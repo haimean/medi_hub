@@ -1,0 +1,17 @@
+E:\MISA.AMIS.WEB\web05b-mf869-pqhuy\backend\MISA.AMIS\MISA.Infastructure\bin\Debug\net5.0\MISA.Infastructure.deps.json
+E:\MISA.AMIS.WEB\web05b-mf869-pqhuy\backend\MISA.AMIS\MISA.Infastructure\bin\Debug\net5.0\MISA.Infastructure.dll
+E:\MISA.AMIS.WEB\web05b-mf869-pqhuy\backend\MISA.AMIS\MISA.Infastructure\bin\Debug\net5.0\MISA.Infastructure.pdb
+E:\MISA.AMIS.WEB\web05b-mf869-pqhuy\backend\MISA.AMIS\MISA.Infastructure\bin\Debug\net5.0\MISA.ApplicationCore.dll
+E:\MISA.AMIS.WEB\web05b-mf869-pqhuy\backend\MISA.AMIS\MISA.Infastructure\bin\Debug\net5.0\MISA.ApplicationCore.pdb
+E:\MISA.AMIS.WEB\web05b-mf869-pqhuy\backend\MISA.AMIS\MISA.Infastructure\obj\Debug\net5.0\MISA.Infastructure.csproj.AssemblyReference.cache
+E:\MISA.AMIS.WEB\web05b-mf869-pqhuy\backend\MISA.AMIS\MISA.Infastructure\obj\Debug\net5.0\MISA.Infastructure.Properties.Resources.resources
+E:\MISA.AMIS.WEB\web05b-mf869-pqhuy\backend\MISA.AMIS\MISA.Infastructure\obj\Debug\net5.0\MISA.Infastructure.csproj.GenerateResource.cache
+E:\MISA.AMIS.WEB\web05b-mf869-pqhuy\backend\MISA.AMIS\MISA.Infastructure\obj\Debug\net5.0\MISA.Infastructure.GeneratedMSBuildEditorConfig.editorconfig
+E:\MISA.AMIS.WEB\web05b-mf869-pqhuy\backend\MISA.AMIS\MISA.Infastructure\obj\Debug\net5.0\MISA.Infastructure.AssemblyInfoInputs.cache
+E:\MISA.AMIS.WEB\web05b-mf869-pqhuy\backend\MISA.AMIS\MISA.Infastructure\obj\Debug\net5.0\MISA.Infastructure.AssemblyInfo.cs
+E:\MISA.AMIS.WEB\web05b-mf869-pqhuy\backend\MISA.AMIS\MISA.Infastructure\obj\Debug\net5.0\MISA.Infastructure.csproj.CoreCompileInputs.cache
+E:\MISA.AMIS.WEB\web05b-mf869-pqhuy\backend\MISA.AMIS\MISA.Infastructure\obj\Debug\net5.0\MISA.Infastructure.csproj.CopyComplete
+E:\MISA.AMIS.WEB\web05b-mf869-pqhuy\backend\MISA.AMIS\MISA.Infastructure\obj\Debug\net5.0\MISA.Infastructure.dll
+E:\MISA.AMIS.WEB\web05b-mf869-pqhuy\backend\MISA.AMIS\MISA.Infastructure\obj\Debug\net5.0\refint\MISA.Infastructure.dll
+E:\MISA.AMIS.WEB\web05b-mf869-pqhuy\backend\MISA.AMIS\MISA.Infastructure\obj\Debug\net5.0\MISA.Infastructure.pdb
+E:\MISA.AMIS.WEB\web05b-mf869-pqhuy\backend\MISA.AMIS\MISA.Infastructure\obj\Debug\net5.0\ref\MISA.Infastructure.dll

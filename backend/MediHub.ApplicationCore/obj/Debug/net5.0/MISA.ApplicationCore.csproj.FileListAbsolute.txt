@@ -1,0 +1,14 @@
+E:\MISA.AMIS.WEB\web05b-mf869-pqhuy\backend\MISA.AMIS\MISA.ApplicationCore\bin\Debug\net5.0\MISA.ApplicationCore.deps.json
+E:\MISA.AMIS.WEB\web05b-mf869-pqhuy\backend\MISA.AMIS\MISA.ApplicationCore\bin\Debug\net5.0\MISA.ApplicationCore.dll
+E:\MISA.AMIS.WEB\web05b-mf869-pqhuy\backend\MISA.AMIS\MISA.ApplicationCore\bin\Debug\net5.0\MISA.ApplicationCore.pdb
+E:\MISA.AMIS.WEB\web05b-mf869-pqhuy\backend\MISA.AMIS\MISA.ApplicationCore\obj\Debug\net5.0\MISA.ApplicationCore.csproj.AssemblyReference.cache
+E:\MISA.AMIS.WEB\web05b-mf869-pqhuy\backend\MISA.AMIS\MISA.ApplicationCore\obj\Debug\net5.0\MISA.ApplicationCore.Properties.Resources.resources
+E:\MISA.AMIS.WEB\web05b-mf869-pqhuy\backend\MISA.AMIS\MISA.ApplicationCore\obj\Debug\net5.0\MISA.ApplicationCore.csproj.GenerateResource.cache
+E:\MISA.AMIS.WEB\web05b-mf869-pqhuy\backend\MISA.AMIS\MISA.ApplicationCore\obj\Debug\net5.0\MISA.ApplicationCore.GeneratedMSBuildEditorConfig.editorconfig
+E:\MISA.AMIS.WEB\web05b-mf869-pqhuy\backend\MISA.AMIS\MISA.ApplicationCore\obj\Debug\net5.0\MISA.ApplicationCore.AssemblyInfoInputs.cache
+E:\MISA.AMIS.WEB\web05b-mf869-pqhuy\backend\MISA.AMIS\MISA.ApplicationCore\obj\Debug\net5.0\MISA.ApplicationCore.AssemblyInfo.cs
+E:\MISA.AMIS.WEB\web05b-mf869-pqhuy\backend\MISA.AMIS\MISA.ApplicationCore\obj\Debug\net5.0\MISA.ApplicationCore.csproj.CoreCompileInputs.cache
+E:\MISA.AMIS.WEB\web05b-mf869-pqhuy\backend\MISA.AMIS\MISA.ApplicationCore\obj\Debug\net5.0\MISA.ApplicationCore.dll
+E:\MISA.AMIS.WEB\web05b-mf869-pqhuy\backend\MISA.AMIS\MISA.ApplicationCore\obj\Debug\net5.0\refint\MISA.ApplicationCore.dll
+E:\MISA.AMIS.WEB\web05b-mf869-pqhuy\backend\MISA.AMIS\MISA.ApplicationCore\obj\Debug\net5.0\MISA.ApplicationCore.pdb
+E:\MISA.AMIS.WEB\web05b-mf869-pqhuy\backend\MISA.AMIS\MISA.ApplicationCore\obj\Debug\net5.0\ref\MISA.ApplicationCore.dll
