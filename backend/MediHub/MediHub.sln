@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34607.119
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediHub.Web", "MediHub\MediHub.Web.csproj", "{60E5E087-9935-4721-8DD0-EBEBD1DC5EAE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{49AF9F90-9A78-4795-AFB9-8829FD7F3A0B} = {49AF9F90-9A78-4795-AFB9-8829FD7F3A0B}
+		{8A2FF4D2-2C8E-42F1-BC68-AE0D484B190D} = {8A2FF4D2-2C8E-42F1-BC68-AE0D484B190D}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediHub.ApplicationCore", "MediHub.ApplicationCore\MediHub.ApplicationCore.csproj", "{8A2FF4D2-2C8E-42F1-BC68-AE0D484B190D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediHub.Infastructure", "MediHub.Infastructure\MediHub.Infastructure.csproj", "{49AF9F90-9A78-4795-AFB9-8829FD7F3A0B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8A2FF4D2-2C8E-42F1-BC68-AE0D484B190D} = {8A2FF4D2-2C8E-42F1-BC68-AE0D484B190D}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{60E5E087-9935-4721-8DD0-EBEBD1DC5EAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60E5E087-9935-4721-8DD0-EBEBD1DC5EAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60E5E087-9935-4721-8DD0-EBEBD1DC5EAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60E5E087-9935-4721-8DD0-EBEBD1DC5EAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A2FF4D2-2C8E-42F1-BC68-AE0D484B190D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A2FF4D2-2C8E-42F1-BC68-AE0D484B190D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A2FF4D2-2C8E-42F1-BC68-AE0D484B190D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A2FF4D2-2C8E-42F1-BC68-AE0D484B190D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49AF9F90-9A78-4795-AFB9-8829FD7F3A0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49AF9F90-9A78-4795-AFB9-8829FD7F3A0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49AF9F90-9A78-4795-AFB9-8829FD7F3A0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49AF9F90-9A78-4795-AFB9-8829FD7F3A0B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0CF69089-116F-403C-BD78-7E343C940418}
+	EndGlobalSection
+EndGlobal
