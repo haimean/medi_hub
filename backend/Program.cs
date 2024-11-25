@@ -1,14 +1,8 @@
-using DashboardApi.Apis;
 using DashboardApi.Application;
-using DashboardApi.Auth.PermisionChecker;
-using DashboardApi.DatabaseContext.AppDbcontext;
-using DashboardApi.DatabaseContext.AppMongoDbContext;
-using DashboardApi.DatabaseContext.DapperDbContext;
 using DashboardApi.HttpConfig;
 using JWT;
 using JWT.Algorithms;
 using JWT.Serializers;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 
@@ -19,7 +13,7 @@ string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(option =>
 {
-    option.SwaggerDoc("v1", new OpenApiInfo { Title = "Dashboard API - 2024/10/21", Version = "v1" });
+    option.SwaggerDoc("v1", new OpenApiInfo { Title = "MediHub API", Version = "v1" });
     option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         In = ParameterLocation.Header,
@@ -48,23 +42,11 @@ builder.Services.AddSwaggerGen(option =>
 Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
 var conn = Environment.GetEnvironmentVariable("WORKERCONNECTIONSTRING");
 
-builder.Services.AddDbContext<WorkerDbContext>(opt => opt.UseNpgsql(conn));
+// builder.Services.AddDbContext<WorkerDbContext>(opt => opt.UseNpgsql(conn));
 
 builder.Services.RegisterAppService();
 builder.Services.AddSignalR();
-builder.Services.AddSingleton<MongoDbContext>();
 
-builder.Services.AddSingleton<DigiCheckDapperContext>();
-builder.Services.AddSingleton<WorkerDapperContext>();
-builder.Services.AddSingleton<QaQcDapperContext>();
-builder.Services.AddSingleton<ResourceCommonDapperContext>();
-builder.Services.AddSingleton<AppMainDapperContext>();
-builder.Services.AddSingleton<JotDapperContext>();
-builder.Services.AddSingleton<DigiCheckDapperContext>();
-builder.Services.AddSingleton<SafetyDbContext>();
-builder.Services.AddSingleton<MaintenanceDbContext>();
-
-builder.Services.AddScoped<IPermissionChecker, PermissionChecker>();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -144,14 +126,7 @@ app.Use((context, next) =>
     return next(context);
 });
 
-new QaQcApiV1().RegisterApi(app);
-new QaQcApiV2().RegisterApi(app);
-new QaQcJotApi().RegisterApi(app);
-new QaQcDigicheckApi().RegisterApi(app);
-new WorkerApi().RegisterApi(app);
-new SafetyApi().RegisterApi(app);
-new MaintenanceApi().RegisterApi(app);
-new DigicheckApi().RegisterApi(app);
+// new QaQcApiV1().RegisterApi(app);
 
 var configuration = builder.Configuration;
 app.MapGet("dashboard/healthcheck", () => "9.20AM - 22.06.2023 Bim app api Ok!");
