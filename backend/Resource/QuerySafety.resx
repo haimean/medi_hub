@@ -1,0 +1,352 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CalculateDailyWIR" xml:space="preserve">
+    <value>WITH MONTHLY_TOTALS AS
+	(SELECT DATE_TRUNC('month', DATE) AS MONTH,
+			SUM(AVE_DAILY_WH_PERSONNEL) AS TOTAL_WH_PERSONNEL,
+			SUM(AVE_DAILY_CLIENT_AND_REP_PERSONNEL) AS TOTAL_CLIENT_AND_REP_PERSONNEL,
+			SUM(AVE_DAILY_SUBCON_PERSONNEL) AS TOTAL_SUBCON_PERSONNEL,
+			(SUM(AVE_DAILY_WH_PERSONNEL) + SUM(AVE_DAILY_CLIENT_AND_REP_PERSONNEL) + SUM(AVE_DAILY_SUBCON_PERSONNEL)) AS TOTAL_SUM,
+			MAX(DATE_TRUNC('month', DATE) + INTERVAL '1 month' - INTERVAL '1 day') AS END_OF_MONTH
+		FROM STATISTIC_ENTITY
+	 	WHERE IS_DELETED &lt;&gt; TRUE
+	 	AND @WHERECLAUSE
+		GROUP BY DATE_TRUNC('month', DATE)),
+	MONTHLY_AVERAGES AS
+	(SELECT MT1.MONTH,
+			MT1.END_OF_MONTH,
+			MT1.TOTAL_WH_PERSONNEL,
+			MT1.TOTAL_CLIENT_AND_REP_PERSONNEL,
+			MT1.TOTAL_SUBCON_PERSONNEL,
+			MT1.TOTAL_SUM,
+			AVG(MT2.TOTAL_SUM) AS AVG_LAST_12_MONTHS
+		FROM MONTHLY_TOTALS MT1
+		LEFT JOIN MONTHLY_TOTALS MT2 ON MT2.END_OF_MONTH BETWEEN MT1.END_OF_MONTH - INTERVAL '12 months' + INTERVAL '1 day' AND MT1.END_OF_MONTH
+		GROUP BY MT1.MONTH,
+			MT1.END_OF_MONTH,
+			MT1.TOTAL_WH_PERSONNEL,
+			MT1.TOTAL_CLIENT_AND_REP_PERSONNEL,
+			MT1.TOTAL_SUBCON_PERSONNEL,
+			MT1.TOTAL_SUM)
+SELECT MONTH,
+	TOTAL_WH_PERSONNEL,
+	TOTAL_CLIENT_AND_REP_PERSONNEL,
+	TOTAL_SUBCON_PERSONNEL,
+	TOTAL_SUM,
+	AVG_LAST_12_MONTHS
+FROM MONTHLY_AVERAGES
+WHERE
+    EXTRACT(YEAR FROM month) = @CURRENTYEAR
+ORDER BY MONTH;</value>
+  </data>
+  <data name="MOMNoticeQuery" xml:space="preserve">
+    <value>-- 0. Main query to filter "LegalNCRegisterEntity" entries
+SELECT * 
+FROM "LegalNCRegisterEntity"
+WHERE IS_DELETED &lt;&gt; TRUE
+  AND PROJECT_NAME IS NOT NULL
+  AND EXTRACT(YEAR FROM DATE_CREATED) = @CURRENTYEAR;
+
+-- 1. MOM - Notice of Non-Compliance Fine
+SELECT 
+  PROJECT_ID,
+  MAX(PROJECT_NAME) AS PROJECT_NAME, -- Use MAX to select one project name per group
+  SUM(FINE_AMOUNT) AS AMOUNT
+FROM "LegalNCRegisterEntity"
+WHERE EXTRACT(YEAR FROM DATE_CREATED) = @CURRENTYEAR
+  AND IS_DELETED IS NOT TRUE
+  AND AUTHORITY = 'MOM'
+GROUP BY PROJECT_ID;
+
+-- 2. NEA – Notice of Composition Fine and NTAC (By Month)
+SELECT 
+  TO_CHAR(DATE_CREATED, 'Mon') AS MONTH,
+  PROJECT_ID,
+  PROJECT_NAME,
+  SUM(FINE_AMOUNT) AS TOTALFINEAMOUNT
+FROM "LegalNCRegisterEntity"
+WHERE EXTRACT(YEAR FROM DATE_CREATED) = @CURRENTYEAR
+  AND IS_DELETED IS NOT TRUE
+  AND PROJECT_NAME IS NOT NULL
+  AND AUTHORITY = 'NEA'
+  AND TYPE = 'Fine'
+GROUP BY EXTRACT(MONTH FROM DATE_CREATED),
+  TO_CHAR(DATE_CREATED, 'Mon'),
+  PROJECT_ID,
+  PROJECT_NAME
+ORDER BY EXTRACT(MONTH FROM DATE_CREATED);
+
+
+-- 3. NEA Offences By Month(Pending Receive CF)
+SELECT 
+  p.PROJECT_ID,
+  MAX(p.PROJECT_NAME) AS PROJECT_NAME, -- Use MAX to get a single project name per project
+  COALESCE(SUM(CASE 
+                WHEN p.REASON = 'Vector' 
+                     AND p.REMARK IS NOT NULL 
+                     AND LOWER(p.REMARK) LIKE '%mosquito%' 
+                THEN p.FINE_AMOUNT 
+                ELSE 0 
+              END), 0) AS Mosquito,
+  COALESCE(SUM(CASE 
+                WHEN p.REASON = 'Noise' 
+                THEN p.FINE_AMOUNT 
+                ELSE 0 
+              END), 0) AS Noise,
+  COALESCE(SUM(CASE 
+                WHEN p.REASON = 'Rodent' 
+                THEN p.FINE_AMOUNT 
+                ELSE 0 
+              END), 0) AS Rodent,
+  COALESCE(SUM(CASE 
+                WHEN p.REASON = 'WDPH' 
+                THEN p.FINE_AMOUNT 
+                ELSE 0 
+              END), 0) AS WDPH,
+  COALESCE(SUM(CASE 
+                WHEN p.REASON = 'Vector' 
+                THEN p.FINE_AMOUNT 
+                ELSE 0 
+              END), 0) AS Vector
+FROM "LegalNCRegisterEntity" p
+WHERE p.IS_DELETED IS NOT TRUE
+  AND PROJECT_NAME IS NOT NULL
+  AND EXTRACT(YEAR FROM p.DATE_CREATED) = @CURRENTYEAR
+  AND p.AUTHORITY = 'NEA'
+GROUP BY p.PROJECT_ID;</value>
+  </data>
+  <data name="StatisticReportV1" xml:space="preserve">
+    <value>WITH MONTHLY_TOTALS AS
+	(SELECT DATE_TRUNC('month', DATE) AS MONTH,
+			SUM(AVE_DAILY_SUBCON_PERSONNEL) AS TOTAL_AVE_DAILY_SUBCON_PERSONNEL,
+			SUM(AVE_DAILY_WH_PERSONNEL) AS TOTAL_AVE_DAILY_WH_PERSONNEL,
+			SUM(AVE_DAILY_CLIENT_AND_REP_PERSONNEL) AS TOTAL_AVE_DAILY_CLIENT_AND_REP_PERSONNEL
+		FROM STATISTIC_ENTITY
+		WHERE IS_DELETED IS NOT TRUE 
+	 	@WHERECLAUSE
+		GROUP BY DATE_TRUNC('month', DATE)
+		ORDER BY DATE_TRUNC('month', DATE) DESC)
+SELECT AVG(TOTAL_AVE_DAILY_WH_PERSONNEL) AS WHSTRENGTH,
+	AVG(TOTAL_AVE_DAILY_CLIENT_AND_REP_PERSONNEL) AS CLIENTRPSTRENGTH,
+	AVG(TOTAL_AVE_DAILY_SUBCON_PERSONNEL) AS SUBCONSTRENGTH
+FROM MONTHLY_TOTALS;</value>
+  </data>
+  <data name="SummaryPCAuditScore" xml:space="preserve">
+    <value>SELECT PROJECT_ID,
+       PROJECT_NAME,
+       ROUND(CAST((AVG(FINAL_SCORE) / 40) * 100 AS NUMERIC), 2) AS PCAUDITSCORE,
+       CASE 
+           WHEN ROUND(CAST((AVG(FINAL_SCORE) / 40) * 100 AS NUMERIC), 2) &gt;= 90 AND ROUND(CAST((AVG(FINAL_SCORE) / 40) * 100 AS NUMERIC), 2) &lt;= 100 THEN 'Well-Above Expectation'
+           WHEN ROUND(CAST((AVG(FINAL_SCORE) / 40) * 100 AS NUMERIC), 2) &gt;= 75 AND ROUND(CAST((AVG(FINAL_SCORE) / 40) * 100 AS NUMERIC), 2) &lt; 90 THEN 'Just Above Expectation'
+           WHEN ROUND(CAST((AVG(FINAL_SCORE) / 40) * 100 AS NUMERIC), 2) &gt;= 50 AND ROUND(CAST((AVG(FINAL_SCORE) / 40) * 100 AS NUMERIC), 2) &lt; 75 THEN 'Meet Expectation'
+           WHEN ROUND(CAST((AVG(FINAL_SCORE) / 40) * 100 AS NUMERIC), 2) &gt;= 25 AND ROUND(CAST((AVG(FINAL_SCORE) / 40) * 100 AS NUMERIC), 2) &lt; 50 THEN 'Below Expectation'
+           ELSE 'Unacceptable'
+       END AS PCAuditScoreName,
+       CASE 
+           WHEN ROUND(CAST((AVG(FINAL_SCORE) / 40) * 100 AS NUMERIC), 2) &gt;= 90 AND ROUND(CAST((AVG(FINAL_SCORE) / 40) * 100 AS NUMERIC), 2) &lt;= 100 THEN 'WAE'
+           WHEN ROUND(CAST((AVG(FINAL_SCORE) / 40) * 100 AS NUMERIC), 2) &gt;= 75 AND ROUND(CAST((AVG(FINAL_SCORE) / 40) * 100 AS NUMERIC), 2) &lt; 90 THEN 'JAE'
+           WHEN ROUND(CAST((AVG(FINAL_SCORE) / 40) * 100 AS NUMERIC), 2) &gt;= 50 AND ROUND(CAST((AVG(FINAL_SCORE) / 40) * 100 AS NUMERIC), 2) &lt; 75 THEN 'MEX'
+           WHEN ROUND(CAST((AVG(FINAL_SCORE) / 40) * 100 AS NUMERIC), 2) &gt;= 25 AND ROUND(CAST((AVG(FINAL_SCORE) / 40) * 100 AS NUMERIC), 2) &lt; 50 THEN 'BEX'
+           ELSE 'Unacceptable'
+       END AS PCAuditScoreShortName,
+       ROUND(CAST(AVG(AUDIT_SCORE) * 10 AS NUMERIC), 2) AS HOUSEKEEPINGAUDITSCORE,
+       CASE 
+           WHEN ROUND(CAST(AVG(AUDIT_SCORE) * 10 AS NUMERIC), 2) = 100 THEN 'Well-Above Expectation'
+           WHEN ROUND(CAST(AVG(AUDIT_SCORE) * 10 AS NUMERIC), 2) &gt;= 75 THEN 'Just Above Expectation'
+           WHEN ROUND(CAST(AVG(AUDIT_SCORE) * 10 AS NUMERIC), 2) &gt;= 50 THEN 'Meet Expectation'
+           WHEN ROUND(CAST(AVG(AUDIT_SCORE) * 10 AS NUMERIC), 2) &gt;= 25 THEN 'Below Expectation'
+           ELSE 'Unacceptable'
+       END AS HouseKeepingAuditScoreName,
+       CASE 
+           WHEN ROUND(CAST(AVG(AUDIT_SCORE) * 10 AS NUMERIC), 2) = 100 THEN 'WAE'
+           WHEN ROUND(CAST(AVG(AUDIT_SCORE) * 10 AS NUMERIC), 2) &gt;= 75 THEN 'JAE'
+           WHEN ROUND(CAST(AVG(AUDIT_SCORE) * 10 AS NUMERIC), 2) &gt;= 50 THEN 'MEX'
+           WHEN ROUND(CAST(AVG(AUDIT_SCORE) * 10 AS NUMERIC), 2) &gt;= 25 THEN 'BEX'
+           ELSE 'Unacceptable'
+       END AS HouseKeepingAuditScoreShortName
+FROM "AuditEntity"
+WHERE IS_DELETED IS NOT TRUE
+  AND PROJECT_ID IS NOT NULL
+  @WHERECLAUSE
+GROUP BY PROJECT_ID,
+         PROJECT_NAME
+ORDER BY PCAUDITSCORE DESC, HOUSEKEEPINGAUDITSCORE DESC, PROJECT_NAME;</value>
+  </data>
+  <data name="WIRASRAFRDetail" xml:space="preserve">
+    <value>WITH INCIDENTDATA AS (
+    SELECT 
+        PROJECT_ID,
+        PROJECT_NAME,
+        SUM(CASE 
+            WHEN INCIDENT_CLASSIFICATION IN ('Fatality', 'Reportable Accident', 'Permanent Disability') 
+            THEN 1 
+            ELSE 0 
+        END) * 100000 AS TOTALINCIDENTS,
+        SUM(CASE 
+            WHEN INCIDENT_CLASSIFICATION IN ('Fatality', 'Reportable Accident', 'Permanent Disability') 
+            THEN MEDICAL_LEAVE_DAY 
+            ELSE 0 
+        END) * 1000000 AS TOTALMEDICALLEAVEDAY
+    FROM 
+        "IncidentRegisterEntities"
+    WHERE 
+        IS_DELETED IS NOT TRUE
+        AND EXTRACT(YEAR FROM DATE_CREATED) = @CURRENT_YEAR
+        AND DATE_CREATED &gt;= @FROM_DATE
+        AND DATE_CREATED &lt;= @TO_DATE
+    GROUP BY 
+        PROJECT_ID, PROJECT_NAME
+),
+STATISTICDATA AS (
+    SELECT 
+        PROJECT_ID,
+        PROJECT_NAME,
+        AVG(AVE_DAILY_WH_PERSONNEL + AVE_DAILY_CLIENT_AND_REP_PERSONNEL + AVE_DAILY_SUBCON_PERSONNEL) AS AVGDAILYPERSONNEL,
+        AVG(TOTAL_WH_MANHOURS_WORKED + TOTAL_CLIENT_WORKED + TOTAL_SC_MH_WORKED) AS AVGWHMANHOURS,
+        SUM(TOTAL_WH_MANHOURS_WORKED + TOTAL_CLIENT_WORKED + TOTAL_SC_MH_WORKED) AS SUMWHMANHOURS
+    FROM 
+        STATISTIC_ENTITY
+    WHERE 
+        IS_DELETED IS NOT TRUE
+        AND EXTRACT(YEAR FROM DATE) = @CURRENT_YEAR
+        AND DATE &gt;= @FROM_DATE
+        AND DATE &lt;= @TO_DATE
+    GROUP BY 
+        PROJECT_ID, PROJECT_NAME
+)
+SELECT 
+    I.PROJECT_ID, 
+    I.PROJECT_NAME,
+    ROUND(COALESCE(I.TOTALINCIDENTS / NULLIF(S.AVGDAILYPERSONNEL, 0), 0)::numeric, 2) AS WIR, -- Tính WIR
+    ROUND(COALESCE(I.TOTALMEDICALLEAVEDAY / NULLIF(S.AVGWHMANHOURS, 0), 0)::numeric, 2) AS ASR,  -- Tính ASR
+    ROUND(COALESCE(I.TOTALINCIDENTS * 10 / NULLIF(S.AVGWHMANHOURS, 0), 0)::numeric, 2) AS AFR,  -- Tính AFR
+	
+    ROUND(COALESCE(I.TOTALMEDICALLEAVEDAY / NULLIF(S.SUMWHMANHOURS, 0), 0)::numeric, 2) AS SUM_ASR,  -- Tính ASR
+    ROUND(COALESCE(I.TOTALINCIDENTS * 10 / NULLIF(S.SUMWHMANHOURS, 0), 0)::numeric, 2) AS SUM_AFR  -- Tính SUM AFR
+FROM 
+    INCIDENTDATA I
+JOIN 
+    STATISTICDATA S ON I.PROJECT_ID = S.PROJECT_ID
+WHERE
+	COALESCE(I.TOTALINCIDENTS / NULLIF(S.AVGDAILYPERSONNEL, 0), 0) &gt; 0 OR
+	COALESCE(I.TOTALMEDICALLEAVEDAY / NULLIF(S.AVGWHMANHOURS, 0), 0) &gt; 0 OR
+	COALESCE(I.TOTALINCIDENTS / NULLIF(S.AVGWHMANHOURS, 0), 0) &gt; 0;</value>
+  </data>
+</root>

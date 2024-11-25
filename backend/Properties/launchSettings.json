@@ -1,0 +1,73 @@
+{
+  "profiles": {
+    "http": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "QAQCCONNECTIONSTRING": "Server=wh-idd-test-dev.c9lyw52w9grj.ap-southeast-1.rds.amazonaws.com;Port=5432;Database=qaqc.2024.09.17;UserId=do_invoice;Password=wohhup2021",
+        "DIGICONNECTIONSTRING": "Server=wh-idd-test-dev.c9lyw52w9grj.ap-southeast-1.rds.amazonaws.com;Port=5432;Database=prefab.2024.10.29.v2;UserId=do_invoice;Password=wohhup2021",
+        "WORKERCONNECTIONSTRING": "Server=wh-idd-test-dev.c9lyw52w9grj.ap-southeast-1.rds.amazonaws.com;Port=5432;Database=worker.2024.10.15;UserId=do_invoice;Password=wohhup2021",
+        "JOTCONNECTIONSTRING": "Server=wh-idd-test-dev.c9lyw52w9grj.ap-southeast-1.rds.amazonaws.com;Port=5432;Database=do_invoice2;UserId=do_invoice;Password=wohhup2021",
+        "APPMAINCONNECTIONSTRING": "Server=wh-idd-test-dev.c9lyw52w9grj.ap-southeast-1.rds.amazonaws.com;Port=5432;Database=idd_app_main;UserId=do_invoice;Password=wohhup2021",
+        "SAFETYCONNECTIONSTRING": "Server=wh-idd-test-dev.c9lyw52w9grj.ap-southeast-1.rds.amazonaws.com;Port=5432;Database=Safety.2024.11.19;UserId=do_invoice;Password=wohhup2021",
+        "MAINTENANCE_CONNECTIONSTRING": "Server=wh-idd-test-dev.c9lyw52w9grj.ap-southeast-1.rds.amazonaws.com;Port=5432;Database=maintenance;UserId=do_invoice;Password=wohhup2021",
+        "RESOURCECOMMONCONNECTIONSTRING": "Server=wh-idd-test-dev.c9lyw52w9grj.ap-southeast-1.rds.amazonaws.com;Port=5432;Database=resource_common;UserId=do_invoice;Password=wohhup2021"
+      },
+      "dotnetRunMessages": true,
+      "applicationUrl": "http://localhost:5259"
+    },
+    "https": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "QAQCCONNECTIONSTRING": "Server=wh-idd-test-dev.c9lyw52w9grj.ap-southeast-1.rds.amazonaws.com;Port=5432;Database=qaqc.2024.09.17;UserId=do_invoice;Password=wohhup2021",
+        "DIGICONNECTIONSTRING": "Server=wh-idd-test-dev.c9lyw52w9grj.ap-southeast-1.rds.amazonaws.com;Port=5432;Database=prefab.2024.10.29.v2;UserId=do_invoice;Password=wohhup2021",
+        "WORKERCONNECTIONSTRING": "Server=wh-idd-test-dev.c9lyw52w9grj.ap-southeast-1.rds.amazonaws.com;Port=5432;Database=worker.2024.10.15;UserId=do_invoice;Password=wohhup2021",
+        "JOTCONNECTIONSTRING": "Server=wh-idd-test-dev.c9lyw52w9grj.ap-southeast-1.rds.amazonaws.com;Port=5432;Database=do_invoice2;UserId=do_invoice;Password=wohhup2021",
+        "APPMAINCONNECTIONSTRING": "Server=wh-idd-test-dev.c9lyw52w9grj.ap-southeast-1.rds.amazonaws.com;Port=5432;Database=idd_app_main;UserId=do_invoice;Password=wohhup2021",
+        "SAFETYCONNECTIONSTRING": "Server=wh-idd-test-dev.c9lyw52w9grj.ap-southeast-1.rds.amazonaws.com;Port=5432;Database=Safety.2024.11.19;UserId=do_invoice;Password=wohhup2021",
+        "MAINTENANCE_CONNECTIONSTRING": "Server=wh-idd-test-dev.c9lyw52w9grj.ap-southeast-1.rds.amazonaws.com;Port=5432;Database=maintenance;UserId=do_invoice;Password=wohhup2021",
+        "RESOURCECOMMONCONNECTIONSTRING": "Server=wh-idd-test-dev.c9lyw52w9grj.ap-southeast-1.rds.amazonaws.com;Port=5432;Database=resource_common;UserId=do_invoice;Password=wohhup2021"
+      },
+      "dotnetRunMessages": true,
+      "applicationUrl": "https://localhost:7201;http://localhost:5259"
+    },
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "launchUrl": "dashboard/swagger",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "QAQCCONNECTIONSTRING": "Server=wh-idd-test-dev.c9lyw52w9grj.ap-southeast-1.rds.amazonaws.com;Port=5432;Database=qaqc.2024.09.17;UserId=do_invoice;Password=wohhup2021",
+        "DIGICONNECTIONSTRING": "Server=wh-idd-test-dev.c9lyw52w9grj.ap-southeast-1.rds.amazonaws.com;Port=5432;Database=prefab.2024.10.29.v2;UserId=do_invoice;Password=wohhup2021",
+        "WORKERCONNECTIONSTRING": "Server=wh-idd-test-dev.c9lyw52w9grj.ap-southeast-1.rds.amazonaws.com;Port=5432;Database=worker.2024.10.15;UserId=do_invoice;Password=wohhup2021",
+        "JOTCONNECTIONSTRING": "Server=wh-idd-test-dev.c9lyw52w9grj.ap-southeast-1.rds.amazonaws.com;Port=5432;Database=do_invoice2;UserId=do_invoice;Password=wohhup2021",
+        "APPMAINCONNECTIONSTRING": "Server=wh-idd-test-dev.c9lyw52w9grj.ap-southeast-1.rds.amazonaws.com;Port=5432;Database=idd_app_main;UserId=do_invoice;Password=wohhup2021",
+        "SAFETYCONNECTIONSTRING": "Server=wh-idd-test-dev.c9lyw52w9grj.ap-southeast-1.rds.amazonaws.com;Port=5432;Database=Safety.2024.11.19;UserId=do_invoice;Password=wohhup2021",
+        "MAINTENANCE_CONNECTIONSTRING": "Server=wh-idd-test-dev.c9lyw52w9grj.ap-southeast-1.rds.amazonaws.com;Port=5432;Database=maintenance;UserId=do_invoice;Password=wohhup2021",
+        "RESOURCECOMMONCONNECTIONSTRING": "Server=wh-idd-test-dev.c9lyw52w9grj.ap-southeast-1.rds.amazonaws.com;Port=5432;Database=resource_common;UserId=do_invoice;Password=wohhup2021"
+      }
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchBrowser": true,
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
+      "publishAllPorts": true,
+      "useSSL": true
+    }
+  },
+  "$schema": "https://json.schemastore.org/launchsettings.json",
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "launchUrl": "dashboard/swagger",
+    "iisExpress": {
+      "applicationUrl": "http://localhost:52617",
+      "sslPort": 44342
+    }
+  }
+}
