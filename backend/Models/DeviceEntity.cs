@@ -6,6 +6,10 @@ namespace MediHub.Web.Models
     [Table("devices")]
     public class DeviceEntity : IBaseEntity, ISoftDelete
     {
+        #region Thông tin chung
+        [Column("device_avatar")]
+        public List<string> DeviceAvatar { get; set; } // Ảnh đại diện thiết bị
+
         [Column("device_code")]
         public string DeviceCode { get; set; } // Mã thiết bị
 
@@ -28,7 +32,7 @@ namespace MediHub.Web.Models
         public string FunctionName { get; set; } // Tên chức năng
 
         [Column("installation_contract")]
-        public string InstallationContract { get; set; } // Hợp đồng lắp đặt
+        public List<string> InstallationContract { get; set; } // Hợp đồng lắp đặt
 
         [Column("machine_status")]
         public string MachineStatus { get; set; } // Tình trạng máy
@@ -42,20 +46,26 @@ namespace MediHub.Web.Models
         [Column("lab_usage")]
         public string LabUsage { get; set; } // Lab sử dụng
 
-        [Column("manager_engineer_info")]
-        public string ManagerEngineerInfo { get; set; } // Thông tin người quản lý và kỹ sư (dưới dạng JSON)
+        [Column("manager_info", TypeName = "jsonb")]
+        public ManagerEngineerInfo? ManagerInfo { get; set; } // Thông tin người quản lý và kỹ sư (dưới dạng JSON)
 
-        [Column("maintenance_log")]
-        public string MaintenanceLog { get; set; } // Nhật ký bảo dưỡng (danh sách ngày bảo dưỡng và các tệp pdf, ảnh)
+        [Column("engineer_info", TypeName = "jsonb")]
+        public ManagerEngineerInfo? EngineerInfo { get; set; } // Thông tin người quản lý và kỹ sư (dưới dạng JSON)
+        #endregion
 
-        [Column("maintenance_report")]
-        public string MaintenanceReport { get; set; } // Biên bản bảo trì
+        #region Lịch sử hoạt động - tình trạng
+        [Column("maintenance_log", TypeName = "jsonb")]
+        public List<MaintenanceRecord>? MaintenanceLog { get; set; } // Nhật ký bảo dưỡng (danh sách ngày bảo dưỡng và các tệp pdf, ảnh)
 
-        [Column("internal_maintenance_check")]
-        public string InternalMaintenanceCheck { get; set; } // Nội kiểm tra bảo trì
+        [Column("maintenance_report", TypeName = "jsonb")]
+        public List<MaintenanceRecord>? MaintenanceReport { get; set; } // Biên bản bảo trì
+
+        [Column("internal_maintenance_check", TypeName = "jsonb")]
+        public List<MaintenanceRecord>? InternalMaintenanceCheck { get; set; } // Nội kiểm tra bảo trì
 
         [Column("maintenance_schedule")]
         public string MaintenanceSchedule { get; set; } // Lịch bảo dưỡng (tương tự nhật ký bảo dưỡng)
+        #endregion
 
         [Column("notes")]
         public string Notes { get; set; } // Ghi chú
@@ -63,4 +73,27 @@ namespace MediHub.Web.Models
         [Column("is_deleted")]
         public bool IsDeleted { get; set; } // Trạng thái xóa
     }
+
+    #region Thông tin chi tiết kỹ sư, lịch sử hoạt động
+    /// <summary>
+    /// Manager, engineer
+    /// </summary>
+    public class ManagerEngineerInfo
+    {
+        public string FullName { get; set; } // Họ tên
+        public DateTime DateOfBirth { get; set; } // Ngày tháng năm sinh
+        public string PhoneNumber { get; set; } // Số điện thoại
+        public string Address { get; set; } // Địa chỉ
+    }
+
+    /// <summary>
+    /// Maintenance record with date and file links
+    /// </summary>
+    public class MaintenanceRecord
+    {
+        public DateTime MaintenanceDate { get; set; } // Ngày bảo dưỡng
+        public List<string> FileLinks { get; set; } // Danh sách đường link dẫn đến các tệp đính kèm
+    }
+    #endregion
+
 }

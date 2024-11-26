@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using MediHub.Web.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace MediHub.Web.DatabaseContext.AppDbcontext
 {
     public class MediHubContext : DbContext
     {
-        // public DbSet<BimElementEntity> BimElementEntities { get; set; }
+        public DbSet<DeviceEntity> DeviceEntity { get; set; }
 
         public MediHubContext(DbContextOptions options)
            : base(options)
