@@ -3,15 +3,10 @@
     "http": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "qaqc/swagger",
+      "launchUrl": "medihub/swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "QAQCCONNECTIONSTRING": "Server=wh-idd-test-dev.c9lyw52w9grj.ap-southeast-1.rds.amazonaws.com;Port=5432;Database=qaqc;UserId=do_invoice;Password=wohhup2021",
-        "DIGICONNECTIONSTRING": "Server=wh-idd-test-dev.c9lyw52w9grj.ap-southeast-1.rds.amazonaws.com;Port=5432;Database=prefab1;UserId=do_invoice;Password=wohhup2021",
-        "WORKERCONNECTIONSTRING": "Server=wh-idd-test-dev.c9lyw52w9grj.ap-southeast-1.rds.amazonaws.com;Port=5432;Database=worker;UserId=do_invoice;Password=wohhup2021",
-        "JOTCONNECTIONSTRING": "Server=wh-idd-test-dev.c9lyw52w9grj.ap-southeast-1.rds.amazonaws.com;Port=5432;Database=do_invoice2;UserId=do_invoice;Password=wohhup2021",
-        "APPMAINCONNECTIONSTRING": "Server=wh-idd-test-dev.c9lyw52w9grj.ap-southeast-1.rds.amazonaws.com;Port=5432;Database=idd_app_main;UserId=do_invoice;Password=wohhup2021",
-        "SAFETYCONNECTIONSTRING": "Server=wh-idd-test-dev.c9lyw52w9grj.ap-southeast-1.rds.amazonaws.com;Port=5432;Database=Safety;UserId=do_invoice;Password=wohhup2021"
+        "MediHubConnectionString": "Server=wh-idd-test-dev.c9lyw52w9grj.ap-southeast-1.rds.amazonaws.com;Port=5432;Database=qaqc;UserId=do_invoice;Password=wohhup2021"
       },
       "dotnetRunMessages": true,
       "applicationUrl": "http://localhost:8010"
@@ -22,12 +17,7 @@
       "launchUrl": "qaqc/swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "QAQCCONNECTIONSTRING": "Server=wh-idd-test-dev.c9lyw52w9grj.ap-southeast-1.rds.amazonaws.com;Port=5432;Database=qaqc;UserId=do_invoice;Password=wohhup2021",
-        "DIGICONNECTIONSTRING": "Server=wh-idd-test-dev.c9lyw52w9grj.ap-southeast-1.rds.amazonaws.com;Port=5432;Database=prefab1;UserId=do_invoice;Password=wohhup2021",
-        "WORKERCONNECTIONSTRING": "Server=wh-idd-test-dev.c9lyw52w9grj.ap-southeast-1.rds.amazonaws.com;Port=5432;Database=worker;UserId=do_invoice;Password=wohhup2021",
-        "JOTCONNECTIONSTRING": "Server=wh-idd-test-dev.c9lyw52w9grj.ap-southeast-1.rds.amazonaws.com;Port=5432;Database=do_invoice2;UserId=do_invoice;Password=wohhup2021",
-        "APPMAINCONNECTIONSTRING": "Server=wh-idd-test-dev.c9lyw52w9grj.ap-southeast-1.rds.amazonaws.com;Port=5432;Database=idd_app_main;UserId=do_invoice;Password=wohhup2021",
-        "SAFETYCONNECTIONSTRING": "Server=wh-idd-test-dev.c9lyw52w9grj.ap-southeast-1.rds.amazonaws.com;Port=5432;Database=Safety;UserId=do_invoice;Password=wohhup2021"
+        "MediHubConnectionString": "Server=wh-idd-test-dev.c9lyw52w9grj.ap-southeast-1.rds.amazonaws.com;Port=5432;Database=qaqc;UserId=do_invoice;Password=wohhup2021"
       },
       "dotnetRunMessages": true,
       "applicationUrl": "https://localhost:7201;http://localhost:8010"
@@ -38,12 +28,7 @@
       "launchUrl": "qaqc/swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "QAQCCONNECTIONSTRING": "Server=wh-idd-test-dev.c9lyw52w9grj.ap-southeast-1.rds.amazonaws.com;Port=5432;Database=qaqc;UserId=do_invoice;Password=wohhup2021",
-        "DIGICONNECTIONSTRING": "Server=wh-idd-test-dev.c9lyw52w9grj.ap-southeast-1.rds.amazonaws.com;Port=5432;Database=prefab1;UserId=do_invoice;Password=wohhup2021",
-        "WORKERCONNECTIONSTRING": "Server=wh-idd-test-dev.c9lyw52w9grj.ap-southeast-1.rds.amazonaws.com;Port=5432;Database=worker;UserId=do_invoice;Password=wohhup2021",
-        "JOTCONNECTIONSTRING": "Server=wh-idd-test-dev.c9lyw52w9grj.ap-southeast-1.rds.amazonaws.com;Port=5432;Database=do_invoice2;UserId=do_invoice;Password=wohhup2021",
-        "APPMAINCONNECTIONSTRING": "Server=wh-idd-test-dev.c9lyw52w9grj.ap-southeast-1.rds.amazonaws.com;Port=5432;Database=idd_app_main;UserId=do_invoice;Password=wohhup2021",
-        "SAFETYCONNECTIONSTRING": "Server=wh-idd-test-dev.c9lyw52w9grj.ap-southeast-1.rds.amazonaws.com;Port=5432;Database=Safety;UserId=do_invoice;Password=wohhup2021"
+        "MediHubConnectionString": "Server=wh-idd-test-dev.c9lyw52w9grj.ap-southeast-1.rds.amazonaws.com;Port=5432;Database=qaqc;UserId=do_invoice;Password=wohhup2021"
       }
     },
     "Docker": {

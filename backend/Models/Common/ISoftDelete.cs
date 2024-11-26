@@ -1,4 +1,4 @@
-﻿namespace QAQCApi.Models.Common
+﻿namespace MediHub.Web.Models.Common
 {
     public interface ISoftDelete
     {

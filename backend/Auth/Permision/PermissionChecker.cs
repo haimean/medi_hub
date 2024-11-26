@@ -1,13 +1,13 @@
-﻿using DashboardApi.Auth.CurrentUser;
-using DashboardApi.Auth.PermisionChecker.Dtos;
-using DashboardApi.HttpConfig;
+﻿using MediHub.Web.Auth.CurrentUser;
+using MediHub.Web.Auth.PermisionChecker.Dtos;
+using MediHub.Web.HttpConfig;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Net;
 
-namespace DashboardApi.Auth.PermisionChecker
+namespace MediHub.Web.Auth.PermisionChecker
 {
     public class PermissionChecker : IPermissionChecker
     {

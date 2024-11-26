@@ -1,4 +1,4 @@
-﻿namespace DashboardApi.HttpConfig
+﻿namespace MediHub.Web.HttpConfig
 {
     public class HttpEndpoint
     {

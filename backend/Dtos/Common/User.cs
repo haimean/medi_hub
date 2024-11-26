@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace QAQCApi.Dtos.Common
+namespace MediHub.Web.Dtos.Common
 {
     [NotMapped]
     public class UserPF

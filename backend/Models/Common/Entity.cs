@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace QAQCApi.Models.Common
+namespace MediHub.Web.Models.Common
 {
     public abstract class Entity : IEntity<Guid>
     {

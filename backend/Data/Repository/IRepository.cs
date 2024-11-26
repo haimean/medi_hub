@@ -1,7 +1,7 @@
-﻿using QAQCApi.Models.Common;
+﻿using MediHub.Web.Models.Common;
 using System.Linq.Expressions;
 
-namespace QAQCApi.Data.Repository
+namespace MediHub.Web.Data.Repository
 {
     public interface IRepository
     {

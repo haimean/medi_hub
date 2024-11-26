@@ -1,4 +1,4 @@
-﻿using DashboardApi.HttpConfig;
+﻿using MediHub.Web.HttpConfig;
 using Newtonsoft.Json;
 using System.Text;
 

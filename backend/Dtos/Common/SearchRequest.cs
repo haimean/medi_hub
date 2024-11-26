@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace QAQCApi.Dtos.Common
+﻿namespace MediHub.Web.Dtos.Common
 {
     public class SearchRequest
     {

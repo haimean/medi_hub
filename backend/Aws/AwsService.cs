@@ -2,15 +2,15 @@
 using Amazon.S3;
 using Amazon.S3.Model;
 using Amazon.S3.Transfer;
-using DashboardApi.HttpConfig;
+using MediHub.Web.Application.Aws.Dtos;
+using MediHub.Web.Aws.Dtos;
+using MediHub.Web.Data.Repository;
+using MediHub.Web.HttpConfig;
 using Microsoft.Extensions.Options;
-using QAQCApi.Aws.Dtos;
-using QAQCApi.Data.Repository;
-using SafetyApi.Application.Aws.Dtos;
 using System.Net;
 
 
-namespace QAQCApi.Aws
+namespace MediHub.Web.Aws
 {
     public class AwsService : Service, IAwsService
     {

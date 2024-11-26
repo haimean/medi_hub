@@ -1,7 +1,7 @@
 ﻿using Npgsql;
 using System.Data;
 
-namespace DashboardApi.DatabaseContext.DapperDbContext
+namespace MediHub.Web.DatabaseContext.DapperDbContext
 {
     public class MediHubDapperContext
     {

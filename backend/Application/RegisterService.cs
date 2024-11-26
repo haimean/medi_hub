@@ -1,9 +1,9 @@
-﻿using DashboardApi.Auth.CurrentUser;
-using QAQCApi.Aws;
-using QAQCApi.Data.Repository;
-using QAQCApi.DatabaseContext.AppDbcontext;
+﻿using MediHub.Web.Auth.CurrentUser;
+using MediHub.Web.Aws;
+using MediHub.Web.Data.Repository;
+using MediHub.Web.DatabaseContext.AppDbcontext;
 
-namespace DashboardApi.Application
+namespace MediHub.Web.Application
 {
     public static class RegisterService
     {

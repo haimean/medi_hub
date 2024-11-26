@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace DashboardApi.HttpConfig
+namespace MediHub.Web.HttpConfig
 {
     public class ServiceResponse
     {

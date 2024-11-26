@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace QAQCApi.Models.Common
+namespace MediHub.Web.Models.Common
 {
     public interface IEntity<TKey> where TKey : IEquatable<TKey>
     {

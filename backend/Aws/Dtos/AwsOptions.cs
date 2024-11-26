@@ -1,4 +1,4 @@
-﻿namespace QAQCApi.Aws.Dtos
+﻿namespace MediHub.Web.Aws.Dtos
 {
     public class AwsOptions
     {

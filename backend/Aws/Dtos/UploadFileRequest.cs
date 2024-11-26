@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
-
-namespace SafetyApi.Application.Aws.Dtos
+﻿namespace MediHub.Web.Application.Aws.Dtos
 {
     public class UploadFileRequest
     {

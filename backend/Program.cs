@@ -1,18 +1,18 @@
 using AutoMapper;
-using DashboardApi.Application;
-using DashboardApi.Auth.PermisionChecker;
-using DashboardApi.DatabaseContext.DapperDbContext;
-using DashboardApi.HttpConfig;
 using HttpConfig;
 using JWT;
 using JWT.Algorithms;
 using JWT.Serializers;
+using MediHub.Web.Application;
+using MediHub.Web.Auth.PermisionChecker;
+using MediHub.Web.Aws.Dtos;
+using MediHub.Web.DatabaseContext.AppDbcontext;
+using MediHub.Web.DatabaseContext.DapperDbContext;
+using MediHub.Web.HttpConfig;
+using MediHub.Web.Profiles;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
-using QAQC.Profiles;
-using QAQCApi.Aws.Dtos;
-using QAQCApi.DatabaseContext.AppDbcontext;
 
 var builder = WebApplication.CreateBuilder(args);
 string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
@@ -114,12 +114,12 @@ if (app.Environment.IsDevelopment() || true)
 {
     app.UseSwagger(c =>
     {
-        c.RouteTemplate = "qaqc/swagger/{documentName}/swagger.json";
+        c.RouteTemplate = "medihub/swagger/{documentName}/swagger.json";
     });
     app.UseSwaggerUI(c =>
     {
-        c.SwaggerEndpoint("/qaqc/swagger/v1/swagger.json", "BeCommon v1");
-        c.RoutePrefix = "qaqc/swagger";
+        c.SwaggerEndpoint("/medihub/swagger/v1/swagger.json", "Backend v1");
+        c.RoutePrefix = "medihub/swagger";
     });
 }
 
@@ -153,7 +153,6 @@ app.Use(
         catch (Exception e)
         {
             var m = e.Message;
-            //
         }
 
         return next(context);
@@ -161,21 +160,15 @@ app.Use(
 );
 
 var configuration = builder.Configuration;
-app.MapGet("qaqc/healthcheck", () => "Ver 29.06.2023 - Bim app api Ok!");
+app.MapGet("medihub/healthcheck", () => "Ver 01");
 
 app.MapGet(
-    "qaqc/healthcheck2",
+    "medihub/healthcheck2",
     () =>
         new
         {
             Env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT"),
-            DigiConnectionString = Environment.GetEnvironmentVariable("DIGICONNECTIONSTRING"),
-            JotConnectionString = Environment.GetEnvironmentVariable("JOTCONNECTIONSTRING"),
-            QaQcConnectionString = Environment.GetEnvironmentVariable("QAQCCONNECTIONSTRING"),
-            WorkerConnectionString = Environment.GetEnvironmentVariable("WORKERCONNECTIONSTRING"),
-            MaintenanceConnectionString = Environment.GetEnvironmentVariable(
-                "MAINTENANCECONNECTIONSTRING"
-            ),
+            MediHubConnectionString = Environment.GetEnvironmentVariable("MediHubConnectionString"),
         }
 );
 

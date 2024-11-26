@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace QAQCApi.DatabaseContext.AppDbcontext
+namespace MediHub.Web.DatabaseContext.AppDbcontext
 {
     public class MediHubContext : DbContext
     {

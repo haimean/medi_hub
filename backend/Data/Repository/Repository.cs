@@ -1,10 +1,10 @@
-﻿using DashboardApi.Auth.CurrentUser;
+﻿using MediHub.Web.Auth.CurrentUser;
+using MediHub.Web.Models.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using QAQCApi.Models.Common;
 using System.Linq.Expressions;
 
-namespace QAQCApi.Data.Repository
+namespace MediHub.Web.Data.Repository
 {
     public class Repository<TContext> : IRepository where TContext : DbContext
     {

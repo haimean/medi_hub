@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace QAQC.Profiles
+namespace MediHub.Web.Profiles
 {
     public class MappingProfile : Profile
     {

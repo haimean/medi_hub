@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MediHub.Web.Apis
+namespace MediHub.Web.Controllers
 {
     public class DeviceController : Controller
     {

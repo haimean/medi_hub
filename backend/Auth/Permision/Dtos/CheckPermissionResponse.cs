@@ -1,4 +1,4 @@
-﻿namespace DashboardApi.Auth.PermisionChecker.Dtos
+﻿namespace MediHub.Web.Auth.PermisionChecker.Dtos
 {
     public class CheckPermissionResponse
     {

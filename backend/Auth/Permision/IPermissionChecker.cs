@@ -1,4 +1,4 @@
-﻿namespace DashboardApi.Auth.PermisionChecker
+﻿namespace MediHub.Web.Auth.PermisionChecker
 {
    public interface IPermissionChecker
    {

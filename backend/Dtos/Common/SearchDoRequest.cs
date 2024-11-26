@@ -1,4 +1,4 @@
-﻿namespace QAQCApi.Dtos.Common
+﻿namespace MediHub.Web.Dtos.Common
 {
     public class SearchDoRequest : SearchRequest
     {

@@ -1,9 +1,8 @@
-﻿using DashboardApi.HttpConfig;
-using QAQCApi.Aws.Dtos;
-using SafetyApi.Application.Aws.Dtos;
-using System.Threading.Tasks;
+﻿using MediHub.Web.Application.Aws.Dtos;
+using MediHub.Web.Aws.Dtos;
+using MediHub.Web.HttpConfig;
 
-namespace QAQCApi.Aws
+namespace MediHub.Web.Aws
 {
     public interface IAwsService
     {

@@ -1,4 +1,4 @@
-﻿namespace DashboardApi.Auth.CurrentUser
+﻿namespace MediHub.Web.Auth.CurrentUser
 {
     public interface ICurrentUser
     {

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace QAQCApi.Models.Common
+namespace MediHub.Web.Models.Common
 {
     public abstract class IBaseEntity : IBaseEntity<Guid>
     {
@@ -33,6 +33,7 @@ namespace QAQCApi.Models.Common
 
 
         private DateTime _UpdatedDate = DateTime.UtcNow;
+
         [Column("updated_at")]
         public DateTime? UpdatedDate
         {

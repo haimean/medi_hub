@@ -1,4 +1,4 @@
-﻿namespace DashboardApi.Utils
+﻿namespace MediHub.Web.Utils
 {
     public class DateTimeRange
     {
