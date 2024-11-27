@@ -51,13 +51,11 @@ builder.Services.AddSwaggerGen(option =>
             },
         }
     );
-
-    // config base
 });
 
 Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
 
-var conn = Environment.GetEnvironmentVariable("MediHubConnectionString");
+var conn = !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("MediHubConnectionString")) ? Environment.GetEnvironmentVariable("MediHubConnectionString") : "Server=wh-idd-test-dev.c9lyw52w9grj.ap-southeast-1.rds.amazonaws.com;Port=5432;Database=qaqc;UserId=do_invoice;Password=wohhup2021";
 builder.Services.AddDbContext<MediHubContext>(opt => opt.UseNpgsql(conn));
 
 builder.Services.RegisterAppService();
@@ -73,6 +71,9 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddTransient<HttpStatusCodeFilterMiddleware>();
 
 #endregion
+
+#region Build controller and policy
+
 builder.Services.AddControllers();
 builder.Services.AddCors(options =>
 {
@@ -108,8 +109,10 @@ builder.Services.AddSingleton(mapper);
 
 var app = builder.Build();
 app.UseRouting();
+#endregion
 
-// Configure the HTTP request pipeline.
+#region Configure the HTTP request pipeline and Auth.
+
 if (app.Environment.IsDevelopment() || true)
 {
     app.UseSwagger(c =>
@@ -172,6 +175,9 @@ app.MapGet(
         }
 );
 
+#endregion
+
+#region Config cros origin and middlewar and migration
 app.UseCors(x =>
     x.SetIsOriginAllowed(origin => true)
         .AllowAnyMethod()
@@ -188,5 +194,6 @@ app.UseMiddleware<HttpStatusCodeFilterMiddleware>();
 await using var scope = app.Services.CreateAsyncScope();
 using var db = scope.ServiceProvider.GetService<MediHubContext>();
 await db.Database.MigrateAsync();
+#endregion
 
 app.Run();
