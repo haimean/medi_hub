@@ -1,83 +1,77 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using MediHub.Web.ApplicationCore.Interfaces;
+using MediHub.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MediHub.Web.Controllers
 {
-    public class DeviceController : Controller
+    [ApiController]
+    [Route("api/[controller]")]
+    public class DevicesController : ControllerBase
     {
-        // GET: DeviceController
-        public ActionResult Index()
+        private readonly IDevicesService _devicesService;
+
+        public DevicesController(IDevicesService devicesService)
         {
-            return View();
+            _devicesService = devicesService;
         }
 
-        // GET: DeviceController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: DeviceController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: DeviceController/Create
+        /// <summary>
+        /// Create new devices
+        /// </summary>
+        /// <param name="devices"></param>
+        /// <returns></returns>
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> Create([FromBody] List<DeviceEntity> devices)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            var response = await _devicesService.Create(devices);
+            return StatusCode((int)response.StatusCode, response);
         }
 
-        // GET: DeviceController/Edit/5
-        public ActionResult Edit(int id)
+        /// <summary>
+        /// Get all devices
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<IActionResult> Get()
         {
-            return View();
+            var response = await _devicesService.Get();
+            return StatusCode((int)response.StatusCode, response);
         }
 
-        // POST: DeviceController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        /// <summary>
+        /// Get devices by IDs
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        [HttpGet("ids")]
+        public async Task<IActionResult> GetByIds([FromQuery] List<Guid> ids)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            var response = await _devicesService.Get(ids);
+            return StatusCode((int)response.StatusCode, response);
         }
 
-        // GET: DeviceController/Delete/5
-        public ActionResult Delete(int id)
+        /// <summary>
+        /// Update devices
+        /// </summary>
+        /// <param name="devices"></param>
+        /// <returns></returns>
+        [HttpPut]
+        public async Task<IActionResult> Update([FromBody] List<DeviceEntity> devices)
         {
-            return View();
+            var response = await _devicesService.Update(devices);
+            return StatusCode((int)response.StatusCode, response);
         }
 
-        // POST: DeviceController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        /// <summary>
+        /// Delete devices by IDs
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        [HttpDelete]
+        public async Task<IActionResult> Delete([FromBody] List<Guid> ids)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            var response = await _devicesService.Delete(ids);
+            return StatusCode((int)response.StatusCode, response);
         }
     }
 }

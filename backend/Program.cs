@@ -3,7 +3,7 @@ using HttpConfig;
 using JWT;
 using JWT.Algorithms;
 using JWT.Serializers;
-using MediHub.Web.Application;
+using MediHub.Web.ApplicationCore.Service;
 using MediHub.Web.Auth.PermisionChecker;
 using MediHub.Web.Aws.Dtos;
 using MediHub.Web.DatabaseContext.AppDbcontext;

@@ -8,7 +8,7 @@ namespace MediHub.Web.Models.Common
 
     }
 
-    public abstract class IBaseEntity<TKey> : BaseEntity where TKey : IEquatable<TKey>
+    public abstract class IBaseEntity<TKey> : Entity<TKey>, BaseEntity where TKey : IEquatable<TKey>
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

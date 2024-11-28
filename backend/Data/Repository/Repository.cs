@@ -251,7 +251,7 @@ namespace MediHub.Web.Data.Repository
                 DbContext.ChangeTracker.AutoDetectChangesEnabled = false;
                 DbContext.ChangeTracker.DetectChanges();
 
-                var modifiedEntries = DbContext.ChangeTracker.Entries<IDateTime>()
+                var modifiedEntries = DbContext.ChangeTracker.Entries<BaseEntity>()
                     .Where(x => x.State == EntityState.Added || x.State == EntityState.Modified || x.State == EntityState.Deleted);
 
                 AuditEntity(modifiedEntries);
@@ -332,7 +332,7 @@ namespace MediHub.Web.Data.Repository
             throw new NotImplementedException();
         }
 
-        private void AuditEntity(IEnumerable<EntityEntry<IDateTime>> modifiedEntries)
+        private void AuditEntity(IEnumerable<EntityEntry<BaseEntity>> modifiedEntries)
         {
             var now = DateTime.UtcNow;
             var userId = CurrentUser.GetId();
@@ -343,7 +343,7 @@ namespace MediHub.Web.Data.Repository
                 switch (entry.State)
                 {
                     case EntityState.Added:
-                        entry.Entity.CreatedAt = now;
+                        entry.Entity.CreatedDate = now;
                         if (string.IsNullOrEmpty(entry.Entity.CreatedBy))
                         {
                             entry.Entity.CreatedBy = email;
@@ -365,9 +365,9 @@ namespace MediHub.Web.Data.Repository
                 }
             }
 
-            void AuditUpdatingField(EntityEntry<IDateTime> entry)
+            void AuditUpdatingField(EntityEntry<BaseEntity> entry)
             {
-                entry.Entity.UpdatedAt = now;
+                entry.Entity.UpdatedDate = now;
                 if (string.IsNullOrEmpty(entry.Entity.UpdatedBy))
                 {
                     entry.Entity.UpdatedBy = email;

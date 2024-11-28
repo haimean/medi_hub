@@ -1,0 +1,148 @@
+﻿using MediHub.Web.ApplicationCore.Interfaces;
+using MediHub.Web.Auth.CurrentUser;
+using MediHub.Web.Auth.PermisionChecker;
+using MediHub.Web.Data.Repository;
+using MediHub.Web.HttpConfig;
+using MediHub.Web.Models;
+
+namespace MediHub.Web.ApplicationCore.Service
+{
+    public class DevicesService : HttpConfig.Service, IDevicesService
+    {
+        private readonly IRepository _repository;
+        private readonly IPermissionChecker _permissionChecker;
+        private readonly ICurrentUser _currentUser;
+
+        public DevicesService(IRepository repository, IPermissionChecker permissionChecker, ICurrentUser currentUser)
+        {
+            _repository = repository;
+            _permissionChecker = permissionChecker;
+            _currentUser = currentUser;
+        }
+
+        /// <summary>
+        /// Create
+        /// </summary>
+        /// <param name="devices"></param>
+        /// <returns></returns>
+        /// CreatedBy: PQ Huy (28.11.2024)
+        public async Task<ServiceResponse> Create(List<DeviceEntity> devices)
+        {
+            try
+            {
+                foreach (var device in devices)
+                {
+                    device.IsDeleted = false;
+                    device.CreatedBy = _currentUser.GetEmail();
+                    device.UpdatedBy = _currentUser.GetEmail();
+
+                    await _repository.AddAsync(device);
+                }
+
+                await _repository.SaveChangeAsync();
+            }
+            catch (Exception ce)
+            {
+                return BadRequest(ce.Message);
+            }
+
+            return Ok(devices);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        /// CreatedBy: PQ Huy (28.11.2024)
+        public async Task<ServiceResponse> Get()
+        {
+            var reuslt = new List<DeviceEntity>();
+
+            try
+            {
+                reuslt = (await _repository.FindAllAsync<DeviceEntity>()).Where(c => c.IsDeleted != true).ToList();
+            }
+            catch (Exception ce)
+            {
+                return BadRequest(ce.Message);
+            }
+
+            return Ok(reuslt);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// CreatedBy: PQ Huy (28.11.2024)
+        public async Task<ServiceResponse> Get(List<Guid> ids)
+        {
+            var result = new List<DeviceEntity>();
+
+            try
+            {
+                result = (await _repository.FindAllAsync<DeviceEntity>())
+                        .Where(c => !c.IsDeleted && ids.Contains(c.Id))
+                        .ToList();
+            }
+            catch (Exception ce)
+            {
+                return BadRequest(ce.Message);
+            }
+
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="devices"></param>
+        /// <returns></returns>
+        /// CreatedBy: PQ Huy (28.11.2024)
+        public async Task<ServiceResponse> Update(List<DeviceEntity> devices)
+        {
+            var reuslt = new List<DeviceEntity>();
+
+            try
+            {
+                foreach (var device in devices)
+                {
+                    await _repository.UpdateAsync(device);
+                }
+            }
+            catch (Exception ce)
+            {
+                return Ok(devices, message: ce.Message);
+            }
+
+            await _repository.SaveChangeAsync();
+            return Ok(devices);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        /// CreatedBy: PQ Huy (28.11.2024)
+        public async Task<ServiceResponse> Delete(List<Guid> ids)
+        {
+            try
+            {
+                foreach (var id in ids)
+                {
+                    await _repository.DeleteAsync<DeviceEntity>(id);
+                }
+
+                await _repository.SaveChangeAsync();
+
+                return Ok(ids);
+            }
+            catch (Exception ce)
+            {
+                return BadRequest(ce.Message);
+            }
+        }
+    }
+}
