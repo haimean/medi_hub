@@ -1,4 +1,4 @@
-﻿using MediHub.Web.Auth.CurrentUser;
+﻿using MediHub.Web.ApplicationCore.Auth.CurrentUser;
 using MediHub.Web.Models.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;

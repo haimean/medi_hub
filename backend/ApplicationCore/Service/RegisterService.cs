@@ -1,5 +1,5 @@
-﻿using MediHub.Web.ApplicationCore.Interfaces;
-using MediHub.Web.Auth.CurrentUser;
+﻿using MediHub.Web.ApplicationCore.Auth.CurrentUser;
+using MediHub.Web.ApplicationCore.Interfaces;
 using MediHub.Web.Aws;
 using MediHub.Web.Data.Repository;
 using MediHub.Web.DatabaseContext.AppDbcontext;
@@ -16,9 +16,10 @@ namespace MediHub.Web.ApplicationCore.Service
 
             #region Services
             services.AddScoped<IAwsService, AwsService>();
-            services.AddScoped<ICurrentUser, CurrentUser>();
+            services.AddScoped<ICurrentUser, CurrentUserService>();
             services.AddScoped<IDevicesService, DevicesService>();
             services.AddScoped<IUsersService, UsersService>();
+            services.AddScoped<IAuthService, AuthService>();
             #endregion
         }
     }

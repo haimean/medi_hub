@@ -1,4 +1,4 @@
-﻿namespace MediHub.Web.Auth.CurrentUser
+﻿namespace MediHub.Web.ApplicationCore.Auth.CurrentUser
 {
     public interface ICurrentUser
     {
@@ -7,11 +7,11 @@
         string GetToken();
     }
 
-    public class CurrentUser : ICurrentUser
+    public class CurrentUserService : ICurrentUser
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public CurrentUser(IHttpContextAccessor httpContext)
+        public CurrentUserService(IHttpContextAccessor httpContext)
         {
 
             _httpContextAccessor = httpContext;
@@ -24,7 +24,7 @@
             {
                 return _httpContextAccessor?.HttpContext?.Items["User"]?.ToString();
             }
-            catch (System.Exception)
+            catch (Exception)
             {
                 return null;
             }
@@ -36,7 +36,7 @@
             {
                 return _httpContextAccessor?.HttpContext?.Request.Headers["Authorization"];
             }
-            catch (System.Exception)
+            catch (Exception)
             {
                 return null;
             }

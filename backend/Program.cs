@@ -4,7 +4,6 @@ using JWT;
 using JWT.Algorithms;
 using JWT.Serializers;
 using MediHub.Web.ApplicationCore.Service;
-using MediHub.Web.Auth.PermisionChecker;
 using MediHub.Web.Aws.Dtos;
 using MediHub.Web.DatabaseContext.AppDbcontext;
 using MediHub.Web.DatabaseContext.DapperDbContext;
@@ -22,7 +21,7 @@ string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(option =>
 {
-    option.SwaggerDoc("v1", new OpenApiInfo { Title = "QAQC Entry App API - 13.11.2024", Version = "v1" });
+    option.SwaggerDoc("v1", new OpenApiInfo { Title = "MediHub App API", Version = "v1" });
     option.AddSecurityDefinition(
         "Bearer",
         new OpenApiSecurityScheme
@@ -64,7 +63,6 @@ builder.Services.AddSignalR();
 builder.Services.AddSingleton<MediHubDapperContext>();
 builder.Services.AddSingleton<MediHubDapperContext>();
 
-builder.Services.AddScoped<IPermissionChecker, PermissionChecker>();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

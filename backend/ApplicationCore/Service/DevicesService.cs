@@ -1,6 +1,5 @@
-﻿using MediHub.Web.ApplicationCore.Interfaces;
-using MediHub.Web.Auth.CurrentUser;
-using MediHub.Web.Auth.PermisionChecker;
+﻿using MediHub.Web.ApplicationCore.Auth.CurrentUser;
+using MediHub.Web.ApplicationCore.Interfaces;
 using MediHub.Web.Data.Repository;
 using MediHub.Web.HttpConfig;
 using MediHub.Web.Models;
@@ -10,13 +9,11 @@ namespace MediHub.Web.ApplicationCore.Service
     public class DevicesService : HttpConfig.Service, IDevicesService
     {
         private readonly IRepository _repository;
-        private readonly IPermissionChecker _permissionChecker;
         private readonly ICurrentUser _currentUser;
 
-        public DevicesService(IRepository repository, IPermissionChecker permissionChecker, ICurrentUser currentUser)
+        public DevicesService(IRepository repository, ICurrentUser currentUser)
         {
             _repository = repository;
-            _permissionChecker = permissionChecker;
             _currentUser = currentUser;
         }
 

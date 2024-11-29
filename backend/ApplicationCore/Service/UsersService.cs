@@ -1,6 +1,5 @@
-﻿using MediHub.Web.ApplicationCore.Interfaces;
-using MediHub.Web.Auth.CurrentUser;
-using MediHub.Web.Auth.PermisionChecker;
+﻿using MediHub.Web.ApplicationCore.Auth.CurrentUser;
+using MediHub.Web.ApplicationCore.Interfaces;
 using MediHub.Web.Data.Repository;
 using MediHub.Web.HttpConfig;
 using MediHub.Web.Models;
@@ -10,13 +9,11 @@ namespace MediHub.Web.ApplicationCore.Service
     public class UsersService : HttpConfig.Service, IUsersService
     {
         private readonly IRepository _repository;
-        private readonly IPermissionChecker _permissionChecker;
         private readonly ICurrentUser _currentUser;
 
-        public UsersService(IRepository repository, IPermissionChecker permissionChecker, ICurrentUser currentUser)
+        public UsersService(IRepository repository, ICurrentUser currentUser)
         {
             _repository = repository;
-            _permissionChecker = permissionChecker;
             _currentUser = currentUser;
         }
 
@@ -32,6 +29,9 @@ namespace MediHub.Web.ApplicationCore.Service
             {
                 foreach (var user in users)
                 {
+                    // Băm mật khẩu trước khi lưu
+                    user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(user.PasswordHash);
+
                     user.IsDeleted = false;
                     user.CreatedBy = _currentUser.GetEmail();
                     user.UpdatedBy = _currentUser.GetEmail();
@@ -50,41 +50,19 @@ namespace MediHub.Web.ApplicationCore.Service
         }
 
         /// <summary>
-        /// 
+        /// Get all users
         /// </summary>
         /// <returns></returns>
         /// CreatedBy: PQ Huy (28.11.2024)
         public async Task<ServiceResponse> Get()
-        {
-            var reuslt = new List<UserEntity>();
-
-            try
-            {
-                reuslt = (await _repository.FindAllAsync<UserEntity>()).Where(c => c.IsDeleted != true).ToList();
-            }
-            catch (Exception ce)
-            {
-                return BadRequest(ce.Message);
-            }
-
-            return Ok(reuslt);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        /// CreatedBy: PQ Huy (28.11.2024)
-        public async Task<ServiceResponse> Get(List<Guid> ids)
         {
             var result = new List<UserEntity>();
 
             try
             {
                 result = (await _repository.FindAllAsync<UserEntity>())
-                        .Where(c => !c.IsDeleted && ids.Contains(c.Id))
-                        .ToList();
+                         .Where(c => c.IsDeleted != true)
+                         .ToList();
             }
             catch (Exception ce)
             {
@@ -95,33 +73,61 @@ namespace MediHub.Web.ApplicationCore.Service
         }
 
         /// <summary>
-        /// 
+        /// Get users by ids
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        /// CreatedBy: PQ Huy (28.11.2024)
+        public async Task<ServiceResponse> Get(List<Guid> ids)
+        {
+            var result = new List<UserEntity>();
+
+            try
+            {
+                result = (await _repository.FindAllAsync<UserEntity>())
+                         .Where(c => !c.IsDeleted && ids.Contains(c.Id))
+                         .ToList();
+            }
+            catch (Exception ce)
+            {
+                return BadRequest(ce.Message);
+            }
+
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// Update users
         /// </summary>
         /// <param name="users"></param>
         /// <returns></returns>
         /// CreatedBy: PQ Huy (28.11.2024)
         public async Task<ServiceResponse> Update(List<UserEntity> users)
         {
-            var reuslt = new List<UserEntity>();
-
             try
             {
                 foreach (var user in users)
                 {
+                    if (!string.IsNullOrWhiteSpace(user.PasswordHash))
+                    {
+                        // Băm mật khẩu nếu mật khẩu được cập nhật
+                        user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(user.PasswordHash);
+                    }
+
                     await _repository.UpdateAsync(user);
                 }
+
+                await _repository.SaveChangeAsync();
+                return Ok(users);
             }
             catch (Exception ce)
             {
                 return Ok(users, message: ce.Message);
             }
-
-            await _repository.SaveChangeAsync();
-            return Ok(users);
         }
 
         /// <summary>
-        /// 
+        /// Delete users
         /// </summary>
         /// <param name="ids"></param>
         /// <returns></returns>
@@ -136,7 +142,6 @@ namespace MediHub.Web.ApplicationCore.Service
                 }
 
                 await _repository.SaveChangeAsync();
-
                 return Ok(ids);
             }
             catch (Exception ce)
