@@ -5,8 +5,12 @@ namespace MediHub.Web.DatabaseContext.AppDbcontext
 {
     public class MediHubContext : DbContext
     {
+        #region DB SET
         public DbSet<DeviceEntity> DeviceEntity { get; set; }
+        public DbSet<UserEntity> UserEntity { get; set; }
+        #endregion
 
+        #region Config context
         public MediHubContext(DbContextOptions options)
            : base(options)
         {
@@ -26,5 +30,6 @@ namespace MediHub.Web.DatabaseContext.AppDbcontext
                 .OnDelete(DeleteBehavior.SetNull);
             });*/
         }
+        #endregion
     }
 }

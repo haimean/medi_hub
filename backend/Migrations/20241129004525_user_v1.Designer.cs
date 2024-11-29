@@ -5,6 +5,7 @@ using MediHub.Web.DatabaseContext.AppDbcontext;
 using MediHub.Web.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -13,9 +14,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MediHub.Web.Migrations
 {
     [DbContext(typeof(MediHubContext))]
-    partial class MediHubContextModelSnapshot : ModelSnapshot
+    [Migration("20241129004525_user_v1")]
+    partial class user_v1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

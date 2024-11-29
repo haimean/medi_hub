@@ -163,7 +163,6 @@ app.Use(
 );
 
 var configuration = builder.Configuration;
-app.MapGet("medihub/healthcheck", () => "Ver 01");
 
 app.MapGet(
     "medihub/healthcheck2",

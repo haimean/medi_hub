@@ -18,6 +18,7 @@ namespace MediHub.Web.ApplicationCore.Service
             services.AddScoped<IAwsService, AwsService>();
             services.AddScoped<ICurrentUser, CurrentUser>();
             services.AddScoped<IDevicesService, DevicesService>();
+            services.AddScoped<IUsersService, UsersService>();
             #endregion
         }
     }
