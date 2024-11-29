@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace MediHub.Web.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("v1/devices")]
     public class DevicesController : ControllerBase
     {
         private readonly IDevicesService _devicesService;

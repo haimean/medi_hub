@@ -22,7 +22,7 @@ namespace MediHub.Web.ApplicationCore.Service
         }
 
         /// <summary>
-        /// 
+        /// Đăng nhập
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
@@ -39,6 +39,8 @@ namespace MediHub.Web.ApplicationCore.Service
 
             // Cập nhật trạng thái đăng nhập
             user.LastLogin = DateTime.UtcNow;
+            user.TokenExpiration = DateTime.UtcNow.AddHours(8); // Thiết lập thời gian hết hạn cho token
+            user.IsTokenValid = true; // Đánh dấu token là hợp lệ
             await _repository.SaveChangeAsync();
 
             // Tạo token JWT
@@ -46,7 +48,7 @@ namespace MediHub.Web.ApplicationCore.Service
         }
 
         /// <summary>
-        /// 
+        /// Đăng xuất
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
@@ -62,13 +64,70 @@ namespace MediHub.Web.ApplicationCore.Service
 
             // Cập nhật trạng thái đăng xuất
             user.LastLogout = DateTime.UtcNow;
+            user.IsTokenValid = false; // Đánh dấu token là không hợp lệ
             await _repository.SaveChangeAsync();
 
             return Ok();
         }
 
         /// <summary>
-        /// 
+        /// Kiểm tra token còn hạn hay không
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        public async Task<ServiceResponse> ValidateToken(string token)
+        {
+            if (string.IsNullOrEmpty(token))
+            {
+                return BadRequest("Invalid Token");
+            }
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            try
+            {
+                // Giải mã token
+                var validationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"])),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ClockSkew = TimeSpan.Zero // Không cho phép độ trễ
+                };
+
+                // Kiểm tra token
+                tokenHandler.ValidateToken(token, validationParameters, out SecurityToken validatedToken);
+
+                // Nếu token hợp lệ, kiểm tra thời gian hết hạn
+                var jwtToken = (JwtSecurityToken)validatedToken;
+                if (jwtToken.ValidTo < DateTime.UtcNow)
+                {
+                    return BadRequest("Token has expired");
+                }
+
+                // Kiểm tra trạng thái token trong cơ sở dữ liệu
+                var userName = jwtToken.Claims.First(c => c.Type == "unique_name").Value.ToString();
+                var user = await _repository.FindAsync<UserEntity>(u => u.Username == userName);
+                if (user == null || !user.IsTokenValid)
+                {
+                    return BadRequest("Token is no longer valid");
+                }
+
+                return Ok(true); // Token hợp lệ và chưa hết hạn
+            }
+            catch (SecurityTokenExpiredException)
+            {
+                return BadRequest("Token has expired");
+            }
+            catch (Exception)
+            {
+                return BadRequest("Invalid Token");
+            }
+        }
+
+        #region Func support gen token and valid
+        /// <summary>
+        /// Tạo token JWT
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
@@ -93,7 +152,7 @@ namespace MediHub.Web.ApplicationCore.Service
         }
 
         /// <summary>
-        /// 
+        /// Xác thực mật khẩu
         /// </summary>
         /// <param name="password"></param>
         /// <param name="storedHash"></param>
@@ -105,14 +164,14 @@ namespace MediHub.Web.ApplicationCore.Service
                 // So sánh mật khẩu đã băm
                 return BCrypt.Net.BCrypt.Verify(password, storedHash);
             }
-            catch (Exception ce)
+            catch (Exception)
             {
                 return false;
             }
         }
 
         /// <summary>
-        /// 
+        /// Băm mật khẩu
         /// </summary>
         /// <param name="password"></param>
         /// <returns></returns>
@@ -121,5 +180,6 @@ namespace MediHub.Web.ApplicationCore.Service
             // Băm mật khẩu trước khi lưu vào cơ sở dữ liệu
             return BCrypt.Net.BCrypt.HashPassword(password);
         }
+        #endregion
     }
 }

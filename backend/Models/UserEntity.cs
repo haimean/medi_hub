@@ -38,6 +38,12 @@ namespace MediHub.Web.Models
 
         [Column("last_logout")]
         public DateTime? LastLogout { get; set; } // Lần đăng xuất gần nhất
+
+        [Column("token_expiration")]
+        public DateTime? TokenExpiration { get; set; } // Thời gian hết hạn của token
+
+        [Column("is_token_valid")]
+        public bool IsTokenValid { get; set; } // Trạng thái hợp lệ của token
         #endregion
 
         #region Metadata

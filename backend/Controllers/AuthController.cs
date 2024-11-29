@@ -33,8 +33,27 @@ namespace MediHub.Web.Controllers
         [HttpPost("logout")]
         public async Task<IActionResult> Logout(string userName)
         {
-            await _authService.LogoutAsync(userName);
-            return Ok("Logged out successfully.");
+            var result = await _authService.LogoutAsync(userName);
+            return StatusCode((int)result.StatusCode, result);
+        }
+
+        /// <summary>
+        /// Kiểm tra token còn hạn hay không
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        /// CreatedBy: PQ Huy (28.11.2024)
+        [HttpGet("check-token")]
+        public async Task<IActionResult> CheckToken(string token)
+        {
+            if (string.IsNullOrEmpty(token))
+            {
+                return BadRequest(new { valid = false, message = "Token is required." });
+            }
+
+            var isValid = await _authService.ValidateToken(token); // Giả sử bạn có phương thức ValidateToken trong IAuthService
+
+            return StatusCode((int)isValid.StatusCode, isValid);
         }
     }
 

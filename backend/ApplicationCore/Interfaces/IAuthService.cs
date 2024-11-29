@@ -18,5 +18,12 @@ namespace MediHub.Web.ApplicationCore.Interfaces
         /// <param name="username"></param>
         /// <returns></returns>
         Task<ServiceResponse> LogoutAsync(string username);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        Task<ServiceResponse> ValidateToken(string token);
     }
 }

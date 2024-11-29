@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace MediHub.Web.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("v1/users")]
     public class UsersController : ControllerBase
     {
         private readonly IUsersService _usersService;
