@@ -1,7 +1,9 @@
+import React, { useState } from 'react';
+
 const Dashboard = () => {
     return (
-        <div>
-            Dashboard
+        <div className="dashboard">
+            Dashboard dfddddddddddddddđ
         </div>
     );
 }

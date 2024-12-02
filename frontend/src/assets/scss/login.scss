@@ -1,0 +1,93 @@
+.medi-login {
+    background-image: url("../images/banner-login-v1.webp");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    font-size: 14px;
+
+    .medi-login__content {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .content__lang {
+        position: fixed;
+        top: 24px;
+        right: 24px;
+        width: 120px;
+        height: 32px;
+        z-index: 99;
+        border-radius: 4px;
+        border: 1px solid #ffffff4d;
+        line-height: 32px;
+        color: #f8f8f8;
+        padding: 0 16px 0 38px;
+        cursor: pointer;
+
+        .lang--icon {
+            background-image: url('../icons/icon-vi.svg');
+            background-position: center;
+            background-repeat: no-repeat;
+            cursor: pointer;
+            position: absolute;
+            left: 8px;
+            top: 7px;
+            height: 16px;
+            width: 21px;
+        }
+    }
+
+    .content__modal {
+        width: 400px;
+        border-radius: 8px;
+        padding: 40px 48px 40px 48px;
+        min-height: 340px;
+        background: #fff;
+        position: relative;
+        box-shadow: 0 12px 20px #0000001f;
+
+        .modal--medi-log {
+            background-image: url('../images/logo-bachmai.webp');
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            width: 100%;
+            height: fit-content;
+            min-height: 4rem;
+        }
+
+        .modal--app-name {
+            text-align: center;
+            font-weight: 900;
+            font-size: 24px;
+            padding: 1rem 0rem 3rem 0rem;
+        }
+
+        .modal--user {
+            margin-bottom: 12px;
+        }
+
+        .modal--user,
+        .modal--pass {
+            height: 48px;
+        }
+
+        .modal--submit {
+            padding: 3rem 0rem;
+
+            .modal--submit__btn {
+                background-color: #2CA01C;
+                min-height: 2.5rem;
+            }
+        }
+    }
+}
+
+
+.input-error {
+    border: 1px solid red; /* Bôi viền đỏ */
+}

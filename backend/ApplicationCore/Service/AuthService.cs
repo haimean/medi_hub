@@ -34,7 +34,7 @@ namespace MediHub.Web.ApplicationCore.Service
 
             if (user == null || !VerifyPassword(password, user.PasswordHash))
             {
-                return BadRequest("Unauthorized");
+                return Ok(message: "Unauthorized");
             }
 
             // Cập nhật trạng thái đăng nhập

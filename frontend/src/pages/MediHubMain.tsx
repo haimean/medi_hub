@@ -8,7 +8,7 @@ const MediHubMain = () => {
     return (
         <div className="w-full h-fulll">
             <div className="medi-topbar">
-                
+                huyyyyyyyy
             </div>
             <div className="medi-content felx">
                 <div className="medi-content__sidebar">
