@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import MediHubMain from '../../pages/MediHubMain';
-import axios from 'axios';
+import axios from '../../api/axiosClient';
+import { apiCheckPermission } from '../../api/appApi';
 
 /**
  * Component check auth and return outlet if has auth
@@ -21,16 +22,17 @@ const AuthRoutes = () => {
             navigate('/login');
         } else {
             // Nếu có token, gọi API để kiểm tra tính hợp lệ của token
-            axios.get('/api/check-token', { params: { token } })
+            apiCheckPermission(token)
                 .then((response: any) => {
                     if (response.data.valid) {
                         setIsAuth(true); // Token hợp lệ
                     } else {
+                        setIsAuth(false); // Token hợp lệ
                         navigate('/login'); // Token không hợp lệ, chuyển hướng đến login
                     }
                 })
                 .catch((error: any) => {
-                    console.error("Error checking token:", error);
+                    setIsAuth(false); // Token hợp lệ
                     navigate('/login'); // Có lỗi khi kiểm tra token, chuyển hướng đến login
                 });
         }
@@ -39,7 +41,7 @@ const AuthRoutes = () => {
     return (
         <div className='w-screen h-screen'>
             {
-                isAuth ? <MediHubMain /> : <div> You do not have permission ! </div>
+                isAuth ? <MediHubMain /> : <Outlet />
             }
         </div>
     );

@@ -79,7 +79,7 @@ namespace MediHub.Web.ApplicationCore.Service
         {
             if (string.IsNullOrEmpty(token))
             {
-                return BadRequest("Invalid Token");
+                return Ok(message: "Invalid Token");
             }
 
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -102,7 +102,7 @@ namespace MediHub.Web.ApplicationCore.Service
                 var jwtToken = (JwtSecurityToken)validatedToken;
                 if (jwtToken.ValidTo < DateTime.UtcNow)
                 {
-                    return BadRequest("Token has expired");
+                    return Ok(message: "Token has expired");
                 }
 
                 // Kiểm tra trạng thái token trong cơ sở dữ liệu
@@ -110,18 +110,18 @@ namespace MediHub.Web.ApplicationCore.Service
                 var user = await _repository.FindAsync<UserEntity>(u => u.Username == userName);
                 if (user == null || !user.IsTokenValid)
                 {
-                    return BadRequest("Token is no longer valid");
+                    return Ok(message: "Token is no longer valid");
                 }
 
                 return Ok(true); // Token hợp lệ và chưa hết hạn
             }
             catch (SecurityTokenExpiredException)
             {
-                return BadRequest("Token has expired");
+                return Ok(message: "Token has expired");
             }
             catch (Exception)
             {
-                return BadRequest("Invalid Token");
+                return Ok(message: "Invalid Token");
             }
         }
 
