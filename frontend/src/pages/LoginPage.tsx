@@ -34,7 +34,7 @@ const LoginPage = () => {
                 const token = response.data; // Giả sử token được trả về trong response
                 localStorage.setItem('MEDI.Token', token); // Lưu token vào localStorage
                 message.success('Đăng nhập thành công!');
-                navigate('dashboard'); // Chuyển hướng đến dashboard
+                navigate('/dashboard'); // Chuyển hướng đến dashboard
             } else {
                 message.error('Đăng nhập thất bại! Vui lòng kiểm tra lại thông tin.');
             }

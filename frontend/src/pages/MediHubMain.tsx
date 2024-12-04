@@ -6,14 +6,16 @@ import { Outlet } from "react-router-dom";
  */
 const MediHubMain = () => {
     return (
-        <div className="w-full h-fulll">
+        <div className="medihub-main w-full h-full">
             <div className="medi-topbar">
-                huyyyyyyyy
+                <div className="medi-topbar__logo"></div>
+                <div className="medi-topbar__right">
+                    <div className="medi-icon topbar__right--setting"></div>
+                    <div className="topbar__right--notification"></div>
+                    <div className="topbar__right--user"></div>
+                </div>
             </div>
             <div className="medi-content felx">
-                <div className="medi-content__sidebar">
-                    content__sidebar
-                </div>
                 <div className="medi-content__detail">
                     <Outlet/>
                 </div>
