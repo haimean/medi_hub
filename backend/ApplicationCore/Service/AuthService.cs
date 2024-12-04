@@ -67,7 +67,7 @@ namespace MediHub.Web.ApplicationCore.Service
             user.IsTokenValid = false; // Đánh dấu token là không hợp lệ
             await _repository.SaveChangeAsync();
 
-            return Ok();
+            return Ok(user);
         }
 
         /// <summary>
@@ -113,7 +113,11 @@ namespace MediHub.Web.ApplicationCore.Service
                     return Ok(message: "Token is no longer valid");
                 }
 
-                return Ok(true); // Token hợp lệ và chưa hết hạn
+                return Ok(new
+                {
+                    User = user,
+                    IsValid = true,
+                }); // Token hợp lệ và chưa hết hạn
             }
             catch (SecurityTokenExpiredException)
             {

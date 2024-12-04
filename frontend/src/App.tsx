@@ -5,15 +5,19 @@ import AuthRoutes from './components/auth/AuthRoutes';
 import Dashboard from './components/dashboard/Dashboard';
 import LoginPage from './pages/LoginPage';
 import './assets/scss/index.scss';
+import { Provider } from 'react-redux';
+import commonStore from './stores/commonStore';
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<AuthRoutes />}>
-        <Route path="dashboard" element={<Dashboard />} />
-        <Route path="login" element={<LoginPage />} />
-      </Route>
-    </Routes>
+    <Provider store={commonStore}>
+      <Routes>
+        <Route path="/" element={<AuthRoutes />}>
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="login" element={<LoginPage />} />
+        </Route>
+      </Routes>
+    </Provider>
   );
 }
 

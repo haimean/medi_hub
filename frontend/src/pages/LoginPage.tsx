@@ -1,18 +1,22 @@
+// src/pages/LoginPage.tsx
 import React, { useState } from 'react';
 import { Button, Input, message } from 'antd';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate để chuyển hướng
 import { apiLogin } from '../api/appApi';
+import { useDispatch } from 'react-redux'; // Import useDispatch
+import { setUsername } from '../stores/commonStore';
 
 /**
  * Login page: check token, allow user entry user name, password
  * CreatedBy: PQ Huy (21.11.2024)
  */
 const LoginPage = () => {
-    const [username, setUsername] = useState(''); // State để lưu username
+    const [username, setUsernameState] = useState(''); // State để lưu username
     const [password, setPassword] = useState(''); // State để lưu password
     const [usernameError, setUsernameError] = useState(false); // State để theo dõi lỗi username
     const [passwordError, setPasswordError] = useState(false); // State để theo dõi lỗi password
     const navigate = useNavigate(); // Khởi tạo useNavigate
+    const dispatch = useDispatch(); // Khởi tạo useDispatch
 
     // Hàm gọi API để đăng nhập
     const funcLogin = async () => {
@@ -30,9 +34,10 @@ const LoginPage = () => {
             const response: any = await apiLogin(username, password);
 
             // Kiểm tra mã trạng thái và xử lý phản hồi từ API
-            if (response?.succeeded && response?.message != "Unauthorized") {
+            if (response?.succeeded && response?.message !== "Unauthorized") {
                 const token = response.data; // Giả sử token được trả về trong response
                 localStorage.setItem('MEDI.Token', token); // Lưu token vào localStorage
+                dispatch(setUsername(username)); // Lưu tên người dùng vào store
                 message.success('Đăng nhập thành công!');
                 navigate('/dashboard'); // Chuyển hướng đến dashboard
             } else {
@@ -62,7 +67,7 @@ const LoginPage = () => {
                             placeholder="Số điện thoại/ Email"
                             value={username}
                             onChange={(e) => {
-                                setUsername(e.target.value);
+                                setUsernameState(e.target.value);
                                 setUsernameError(false); // Tắt lỗi khi người dùng nhập
                             }} // Cập nhật state khi người dùng nhập
                         />

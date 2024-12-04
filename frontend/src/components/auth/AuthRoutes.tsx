@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from 'react';
+// src/components/AuthRoutes.tsx
+import React, { useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import MediHubMain from '../../pages/MediHubMain';
 import { apiCheckPermission } from '../../api/appApi';
+import { useDispatch, useSelector } from 'react-redux'; // Import useDispatch và useSelector
+import { setAuth, setUsername } from '../../stores/commonStore';
 
 /**
  * Component check auth and return outlet if has auth
@@ -10,7 +13,8 @@ import { apiCheckPermission } from '../../api/appApi';
  */
 const AuthRoutes = () => {
     let navigate = useNavigate();
-    const [isAuth, setIsAuth] = useState<boolean>(false); // Mặc định là false
+    const dispatch = useDispatch(); // Khởi tạo dispatch
+    const isAuth = useSelector((state: any) => state.isAuth); // Lấy isAuth từ store
 
     // check has token or not
     useEffect(() => {
@@ -25,24 +29,25 @@ const AuthRoutes = () => {
                     const path = window.location.pathname; // Lấy đường dẫn hiện tại
                     const firstSegment = path.split('/')[1]; // Tách chuỗi và lấy phần đầu tiên sau dấu /
 
-                    if (response.data) {
-                        setIsAuth(true); // Token hợp lệ
-                        if(firstSegment != 'dashboard') {
+                    if (response.data?.isValid) {
+                        dispatch(setAuth(true)); // Cập nhật isAuth trong store
+                        dispatch(setUsername(response.data.user?.username)); // Lưu tên người dùng vào store
+                        if (firstSegment !== 'dashboard') {
                             navigate('/dashboard');
                         }
                     } else {
-                        setIsAuth(false); // Token ko hợp lệ
-                        if(firstSegment != 'login') {
+                        dispatch(setAuth(false)); // Cập nhật isAuth trong store
+                        if (firstSegment !== 'login') {
                             navigate('/login'); // Có lỗi khi kiểm tra token, chuyển hướng đến login
                         }
                     }
                 })
                 .catch((error: any) => {
-                    setIsAuth(false); // Token hợp lệ
+                    dispatch(setAuth(false)); // Cập nhật isAuth trong store
                     navigate('/login'); // Có lỗi khi kiểm tra token, chuyển hướng đến login
                 });
         }
-    }, [navigate]);
+    }, [navigate, dispatch]);
 
     return (
         <div className='w-screen h-screen'>

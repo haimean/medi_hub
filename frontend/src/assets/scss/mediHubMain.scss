@@ -28,8 +28,8 @@
                 background-size: cover;
                 background-position: center;
                 cursor: pointer;
-                width: 32px;
-                height: 32px;
+                width: 24px;
+                height: 24px;
             }
 
             .topbar__right--setting {
@@ -58,6 +58,19 @@
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
-        opacity: 0.5;
+        position: relative; /* Để sử dụng cho lớp phủ */
+
+        .medi-content--overlay{
+            position: absolute; /* Để lớp phủ nằm trên hình nền */
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(173, 173, 173, 0.5); /* Màu đen với độ trong suốt 50% */
+        }
+
+        .medi-content__detail{
+            z-index: 1;
+        }
     }
 }
