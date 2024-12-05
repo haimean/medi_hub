@@ -8,6 +8,7 @@ namespace MediHub.Web.DatabaseContext.AppDbcontext
         #region DB SET
         public DbSet<DeviceEntity> DeviceEntity { get; set; }
         public DbSet<UserEntity> UserEntity { get; set; }
+        public DbSet<DepartmentEntity> DepartmentEntity { get; set; }
         #endregion
 
         #region Config context

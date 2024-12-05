@@ -15,6 +15,7 @@ const LoginPage = () => {
     const [password, setPassword] = useState(''); // State để lưu password
     const [usernameError, setUsernameError] = useState(false); // State để theo dõi lỗi username
     const [passwordError, setPasswordError] = useState(false); // State để theo dõi lỗi password
+    const [loading, setLoading] = useState(false); // State để theo dõi trạng thái loading
     const navigate = useNavigate(); // Khởi tạo useNavigate
     const dispatch = useDispatch(); // Khởi tạo useDispatch
 
@@ -29,6 +30,8 @@ const LoginPage = () => {
             message.warning('Vui lòng nhập Số điện thoại/Email và Mật khẩu!'); // Cảnh báo nếu không nhập
             return; // Dừng hàm nếu không có thông tin
         }
+
+        setLoading(true); // Bắt đầu trạng thái loading
 
         try {
             const response: any = await apiLogin(username, password);
@@ -46,6 +49,15 @@ const LoginPage = () => {
         } catch (error) {
             message.error('Có lỗi xảy ra! Vui lòng thử lại.');
             console.error('Login error:', error);
+        } finally {
+            setLoading(false); // Kết thúc trạng thái loading
+        }
+    };
+
+    // Hàm xử lý sự kiện nhấn phím
+    const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
+            funcLogin(); // Gọi hàm đăng nhập khi nhấn Enter
         }
     };
 
@@ -70,6 +82,7 @@ const LoginPage = () => {
                                 setUsernameState(e.target.value);
                                 setUsernameError(false); // Tắt lỗi khi người dùng nhập
                             }} // Cập nhật state khi người dùng nhập
+                            onKeyPress={handleKeyPress} // Thêm sự kiện onKeyPress
                         />
                     </div>
                     <div className="modal--pass">
@@ -81,13 +94,21 @@ const LoginPage = () => {
                                 setPassword(e.target.value);
                                 setPasswordError(false); // Tắt lỗi khi người dùng nhập
                             }} // Cập nhật state khi người dùng nhập
+                            onKeyPress={handleKeyPress} // Thêm sự kiện onKeyPress
                         />
                     </div>
                     <div className="modal--forgot-pass">
                         {/* Có thể thêm liên kết quên mật khẩu ở đây */}
                     </div>
                     <div className="modal--submit w-full">
-                        <Button onClick={funcLogin} className='w-full modal--submit__btn' type="primary">Đăng Nhập</Button>
+                        <Button 
+                            onClick={funcLogin} 
+                            className='w-full modal--submit__btn' 
+                            type="primary" 
+                            loading={loading} // Thêm thuộc tính loading
+                        >
+                            Đăng Nhập
+                        </Button>
                     </div>
                 </div>
             </div>

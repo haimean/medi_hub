@@ -72,6 +72,13 @@ namespace MediHub.Web.Models
 
         [Column("is_deleted")]
         public bool IsDeleted { get; set; } // Trạng thái xóa
+
+        #region Phân quyền phòng ban
+
+        [Column("department_ids")]
+        public List<Guid> DepartmentIds { get; set; } // Danh sách ID phòng ban mà người dùng có quyền truy cập
+
+        #endregion
     }
 
     #region Thông tin chi tiết kỹ sư, lịch sử hoạt động

@@ -46,6 +46,13 @@ namespace MediHub.Web.Models
         public bool IsTokenValid { get; set; } // Trạng thái hợp lệ của token
         #endregion
 
+        #region Phân quyền phòng ban
+
+        [Column("department_ids")]
+        public List<Guid> DepartmentIds { get; set; } // Danh sách ID phòng ban mà người dùng có quyền truy cập
+
+        #endregion
+
         #region Metadata
         [Column("is_deleted")]
         public bool IsDeleted { get; set; } // Trạng thái xóa
