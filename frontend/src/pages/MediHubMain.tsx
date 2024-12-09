@@ -4,7 +4,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import { Popconfirm, Button, message, Select } from 'antd';
 import { apiLogout } from "../api/appApi";
 import { useSelector, useDispatch } from 'react-redux'; // Import useDispatch
-import { setAuth, setSelectedDepartment } from '../stores/commonStore';
+import { setAuth, setDepartment } from '../stores/commonStore';
 
 // Định nghĩa kiểu cho RootState
 interface RootState {
@@ -53,7 +53,7 @@ const MediHubMain = () => {
                 }))
             }
 
-            dispatch(setSelectedDepartment({
+            dispatch(setDepartment({
                 id: departments[0]?.id,
                 name: departments[0]?.name,
             }))
@@ -74,11 +74,12 @@ const MediHubMain = () => {
                                 !isEnableDepartment ? (
                                     <div className='content--text cursor-pointer' onClick={() => setIsEnableDepartment(true)}>{department?.name}</div>
                                 ) : <Select
-                                    defaultValue={departments?.length > 0 ? departments[0]?.id : null}
+                                    value={department?.id ? department?.id : departments[0]?.id}
                                     style={{ width: '100%', maxHeight: '1.5rem' }}
                                     options={departmentOption}
+                                    open={true} // Automatically open the dropdown
                                     onChange={(e) => {
-                                        dispatch(setSelectedDepartment({
+                                        dispatch(setDepartment({
                                             id: e,
                                             name: departments?.find((x: any) => x.id == e)?.name,
                                         }));

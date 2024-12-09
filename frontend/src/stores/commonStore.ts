@@ -91,7 +91,7 @@ export const setUserInfo = (userInfo: UserInfo) => ({
 });
 
 // Định nghĩa action để cập nhật department
-export const setSelectedDepartment = (department: any | null) => ({
+export const setDepartment = (department: any | null) => ({
     type: SET_SELECTED_DEPARTMENT,
     payload: department,
 });
