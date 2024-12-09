@@ -2,9 +2,11 @@
 import React, { useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import MediHubMain from '../../pages/MediHubMain';
-import { apiCheckPermission } from '../../api/appApi';
 import { useDispatch, useSelector } from 'react-redux'; // Import useDispatch và useSelector
-import { setAuth, setUsername } from '../../stores/commonStore';
+import { setAuth, setUsername, setDepartments, setUserInfo } from '../../stores/commonStore'; // Import setDepartments
+import { apiCheckPermission, getDepartments } from '../../api/appApi'; // Import the new API function
+import { useQuery } from '@tanstack/react-query';
+import { message } from 'antd';
 
 /**
  * Component check auth and return outlet if has auth
@@ -16,38 +18,45 @@ const AuthRoutes = () => {
     const dispatch = useDispatch(); // Khởi tạo dispatch
     const isAuth = useSelector((state: any) => state.isAuth); // Lấy isAuth từ store
 
-    // check has token or not
-    useEffect(() => {
-        const token = localStorage.getItem('MEDI.Token');
-        if (!token) {
-            // Nếu không có token, chuyển hướng đến trang login
-            navigate('/login');
-        } else {
-            // Nếu có token, gọi API để kiểm tra tính hợp lệ của token
-            apiCheckPermission(token)
-                .then((response: any) => {
-                    const path = window.location.pathname; // Lấy đường dẫn hiện tại
-                    const firstSegment = path.split('/')[1]; // Tách chuỗi và lấy phần đầu tiên sau dấu /
+    // Get token from local storage
+    const token = localStorage.getItem('MEDI.Token');
 
-                    if (response.data?.isValid) {
-                        dispatch(setAuth(true)); // Cập nhật isAuth trong store
-                        dispatch(setUsername(response.data.user?.username)); // Lưu tên người dùng vào store
-                        if (firstSegment !== 'dashboard') {
-                            navigate('/dashboard');
-                        }
-                    } else {
-                        dispatch(setAuth(false)); // Cập nhật isAuth trong store
-                        if (firstSegment !== 'login') {
-                            navigate('/login'); // Có lỗi khi kiểm tra token, chuyển hướng đến login
-                        }
-                    }
-                })
-                .catch((error: any) => {
-                    dispatch(setAuth(false)); // Cập nhật isAuth trong store
-                    navigate('/login'); // Có lỗi khi kiểm tra token, chuyển hướng đến login
-                });
+    // Use useQuery to check token validity
+    const { isError, isLoading, data } = useQuery({
+        queryKey: [`apiCheckPermission ${token}`, token],
+        queryFn: () => apiCheckPermission(token),
+        refetchOnWindowFocus: false,
+        enabled: !!token, // Only run the query if the token exists
+    });
+
+    // Use useQuery to fetch departments
+    const { data: departmentsData, isLoading: isLoadingDepartments } = useQuery({
+        queryKey: ["get-all-departments"],
+        queryFn: getDepartments,
+        staleTime: 60 * 10000, // Cache for 10 minute
+    });
+
+    useEffect(() => {
+        dispatch(setDepartments(departmentsData?.data)); // Dispatch action to store departments
+    }, [departmentsData])
+
+    useEffect(() => {
+        if (isLoading) return; // Wait for the query to load
+        if (isError || !data?.data?.isValid) {
+            dispatch(setAuth(false)); // Cập nhật isAuth trong store
+            navigate('/login'); // Có lỗi khi kiểm tra token, chuyển hướng đến login
+        } else {
+            dispatch(setAuth(true)); // Cập nhật isAuth trong store
+            dispatch(setUsername(data?.data.user?.username)); // Lưu tên người dùng vào store
+            dispatch(setUserInfo(data?.data.user)); // Lưu người dùng vào store
+            if (window.location.pathname.split('/')[1] !== 'dashboard') {
+                navigate('/dashboard');
+            }
+            if(!data?.data?.user?.departmentIds || data?.data?.user?.departmentIds?.length <= 0) {
+                message.warning("Bạn chưa được phân quyền vào phòng ban nào. Vui lòng liên hệ quản trị viên !")
+            }
         }
-    }, [navigate, dispatch]);
+    }, [isLoading, isError, data, dispatch, navigate]);
 
     return (
         <div className='w-screen h-screen'>

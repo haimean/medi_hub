@@ -7,13 +7,27 @@
         justify-content: space-between;
         padding: 0px 4px 0px 4px;
 
-        .medi-topbar__logo {
-            background-image: url('../images/logo-bachmai.webp');
-            background-size: cover;
-            background-repeat: no-repeat;
-            width: 4rem;
-            height: 100%;
-            min-height: 4rem;
+        .medi-topbar__left {
+            display: flex;
+            align-items: center;
+            justify-content: left;
+
+            .medi-topbar__logo {
+                background-image: url('../images/logo-bachmai.webp');
+                background-size: cover;
+                background-repeat: no-repeat;
+                width: 4rem;
+                height: 100%;
+                min-height: 4rem;
+            }
+
+            .topbar__logo--content {
+                .content--text {
+                    font-weight: 700;
+                    color: #2CA01C;
+                    font-size: larger;
+                }
+            }
         }
 
         .medi-topbar__right{

@@ -1,14 +1,17 @@
 // src/pages/MediHubMain.tsx
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Outlet, useNavigate } from "react-router-dom";
-import { Popconfirm, Button, message } from 'antd';
+import { Popconfirm, Button, message, Select } from 'antd';
 import { apiLogout } from "../api/appApi";
 import { useSelector, useDispatch } from 'react-redux'; // Import useDispatch
-import { setAuth } from '../stores/commonStore';
+import { setAuth, setSelectedDepartment } from '../stores/commonStore';
 
 // Định nghĩa kiểu cho RootState
 interface RootState {
     username: string | null; // Định nghĩa kiểu cho username
+    department: any | null; // Định nghĩa kiểu cho username
+    departments: [] | null; // Định nghĩa kiểu cho departments
+    userInfo: any | null; // Định nghĩa kiểu cho departments
 }
 
 /**
@@ -17,6 +20,13 @@ interface RootState {
  */
 const MediHubMain = () => {
     const username = useSelector((state: RootState) => state.username); // Lấy username từ store
+    const userInfo = useSelector((state: RootState) => state.userInfo); // Lấy username từ store
+    const departments: any = useSelector((state: RootState) => state.departments); // Lấy departments từ store
+    const department: any = useSelector((state: RootState) => state.department); // Lấy department từ store
+
+    const [departmentOption, setDepartmentOption] = useState<any>([]);
+    const [isEnableDepartment, setIsEnableDepartment] = useState<boolean>(false);
+
     const dispatch = useDispatch(); // Khởi tạo dispatch
     let navigate = useNavigate();
 
@@ -32,10 +42,53 @@ const MediHubMain = () => {
         }
     };
 
+    useEffect(() => {
+        if (userInfo && departments?.length > 0) {
+            if (userInfo.role.includes('Admin')) {
+                setDepartmentOption(departments?.map((item: any) => {
+                    return {
+                        value: item?.id,
+                        label: item?.name
+                    }
+                }))
+            }
+
+            dispatch(setSelectedDepartment({
+                id: departments[0]?.id,
+                name: departments[0]?.name,
+            }))
+        }
+    }, [userInfo, departments])
+
     return (
         <div className="medihub-main w-full h-full">
             <div className="medi-topbar">
-                <div className="medi-topbar__logo"></div>
+                <div className='medi-topbar__left'>
+                    <div className="medi-topbar__logo"></div>
+                    <div className='topbar__logo--content'>
+                        <div className='content--text'>
+                            Bệnh Viện Bạch Mai
+                        </div>
+                        <div className='content--department'>
+                            {
+                                !isEnableDepartment ? (
+                                    <div className='content--text cursor-pointer' onClick={() => setIsEnableDepartment(true)}>{department?.name}</div>
+                                ) : <Select
+                                    defaultValue={departments?.length > 0 ? departments[0]?.id : null}
+                                    style={{ width: '100%', maxHeight: '1.5rem' }}
+                                    options={departmentOption}
+                                    onChange={(e) => {
+                                        dispatch(setSelectedDepartment({
+                                            id: e,
+                                            name: departments?.find((x: any) => x.id == e)?.name,
+                                        }));
+                                        setIsEnableDepartment(false);
+                                    }}
+                                />
+                            }
+                        </div>
+                    </div>
+                </div>
                 <div className="medi-topbar__right">
                     <div className="medi-icon topbar__right--setting"></div>
                     <div className="topbar__right--notification"></div>
