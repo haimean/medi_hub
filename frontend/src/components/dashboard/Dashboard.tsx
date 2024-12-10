@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
+import Device1 from '../../assets/images/device1.webp';
+import Device2 from '../../assets/images/device2.webp';
 
 const Dashboard = () => {
     return (
         <div className="medi-dashboard">
             <div className='dashboard-row-1'>
-                <div className='row-1--device'>
-
-                </div>
+                <img className='row-1--device-1' src={Device1} alt="device-1" />
                 <div className='row-1--app-title'>
                     MEDICAL EQUIPMENT LAB
                 </div>
-                <div className='row-1--device'>
-
-                </div>
+                <img className='row-1--device-2' src={Device2} alt="device-1" />
             </div>
             <div className='dashboard-row-2'>
                 <div className='row-2--group-1'>

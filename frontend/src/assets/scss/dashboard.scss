@@ -1,6 +1,51 @@
 .medi-dashboard {
     width: 100%;
     height: 100%;
+    padding: 0px 24px;
 
-    
+    .dashboard-row-1 {
+        padding: 24px 0px;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+
+        .row-1--app-title {
+            font-weight: 700; /* Bold text */
+            font-size: 40px; /* Font size */
+            color: #2CA01C; /* Text color */
+            text-align: center; /* Center the text */
+            text-transform: uppercase; /* Make text uppercase for emphasis */
+            letter-spacing: 1px; /* Add spacing between letters */
+            text-shadow: 
+                3px 3px 0 rgba(255, 255, 255, 0.6), /* Bright shadow for lift effect */
+                1px 1px 5px rgba(0, 0, 0, 0.5); /* Stronger shadow for depth */
+            padding: 10px; /* Add padding for better spacing */
+            margin: 20px 0; /* Add margin for spacing above and below */
+            transition: transform 0.3s ease, color 0.3s ease; /* Smooth transition for hover effect */
+            
+            &:hover {
+                transform: translateY(-2px); /* Slightly lift the text on hover */
+                color: #1A7A0D; /* Darker shade on hover for contrast */
+                text-shadow: 
+                    3px 3px 0 rgba(255, 255, 255, 0.8), /* Brighter shadow on hover */
+                    1px 1px 5px rgba(0, 0, 0, 0.7); /* Stronger shadow for depth */
+            }
+        }
+
+        .row-1--device-1,
+        .row-1--device-2 {
+            height: 100%;
+            width: 25%;
+            border-radius: 4px;
+        }
+
+    }
+
+    .dashboard-row-1,
+    .dashboard-row-2,
+    .dashboard-row-3,
+    .dashboard-row-4 {
+        width: 100%;
+        height: 24%;
+    }
 }
