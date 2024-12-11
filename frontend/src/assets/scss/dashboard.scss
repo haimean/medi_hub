@@ -7,7 +7,7 @@
         padding: 24px 0px;
         display: flex;
         align-items: center;
-        justify-content: space-around;
+        justify-content: space-between;
 
         .row-1--app-title {
             font-weight: 700; /* Bold text */
@@ -47,5 +47,41 @@
     .dashboard-row-4 {
         width: 100%;
         height: 24%;
+    }
+
+    .dashboard-row-2 {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .row-2--group {
+            color: #fff;
+            padding: 8px 15px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 18px;
+            box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+            transition: all 0.3s ease; /* Smooth transition for hover effects */
+
+            &:hover {
+                cursor: pointer;
+                box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+                transform: translateY(-2px); /* Slightly lift the button */
+            }
+
+            .group-1--title {
+                padding-bottom: 1rem;
+            }
+
+            .group-1--info {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                .info__number {
+                    padding-right: 10rem;
+                }
+            }
+        }
     }
 }

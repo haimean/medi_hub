@@ -2,3 +2,15 @@
 .input-error {
     border: 1px solid red; /* Bôi viền đỏ */
 }
+
+.status-due-soon {
+    background-color: #FFC800;
+}
+
+.status-overdue {
+    background-color: #E3503E;
+}
+
+.status-notyet-due {
+    background-color: #65C728;
+}

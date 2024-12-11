@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Device1 from '../../assets/images/device1.webp';
-import Device2 from '../../assets/images/device2.webp';
+import Device2 from '../../assets/images/device3.webp';
 
 const Dashboard = () => {
     return (
@@ -13,14 +13,26 @@ const Dashboard = () => {
                 <img className='row-1--device-2' src={Device2} alt="device-1" />
             </div>
             <div className='dashboard-row-2'>
-                <div className='row-2--group-1'>
-
+                <div className='row-2--group status-due-soon'>
+                    <div className='group-1--title'>Bảo Dưỡng Định Kỳ</div>
+                    <div className='group-1--info'>
+                        <div className='info__number'>45</div>
+                        <div className='info__status-name'>Sắp đến hạn</div>
+                    </div>
                 </div>
-                <div className='row-2--group-2'>
-
+                <div className='row-2--group status-overdue'>
+                    <div className='group-1--title'>Thay thế Định Kỳ</div>
+                    <div className='group-1--info'>
+                        <div className='info__number'>45</div>
+                        <div className='info__status-name'>Sắp đến hạn</div>
+                    </div>
                 </div>
-                <div className='row-2--group-3'>
-
+                <div className='row-2--group status-notyet-due'>
+                    <div className='group-1--title'>Bảo Dưỡng Định Kỳ</div>
+                    <div className='group-1--info'>
+                        <div className='info__number'>45</div>
+                        <div className='info__status-name'>Sắp đến hạn</div>
+                    </div>
                 </div>
             </div>
             <div className='dashboard-row-3'>
