@@ -3,6 +3,46 @@ import Device1 from '../../assets/images/device1.webp';
 import Device2 from '../../assets/images/device3.webp';
 
 const Dashboard = () => {
+
+    // Tên nhánh
+    const [lstBranch, setLstBranch] = useState([
+        {
+            value: 'roche',
+            label: 'Roche',
+            avatar: 'roche-svg'
+        },
+        {
+            value: 'beckmanCoulter',
+            label: 'Beckman Coulter',
+            avatar: 'beckman-svg'
+        },
+        {
+            value: 'abbottDiagnostics',
+            label: 'Abbott Diagnostics',
+            avatar: 'abbott-svg'
+        }
+    ]);
+
+    // Tên loại thiết bị
+    const [kindDevices, setKindDevices] = useState([
+        {
+            value: 'tumat',
+            label: 'Tủ Mát'
+        },
+        {
+            value: 'tuam',
+            label: 'Tủ Âm'
+        },
+        {
+            value: 'locro',
+            label: 'Lọc RO'
+        },
+        {
+            value: 'khac',
+            label: 'Khác'
+        }
+    ]);
+
     return (
         <div className="medi-dashboard">
             <div className='dashboard-row-1'>
@@ -36,29 +76,28 @@ const Dashboard = () => {
                 </div>
             </div>
             <div className='dashboard-row-3'>
-                <div className='row-3--branch-1'>
-
-                </div>
-                <div className='row-3--branch-2'>
-
-                </div>
-                <div className='row-3--branch-3'>
-
-                </div>
+                {
+                    lstBranch?.map((branch: any, index: any) => {
+                        return (
+                            <div key={`dashboard-branch-${index}`} className={`row-3--branch`}
+                                style={{ flex: `0 0 ${99 / lstBranch?.length}%` }} // Dynamic width
+                            >
+                                <div className={`branch-img ${branch?.avatar}`}></div>
+                            </div>
+                        )
+                    })
+                }
             </div>
             <div className='dashboard-row-4'>
-                <div className='row-4--kind-1'>
-
-                </div>
-                <div className='row-4--kind-2'>
-
-                </div>
-                <div className='row-4--kind-3'>
-
-                </div>
-                <div className='row-4--kind-4'>
-
-                </div>
+                {
+                    kindDevices?.map((branch: any, index: any) => {
+                        return (
+                            <div key={`dashboard-kind-${index}`} className={`row-3--kind`}
+                                style={{ flex: `0 0 ${99 / kindDevices?.length}%` }} // Dynamic width
+                            >{branch?.label}</div>
+                        )
+                    })
+                }
             </div>
         </div>
     );
