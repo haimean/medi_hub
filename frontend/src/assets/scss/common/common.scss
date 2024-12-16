@@ -26,3 +26,27 @@
 .abbott-svg {
     background-image: url('../../images/Abbott.svg');
 }
+
+.btn-main {
+    border-color: #2CA01C;
+    background-color: #2CA01C;
+    color: #fff;
+
+    &:hover {
+        border-color: #2CA01C !important;
+        background-color: #3ead30 !important;
+        color: #fff !important;
+    }
+}
+
+.btn-main-2 {
+    border-color: #2CA01C;
+    color: #2CA01C;
+    background-color: #fff;
+
+    &:hover {
+        border-color: #2CA01C !important;
+        color: #2CA01C !important;
+        background-color: #f0f7ef !important;
+    }
+}

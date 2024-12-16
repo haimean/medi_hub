@@ -1,11 +1,22 @@
 import React, { useMemo, useState } from 'react';
 import DevicesTopBar from './DevicesTopBar';
 import { Tooltip } from 'antd';
-import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
+import { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons';
 import { AgGridReact } from 'ag-grid-react';
+import { useQuery } from '@tanstack/react-query';
+import { getDevices } from '../../api/appApi';
 
 const Devices = () => {
+    
+    const [refreshDevice, setRefreshDevice] = useState([]);
 
+    // Use useQuery to check token validity
+    const { isError, isLoading, data } = useQuery({
+        queryKey: [`all-devices`, refreshDevice],
+        queryFn: () => getDevices(),
+        refetchOnWindowFocus: false
+    });
+    
     /**
      * Column Devices
      * CreatedBy: PQ Huy (16.12.2024)
@@ -29,8 +40,8 @@ const Devices = () => {
                 field: 'deviceCode',
                 tooltipField: 'MTB',
                 resizable: true,
-                minWidth: 100,
-                maxWidth: 150,
+                minWidth: 120,
+                maxWidth: 120,
                 flex: 1,
                 filter: 'agSetColumnFilter',
                 pinned: "left"
@@ -68,7 +79,6 @@ const Devices = () => {
                 field: 'functionName',
                 tooltipField: 'Chức năng',
                 minWidth: 150,
-                resizable: false,
                 flex: 1,
                 filter: 'agSetColumnFilter'
             },
@@ -77,7 +87,7 @@ const Devices = () => {
                 field: 'serialNumber',
                 tooltipField: 'Số Seri',
                 minWidth: 150,
-                resizable: false,
+                maxWidth: 150,
                 flex: 1,
                 filter: 'agSetColumnFilter'
             },
@@ -86,25 +96,30 @@ const Devices = () => {
                 field: 'managerInfo.FullName',
                 tooltipField: 'Người quản lý',
                 minWidth: 200,
-                resizable: false,
                 flex: 1,
-                filter: 'agSetColumnFilter'
+                filter: 'agSetColumnFilter',
+                cellRenderer: (params: any) => {
+                    return <div>{params?.data?.managerInfo?.fullName}</div>
+                }
             },
             {
                 headerName: 'Kỹ sư',
                 field: 'engineerInfo.FullName',
                 tooltipField: 'Kỹ sư',
                 minWidth: 150,
-                resizable: false,
                 flex: 1,
-                filter: 'agSetColumnFilter'
+                filter: 'agSetColumnFilter',
+                cellRenderer: (params: any) => {
+                    return <div>{params?.data?.engineerInfo?.fullName}</div>
+                }
             },
             {
                 headerName: 'Trạng thái',
                 field: 'status',
                 tooltipField: 'Trạng thái',
+                maxWidth: 150,
                 minWidth: 150,
-                resizable: false,
+                pinned: "right",
                 flex: 1,
                 filter: 'agSetColumnFilter'
             },
@@ -112,31 +127,62 @@ const Devices = () => {
                 headerName: 'Hành động',
                 field: '',
                 resizable: false,
-                minWidth: 150,
-                width: 150,
-                flex: 1,
+                minWidth: 120,
+                width: 120,
                 pinned: "right",
+                sortable: false, // Tắt chức năng sắp xếp cho cột này
+                suppressMenu: true, // Ẩn menu của cột
                 cellRenderer: (record: any) => {
                     let hasPer = true;
                     return (
-                        <Tooltip
-                            placement='left'
-                            title={hasPer ? 'Edit Advisory' : 'Do not have permission'}
-                        >
-                            <EditOutlined
-                                title="Edit Advisory"
-                                style={{
-                                    marginLeft: 12,
-                                    color: !hasPer ? '#6b7280' : '#000',
-                                    cursor: !hasPer ? 'not-allowed' : 'pointer'
-                                }}
-                            />
-                        </Tooltip>
+                        <>
+                            <Tooltip
+                                placement='left'
+                                title={hasPer ? 'Xem chi tiết' : 'Không có quyền'}
+                            >
+                                <EyeOutlined
+                                    title="Xem chi tiết"
+                                    style={{
+                                        marginLeft: 12,
+                                        color: !hasPer ? '#6b7280' : '#000',
+                                        cursor: !hasPer ? 'not-allowed' : 'pointer'
+                                    }}
+                                />
+                            </Tooltip>
+                            <Tooltip
+                                placement='left'
+                                title={hasPer ? 'Sửa thiết bị' : 'Không có quyền'}
+                            >
+                                <EditOutlined
+                                    title="Sửa thiết bị"
+                                    style={{
+                                        marginLeft: 12,
+                                        color: !hasPer ? '#6b7280' : '#000',
+                                        cursor: !hasPer ? 'not-allowed' : 'pointer'
+                                    }}
+                                />
+                            </Tooltip>
+                            <Tooltip
+                                placement='left'
+                                title={hasPer ? 'Xóa thiết bị' : 'Không có quyền'}
+                            >
+                                <DeleteOutlined
+                                    title="Xóa thiết bị"
+                                    style={{
+                                        marginLeft: 12,
+                                        color: !hasPer ? '#6b7280' : 'red',
+                                        cursor: !hasPer ? 'not-allowed' : 'pointer'
+                                    }}
+                                />
+                            </Tooltip>
+                        </>
                     )
                 }
             },
         ];
     }, []);
+
+
 
     return (
         <div className="medi-devices">
@@ -144,7 +190,7 @@ const Devices = () => {
             <div className='devices__content ag-theme-alpine'>
                 <AgGridReact
                     animateRows={true}
-                    rowData={[]}
+                    rowData={data?.data}
                     columnDefs={columnDefs}
                     suppressRowHoverHighlight={true}
                 ></AgGridReact>

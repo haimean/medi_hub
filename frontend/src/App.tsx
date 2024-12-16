@@ -8,6 +8,7 @@ import './assets/scss/index.scss';
 import { Provider } from 'react-redux';
 import commonStore from './stores/commonStore';
 import Devices from './components/devices/Devices';
+import DevicesDetail from './components/devices/DevicesDetail';
 
 function App() {
   return (
@@ -15,7 +16,12 @@ function App() {
       <Routes>
         <Route path="/" element={<AuthRoutes />}>
           <Route path="dashboard" element={<Dashboard />} />
+
+          {/* devices */}
           <Route path="devices" element={<Devices />} />
+          <Route path="devices/add" element={<DevicesDetail />} />
+
+          {/* login */}
           <Route path="login" element={<LoginPage />} />
         </Route>
       </Routes>
