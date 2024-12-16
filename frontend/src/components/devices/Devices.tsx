@@ -17,7 +17,7 @@ const Devices = () => {
                 field: 'S/N',
                 tooltipField: 'S/N',
                 resizable: true,
-                maxWidth: 50,
+                maxWidth: 100,
                 minWidth: 50,
                 suppressMenu: true,
                 floatingFilterComponentParams: { suppressFilterButton: true },
@@ -25,33 +25,95 @@ const Devices = () => {
                 pinned: "left"
             },
             {
-                headerName: 'Project Name',
-                field: 'projectName',
-                tooltipField: 'Project Name',
+                headerName: 'MTB',
+                field: 'deviceCode',
+                tooltipField: 'MTB',
                 resizable: true,
-                maxWidth: 120,
+                minWidth: 100,
+                maxWidth: 150,
+                flex: 1,
+                filter: 'agSetColumnFilter',
+                pinned: "left"
+            },
+            {
+                headerName: 'Tên thiết bị',
+                field: 'deviceName',
+                tooltipField: 'Tên thiết bị',
+                resizable: true,
                 minWidth: 120,
                 flex: 1,
                 filter: 'agSetColumnFilter',
                 pinned: "left"
             },
             {
-                headerName: 'Status',
-                field: 'status',
-                tooltipField: 'Status',
+                headerName: 'Nước sản xuất',
+                field: 'manufacturerCountry',
+                tooltipField: 'Nước sản xuất',
                 minWidth: 150,
-                maxWidth: 150,
                 resizable: false,
                 flex: 1,
-                pinned: "right",
                 filter: 'agSetColumnFilter'
             },
             {
-                headerName: 'Actions',
+                headerName: 'Tên hãng',
+                field: 'manufacturerName',
+                tooltipField: 'Tên hãng',
+                minWidth: 150,
+                resizable: false,
+                flex: 1,
+                filter: 'agSetColumnFilter'
+            },
+            {
+                headerName: 'Chức năng',
+                field: 'functionName',
+                tooltipField: 'Chức năng',
+                minWidth: 150,
+                resizable: false,
+                flex: 1,
+                filter: 'agSetColumnFilter'
+            },
+            {
+                headerName: 'Số Seri',
+                field: 'serialNumber',
+                tooltipField: 'Số Seri',
+                minWidth: 150,
+                resizable: false,
+                flex: 1,
+                filter: 'agSetColumnFilter'
+            },
+            {
+                headerName: 'Người quản lý',
+                field: 'managerInfo.FullName',
+                tooltipField: 'Người quản lý',
+                minWidth: 200,
+                resizable: false,
+                flex: 1,
+                filter: 'agSetColumnFilter'
+            },
+            {
+                headerName: 'Kỹ sư',
+                field: 'engineerInfo.FullName',
+                tooltipField: 'Kỹ sư',
+                minWidth: 150,
+                resizable: false,
+                flex: 1,
+                filter: 'agSetColumnFilter'
+            },
+            {
+                headerName: 'Trạng thái',
+                field: 'status',
+                tooltipField: 'Trạng thái',
+                minWidth: 150,
+                resizable: false,
+                flex: 1,
+                filter: 'agSetColumnFilter'
+            },
+            {
+                headerName: 'Hành động',
                 field: '',
                 resizable: false,
-                minWidth: 100,
-                width: 100,
+                minWidth: 150,
+                width: 150,
                 flex: 1,
                 pinned: "right",
                 cellRenderer: (record: any) => {

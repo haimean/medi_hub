@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 import Device1 from '../../assets/images/device1.webp';
 import Device2 from '../../assets/images/device3.webp';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSelectedBrand, setSelectedDeviceType } from '../../stores/commonStore'; // Import setDepartments
 
 const Dashboard = () => {
-
+    const navigate = useNavigate();
+    const dispatch = useDispatch(); // Khởi tạo dispatch
+    
     // Tên nhánh
     const [lstBranch, setLstBranch] = useState([
         {
@@ -81,6 +86,10 @@ const Dashboard = () => {
                         return (
                             <div key={`dashboard-branch-${index}`} className={`row-3--branch`}
                                 style={{ flex: `0 0 ${99 / lstBranch?.length}%` }} // Dynamic width
+                                onClick={() => {
+                                    dispatch(setSelectedBrand(branch?.value)); // Lưu id branch chọn
+                                    navigate('/devices')
+                                }}
                             >
                                 <div className={`branch-img ${branch?.avatar}`}></div>
                             </div>
@@ -90,11 +99,15 @@ const Dashboard = () => {
             </div>
             <div className='dashboard-row-4'>
                 {
-                    kindDevices?.map((branch: any, index: any) => {
+                    kindDevices?.map((kind: any, index: any) => {
                         return (
                             <div key={`dashboard-kind-${index}`} className={`row-3--kind`}
                                 style={{ flex: `0 0 ${100 / kindDevices?.length}%` }} // Dynamic width
-                            >{branch?.label}</div>
+                                onClick={() => {
+                                    dispatch(setSelectedDeviceType(kind?.value)); // Lưu id branch chọn
+                                    navigate('/devices')
+                                }}
+                            >{kind?.label}</div>
                         )
                     })
                 }

@@ -8,6 +8,8 @@ const SET_AUTH = 'SET_AUTH';
 const SET_DEPARTMENTS = 'SET_DEPARTMENTS'; // New action type for departments
 const SET_USER_INFO = 'SET_USER_INFO'; // New action type for user information
 const SET_SELECTED_DEPARTMENT = 'SET_SELECTED_DEPARTMENT'; // New action type for selected department
+const SET_SELECTED_BRAND = 'SET_SELECTED_BRAND'; // New action type for selected brand
+const SET_SELECTED_DEVICE_TYPE = 'SET_SELECTED_DEVICE_TYPE'; // New action type for selected device type
 
 // Định nghĩa kiểu cho trạng thái
 interface UserInfo {
@@ -25,6 +27,8 @@ interface State {
     departments: any[]; // Thêm trường departments
     userInfo: UserInfo | null; // Thêm trường userInfo
     department: any | null; // Thêm trường department
+    selectedBrand: string | null; // Thêm trường selectedBrand
+    selectedDeviceType: string | null; // Thêm trường selectedDeviceType
 }
 
 // Định nghĩa trạng thái ban đầu
@@ -35,6 +39,8 @@ const initialState: State = {
     departments: [], // Mặc định là mảng rỗng
     userInfo: null, // Mặc định là null
     department: null, // Mặc định là null
+    selectedBrand: null, // Mặc định là null
+    selectedDeviceType: null, // Mặc định là null
 };
 
 // Định nghĩa kiểu cho các action
@@ -58,6 +64,10 @@ const reducer: Reducer<State, Action> = (state = initialState, action) => {
             return { ...state, userInfo: action.payload };
         case SET_SELECTED_DEPARTMENT: // Thêm action để cập nhật department
             return { ...state, department: action.payload };
+        case SET_SELECTED_BRAND: // Thêm action để cập nhật selectedBrand
+            return { ...state, selectedBrand: action.payload };
+        case SET_SELECTED_DEVICE_TYPE: // Thêm action để cập nhật selectedDeviceType
+            return { ...state, selectedDeviceType: action.payload };
         default:
             return state;
     }
@@ -94,6 +104,18 @@ export const setUserInfo = (userInfo: UserInfo) => ({
 export const setDepartment = (department: any | null) => ({
     type: SET_SELECTED_DEPARTMENT,
     payload: department,
+});
+
+// Định nghĩa action để cập nhật selectedBrand
+export const setSelectedBrand = (brand: string | null) => ({
+    type: SET_SELECTED_BRAND,
+    payload: brand,
+});
+
+// Định nghĩa action để cập nhật selectedDeviceType
+export const setSelectedDeviceType = (deviceType: string | null) => ({
+    type: SET_SELECTED_DEVICE_TYPE,
+    payload: deviceType,
 });
 
 // Optional: Action to update global variable
