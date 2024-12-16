@@ -7,6 +7,7 @@ import LoginPage from './pages/LoginPage';
 import './assets/scss/index.scss';
 import { Provider } from 'react-redux';
 import commonStore from './stores/commonStore';
+import Devices from './components/devices/Devices';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<AuthRoutes />}>
           <Route path="dashboard" element={<Dashboard />} />
+          <Route path="devices" element={<Devices />} />
           <Route path="login" element={<LoginPage />} />
         </Route>
       </Routes>

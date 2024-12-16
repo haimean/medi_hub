@@ -10,25 +10,40 @@
         justify-content: space-between;
 
         .row-1--app-title {
-            font-weight: 700; /* Bold text */
-            font-size: 40px; /* Font size */
-            color: #2CA01C; /* Text color */
-            text-align: center; /* Center the text */
-            text-transform: uppercase; /* Make text uppercase for emphasis */
-            letter-spacing: 1px; /* Add spacing between letters */
-            text-shadow: 
-                3px 3px 0 rgba(255, 255, 255, 0.6), /* Bright shadow for lift effect */
-                1px 1px 5px rgba(0, 0, 0, 0.5); /* Stronger shadow for depth */
-            padding: 10px; /* Add padding for better spacing */
-            margin: 20px 0; /* Add margin for spacing above and below */
-            transition: transform 0.3s ease, color 0.3s ease; /* Smooth transition for hover effect */
-            
+            font-weight: 700;
+            /* Bold text */
+            font-size: 3vw;
+            /* Font size */
+            color: #2CA01C;
+            /* Text color */
+            text-align: center;
+            /* Center the text */
+            text-transform: uppercase;
+            /* Make text uppercase for emphasis */
+            letter-spacing: 1px;
+            /* Add spacing between letters */
+            text-shadow:
+                3px 3px 0 rgba(255, 255, 255, 0.6),
+                /* Bright shadow for lift effect */
+                1px 1px 5px rgba(0, 0, 0, 0.5);
+            /* Stronger shadow for depth */
+            padding: 10px;
+            /* Add padding for better spacing */
+            margin: 20px 0;
+            /* Add margin for spacing above and below */
+            transition: transform 0.3s ease, color 0.3s ease;
+            /* Smooth transition for hover effect */
+
             &:hover {
-                transform: translateY(-2px); /* Slightly lift the text on hover */
-                color: #1A7A0D; /* Darker shade on hover for contrast */
-                text-shadow: 
-                    3px 3px 0 rgba(255, 255, 255, 0.8), /* Brighter shadow on hover */
-                    1px 1px 5px rgba(0, 0, 0, 0.7); /* Stronger shadow for depth */
+                transform: translateY(-2px);
+                /* Slightly lift the text on hover */
+                color: #1A7A0D;
+                /* Darker shade on hover for contrast */
+                text-shadow:
+                    3px 3px 0 rgba(255, 255, 255, 0.8),
+                    /* Brighter shadow on hover */
+                    1px 1px 5px rgba(0, 0, 0, 0.7);
+                /* Stronger shadow for depth */
             }
         }
 
@@ -70,7 +85,8 @@
             &:hover {
                 cursor: pointer;
                 box-shadow: #32325d40 0px 50px 100px -20px, #0000004d 0px 30px 60px -30px, #0a254059 0px -2px 6px 0px inset;
-                transform: translateY(-2px); /* Slightly lift the button */
+                transform: translateY(-2px);
+                /* Slightly lift the button */
             }
         }
     }
@@ -93,7 +109,8 @@
             .branch-img {
                 background-repeat: no-repeat;
                 background-size: contain;
-                background-position: center; /* Center the background image */
+                background-position: center;
+                /* Center the background image */
                 width: 100%;
                 height: 100%;
             }
@@ -101,7 +118,8 @@
             &:hover {
                 cursor: pointer;
                 box-shadow: #32325d40 0px 50px 100px -20px, #0000004d 0px 30px 60px -30px, #0a254059 0px -2px 6px 0px inset;
-                transform: translateY(-2px); /* Slightly lift the button */
+                transform: translateY(-2px);
+                /* Slightly lift the button */
             }
         }
     }
@@ -118,26 +136,26 @@
             font-weight: 700;
             font-size: 18px;
             box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
-            transition: all 0.3s ease; /* Smooth transition for hover effects */
+            transition: all 0.3s ease;
+            /* Smooth transition for hover effects */
+            flex: 0 0 30%;
+            height: 50%;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
 
             &:hover {
                 cursor: pointer;
                 box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
-                transform: translateY(-2px); /* Slightly lift the button */
-            }
-
-            .group-1--title {
-                padding-bottom: 1rem;
+                transform: translateY(-2px);
+                /* Slightly lift the button */
             }
 
             .group-1--info {
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
-
-                .info__number {
-                    padding-right: 10rem;
-                }
             }
         }
     }

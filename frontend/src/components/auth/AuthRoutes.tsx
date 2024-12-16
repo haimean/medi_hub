@@ -49,7 +49,7 @@ const AuthRoutes = () => {
             dispatch(setAuth(true)); // Cập nhật isAuth trong store
             dispatch(setUsername(data?.data.user?.username)); // Lưu tên người dùng vào store
             dispatch(setUserInfo(data?.data.user)); // Lưu người dùng vào store
-            if (window.location.pathname.split('/')[1] !== 'dashboard') {
+            if (!['dashboard', 'devices'].includes(window.location.pathname.split('/')[1])) {
                 navigate('/dashboard');
             }
             if(!data?.data?.user?.departmentIds || data?.data?.user?.departmentIds?.length <= 0) {

@@ -93,7 +93,7 @@ const Dashboard = () => {
                     kindDevices?.map((branch: any, index: any) => {
                         return (
                             <div key={`dashboard-kind-${index}`} className={`row-3--kind`}
-                                style={{ flex: `0 0 ${99 / kindDevices?.length}%` }} // Dynamic width
+                                style={{ flex: `0 0 ${100 / kindDevices?.length}%` }} // Dynamic width
                             >{branch?.label}</div>
                         )
                     })
