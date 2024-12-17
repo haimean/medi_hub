@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import { Button, Form, Input, Checkbox, Upload, Image } from 'antd';
+import { Button, Form, Input, Upload, Image, Row, Col } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import DevicesDetailTopbar from './DevicesDetailTopbar';
 
 const DevicesDetail = () => {
     let navigate = useNavigate();
     const [imageUrl, setImageUrl] = useState<string | null>(null);
+    const [fileList, setFileList] = useState<any[]>([]);
+    const [previewImage, setPreviewImage] = useState<string>('');
+    const [previewOpen, setPreviewOpen] = useState<boolean>(false);
 
     const onFinish = (values: any) => {
         console.log('Received values:', values);
@@ -14,13 +17,24 @@ const DevicesDetail = () => {
 
     const handleUploadChange = (info: any) => {
         if (info.file.status === 'done') {
-            // Lấy URL của ảnh đã chọn
             const reader = new FileReader();
             reader.onload = (e: any) => {
                 setImageUrl(e.target.result as string);
             };
-            reader.readAsDataURL(info.file.originFileObj);
         }
+        setFileList(info.fileList.slice(-1)); // Chỉ giữ lại file cuối cùng
+    };
+
+    const handlePreview = async (file: any) => {
+        if (!file.url && !file.preview) {
+            file.preview = await new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file.originFileObj);
+                reader.onload = () => resolve(reader.result);
+            });
+        }
+        setPreviewImage(file.url || file.preview);
+        setPreviewOpen(true);
     };
 
     return (
@@ -32,15 +46,15 @@ const DevicesDetail = () => {
                     className='detail__content--form'
                     initialValues={{ remember: true }}
                     onFinish={onFinish}
-                    onFinishFailed={() => {}}
+                    onFinishFailed={() => { }}
                     autoComplete="off"
                 >
                     <div className='detail__content--left'>
                         <Form.Item
                             label='Tên thiết bị'
                             name='deviceName'
-                            labelCol={{ span: 6 }} // Căn chỉnh nhãn
-                            wrapperCol={{ span: 18 }} // Căn chỉnh ô input
+                            labelCol={{ span: 6 }}
+                            wrapperCol={{ span: 18 }}
                             rules={[{ required: true, message: 'Vui lòng nhập tên thiết bị' }]}
                         >
                             <Input />
@@ -67,7 +81,7 @@ const DevicesDetail = () => {
                             name='manufacturerName'
                             labelCol={{ span: 6 }}
                             wrapperCol={{ span: 18 }}
-                            rules={[{ required: true, message: 'Vui lòng nhập tên hãng' }]} // Bắt buộc nhập
+                            rules={[{ required: true, message: 'Vui lòng nhập tên hãng' }]}
                         >
                             <Input />
                         </Form.Item>
@@ -93,9 +107,32 @@ const DevicesDetail = () => {
                             name='functionName'
                             labelCol={{ span: 6 }}
                             wrapperCol={{ span: 18 }}
-                            rules={[{ required: true, message: 'Vui lòng nhập tên chức năng' }]} // Bắt buộc nhập
+                            rules={[{ required: true, message: 'Vui lòng nhập tên chức năng' }]}
                         >
                             <Input />
+                        </Form.Item>
+                        {/* Hợp đồng lắp đặt */}
+                        <Form.Item
+                            label='Hợp đồng lắp đặt'
+                            name='installationContract'
+                            labelCol={{ span: 6 }}
+                            wrapperCol={{ span: 18 }}
+                        >
+                            <Upload
+                                fileList={fileList}
+                                onChange={handleUploadChange}
+                                beforeUpload={(file) => {
+                                    const isPDF = file.type === 'application/pdf';
+                                    const isImage = file.type.startsWith('image/');
+                                    if (!isPDF && !isImage) {
+                                        alert('Bạn chỉ có thể tải lên file PDF hoặc ảnh!');
+                                    }
+                                    return isPDF || isImage;
+                                }}
+                                multiple // Cho phép tải lên nhiều file
+                            >
+                                <Button>Chọn file</Button>
+                            </Upload>
                         </Form.Item>
                         <Form.Item
                             label='Tình trạng máy'
@@ -130,6 +167,50 @@ const DevicesDetail = () => {
                         >
                             <Input />
                         </Form.Item>
+                        {/* Thông tin người quản lý */}
+                        <Row gutter={16}>
+                            <Col span={12}>
+                                <Form.Item
+                                    label='Người quản lý'
+                                    name={['managerInfo', 'fullName']}
+                                    labelCol={{ span: 12 }}
+                                    wrapperCol={{ span: 12 }}
+                                >
+                                    <Input placeholder='Nguyễn Văn A' />
+                                </Form.Item>
+                            </Col>
+                            <Col span={12}>
+                                <Form.Item
+                                    name={['managerInfo', 'phoneNumber']}
+                                    labelCol={{ span: 12 }}
+                                    wrapperCol={{ span: 12 }}
+                                >
+                                    <Input placeholder='Số điện thoại' />
+                                </Form.Item>
+                            </Col>
+                        </Row>
+                        {/* Thông tin kỹ sư */}
+                        <Row gutter={16}>
+                            <Col span={12}>
+                                <Form.Item
+                                    label='Kỹ sư'
+                                    name={['engineerInfo', 'fullName']}
+                                    labelCol={{ span: 12 }}
+                                    wrapperCol={{ span: 12 }}
+                                >
+                                    <Input placeholder='Nguyễn Văn B' />
+                                </Form.Item>
+                            </Col>
+                            <Col span={12}>
+                                <Form.Item
+                                    name={['engineerInfo', 'phoneNumber']}
+                                    labelCol={{ span: 12 }}
+                                    wrapperCol={{ span: 12 }}
+                                >
+                                    <Input placeholder='Số điện thoại' />
+                                </Form.Item>
+                            </Col>
+                        </Row>
                     </div>
                     <div className='detail__content--right'>
                         <Form.Item
@@ -139,62 +220,78 @@ const DevicesDetail = () => {
                             wrapperCol={{ span: 18 }}
                         >
                             <Upload
-                                showUploadList={false}
+                                action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
+                                listType="picture-card"
+                                fileList={fileList}
+                                onPreview={handlePreview}
                                 onChange={handleUploadChange}
+                                beforeUpload={(file) => {
+                                    const isImage = file.type.startsWith('image/');
+                                    if (!isImage) {
+                                        alert('Bạn chỉ có thể tải lên ảnh!');
+                                    }
+                                    return isImage;
+                                }}
                             >
-                                <Button>Chọn ảnh</Button>
+                                {fileList.length >= 1 ? null : <Button>Chọn ảnh</Button>}
                             </Upload>
-                            {imageUrl && (
-                                <div style={{ marginTop: 16 }}>
-                                    <Image
-                                        width={200}
-                                        src={imageUrl}
-                                        alt="Ảnh đại diện"
-                                        style={{ border: '1px solid #d9d9d9', borderRadius: '4px' }}
-                                    />
-                                </div>
+                            {previewImage && (
+                                <Image
+                                    preview={{
+                                        visible: previewOpen,
+                                        onVisibleChange: (visible) => setPreviewOpen(visible),
+                                        afterOpenChange: (visible) => !visible && setPreviewImage(''),
+                                    }}
+                                    src={previewImage}
+                                    style={{ marginTop: 16, width: 200 }}
+                                />
                             )}
                         </Form.Item>
-                        <Form.Item
-                            label='Nhật ký bảo dưỡng'
-                            name='maintenanceLog'
-                            labelCol={{ span: 6 }}
-                            wrapperCol={{ span: 18 }}
-                        >
-                            <Input.TextArea placeholder="Nhập nhật ký bảo dưỡng" />
-                        </Form.Item>
-                        <Form.Item
-                            label='Biên bản bảo trì'
-                            name='maintenanceReport'
-                            labelCol={{ span: 6 }}
-                            wrapperCol={{ span: 18 }}
-                        >
-                            <Input.TextArea placeholder="Nhập biên bản bảo trì" />
-                        </Form.Item>
-                        <Form.Item
-                            label='Nội kiểm tra bảo trì'
-                            name='internalMaintenanceCheck'
-                            labelCol={{ span: 6 }}
-                            wrapperCol={{ span: 18 }}
-                        >
-                            <Input.TextArea placeholder="Nhập nội kiểm tra bảo trì" />
-                        </Form.Item>
-                        <Form.Item
-                            label='Lịch bảo dưỡng'
-                            name='maintenanceSchedule'
-                            labelCol={{ span: 6 }}
-                            wrapperCol={{ span: 18 }}
-                        >
-                            <Input placeholder="Nhập lịch bảo dưỡng" />
-                        </Form.Item>
-                        <Form.Item
-                            label='Ghi chú'
-                            name='notes'
-                            labelCol={{ span: 6 }}
-                            wrapperCol={{ span: 18 }}
-                        >
-                            <Input.TextArea />
-                        </Form.Item>
+                        <div>
+                            <div className='text-xl font-bold'>Lịch sử - Tình trạng hoạt động</div>
+                            <>
+                                <Form.Item
+                                    label='Nhật ký bảo dưỡng'
+                                    name='maintenanceLog'
+                                    labelCol={{ span: 6 }}
+                                    wrapperCol={{ span: 18 }}
+                                >
+                                    <Input.TextArea placeholder="Nhập nhật ký bảo dưỡng" />
+                                </Form.Item>
+                                <Form.Item
+                                    label='Biên bản bảo trì'
+                                    name='maintenanceReport'
+                                    labelCol={{ span: 6 }}
+                                    wrapperCol={{ span: 18 }}
+                                >
+                                    <Input.TextArea placeholder="Nhập biên bản bảo trì" />
+                                </Form.Item>
+                                <Form.Item
+                                    label='Nội kiểm tra bảo trì'
+                                    name='internalMaintenanceCheck'
+                                    labelCol={{ span: 6 }}
+                                    wrapperCol={{ span: 18 }}
+                                >
+                                    <Input.TextArea placeholder="Nhập nội kiểm tra bảo trì" />
+                                </Form.Item>
+                                <Form.Item
+                                    label='Lịch bảo dưỡng'
+                                    name='maintenanceSchedule'
+                                    labelCol={{ span: 6 }}
+                                    wrapperCol={{ span: 18 }}
+                                >
+                                    <Input placeholder="Nhập lịch bảo dưỡng" />
+                                </Form.Item>
+                                <Form.Item
+                                    label='Ghi chú'
+                                    name='notes'
+                                    labelCol={{ span: 6 }}
+                                    wrapperCol={{ span: 18 }}
+                                >
+                                    <Input.TextArea />
+                                </Form.Item>
+                            </>
+                        </div>
                     </div>
                 </Form>
             </div>

@@ -248,9 +248,10 @@
 
     .devices-detail__content {
         width: 100%;
+        overflow: auto;
         height: calc(100% - 3.5rem);
         background-color: #fff;
-        padding: 8px 24px;
+        padding: 8px;
 
         .detail__content--form {
             width: 100%;
