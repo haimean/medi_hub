@@ -7,10 +7,19 @@
         justify-content: space-between;
         padding: 4px 12px;
 
+        .medi-topbar-between {
+            font-size: x-large;
+            font-weight: 700;
+            color: #2CA01C;
+        }
         .medi-topbar__left {
             display: flex;
             align-items: center;
             justify-content: left;
+
+            &:hover {
+                cursor: pointer;
+            }
 
             .medi-topbar__logo {
                 background-image: url('../images/logo-bachmai.webp');

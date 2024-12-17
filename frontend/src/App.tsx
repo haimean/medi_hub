@@ -8,7 +8,7 @@ import './assets/scss/index.scss';
 import { Provider } from 'react-redux';
 import commonStore from './stores/commonStore';
 import Devices from './components/devices/Devices';
-import DevicesDetail from './components/devices/DevicesDetail';
+import DevicesDetail from './components/devices/detail/DevicesDetail';
 
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
 
           {/* devices */}
           <Route path="devices" element={<Devices />} />
-          <Route path="devices/add" element={<DevicesDetail />} />
+          <Route path="devices/detail" element={<DevicesDetail />} />
 
           {/* login */}
           <Route path="login" element={<LoginPage />} />

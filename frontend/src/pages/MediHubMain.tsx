@@ -64,9 +64,9 @@ const MediHubMain = () => {
         <div className="medihub-main w-full h-full">
             <div className="medi-topbar">
                 <div className='medi-topbar__left'>
-                    <div className="medi-topbar__logo"></div>
+                    <div className="medi-topbar__logo" onClick={() => navigate('dashboard')}></div>
                     <div className='topbar__logo--content'>
-                        <div className='content--text'>
+                        <div className='content--text'  onClick={() => navigate('dashboard')}>
                             Bệnh Viện Bạch Mai
                         </div>
                         <div className='content--department'>
@@ -90,6 +90,12 @@ const MediHubMain = () => {
                         </div>
                     </div>
                 </div>
+                {
+                    !['dashboard'].includes(window.location.pathname.split('/')[1]) &&
+                    <div className="medi-topbar-between">
+                        MEDICAL EQUIPMENT LAB
+                    </div>
+                }
                 <div className="medi-topbar__right">
                     <div className="medi-icon topbar__right--setting"></div>
                     <div className="topbar__right--notification"></div>

@@ -18,7 +18,7 @@ const DevicesTopBar = () => {
             </div>
             <div className='devices__topbar--right'>
                 <Search className='right-btn-search' placeholder="Tìm kiếm theo mã, tên thiết bị, ..." onSearch={onSearch}/>
-                <Button className='btn-main' style={{ marginRight: '8px' }} onClick={() => navigate('add')} icon={<PlusOutlined />}>Thêm</Button>
+                <Button className='btn-main' style={{ marginRight: '8px' }} onClick={() => navigate('detail')} icon={<PlusOutlined />}>Thêm</Button>
                 <Button className='btn-main-2' icon={<ImportOutlined />}>Nhập từ excel</Button>
             </div>
         </div>
