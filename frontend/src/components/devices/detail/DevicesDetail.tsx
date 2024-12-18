@@ -250,40 +250,35 @@ const DevicesDetail = () => {
                                 <Form.Item
                                     label='Nhật ký bảo dưỡng'
                                     name='maintenanceLog'
-                                    labelCol={{ span: 6 }}
-                                    wrapperCol={{ span: 18 }}
+                                    labelCol={{ span: 6, prefixCls: 'right-item' }}
                                 >
                                     <Input.TextArea placeholder="Nhập nhật ký bảo dưỡng" />
                                 </Form.Item>
                                 <Form.Item
                                     label='Biên bản bảo trì'
                                     name='maintenanceReport'
-                                    labelCol={{ span: 6 }}
-                                    wrapperCol={{ span: 18 }}
+                                    labelCol={{ span: 6, prefixCls: 'right-item' }}
                                 >
                                     <Input.TextArea placeholder="Nhập biên bản bảo trì" />
                                 </Form.Item>
                                 <Form.Item
                                     label='Nội kiểm tra bảo trì'
                                     name='internalMaintenanceCheck'
-                                    labelCol={{ span: 6 }}
-                                    wrapperCol={{ span: 18 }}
+                                    labelCol={{ span: 6, prefixCls: 'right-item' }}
                                 >
                                     <Input.TextArea placeholder="Nhập nội kiểm tra bảo trì" />
                                 </Form.Item>
                                 <Form.Item
                                     label='Lịch bảo dưỡng'
                                     name='maintenanceSchedule'
-                                    labelCol={{ span: 6 }}
-                                    wrapperCol={{ span: 18 }}
+                                    labelCol={{ span: 6, prefixCls: 'right-item' }}
                                 >
                                     <Input placeholder="Nhập lịch bảo dưỡng" />
                                 </Form.Item>
                                 <Form.Item
                                     label='Ghi chú'
                                     name='notes'
-                                    labelCol={{ span: 6 }}
-                                    wrapperCol={{ span: 18 }}
+                                    labelCol={{ span: 6, prefixCls: 'right-item' }}
                                 >
                                     <Input.TextArea />
                                 </Form.Item>

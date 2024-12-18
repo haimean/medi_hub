@@ -274,6 +274,12 @@
                 height: 100%;
                 width: 50%;
                 padding: 4px;
+                
+                .right-item {
+                    display: flex;
+                    align-items: center;
+                    justify-content: left;
+                }
             }
         }
     }
