@@ -53,17 +53,17 @@ const DevicesDetail = () => {
                         <Form.Item
                             label='Tên thiết bị'
                             name='deviceName'
-                            labelCol={{ span: 6 }}
-                            wrapperCol={{ span: 18 }}
                             rules={[{ required: true, message: 'Vui lòng nhập tên thiết bị' }]}
+                            labelCol={{ span: 5, prefixCls: 'left-item' }}
+                            wrapperCol={{ span: 12 }}
                         >
                             <Input />
                         </Form.Item>
                         <Form.Item
                             label='Mã thiết bị'
                             name='deviceCode'
-                            labelCol={{ span: 6 }}
-                            wrapperCol={{ span: 18 }}
+                            labelCol={{ span: 5, prefixCls: 'left-item' }}
+                            wrapperCol={{ span: 12 }}
                             rules={[{ required: true, message: 'Vui lòng nhập mã thiết bị' }]}
                         >
                             <Input />
@@ -71,16 +71,16 @@ const DevicesDetail = () => {
                         <Form.Item
                             label='Nước sản xuất'
                             name='manufacturerCountry'
-                            labelCol={{ span: 6 }}
-                            wrapperCol={{ span: 18 }}
+                            labelCol={{ span: 5, prefixCls: 'left-item' }}
+                            wrapperCol={{ span: 12 }}
                         >
                             <Input />
                         </Form.Item>
                         <Form.Item
                             label='Tên hãng'
                             name='manufacturerName'
-                            labelCol={{ span: 6 }}
-                            wrapperCol={{ span: 18 }}
+                            labelCol={{ span: 5, prefixCls: 'left-item' }}
+                            wrapperCol={{ span: 12 }}
                             rules={[{ required: true, message: 'Vui lòng nhập tên hãng' }]}
                         >
                             <Input />
@@ -88,8 +88,8 @@ const DevicesDetail = () => {
                         <Form.Item
                             label='Năm sản xuất'
                             name='manufacturingYear'
-                            labelCol={{ span: 6 }}
-                            wrapperCol={{ span: 18 }}
+                            labelCol={{ span: 5, prefixCls: 'left-item' }}
+                            wrapperCol={{ span: 12 }}
                             rules={[{ required: true, message: 'Vui lòng nhập năm sản xuất' }]}
                         >
                             <Input type="number" />
@@ -97,16 +97,16 @@ const DevicesDetail = () => {
                         <Form.Item
                             label='Số seri'
                             name='serialNumber'
-                            labelCol={{ span: 6 }}
-                            wrapperCol={{ span: 18 }}
+                            labelCol={{ span: 5, prefixCls: 'left-item' }}
+                            wrapperCol={{ span: 12 }}
                         >
                             <Input />
                         </Form.Item>
                         <Form.Item
                             label='Tên chức năng'
                             name='functionName'
-                            labelCol={{ span: 6 }}
-                            wrapperCol={{ span: 18 }}
+                            labelCol={{ span: 5, prefixCls: 'left-item' }}
+                            wrapperCol={{ span: 12 }}
                             rules={[{ required: true, message: 'Vui lòng nhập tên chức năng' }]}
                         >
                             <Input />
@@ -115,8 +115,8 @@ const DevicesDetail = () => {
                         <Form.Item
                             label='Hợp đồng lắp đặt'
                             name='installationContract'
-                            labelCol={{ span: 6 }}
-                            wrapperCol={{ span: 18 }}
+                            labelCol={{ span: 5, prefixCls: 'left-item' }}
+                            wrapperCol={{ span: 12 }}
                         >
                             <Upload
                                 fileList={fileList}
@@ -137,24 +137,24 @@ const DevicesDetail = () => {
                         <Form.Item
                             label='Tình trạng máy'
                             name='machineStatus'
-                            labelCol={{ span: 6 }}
-                            wrapperCol={{ span: 18 }}
+                            labelCol={{ span: 5, prefixCls: 'left-item' }}
+                            wrapperCol={{ span: 12 }}
                         >
                             <Input />
                         </Form.Item>
                         <Form.Item
                             label='Nguồn nhập'
                             name='importSource'
-                            labelCol={{ span: 6 }}
-                            wrapperCol={{ span: 18 }}
+                            labelCol={{ span: 5, prefixCls: 'left-item' }}
+                            wrapperCol={{ span: 12 }}
                         >
                             <Input />
                         </Form.Item>
                         <Form.Item
                             label='Ngày sử dụng'
                             name='usageDate'
-                            labelCol={{ span: 6 }}
-                            wrapperCol={{ span: 18 }}
+                            labelCol={{ span: 5, prefixCls: 'left-item' }}
+                            wrapperCol={{ span: 12 }}
                             rules={[{ required: true, message: 'Vui lòng nhập ngày sử dụng' }]}
                         >
                             <Input type="date" />
@@ -162,8 +162,8 @@ const DevicesDetail = () => {
                         <Form.Item
                             label='Lab sử dụng'
                             name='labUsage'
-                            labelCol={{ span: 6 }}
-                            wrapperCol={{ span: 18 }}
+                            labelCol={{ span: 5, prefixCls: 'left-item' }}
+                            wrapperCol={{ span: 12 }}
                         >
                             <Input />
                         </Form.Item>
@@ -173,8 +173,8 @@ const DevicesDetail = () => {
                                 <Form.Item
                                     label='Người quản lý'
                                     name={['managerInfo', 'fullName']}
-                                    labelCol={{ span: 12 }}
-                                    wrapperCol={{ span: 12 }}
+                                    labelCol={{ span: 10, prefixCls: 'left-item' }}
+                                    wrapperCol={{ span: 15 }}
                                 >
                                     <Input placeholder='Nguyễn Văn A' />
                                 </Form.Item>
@@ -182,8 +182,7 @@ const DevicesDetail = () => {
                             <Col span={12}>
                                 <Form.Item
                                     name={['managerInfo', 'phoneNumber']}
-                                    labelCol={{ span: 12 }}
-                                    wrapperCol={{ span: 12 }}
+                                    wrapperCol={{ span: 15 }}
                                 >
                                     <Input placeholder='Số điện thoại' />
                                 </Form.Item>
@@ -195,8 +194,8 @@ const DevicesDetail = () => {
                                 <Form.Item
                                     label='Kỹ sư'
                                     name={['engineerInfo', 'fullName']}
-                                    labelCol={{ span: 12 }}
-                                    wrapperCol={{ span: 12 }}
+                                    labelCol={{ span: 10, prefixCls: 'left-item' }}
+                                    wrapperCol={{ span: 15 }}
                                 >
                                     <Input placeholder='Nguyễn Văn B' />
                                 </Form.Item>
@@ -204,8 +203,7 @@ const DevicesDetail = () => {
                             <Col span={12}>
                                 <Form.Item
                                     name={['engineerInfo', 'phoneNumber']}
-                                    labelCol={{ span: 12 }}
-                                    wrapperCol={{ span: 12 }}
+                                    wrapperCol={{ span: 15 }}
                                 >
                                     <Input placeholder='Số điện thoại' />
                                 </Form.Item>
@@ -213,11 +211,10 @@ const DevicesDetail = () => {
                         </Row>
                     </div>
                     <div className='detail__content--right'>
+                        <div className='text-xl font-bold' style={{paddingBottom: '8px'}}>Ảnh đại diện</div>
                         <Form.Item
-                            label='Ảnh đại diện'
+                            label=''
                             name='deviceAvatar'
-                            labelCol={{ span: 6 }}
-                            wrapperCol={{ span: 18 }}
                         >
                             <Upload
                                 action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
@@ -247,8 +244,8 @@ const DevicesDetail = () => {
                                 />
                             )}
                         </Form.Item>
-                        <div>
-                            <div className='text-xl font-bold'>Lịch sử - Tình trạng hoạt động</div>
+                        <>
+                            <div className='text-xl font-bold' style={{paddingBottom: '8px'}}>Lịch sử - Tình trạng hoạt động</div>
                             <>
                                 <Form.Item
                                     label='Nhật ký bảo dưỡng'
@@ -291,7 +288,7 @@ const DevicesDetail = () => {
                                     <Input.TextArea />
                                 </Form.Item>
                             </>
-                        </div>
+                        </>
                     </div>
                 </Form>
             </div>
