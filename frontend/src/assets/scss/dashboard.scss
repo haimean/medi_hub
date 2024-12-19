@@ -274,6 +274,23 @@
                 height: 100%;
                 width: 50%;
                 padding: 4px;
+
+                .right-avatar {
+                    .ant-upload-list.ant-upload-list-picture-card {
+                        width: 100%;
+                        min-height: 10rem;
+
+                        .ant-upload-list-item-container {
+                            min-height: 10rem;
+                            width: 100%;
+                        }
+
+                        .ant-upload.ant-upload-select {
+                            min-height: 10rem;
+                            width: 100%;
+                        }
+                    }
+                }
                 
                 .right-item {
                     display: flex;

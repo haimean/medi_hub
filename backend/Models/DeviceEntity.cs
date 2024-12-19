@@ -34,6 +34,9 @@ namespace MediHub.Web.Models
         [Column("installation_contract")]
         public List<string> InstallationContract { get; set; } // Hợp đồng lắp đặt
 
+        [Column("contract_duration")]
+        public DateTime? ContractDuration { get; set; } // Thời hạn hợp đồng
+
         [Column("machine_status")]
         public string MachineStatus { get; set; } // Tình trạng máy
 
@@ -51,6 +54,12 @@ namespace MediHub.Web.Models
 
         [Column("engineer_info", TypeName = "jsonb")]
         public ManagerEngineerInfo? EngineerInfo { get; set; } // Thông tin người quản lý và kỹ sư (dưới dạng JSON)
+
+        [Column("device_usage_instructions")]
+        public string DeviceUsageInstructions { get; set; } // HDSD Thiết bị
+
+        [Column("device_troubleshooting_instructions")]
+        public string DeviceTroubleshootingInstructions { get; set; } // HD sử lý sự cố thiết bị
         #endregion
 
         #region Lịch sử hoạt động - tình trạng
@@ -102,5 +111,4 @@ namespace MediHub.Web.Models
         public List<string> FileLinks { get; set; } // Danh sách đường link dẫn đến các tệp đính kèm
     }
     #endregion
-
 }

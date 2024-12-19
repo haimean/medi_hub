@@ -5,6 +5,7 @@ using MediHub.Web.DatabaseContext.AppDbcontext;
 using MediHub.Web.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -13,9 +14,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MediHub.Web.Migrations
 {
     [DbContext(typeof(MediHubContext))]
-    partial class MediHubContextModelSnapshot : ModelSnapshot
+    [Migration("20241219010521_devices_v3")]
+    partial class devices_v3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -100,14 +103,6 @@ namespace MediHub.Web.Migrations
                     b.Property<string>("DeviceName")
                         .HasColumnType("text")
                         .HasColumnName("device_name");
-
-                    b.Property<string>("DeviceTroubleshootingInstructions")
-                        .HasColumnType("text")
-                        .HasColumnName("device_troubleshooting_instructions");
-
-                    b.Property<string>("DeviceUsageInstructions")
-                        .HasColumnType("text")
-                        .HasColumnName("device_usage_instructions");
 
                     b.Property<ManagerEngineerInfo>("EngineerInfo")
                         .HasColumnType("jsonb")
