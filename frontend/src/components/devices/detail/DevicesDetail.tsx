@@ -3,9 +3,11 @@ import { Button, Form, Input, Upload, Image, Row, Col, UploadProps, message } fr
 import { useNavigate } from 'react-router-dom';
 import DevicesDetailTopbar from './DevicesDetailTopbar';
 import { FileImageOutlined, UploadOutlined } from '@ant-design/icons';
+import ActivityHistory from './ActivityHistory';
 
 const DevicesDetail = () => {
-    let navigate = useNavigate();
+    let navigate = useNavigate();    
+    const [form] = Form.useForm(); // Khởi tạo form
     const [imageUrl, setImageUrl] = useState<string | null>(null);
     const [fileList, setFileList] = useState<any[]>([]);
     const [previewImage, setPreviewImage] = useState<string>('');
@@ -65,6 +67,7 @@ const DevicesDetail = () => {
             <DevicesDetailTopbar />
             <div className='devices-detail__content'>
                 <Form
+                    form={form} // Gán form vào component
                     name="basic"
                     className='detail__content--form'
                     initialValues={{ remember: true }}
@@ -264,28 +267,37 @@ const DevicesDetail = () => {
                             name='maintenanceLog'
                             labelCol={{ span: 6, prefixCls: 'right-item' }}
                         >
-                            <Input.TextArea placeholder="Nhập nhật ký bảo dưỡng" />
+                            <ActivityHistory 
+                                label='Nhật ký bảo dưỡng'
+                                value={form.getFieldValue('maintenanceLog')}
+                            />
                         </Form.Item>
                         <Form.Item
                             label='Biên bản bảo trì'
                             name='maintenanceReport'
                             labelCol={{ span: 6, prefixCls: 'right-item' }}
                         >
-                            <Input.TextArea placeholder="Nhập biên bản bảo trì" />
+                            <ActivityHistory 
+                                label='Nhật ký bảo dưỡng'
+                                value={form.getFieldValue('maintenanceReport')}
+                            />
                         </Form.Item>
                         <Form.Item
                             label='Nội kiểm tra bảo trì'
                             name='internalMaintenanceCheck'
                             labelCol={{ span: 6, prefixCls: 'right-item' }}
                         >
-                            <Input.TextArea placeholder="Nhập nội kiểm tra bảo trì" />
+                            <ActivityHistory 
+                                label='Nhật ký bảo dưỡng'
+                                value={form.getFieldValue('internalMaintenanceCheck')}
+                            />
                         </Form.Item>
                         <Form.Item
                             label='Lịch bảo dưỡng'
                             name='maintenanceSchedule'
                             labelCol={{ span: 6, prefixCls: 'right-item' }}
                         >
-                            <Input placeholder="Nhập lịch bảo dưỡng" />
+                            <Input type="date" />
                         </Form.Item>
                         <Form.Item
                             label='Ghi chú'

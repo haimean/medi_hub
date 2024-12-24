@@ -73,7 +73,7 @@ namespace MediHub.Web.Models
         public List<MaintenanceRecord>? InternalMaintenanceCheck { get; set; } // Nội kiểm tra bảo trì
 
         [Column("maintenance_schedule")]
-        public string MaintenanceSchedule { get; set; } // Lịch bảo dưỡng (tương tự nhật ký bảo dưỡng)
+        public DateTime MaintenanceSchedule { get; set; } // Lịch bảo dưỡng (tương tự nhật ký bảo dưỡng)
         #endregion
 
         [Column("notes")]
