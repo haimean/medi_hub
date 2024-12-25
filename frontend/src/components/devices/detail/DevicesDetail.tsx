@@ -3,7 +3,7 @@ import { Button, Form, Input, Upload, Image, Row, Col, UploadProps, message } fr
 import { useNavigate } from 'react-router-dom';
 import DevicesDetailTopbar from './DevicesDetailTopbar';
 import { FileImageOutlined, UploadOutlined } from '@ant-design/icons';
-import ActivityHistory from './ActivityHistory';
+import ActivityHistory from './activityHistory/ActivityHistory';
 
 const DevicesDetail = () => {
     let navigate = useNavigate();    
@@ -59,7 +59,7 @@ const DevicesDetail = () => {
         if (!isImage) {
             message.error('Bạn chỉ có thể tải lên ảnh!');
         }
-        return isImage; // Allow only image files
+        return false; // Allow only image files
     };
 
     return (
@@ -269,7 +269,7 @@ const DevicesDetail = () => {
                         >
                             <ActivityHistory 
                                 label='Nhật ký bảo dưỡng'
-                                value={form.getFieldValue('maintenanceLog')}
+                                value={form?.getFieldValue('maintenanceLog')}
                             />
                         </Form.Item>
                         <Form.Item
@@ -278,8 +278,8 @@ const DevicesDetail = () => {
                             labelCol={{ span: 6, prefixCls: 'right-item' }}
                         >
                             <ActivityHistory 
-                                label='Nhật ký bảo dưỡng'
-                                value={form.getFieldValue('maintenanceReport')}
+                                label='Biên bản bảo trì'
+                                value={form?.getFieldValue('maintenanceReport')}
                             />
                         </Form.Item>
                         <Form.Item
@@ -288,8 +288,8 @@ const DevicesDetail = () => {
                             labelCol={{ span: 6, prefixCls: 'right-item' }}
                         >
                             <ActivityHistory 
-                                label='Nhật ký bảo dưỡng'
-                                value={form.getFieldValue('internalMaintenanceCheck')}
+                                label='Nội kiểm tra bảo trì'
+                                value={form?.getFieldValue('internalMaintenanceCheck')}
                             />
                         </Form.Item>
                         <Form.Item
@@ -312,7 +312,7 @@ const DevicesDetail = () => {
                             name='deviceUsageInstructions'
                             labelCol={{ span: 6, prefixCls: 'right-item' }}
                         >
-                            <Input.TextArea placeholder="Nhập hướng dẫn sử dụng thiết bị" />
+                            <Input.TextArea placeholder="Hướng dẫn sử dụng thiết bị" />
                         </Form.Item>
                         {/* HD sử lý sự cố thiết bị */}
                         <Form.Item
@@ -320,7 +320,7 @@ const DevicesDetail = () => {
                             name='deviceTroubleshootingInstructions'
                             labelCol={{ span: 6, prefixCls: 'right-item' }}
                         >
-                            <Input.TextArea placeholder="Nhập hướng dẫn xử lý sự cố thiết bị" />
+                            <Input.TextArea placeholder="Hướng dẫn xử lý sự cố thiết bị" />
                         </Form.Item>
                     </div>
                 </Form>

@@ -297,6 +297,16 @@
                     align-items: center;
                     justify-content: left;
                 }
+
+                .activity-history {
+                    .history__calendar-icon {
+                        font-size: 18px;
+
+                        &:hover {
+                            cursor: pointer;
+                        }
+                    }
+                }
             }
         }
     }

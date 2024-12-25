@@ -1,3 +1,20 @@
+/* Thêm quy tắc cho thanh cuộn */
+::-webkit-scrollbar {
+    width: 12px; /* Độ rộng của thanh cuộn */
+}
+
+::-webkit-scrollbar-track {
+    background: #fff; /* Màu nền của thanh cuộn */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #a5a5a5;
+    border-radius: 6px; /* Bo tròn các góc của thanh cuộn */
+}
+
+::-webkit-scrollbar-thumb:hover {
+}
+
 .medihub-main {
     .medi-topbar {
         width: 100%;
