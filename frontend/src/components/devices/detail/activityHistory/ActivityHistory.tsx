@@ -15,6 +15,7 @@ const ActivityHistory = ({ label, value }: any) => {
     const [fileList, setFileList] = useState<any[]>([]); // Danh sách file đã tải lên
     const [previewImage, setPreviewImage] = useState<string>('');
     const [previewOpen, setPreviewOpen] = useState<boolean>(false);
+    const [monthYear, setMonthYear] = useState<string>(''); // State to store month/year input
 
     /**
      * Hiển thị modal cho hoạt động
@@ -80,14 +81,6 @@ const ActivityHistory = ({ label, value }: any) => {
     };
 
     /**
-     * Xử lý khi nhấn nút OK trong modal hình ảnh
-     * CreatedBy: PQ Huy (25.12.2024)
-     */
-    const handleImageModalOk = () => {
-        setIsImageModalVisible(false);
-    };
-
-    /**
      * Xử lý khi nhấn nút Hủy trong modal hình ảnh
      * CreatedBy: PQ Huy (25.12.2024)
      */
@@ -134,6 +127,24 @@ const ActivityHistory = ({ label, value }: any) => {
         }
         setPreviewImage(file.url || file.preview);
         setPreviewOpen(true);
+    };
+
+    /**
+     * Xử lý khi nhấn nút OK trong modal hình ảnh
+     * CreatedBy: PQ Huy (25.12.2024)
+     */
+    const handleImageModalOk = () => {
+        if (!monthYear) {
+            message.error('Vui lòng nhập tháng/năm trước khi lưu!');
+            return;
+        }
+
+        // Create folder and save img automatically
+
+        // save to setActivities
+
+
+        setIsImageModalVisible(false);
     };
 
     return (
@@ -204,7 +215,11 @@ const ActivityHistory = ({ label, value }: any) => {
             >
                 <div className='pb-2.5'>
                     <span className='pr-2'>Bảo dưỡng:</span>
-                    <DatePicker picker="month" placeholder='Chọn tháng/năm'/>
+                    <DatePicker 
+                        picker="month" 
+                        placeholder='Chọn tháng/năm'
+                        onChange={(date) => setMonthYear(dayjs(date).format('MM-YYYY'))} // Set month/year
+                    />
                 </div>
                 <Upload
                     listType="picture-card"

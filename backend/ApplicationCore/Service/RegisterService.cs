@@ -21,6 +21,7 @@ namespace MediHub.Web.ApplicationCore.Service
             services.AddScoped<IDepartmentsService, DepartmentsService>();
             services.AddScoped<IDevicesService, DevicesService>();
             services.AddScoped<IUsersService, UsersService>();
+            services.AddScoped<ICommonService, CommonService>();
 
             services.AddScoped<IAuthService, AuthService>();
             #endregion
