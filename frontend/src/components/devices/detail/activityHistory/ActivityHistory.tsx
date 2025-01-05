@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 import { CalendarOutlined, DeleteOutlined, PlusOutlined } from '@ant-design/icons'; // Thêm PlusOutlined
 import { Modal, Button, DatePicker, List, Upload, Image, message } from 'antd';
 import dayjs from 'dayjs';
+import { v4 as uuidv4 } from 'uuid';
 
 /**
  * CreatedBy: PQ Huy (25.12.2024)
  */
-const ActivityHistory = ({ label, value }: any) => {
+const ActivityHistory = ({ label, value, key }: any) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [isImageModalVisible, setIsImageModalVisible] = useState(false);
+    const [isViewListImg, setIsViewListImg] = useState(false);
     const [selectedDateRange, setSelectedDateRange] = useState<any>(null);
     const [activities, setActivities] = useState<any>([]);
     const [currentImages, setCurrentImages] = useState<string[]>([]);
@@ -65,8 +67,9 @@ const ActivityHistory = ({ label, value }: any) => {
      * CreatedBy: PQ Huy (25.12.2024)
      */
     const showImageModalEdit = (images: string[]) => {
+        setIsViewListImg(true);
         setCurrentImages(images);
-        setFileList(images.map(image => ({ uid: image, name: image, status: 'done', url: image }))); // Chuyển đổi hình ảnh thành định dạng fileList
+        setFileList(images); // Chuyển đổi hình ảnh thành định dạng fileList
         setIsImageModalVisible(true);
     };
 
@@ -78,6 +81,7 @@ const ActivityHistory = ({ label, value }: any) => {
         setCurrentImages([]);
         setFileList([]); // Chuyển đổi hình ảnh thành định dạng fileList
         setIsImageModalVisible(true);
+        setIsViewListImg(false);
     };
 
     /**
@@ -85,6 +89,7 @@ const ActivityHistory = ({ label, value }: any) => {
      * CreatedBy: PQ Huy (25.12.2024)
      */
     const handleImageModalCancel = () => {
+        setIsViewListImg(false);
         setIsImageModalVisible(false);
         setFileList([]); // Xóa danh sách file khi đóng modal
     };
@@ -133,18 +138,41 @@ const ActivityHistory = ({ label, value }: any) => {
      * Xử lý khi nhấn nút OK trong modal hình ảnh
      * CreatedBy: PQ Huy (25.12.2024)
      */
-    const handleImageModalOk = () => {
+    const handleImageModalOk = async () => {
         if (!monthYear) {
             message.error('Vui lòng nhập tháng/năm trước khi lưu!');
             return;
         }
 
-        // Create folder and save img automatically
+        // Kiểm tra xem monthYear đã tồn tại trong activities chưa
+        const existingActivityIndex = activities.findIndex((activity: any) => activity.monthYear === monthYear);
 
-        // save to setActivities
+        // Nếu đã tồn tại, cập nhật hình ảnh cho hoạt động đó
+        if (existingActivityIndex !== -1) {
+            const updatedActivities = [...activities];
+            
+            // case 1: trường hợp thêm mới thì check xem tồn tại chưa rồi add mới vào như sau:
+            if(!isViewListImg) {
+                updatedActivities[existingActivityIndex].images = [
+                    ...updatedActivities[existingActivityIndex].images,
+                    ...fileList
+                ];
+            } else {
+                updatedActivities[existingActivityIndex].images = [...fileList];
+            }
 
+            setActivities(updatedActivities);
+        } else {
+            // Nếu chưa tồn tại, thêm mới hoạt động
+            setActivities([...activities, {
+                id: uuidv4(),
+                images: fileList,
+                monthYear: monthYear
+            }]);
+        }
 
         setIsImageModalVisible(false);
+        setIsViewListImg(false);
     };
 
     return (
@@ -157,7 +185,7 @@ const ActivityHistory = ({ label, value }: any) => {
                 onCancel={handleCancel}
                 footer={[
                     <Button key="back" onClick={handleCancel}>
-                        Hủy
+                        Đóng
                     </Button>,
                     <Button className='btn-main' key="submit" onClick={showImageModalAdd} icon={<PlusOutlined />}>
                         Thêm mới
@@ -178,21 +206,21 @@ const ActivityHistory = ({ label, value }: any) => {
                     renderItem={(item: any) => (
                         <List.Item
                             actions={[
-                                <span 
-                                    onClick={() => showImageModalEdit(item.images)} 
+                                <span
+                                    onClick={() => showImageModalEdit(item?.images)}
                                     style={{ color: '#0073E6', cursor: 'pointer', marginRight: '8px' }}
                                 >
-                                    Xem ảnh ({item.images.length})
+                                    Xem ảnh ({item?.images?.length})
                                 </span>,
-                                <DeleteOutlined 
-                                    onClick={() => handleDelete(item.id)} 
-                                    style={{ color: 'red' }} 
+                                <DeleteOutlined
+                                    onClick={() => handleDelete(item?.id)}
+                                    style={{ color: 'red' }}
                                 />
                             ]}
                             style={{ borderBottom: '1px solid #f0f0f0' }}
                         >
                             <List.Item.Meta
-                                title={item.monthYear}
+                                title={item?.monthYear}
                             />
                         </List.Item>
                     )}
@@ -206,19 +234,20 @@ const ActivityHistory = ({ label, value }: any) => {
                 onCancel={handleImageModalCancel}
                 footer={[
                     <Button key="back" onClick={handleImageModalCancel}>
-                        Hủy {/* Thay đổi chữ Cancel thành Hủy */}
+                        Hủy
                     </Button>,
                     <Button className='btn-main' key="submit" onClick={handleImageModalOk}>
-                        Lưu 
+                        Lưu
                     </Button>
                 ]}
             >
                 <div className='pb-2.5'>
                     <span className='pr-2'>Bảo dưỡng:</span>
-                    <DatePicker 
-                        picker="month" 
+                    <DatePicker
+                        picker="month"
                         placeholder='Chọn tháng/năm'
                         onChange={(date) => setMonthYear(dayjs(date).format('MM-YYYY'))} // Set month/year
+                        disabled={isViewListImg}
                     />
                 </div>
                 <Upload

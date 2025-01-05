@@ -20,7 +20,7 @@ namespace MediHub.Web.ApplicationCore.Service
         /// </summary>
         /// <param name="files">List of files to upload.</param>
         /// <returns>Service response with uploaded file keys.</returns>
-        public async Task<ServiceResponse> UploadDocs(List<IFormFile> files)
+        public async Task<ServiceResponse> UploadDocs(Dictionary<string, IFormFile> files)
         {
             var response = new ServiceResponse();
 
@@ -29,28 +29,26 @@ namespace MediHub.Web.ApplicationCore.Service
                 return BadRequest(message: "No files uploaded.");
             }
 
-            var uploadedFiles = new List<string>();
+            var uploadedFiles = new Dictionary<string, IFormFile>();
+
             foreach (var file in files)
             {
-                if (file.Length > 0)
+                var key = Guid.NewGuid().ToString(); // Tạo key giống như S3
+                var filePath = Path.Combine("Uploads", $"{file.Key}{key}{Path.GetExtension(file.Value.FileName)}");
+
+                // {{ edit_1 }}: Check if the directory exists, if not, create it
+                var directoryPath = Path.GetDirectoryName(filePath);
+                if (!Directory.Exists(directoryPath))
                 {
-                    var key = Guid.NewGuid().ToString(); // Tạo key giống như S3
-                    var filePath = Path.Combine("Uploads", key + Path.GetExtension(file.FileName));
-
-                    // {{ edit_1 }}: Check if the directory exists, if not, create it
-                    var directoryPath = Path.GetDirectoryName(filePath);
-                    if (!Directory.Exists(directoryPath))
-                    {
-                        Directory.CreateDirectory(directoryPath);
-                    }
-
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await file.CopyToAsync(stream);
-                    }
-
-                    uploadedFiles.Add(key); // Lưu key để trả về
+                    Directory.CreateDirectory(directoryPath);
                 }
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await file.Value.CopyToAsync(stream);
+                }
+
+                uploadedFiles.Add(file.Key, file.Value); // Lưu key để trả về
             }
 
             return Ok(uploadedFiles);

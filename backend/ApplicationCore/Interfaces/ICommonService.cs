@@ -9,7 +9,7 @@ namespace MediHub.Web.ApplicationCore.Interfaces
         /// </summary>
         /// <param name="files"></param>
         /// <returns></returns>
-        Task<ServiceResponse> UploadDocs(List<IFormFile> files);
+        Task<ServiceResponse> UploadDocs(Dictionary<string, IFormFile> files);
 
         /// <summary>
         /// 

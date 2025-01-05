@@ -269,6 +269,7 @@ const DevicesDetail = () => {
                         >
                             <ActivityHistory 
                                 label='Nhật ký bảo dưỡng'
+                                key='maintenanceLog'
                                 value={form?.getFieldValue('maintenanceLog')}
                             />
                         </Form.Item>
@@ -279,6 +280,7 @@ const DevicesDetail = () => {
                         >
                             <ActivityHistory 
                                 label='Biên bản bảo trì'
+                                key='maintenanceReport'
                                 value={form?.getFieldValue('maintenanceReport')}
                             />
                         </Form.Item>
@@ -289,6 +291,7 @@ const DevicesDetail = () => {
                         >
                             <ActivityHistory 
                                 label='Nội kiểm tra bảo trì'
+                                key='internalMaintenanceCheck'
                                 value={form?.getFieldValue('internalMaintenanceCheck')}
                             />
                         </Form.Item>

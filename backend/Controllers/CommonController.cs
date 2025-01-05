@@ -20,7 +20,7 @@ namespace MediHub.Web.Controllers
         /// <param name="departments"></param>
         /// <returns></returns>
         [HttpPost("upload-docs")]
-        public async Task<IActionResult> Upload(List<IFormFile> files)
+        public async Task<IActionResult> Upload(Dictionary<string, IFormFile> files)
         {
             if (files == null || files.Count == 0)
             {
@@ -38,14 +38,14 @@ namespace MediHub.Web.Controllers
         /// <param name="departments"></param>
         /// <returns></returns>
         [HttpPost("get-docs")]
-        public async Task<IActionResult> GetDocs(List<IFormFile> files)
+        public async Task<IActionResult> GetDocs(List<string> files)
         {
             if (files == null || files.Count == 0)
             {
                 return BadRequest("No files uploaded.");
             }
 
-            var uploadedFiles = await _commonService.UploadDocs(files);
+            var uploadedFiles = await _commonService.GetDocs(files);
             return StatusCode((int)uploadedFiles.StatusCode, uploadedFiles);
         }
     }

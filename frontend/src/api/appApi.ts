@@ -73,3 +73,16 @@ export async function deleteDevices(params: any) {
    return await axiosClient.delete(`${process.env.REACT_APP_API_URL}/v1/devices`, params);
 }
 //#endregion
+
+
+//#region API Common
+
+export async function uploadDocs(params: any) {
+   return await axiosClient.post(`${process.env.REACT_APP_API_URL}/v1/common/upload-docs`, params);
+}
+
+
+export async function getdocs(params: any) {
+   return await axiosClient.post(`${process.env.REACT_APP_API_URL}/v1/common/get-docs`, params);
+}
+//#endregion
