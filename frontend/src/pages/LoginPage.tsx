@@ -1,5 +1,5 @@
 // src/pages/LoginPage.tsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react'; // Import useEffect
 import { Button, Input, message } from 'antd';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate để chuyển hướng
 import { apiLogin } from '../api/appApi';
@@ -18,6 +18,18 @@ const LoginPage = () => {
     const [loading, setLoading] = useState(false); // State để theo dõi trạng thái loading
     const navigate = useNavigate(); // Khởi tạo useNavigate
     const dispatch = useDispatch(); // Khởi tạo useDispatch
+
+    // Load saved username and password from localStorage
+    useEffect(() => {
+        const savedUsername = localStorage.getItem('savedUsername');
+        const savedPassword = localStorage.getItem('savedPassword');
+        if (savedUsername) {
+            setUsernameState(savedUsername);
+        }
+        if (savedPassword) {
+            setPassword(savedPassword);
+        }
+    }, []);
 
     // Hàm gọi API để đăng nhập
     const funcLogin = async () => {
@@ -40,6 +52,8 @@ const LoginPage = () => {
             if (response?.succeeded && response?.message !== "Unauthorized") {
                 const token = response.data; // Giả sử token được trả về trong response
                 localStorage.setItem('MEDI.Token', token); // Lưu token vào localStorage
+                localStorage.setItem('savedUsername', username); // Lưu username vào localStorage
+                localStorage.setItem('savedPassword', password); // Lưu password vào localStorage
                 dispatch(setUsername(username)); // Lưu tên người dùng vào store
                 message.success('Đăng nhập thành công!');
                 navigate('/dashboard'); // Chuyển hướng đến dashboard

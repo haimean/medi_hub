@@ -196,7 +196,7 @@ const ActivityHistory = ({ label, value, key }: any) => {
                     <span style={{ fontWeight: 'bold', marginRight: '8px' }}>Bộ Lọc:</span>
                     <DatePicker.RangePicker
                         onChange={onDateChange}
-                        format="YYYY-MM"
+                        format="MM-YYYY"
                         picker="month"
                         placeholder={['Bắt đầu', 'Kết thúc']}
                     />
@@ -257,7 +257,7 @@ const ActivityHistory = ({ label, value, key }: any) => {
                     onChange={handleChange}
                     beforeUpload={beforeUploadImage}
                 >
-                    {fileList.length >= 8 ? null : <div>+ Upload</div>}
+                    <div>+ Upload</div>
                 </Upload>
                 {previewImage && (
                     <Image
