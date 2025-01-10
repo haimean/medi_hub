@@ -18,6 +18,7 @@ const ActivityHistory = ({ label, value, key }: any) => {
     const [previewImage, setPreviewImage] = useState<string>('');
     const [previewOpen, setPreviewOpen] = useState<boolean>(false);
     const [monthYear, setMonthYear] = useState<string>(''); // State to store month/year input
+    const [filteredActivities, setFilteredActivities] = useState<any[]>([]); // State to hold filtered activities
 
     /**
      * Hiển thị modal cho hoạt động
@@ -50,6 +51,30 @@ const ActivityHistory = ({ label, value, key }: any) => {
      */
     const onDateChange = (dates: any) => {
         setSelectedDateRange(dates);
+
+        // thực hiện lọc 
+        filterActivities(dates);
+    };
+
+    /**
+     * Lọc hoạt động theo khoảng thời gian đã chọn
+     * @param dates - khoảng thời gian đã chọn
+     * @param data - khoảng thời gian đã chọn
+     * CreatedBy: PQ Huy (25.12.2024)
+     */
+    const filterActivities = (dates: any, data: any = null) => {
+        if (dates && dates.length === 2) {
+            const start = dayjs(dates[0]).startOf('month'); // Ngày đầu tiên của tháng
+            const end = dayjs(dates[1]).endOf('month'); // Ngày cuối cùng của tháng
+
+            const filtered = (data ? data : activities).filter((activity: any) => {
+                const activityDate = dayjs(activity.monthYear, 'MM-YYYY'); // Assuming monthYear is in 'MM-YYYY' format
+                return activityDate >= start && activityDate <= end;
+            });
+            setFilteredActivities(filtered);
+        } else {
+            setFilteredActivities(data ? data : activities); // Reset to all activities if no valid date range
+        }
     };
 
     /**
@@ -139,6 +164,8 @@ const ActivityHistory = ({ label, value, key }: any) => {
      * CreatedBy: PQ Huy (25.12.2024)
      */
     const handleImageModalOk = async () => {
+        let result = null;
+
         if (!monthYear) {
             message.error('Vui lòng nhập tháng/năm trước khi lưu!');
             return;
@@ -161,15 +188,20 @@ const ActivityHistory = ({ label, value, key }: any) => {
                 updatedActivities[existingActivityIndex].images = [...fileList];
             }
 
-            setActivities(updatedActivities);
+            result = [...updatedActivities];
         } else {
             // Nếu chưa tồn tại, thêm mới hoạt động
-            setActivities([...activities, {
+            result = [...activities, {
                 id: uuidv4(),
                 images: fileList,
                 monthYear: monthYear
-            }]);
+            }];
         }
+
+        
+        // thực hiện lọc
+        setActivities(result);
+        filterActivities(selectedDateRange, result);
 
         setIsImageModalVisible(false);
         setIsViewListImg(false);
@@ -202,7 +234,7 @@ const ActivityHistory = ({ label, value, key }: any) => {
                     />
                 </div>
                 <List
-                    dataSource={activities}
+                    dataSource={filteredActivities} // Use filtered activities if available
                     renderItem={(item: any) => (
                         <List.Item
                             actions={[
@@ -255,6 +287,7 @@ const ActivityHistory = ({ label, value, key }: any) => {
                     fileList={fileList}
                     onPreview={handlePreview}
                     onChange={handleChange}
+                    accept="image/*"
                     beforeUpload={beforeUploadImage}
                 >
                     <div>+ Upload</div>
