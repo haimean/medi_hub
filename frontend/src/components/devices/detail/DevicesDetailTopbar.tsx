@@ -1,19 +1,105 @@
-import React, { useMemo, useState } from 'react';
+import React from 'react';
 import { Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import { FormInstance } from 'antd/es/form';
+import { createDevices } from '../../../api/appApi'; // Import hàm createDevices
+import { useSelector } from 'react-redux';
 
-const DevicesDetailTopbar = () => {
+interface DevicesDetailTopbarProps {
+    form: FormInstance; // Định nghĩa kiểu cho form
+    onFinish: (values: any) => void; // Định nghĩa kiểu cho hàm onFinish
+}
+
+const DevicesDetailTopbar: React.FC<DevicesDetailTopbarProps> = ({ form, onFinish }) => {
     let navigate = useNavigate();
+    const department = useSelector((state: any) => state.department); // Lấy department từ store
+
+    const handleCancel = () => {
+        navigate('/'); // Quay lại trang chính
+    };
+
+    /**
+     * Hàm tạo adjustedValues
+     * @param values 
+     * @returns 
+     * CreatedBy: PQ Huy (19.01.2025)
+     */
+    const createAdjustedValues = (values: any) => {
+        return {
+            name: values.deviceName,
+            deviceAvatar: values?.deviceAvatar ? [values.deviceAvatar[0].name] : [], // Chỉ lấy tên file
+            deviceCode: values?.deviceCode,
+            deviceName: values?.deviceName,
+            manufacturerCountry: values?.manufacturerCountry,
+            manufacturerName: values?.manufacturerName,
+            manufacturingYear: Number(values?.manufacturingYear), // Chuyển đổi sang số
+            serialNumber: values?.serialNumber,
+            functionName: values?.functionName,
+            installationContract: values?.installationContract?.fileList?.map((file: any) => file?.name), // Chỉ lấy tên file
+            contractDuration: values?.contractDuration,
+            machineStatus: values?.machineStatus,
+            importSource: values?.importSource || "", // Nếu không có giá trị, có thể để trống
+            usageDate: values?.usageDate,
+            labUsage: values?.labUsage,
+            managerInfo: {
+                fullName: values?.managerInfo?.fullName,
+                dateOfBirth: new Date().toISOString(), // Thay thế bằng giá trị thực tế nếu có
+                phoneNumber: values.managerInfo.phoneNumber,
+                address: values.managerInfo.address || "", // Nếu không có giá trị, có thể để trống
+            },
+            engineerInfo: {
+                fullName: values.engineerInfo.fullName,
+                dateOfBirth: new Date().toISOString(), // Thay thế bằng giá trị thực tế nếu có
+                phoneNumber: values.engineerInfo.phoneNumber,
+                address: values.engineerInfo.address || "", // Nếu không có giá trị, có thể để trống
+            },
+            deviceUsageInstructions: values.deviceUsageInstructions,
+            deviceTroubleshootingInstructions: values.deviceTroubleshootingInstructions,
+            maintenanceLog: [], // Cần thêm thông tin nếu có
+            maintenanceReport: [], // Cần thêm thông tin nếu có
+            internalMaintenanceCheck: [], // Cần thêm thông tin nếu có
+            maintenanceSchedule: values.maintenanceSchedule,
+            notes: values.notes,
+            departmentIds: [department?.id], // ID của phòng ban có thể được lấy từ một nguồn khác
+        };
+
+        
+    };
+
+    const handleSave = async () => {
+        try {
+            const values = await form.validateFields(); // Kiểm tra tính hợp lệ của form
+            const adjustedValues = createAdjustedValues(values); // Tạo adjustedValues
+            await createDevices([adjustedValues]); // Gọi API để lưu dữ liệu
+            onFinish(values); // Gọi hàm onFinish
+            navigate('/'); // Quay lại trang chính
+        } catch (info) {
+            console.log('Validate Failed:', info);
+        }
+    };
+
+    const handleAdd = async () => {
+        try {
+            const values = await form.validateFields(); // Kiểm tra tính hợp lệ của form
+            const adjustedValues = createAdjustedValues(values); // Tạo adjustedValues
+            await createDevices([adjustedValues]); // Gọi API để lưu dữ liệu
+
+            onFinish(values); // Gọi hàm onFinish
+            form.resetFields(); // Làm sạch form để nhập bản ghi mới
+        } catch (info) {
+            console.log('Validate Failed:', info);
+        }
+    };
 
     return (
         <div className="devices-detail__topbar">
             <div className='detail__topbar--left'>
-                <div className='text-xl	font-bold'>Lý lịch thiết bị</div>
+                <div className='text-xl font-bold'>Lý lịch thiết bị</div>
             </div>
             <div className='detail__topbar--right'>
-                <Button variant="dashed" className='btn-main-3' style={{ marginRight: '8px' }} onClick={() => navigate('/devices')}>Hủy bỏ</Button>
-                <Button className='btn-main-2' style={{ marginRight: '8px' }} >Lưu và thêm</Button>
-                <Button className='btn-main'>Lưu</Button>
+                <Button variant="dashed" className='btn-main-3' style={{ marginRight: '8px' }} onClick={handleCancel}>Hủy</Button>
+                <Button className='btn-main-2' style={{ marginRight: '8px' }} onClick={handleAdd}>Lưu và thêm</Button>
+                <Button className='btn-main' onClick={handleSave}>Lưu</Button>
             </div>
         </div>
     );

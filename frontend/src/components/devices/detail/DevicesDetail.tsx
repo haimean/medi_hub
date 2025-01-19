@@ -64,7 +64,7 @@ const DevicesDetail = () => {
 
     return (
         <div className="medi-devices-detail">
-            <DevicesDetailTopbar />
+            <DevicesDetailTopbar form={form} onFinish={onFinish} />
             <div className='devices-detail__content'>
                 <Form
                     form={form} // Gán form vào component
