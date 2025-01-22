@@ -35,7 +35,12 @@ namespace MediHub.Web.Models
         public List<string> InstallationContract { get; set; } // Hợp đồng lắp đặt
 
         [Column("contract_duration")]
-        public DateTime? ContractDuration { get; set; } // Thời hạn hợp đồng
+        public DateTime? ContractDuration
+        {
+            get => _contractDuration;
+            set => _contractDuration = value?.ToUniversalTime();
+        }
+        private DateTime? _contractDuration; // Thời hạn hợp đồng
 
         [Column("machine_status")]
         public string MachineStatus { get; set; } // Tình trạng máy
@@ -44,7 +49,12 @@ namespace MediHub.Web.Models
         public string ImportSource { get; set; } // Nguồn nhập
 
         [Column("usage_date")]
-        public DateTime UsageDate { get; set; } // Ngày sử dụng
+        public DateTime UsageDate
+        {
+            get => _usageDate;
+            set => _usageDate = value.ToUniversalTime();
+        }
+        private DateTime _usageDate; // Ngày sử dụng
 
         [Column("lab_usage")]
         public string LabUsage { get; set; } // Lab sử dụng
@@ -73,7 +83,13 @@ namespace MediHub.Web.Models
         public List<MaintenanceRecord>? InternalMaintenanceCheck { get; set; } // Nội kiểm tra bảo trì
 
         [Column("maintenance_schedule")]
-        public DateTime MaintenanceSchedule { get; set; } // Lịch bảo dưỡng (tương tự nhật ký bảo dưỡng)
+        public DateTime? MaintenanceSchedule
+        {
+            get => _maintenanceSchedule;
+            set => _maintenanceSchedule = value?.ToUniversalTime();
+        }
+        private DateTime? _maintenanceSchedule; // Lịch bảo dưỡng (tương tự nhật ký bảo dưỡng)
+
         #endregion
 
         [Column("notes")]

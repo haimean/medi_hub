@@ -1,9 +1,10 @@
 import React from 'react';
-import { Button } from 'antd';
+import { Button, message } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { FormInstance } from 'antd/es/form';
 import { createDevices } from '../../../api/appApi'; // Import hàm createDevices
 import { useSelector } from 'react-redux';
+import { error } from 'console';
 
 interface DevicesDetailTopbarProps {
     form: FormInstance; // Định nghĩa kiểu cho form
@@ -82,10 +83,18 @@ const DevicesDetailTopbar: React.FC<DevicesDetailTopbarProps> = ({ form, onFinis
         try {
             const values = await form.validateFields(); // Kiểm tra tính hợp lệ của form
             const adjustedValues = createAdjustedValues(values); // Tạo adjustedValues
-            await createDevices([adjustedValues]); // Gọi API để lưu dữ liệu
 
-            onFinish(values); // Gọi hàm onFinish
-            form.resetFields(); // Làm sạch form để nhập bản ghi mới
+             // Gọi API để lưu dữ liệu
+            await createDevices([adjustedValues]).then((respon: any) => {
+                if(respon?.succeeded) {
+                    message.success('Lưu thành công');
+                    onFinish(values); // Gọi hàm onFinish
+                    form.resetFields(); // Làm sạch form để nhập bản ghi mới
+                }
+            }).catch((error) => {
+                message.error('Lưu thất bại');
+                console.log('createDevices error', error);
+            });
         } catch (info) {
             console.log('Validate Failed:', info);
         }
