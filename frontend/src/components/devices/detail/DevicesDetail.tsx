@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Form, Input, Upload, Image, Row, Col, UploadProps, message } from 'antd';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import DevicesDetailTopbar from './DevicesDetailTopbar';
 import { FileImageOutlined, UploadOutlined } from '@ant-design/icons';
 import ActivityHistory from './activityHistory/ActivityHistory';
+import { getDeviceById } from '../../../api/appApi';
 
 const DevicesDetail = () => {
     let navigate = useNavigate();    
+    const { id } = useParams(); // Lấy ID từ URL
     const [form] = Form.useForm(); // Khởi tạo form
     const [imageUrl, setImageUrl] = useState<string | null>(null);
     const [fileList, setFileList] = useState<any[]>([]);
@@ -26,11 +28,71 @@ const DevicesDetail = () => {
         },
     };
 
+    useEffect(() => {
+        if (id) {
+            // Nếu có ID, gọi API để lấy thông tin thiết bị
+            const fetchDeviceData = async () => {
+                try {
+                    const deviceData: any = (await getDeviceById(id))?.data;
+                    
+                    // Ánh xạ dữ liệu từ deviceData vào form
+                    form.setFieldsValue({
+                        deviceName: deviceData?.deviceName,
+                        deviceCode: deviceData?.deviceCode,
+                        manufacturerCountry: deviceData?.manufacturerCountry,
+                        manufacturerName: deviceData?.manufacturerName,
+                        manufacturingYear: deviceData?.manufacturingYear,
+                        serialNumber: deviceData?.serialNumber,
+                        functionName: deviceData?.functionName,
+                        installationContract: deviceData?.installationContract,
+                        contractDuration: deviceData?.contractDuration,
+                        machineStatus: deviceData?.machineStatus,
+                        importSource: deviceData?.importSource,
+                        usageDate: deviceData?.usageDate,
+                        labUsage: deviceData?.labUsage,
+                        managerInfo: {
+                            fullName: deviceData?.managerInfo?.fullName,
+                            phoneNumber: deviceData?.managerInfo?.phoneNumber,
+                        },
+                        engineerInfo: {
+                            fullName: deviceData?.engineerInfo?.fullName,
+                            phoneNumber: deviceData?.engineerInfo?.phoneNumber,
+                        },
+                        deviceUsageInstructions: deviceData?.deviceUsageInstructions,
+                        deviceTroubleshootingInstructions: deviceData?.deviceTroubleshootingInstructions,
+                        maintenanceLog: deviceData?.maintenanceLog,
+                        maintenanceReport: deviceData?.maintenanceReport,
+                        internalMaintenanceCheck: deviceData?.internalMaintenanceCheck,
+                        maintenanceSchedule: deviceData?.maintenanceSchedule,
+                        notes: deviceData?.notes,
+                    });
+
+                    if (deviceData?.deviceAvatar) {
+                        setImageUrl(deviceData?.deviceAvatar);
+                    }
+                } catch (error) {
+                    console.error("Error fetching device data:", error);
+                    message.error("Có lỗi xảy ra khi lấy thông tin thiết bị");
+                }
+            };
+
+            fetchDeviceData();
+        }
+    }, [id, form]);
+    
+    /**
+     * 
+     * @param values 
+     */
     const onFinish = (values: any) => {
         console.log('Received values:', values);
         // Thực hiện lưu thông tin vào backend ở đây
     };
 
+    /**
+     * 
+     * @param info 
+     */
     const handleUploadChange = (info: any) => {
         if (info.file.status === 'done') {
             const reader = new FileReader();
@@ -41,6 +103,10 @@ const DevicesDetail = () => {
         setFileList(info.fileList.slice(-1)); // Chỉ giữ lại file cuối cùng
     };
 
+    /**
+     * 
+     * @param file 
+     */
     const handlePreview = async (file: any) => {
         if (!file.url && !file.preview) {
             file.preview = await new Promise((resolve) => {

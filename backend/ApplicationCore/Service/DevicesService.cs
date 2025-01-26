@@ -70,6 +70,27 @@ namespace MediHub.Web.ApplicationCore.Service
         /// <summary>
         /// 
         /// </summary>
+        /// <returns></returns>
+        /// CreatedBy: PQ Huy (28.11.2024)
+        public async Task<ServiceResponse> Get(Guid id)
+        {
+            var reuslt = new DeviceEntity();
+
+            try
+            {
+                reuslt = (await _repository.FindAsync<DeviceEntity>(id));
+            }
+            catch (Exception ce)
+            {
+                return BadRequest(ce.Message);
+            }
+
+            return Ok(reuslt);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         /// CreatedBy: PQ Huy (28.11.2024)
@@ -127,14 +148,22 @@ namespace MediHub.Web.ApplicationCore.Service
         {
             try
             {
+                var result = new List<Guid>();
+
                 foreach (var id in ids)
                 {
-                    await _repository.DeleteAsync<DeviceEntity>(id);
+                    var findCode = (await _repository.FindAsync<DeviceEntity>(id));
+
+                    if (findCode != null)
+                    {
+                        await _repository.DeleteAsync<DeviceEntity>(id);
+                        result.Add(id);
+                    }
                 }
 
                 await _repository.SaveChangeAsync();
 
-                return Ok(ids);
+                return Ok(result);
             }
             catch (Exception ce)
             {

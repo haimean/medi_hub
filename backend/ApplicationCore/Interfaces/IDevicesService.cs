@@ -19,6 +19,12 @@ namespace MediHub.Web.ApplicationCore.Interfaces
         Task<ServiceResponse> Get();
 
         /// <summary>
+        /// Get by id
+        /// </summary>
+        /// <returns></returns>
+        Task<ServiceResponse> Get(Guid id);
+
+        /// <summary>
         /// Get by list id
         /// </summary>
         /// <param name="id"></param>

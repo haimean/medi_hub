@@ -20,6 +20,7 @@ function App() {
           {/* devices */}
           <Route path="devices" element={<Devices />} />
           <Route path="devices/detail" element={<DevicesDetail />} />
+          <Route path="devices/detail/:id" element={<DevicesDetail />} />
 
           {/* login */}
           <Route path="login" element={<LoginPage />} />

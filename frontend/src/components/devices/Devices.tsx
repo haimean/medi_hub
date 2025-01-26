@@ -1,22 +1,23 @@
 import React, { useMemo, useState } from 'react';
 import DevicesTopBar from './DevicesTopBar';
-import { Tooltip } from 'antd';
+import { Tooltip, Popconfirm, message } from 'antd'; // Import Popconfirm
 import { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons';
 import { AgGridReact } from 'ag-grid-react';
 import { useQuery } from '@tanstack/react-query';
-import { getDevices } from '../../api/appApi';
+import { deleteDevices, getDevices } from '../../api/appApi';
+import { useNavigate } from 'react-router-dom';
 
 const Devices = () => {
-    
-    const [refreshDevice, setRefreshDevice] = useState([]);
+    const [refreshDevice, setRefreshDevice] = useState(0); // Sử dụng số để trigger refetch
+    const navigate = useNavigate();
 
-    // Use useQuery to check token validity
+    // Use useQuery to fetch devices
     const { isError, isLoading, data } = useQuery({
         queryKey: [`all-devices`, refreshDevice],
         queryFn: () => getDevices(),
         refetchOnWindowFocus: false
     });
-    
+
     /**
      * Column Devices
      * CreatedBy: PQ Huy (16.12.2024)
@@ -130,10 +131,10 @@ const Devices = () => {
                 minWidth: 120,
                 width: 120,
                 pinned: "right",
-                sortable: false, // Tắt chức năng sắp xếp cho cột này
-                suppressMenu: true, // Ẩn menu của cột
+                sortable: false,
+                suppressMenu: true,
                 cellRenderer: (record: any) => {
-                    let hasPer = true;
+                    let hasPer = true; // Placeholder for permission check
                     return (
                         <>
                             <Tooltip
@@ -160,21 +161,30 @@ const Devices = () => {
                                         color: !hasPer ? '#6b7280' : '#000',
                                         cursor: !hasPer ? 'not-allowed' : 'pointer'
                                     }}
+                                    onClick={() => navigate(`/devices/detail/${record?.data?.id}`)}
                                 />
                             </Tooltip>
-                            <Tooltip
-                                placement='left'
-                                title={hasPer ? 'Xóa thiết bị' : 'Không có quyền'}
+                            <Popconfirm
+                                title="Bạn có chắc chắn muốn xóa thiết bị này không?"
+                                onConfirm={() => onDeleteDevice(record)}
+                                okText="Có"
+                                placement="leftTop"
+                                cancelText="Không"
                             >
-                                <DeleteOutlined
-                                    title="Xóa thiết bị"
-                                    style={{
-                                        marginLeft: 12,
-                                        color: !hasPer ? '#6b7280' : 'red',
-                                        cursor: !hasPer ? 'not-allowed' : 'pointer'
-                                    }}
-                                />
-                            </Tooltip>
+                                <Tooltip
+                                    placement='left'
+                                    title={hasPer ? 'Xóa thiết bị' : 'Không có quyền'}
+                                >
+                                    <DeleteOutlined
+                                        title="Xóa thiết bị"
+                                        style={{
+                                            marginLeft: 12,
+                                            color: !hasPer ? '#6b7280' : 'red',
+                                            cursor: !hasPer ? 'not-allowed' : 'pointer'
+                                        }}
+                                    />
+                                </Tooltip>
+                            </Popconfirm>
                         </>
                     )
                 }
@@ -182,7 +192,21 @@ const Devices = () => {
         ];
     }, []);
 
-
+    /**
+     * Func on delete device
+     * @param data 
+     * CreatedBy: PQ Huy (26.01.2025)
+     */
+    const onDeleteDevice = async (data: any) => {
+        try {
+            await deleteDevices([data?.data?.id]);
+            setRefreshDevice(prev => prev + 1); // Trigger refetch by incrementing the state
+            message.success("Xóa thiết bị thành công");
+        } catch (error) {
+            console.error("Error deleting device:", error);
+            message.error("Có lỗi xảy ra");
+        }
+    }
 
     return (
         <div className="medi-devices">
@@ -193,7 +217,7 @@ const Devices = () => {
                     rowData={data?.data}
                     columnDefs={columnDefs}
                     suppressRowHoverHighlight={true}
-                ></AgGridReact>
+                />
             </div>
         </div>
     );

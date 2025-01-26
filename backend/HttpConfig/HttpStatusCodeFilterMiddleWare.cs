@@ -24,7 +24,7 @@ namespace HttpConfig
 
                 var responseObject = JsonConvert.DeserializeObject<ServiceResponse>(responseBody);
 
-                if (responseObject?.StatusCode != 0)
+                if (responseObject?.StatusCode != null && responseObject?.StatusCode != 0)
                 {
                     context.Response.StatusCode = responseObject.StatusCode;
                 }

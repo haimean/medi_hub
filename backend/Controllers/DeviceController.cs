@@ -39,6 +39,17 @@ namespace MediHub.Web.Controllers
         }
 
         /// <summary>
+        /// Get devices by id
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("id")]
+        public async Task<IActionResult> Get(Guid id)
+        {
+            var response = await _devicesService.Get(id);
+            return StatusCode((int)response.StatusCode, response);
+        }
+
+        /// <summary>
         /// Get devices by IDs
         /// </summary>
         /// <param name="ids"></param>
