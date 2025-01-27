@@ -10,6 +10,7 @@ const SET_USER_INFO = 'SET_USER_INFO'; // New action type for user information
 const SET_SELECTED_DEPARTMENT = 'SET_SELECTED_DEPARTMENT'; // New action type for selected department
 const SET_SELECTED_BRAND = 'SET_SELECTED_BRAND'; // New action type for selected brand
 const SET_SELECTED_DEVICE_TYPE = 'SET_SELECTED_DEVICE_TYPE'; // New action type for selected device type
+const SET_IS_EDIT_DEVICE = 'SET_IS_EDIT_DEVICE'; // New action type for edit device state
 
 // Định nghĩa kiểu cho trạng thái
 interface UserInfo {
@@ -29,6 +30,7 @@ interface State {
     department: any | null; // Thêm trường department
     selectedBrand: string | null; // Thêm trường selectedBrand
     selectedDeviceType: string | null; // Thêm trường selectedDeviceType
+    isEditDevice: boolean; // Thêm trường isEditDevice
 }
 
 // Định nghĩa trạng thái ban đầu
@@ -41,6 +43,7 @@ const initialState: State = {
     department: null, // Mặc định là null
     selectedBrand: null, // Mặc định là null
     selectedDeviceType: null, // Mặc định là null
+    isEditDevice: false, // Mặc định là false
 };
 
 // Định nghĩa kiểu cho các action
@@ -68,6 +71,8 @@ const reducer: Reducer<State, Action> = (state = initialState, action) => {
             return { ...state, selectedBrand: action.payload };
         case SET_SELECTED_DEVICE_TYPE: // Thêm action để cập nhật selectedDeviceType
             return { ...state, selectedDeviceType: action.payload };
+        case SET_IS_EDIT_DEVICE: // Thêm action để cập nhật trạng thái isEditDevice
+            return { ...state, isEditDevice: action.payload };
         default:
             return state;
     }
@@ -116,6 +121,12 @@ export const setSelectedBrand = (brand: string | null) => ({
 export const setSelectedDeviceType = (deviceType: string | null) => ({
     type: SET_SELECTED_DEVICE_TYPE,
     payload: deviceType,
+});
+
+// Định nghĩa action để cập nhật trạng thái isEditDevice
+export const setIsEditDevice = (isEdit: boolean) => ({
+    type: SET_IS_EDIT_DEVICE,
+    payload: isEdit,
 });
 
 // Optional: Action to update global variable

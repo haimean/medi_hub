@@ -2,9 +2,8 @@ import React from 'react';
 import { Button, message } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { FormInstance } from 'antd/es/form';
-import { createDevices } from '../../../api/appApi'; // Import hàm createDevices
+import { createDevices, updatedDevices } from '../../../api/appApi'; // Import hàm createDevices và updateDevices
 import { useSelector } from 'react-redux';
-import { error } from 'console';
 
 interface DevicesDetailTopbarProps {
     form: FormInstance; // Định nghĩa kiểu cho form
@@ -14,6 +13,7 @@ interface DevicesDetailTopbarProps {
 const DevicesDetailTopbar: React.FC<DevicesDetailTopbarProps> = ({ form, onFinish }) => {
     let navigate = useNavigate();
     const department = useSelector((state: any) => state.department); // Lấy department từ store
+    const isEditDevice: boolean = useSelector((state: any) => state.isEditDevice); // Lấy trạng thái isEditDevice từ store
 
     const handleCancel = () => {
         navigate('/'); // Quay lại trang chính
@@ -63,38 +63,73 @@ const DevicesDetailTopbar: React.FC<DevicesDetailTopbarProps> = ({ form, onFinis
             notes: values.notes,
             departmentIds: [department?.id], // ID của phòng ban có thể được lấy từ một nguồn khác
         };
-
-        
     };
 
+    /**
+     * 
+     */
     const handleSave = async () => {
         try {
             const values = await form.validateFields(); // Kiểm tra tính hợp lệ của form
             const adjustedValues = createAdjustedValues(values); // Tạo adjustedValues
-            await createDevices([adjustedValues]); // Gọi API để lưu dữ liệu
-            onFinish(values); // Gọi hàm onFinish
-            navigate('/'); // Quay lại trang chính
+
+            if (isEditDevice) {
+                // Nếu đang ở chế độ sửa, gọi API updateDevices
+                await updatedDevices(adjustedValues).then((res: any) => {
+                    if (res?.succeeded) {
+                        message.success('Cập nhật thành công');
+                        onFinish(values); // Gọi hàm onFinish
+                    } else {
+                        message.error('Cập nhật thất bại');
+                    }
+                });
+            } else {
+                // Nếu không, gọi API createDevices để thêm mới
+                await createDevices([adjustedValues]).then((res: any) => {
+                    if (res?.succeeded) {
+                        message.success('Lưu thành công');
+                        onFinish(values); // Gọi hàm onFinish
+                    } else {
+                        message.error('Lưu thất bại');
+                    }
+                });
+            }
         } catch (info) {
             console.log('Validate Failed:', info);
         }
     };
 
+    /**
+     * 
+     */
     const handleAdd = async () => {
         try {
             const values = await form.validateFields(); // Kiểm tra tính hợp lệ của form
             const adjustedValues = createAdjustedValues(values); // Tạo adjustedValues
 
-             // Gọi API để lưu dữ liệu
-            await createDevices([adjustedValues]).then((respon: any) => {
-                if(respon?.succeeded) {
-                    message.success('Lưu thành công');
-                    onFinish(values); // Gọi hàm onFinish
-                    form.resetFields(); // Làm sạch form để nhập bản ghi mới
-                }
-            }).catch((error) => {
-                message.error('Lưu thất bại');
-                console.log('createDevices error', error);
-            });
+            if (isEditDevice) {
+                // Nếu đang ở chế độ sửa, gọi API updateDevices
+                await updatedDevices(adjustedValues).then((res: any) => {
+                    if (res?.succeeded) {
+                        message.success('Cập nhật thành công');
+                        onFinish(values); // Gọi hàm onFinish
+                        form.resetFields(); // Làm sạch form để nhập bản ghi mới
+                    } else {
+                        message.error('Cập nhật thất bại');
+                    }
+                });
+            } else {
+                // Nếu không, gọi API createDevices để thêm mới
+                await createDevices([adjustedValues]).then((res: any) => {
+                    if (res?.succeeded) {
+                        message.success('Lưu thành công');
+                        onFinish(values); // Gọi hàm onFinish
+                        form.resetFields(); // Làm sạch form để nhập bản ghi mới
+                    } else {
+                        message.error('Lưu thất bại');
+                    }
+                });
+            }
         } catch (info) {
             console.log('Validate Failed:', info);
         }

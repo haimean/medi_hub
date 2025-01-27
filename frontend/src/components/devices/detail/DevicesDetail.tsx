@@ -5,16 +5,21 @@ import DevicesDetailTopbar from './DevicesDetailTopbar';
 import { FileImageOutlined, UploadOutlined } from '@ant-design/icons';
 import ActivityHistory from './activityHistory/ActivityHistory';
 import { getDeviceById } from '../../../api/appApi';
+import { useQuery } from '@tanstack/react-query';
+import { setIsEditDevice } from '../../../stores/commonStore'; // Import setDepartments
+import { useDispatch, useSelector } from 'react-redux';
 
 const DevicesDetail = () => {
-    let navigate = useNavigate();    
+    let navigate = useNavigate();
     const { id } = useParams(); // Lấy ID từ URL
     const [form] = Form.useForm(); // Khởi tạo form
     const [imageUrl, setImageUrl] = useState<string | null>(null);
     const [fileList, setFileList] = useState<any[]>([]);
     const [previewImage, setPreviewImage] = useState<string>('');
     const [previewOpen, setPreviewOpen] = useState<boolean>(false);
-
+    const isEditDevice: boolean = useSelector((state: any) => state.isEditDevice); // Lấy trạng thái isEditDevice từ store
+    const dispatch = useDispatch(); // Khởi tạo dispatch
+    
     const { Dragger } = Upload;
 
     const propsInstallationContract: UploadProps = {
@@ -28,58 +33,57 @@ const DevicesDetail = () => {
         },
     };
 
+    const { data: deviceData, isLoading, isError } = useQuery({
+        queryKey: [`device-detail-${id}`, id],
+        queryFn: () => getDeviceById(id ? id : ''),
+        refetchOnWindowFocus: false,
+        enabled: !!id, // Only run the query if the id exists
+    });
+
     useEffect(() => {
-        if (id) {
-            // Nếu có ID, gọi API để lấy thông tin thiết bị
-            const fetchDeviceData = async () => {
-                try {
-                    const deviceData: any = (await getDeviceById(id))?.data;
-                    
-                    // Ánh xạ dữ liệu từ deviceData vào form
-                    form.setFieldsValue({
-                        deviceName: deviceData?.deviceName,
-                        deviceCode: deviceData?.deviceCode,
-                        manufacturerCountry: deviceData?.manufacturerCountry,
-                        manufacturerName: deviceData?.manufacturerName,
-                        manufacturingYear: deviceData?.manufacturingYear,
-                        serialNumber: deviceData?.serialNumber,
-                        functionName: deviceData?.functionName,
-                        installationContract: deviceData?.installationContract,
-                        contractDuration: deviceData?.contractDuration,
-                        machineStatus: deviceData?.machineStatus,
-                        importSource: deviceData?.importSource,
-                        usageDate: deviceData?.usageDate,
-                        labUsage: deviceData?.labUsage,
-                        managerInfo: {
-                            fullName: deviceData?.managerInfo?.fullName,
-                            phoneNumber: deviceData?.managerInfo?.phoneNumber,
-                        },
-                        engineerInfo: {
-                            fullName: deviceData?.engineerInfo?.fullName,
-                            phoneNumber: deviceData?.engineerInfo?.phoneNumber,
-                        },
-                        deviceUsageInstructions: deviceData?.deviceUsageInstructions,
-                        deviceTroubleshootingInstructions: deviceData?.deviceTroubleshootingInstructions,
-                        maintenanceLog: deviceData?.maintenanceLog,
-                        maintenanceReport: deviceData?.maintenanceReport,
-                        internalMaintenanceCheck: deviceData?.internalMaintenanceCheck,
-                        maintenanceSchedule: deviceData?.maintenanceSchedule,
-                        notes: deviceData?.notes,
-                    });
+        if (deviceData) {
+            // Ánh xạ dữ liệu từ deviceData vào form
+            form.setFieldsValue({
+                deviceName: deviceData?.data?.deviceName,
+                deviceCode: deviceData?.data?.deviceCode,
+                manufacturerCountry: deviceData?.data?.manufacturerCountry,
+                manufacturerName: deviceData?.data?.manufacturerName,
+                manufacturingYear: deviceData?.data?.manufacturingYear,
+                serialNumber: deviceData?.data?.serialNumber,
+                functionName: deviceData?.data?.functionName,
+                installationContract: deviceData?.data?.installationContract,
+                contractDuration: deviceData?.data?.contractDuration,
+                machineStatus: deviceData?.data?.machineStatus,
+                importSource: deviceData?.data?.importSource,
+                usageDate: deviceData?.data?.usageDate,
+                labUsage: deviceData?.data?.labUsage,
+                managerInfo: {
+                    fullName: deviceData?.data?.managerInfo?.fullName,
+                    phoneNumber: deviceData?.data?.managerInfo?.phoneNumber,
+                },
+                engineerInfo: {
+                    fullName: deviceData?.data?.engineerInfo?.fullName,
+                    phoneNumber: deviceData?.data?.engineerInfo?.phoneNumber,
+                },
+                deviceUsageInstructions: deviceData?.data?.deviceUsageInstructions,
+                deviceTroubleshootingInstructions: deviceData?.data?.deviceTroubleshootingInstructions,
+                maintenanceLog: deviceData?.data?.maintenanceLog,
+                maintenanceReport: deviceData?.data?.maintenanceReport,
+                internalMaintenanceCheck: deviceData?.data?.internalMaintenanceCheck,
+                maintenanceSchedule: deviceData?.data?.maintenanceSchedule,
+                notes: deviceData?.data?.notes,
+            });
 
-                    if (deviceData?.deviceAvatar) {
-                        setImageUrl(deviceData?.deviceAvatar);
-                    }
-                } catch (error) {
-                    console.error("Error fetching device data:", error);
-                    message.error("Có lỗi xảy ra khi lấy thông tin thiết bị");
-                }
-            };
+            if (deviceData?.data?.deviceAvatar) {
+                setImageUrl(deviceData?.data?.deviceAvatar);
+            }
 
-            fetchDeviceData();
+            dispatch(setIsEditDevice(true));
+        } else {
+            dispatch(setIsEditDevice(false));
         }
-    }, [id, form]);
-    
+    }, [deviceData, form]);
+
     /**
      * 
      * @param values 
@@ -333,7 +337,7 @@ const DevicesDetail = () => {
                             name='maintenanceLog'
                             labelCol={{ span: 6, prefixCls: 'right-item' }}
                         >
-                            <ActivityHistory 
+                            <ActivityHistory
                                 label='Nhật ký bảo dưỡng'
                                 key='maintenanceLog'
                                 value={form?.getFieldValue('maintenanceLog')}
@@ -344,7 +348,7 @@ const DevicesDetail = () => {
                             name='maintenanceReport'
                             labelCol={{ span: 6, prefixCls: 'right-item' }}
                         >
-                            <ActivityHistory 
+                            <ActivityHistory
                                 label='Biên bản bảo trì'
                                 key='maintenanceReport'
                                 value={form?.getFieldValue('maintenanceReport')}
@@ -355,7 +359,7 @@ const DevicesDetail = () => {
                             name='internalMaintenanceCheck'
                             labelCol={{ span: 6, prefixCls: 'right-item' }}
                         >
-                            <ActivityHistory 
+                            <ActivityHistory
                                 label='Nội kiểm tra bảo trì'
                                 key='internalMaintenanceCheck'
                                 value={form?.getFieldValue('internalMaintenanceCheck')}
