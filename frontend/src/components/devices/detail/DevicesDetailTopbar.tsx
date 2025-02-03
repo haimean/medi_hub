@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, message } from 'antd';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { FormInstance } from 'antd/es/form';
 import { createDevices, updatedDevices } from '../../../api/appApi'; // Import hàm createDevices và updateDevices
 import { useSelector } from 'react-redux';
@@ -14,9 +14,10 @@ const DevicesDetailTopbar: React.FC<DevicesDetailTopbarProps> = ({ form, onFinis
     let navigate = useNavigate();
     const department = useSelector((state: any) => state.department); // Lấy department từ store
     const isEditDevice: boolean = useSelector((state: any) => state.isEditDevice); // Lấy trạng thái isEditDevice từ store
+    const { id } = useParams(); // Lấy ID từ URL
 
     const handleCancel = () => {
-        navigate('/'); // Quay lại trang chính
+        navigate(-1); // Quay lại trang trước đó
     };
 
     /**
@@ -71,11 +72,12 @@ const DevicesDetailTopbar: React.FC<DevicesDetailTopbarProps> = ({ form, onFinis
     const handleSave = async () => {
         try {
             const values = await form.validateFields(); // Kiểm tra tính hợp lệ của form
-            const adjustedValues = createAdjustedValues(values); // Tạo adjustedValues
+            let adjustedValues: any = createAdjustedValues(values); // Tạo adjustedValues
 
             if (isEditDevice) {
                 // Nếu đang ở chế độ sửa, gọi API updateDevices
-                await updatedDevices(adjustedValues).then((res: any) => {
+                adjustedValues.Id = id;
+                await updatedDevices([adjustedValues]).then((res: any) => {
                     if (res?.succeeded) {
                         message.success('Cập nhật thành công');
                         onFinish(values); // Gọi hàm onFinish
@@ -109,7 +111,7 @@ const DevicesDetailTopbar: React.FC<DevicesDetailTopbarProps> = ({ form, onFinis
 
             if (isEditDevice) {
                 // Nếu đang ở chế độ sửa, gọi API updateDevices
-                await updatedDevices(adjustedValues).then((res: any) => {
+                await updatedDevices([adjustedValues]).then((res: any) => {
                     if (res?.succeeded) {
                         message.success('Cập nhật thành công');
                         onFinish(values); // Gọi hàm onFinish

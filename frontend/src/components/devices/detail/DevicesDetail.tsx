@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Form, Input, Upload, Image, Row, Col, UploadProps, message } from 'antd';
+import { Button, Form, Input, Upload, Image, Row, Col, UploadProps, message, DatePicker, Modal } from 'antd';
 import { useNavigate, useParams } from 'react-router-dom';
 import DevicesDetailTopbar from './DevicesDetailTopbar';
 import { FileImageOutlined, UploadOutlined } from '@ant-design/icons';
@@ -8,6 +8,7 @@ import { getDeviceById } from '../../../api/appApi';
 import { useQuery } from '@tanstack/react-query';
 import { setIsEditDevice } from '../../../stores/commonStore'; // Import setDepartments
 import { useDispatch, useSelector } from 'react-redux';
+import dayjs from 'dayjs';
 
 const DevicesDetail = () => {
     let navigate = useNavigate();
@@ -15,20 +16,27 @@ const DevicesDetail = () => {
     const [form] = Form.useForm(); // Khởi tạo form
     const [imageUrl, setImageUrl] = useState<string | null>(null);
     const [fileList, setFileList] = useState<any[]>([]);
+    const [fileListContract, setFileListContract] = useState<any[]>([]);
     const [previewImage, setPreviewImage] = useState<string>('');
     const [previewOpen, setPreviewOpen] = useState<boolean>(false);
     const isEditDevice: boolean = useSelector((state: any) => state.isEditDevice); // Lấy trạng thái isEditDevice từ store
     const dispatch = useDispatch(); // Khởi tạo dispatch
-    
     const { Dragger } = Upload;
 
-    const propsInstallationContract: UploadProps = {
+    const propsInstallationContract = {
         name: 'file',
         multiple: true,
-        onChange(info) {
+        onChange(info: any) {
             const { status } = info.file;
+            if (status === 'done') {
+                message.success(`${info.file.name} file uploaded successfully`);
+            } else if (status === 'error') {
+                message.error(`${info.file.name} file upload failed.`);
+            }
+            setFileListContract(info.fileList); // Update the file list
         },
-        beforeUpload(file, fileList) {
+        beforeUpload(file: any) {
+            // Prevent automatic upload
             return false;
         },
     };
@@ -52,10 +60,10 @@ const DevicesDetail = () => {
                 serialNumber: deviceData?.data?.serialNumber,
                 functionName: deviceData?.data?.functionName,
                 installationContract: deviceData?.data?.installationContract,
-                contractDuration: deviceData?.data?.contractDuration,
+                contractDuration: deviceData?.data?.contractDuration ? dayjs(deviceData?.data?.contractDuration) : null,
                 machineStatus: deviceData?.data?.machineStatus,
                 importSource: deviceData?.data?.importSource,
-                usageDate: deviceData?.data?.usageDate,
+                usageDate: deviceData?.data?.usageDate ? dayjs(deviceData?.data?.usageDate) : null,
                 labUsage: deviceData?.data?.labUsage,
                 managerInfo: {
                     fullName: deviceData?.data?.managerInfo?.fullName,
@@ -70,7 +78,7 @@ const DevicesDetail = () => {
                 maintenanceLog: deviceData?.data?.maintenanceLog,
                 maintenanceReport: deviceData?.data?.maintenanceReport,
                 internalMaintenanceCheck: deviceData?.data?.internalMaintenanceCheck,
-                maintenanceSchedule: deviceData?.data?.maintenanceSchedule,
+                maintenanceSchedule: deviceData?.data?.maintenanceSchedule ? dayjs(deviceData?.data?.maintenanceSchedule) : null,
                 notes: deviceData?.data?.notes,
             });
 
@@ -112,15 +120,15 @@ const DevicesDetail = () => {
      * @param file 
      */
     const handlePreview = async (file: any) => {
-        if (!file.url && !file.preview) {
-            file.preview = await new Promise((resolve) => {
-                const reader = new FileReader();
-                reader.readAsDataURL(file.originFileObj);
-                reader.onload = () => resolve(reader.result);
-            });
+        // Check if the file has a URL or create a data URL for local files
+        const fileUrl = file.url || (file.originFileObj && URL.createObjectURL(file.originFileObj));
+        
+        if (fileUrl) {
+            // Open the file in a new tab
+            window.open(fileUrl, '_blank');
+        } else {
+            message.error('Unable to preview the file.');
         }
-        setPreviewImage(file.url || file.preview);
-        setPreviewOpen(true);
     };
 
     // Function to validate image file type
@@ -214,9 +222,24 @@ const DevicesDetail = () => {
                             labelCol={{ span: 6, prefixCls: 'left-item' }}
                             wrapperCol={{ span: 12 }}
                         >
-                            <Dragger {...propsInstallationContract}>
+                            <Dragger {...propsInstallationContract} onPreview={handlePreview}>
                                 <UploadOutlined style={{ fontSize: '24px' }} />
+                                <p className="ant-upload-text">Tải lên</p>
                             </Dragger>
+                            {fileListContract.length > 0 && (
+                                <div style={{ marginTop: 16 }}>
+                                    {fileListContract.map((file) => (
+                                        <div key={file.uid}>
+                                            <a
+                                                onClick={() => handlePreview(file)}
+                                                style={{ cursor: 'pointer', color: '#1890ff' }}
+                                            >
+                                                {file.name}
+                                            </a>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
                         </Form.Item>
                         {/* Thời hạn hợp đồng */}
                         <Form.Item
@@ -225,7 +248,7 @@ const DevicesDetail = () => {
                             labelCol={{ span: 6, prefixCls: 'left-item' }}
                             wrapperCol={{ span: 12 }}
                         >
-                            <Input type="date" />
+                            <DatePicker format={'DD/MM/YYYY'} />
                         </Form.Item>
                         <Form.Item
                             label='Tình trạng máy'
@@ -250,7 +273,7 @@ const DevicesDetail = () => {
                             wrapperCol={{ span: 12 }}
                             rules={[{ required: true, message: 'Vui lòng nhập ngày sử dụng' }]}
                         >
-                            <Input type="date" />
+                            <DatePicker format={'DD/MM/YYYY'} />
                         </Form.Item>
                         <Form.Item
                             label='Lab sử dụng'
@@ -370,7 +393,7 @@ const DevicesDetail = () => {
                             name='maintenanceSchedule'
                             labelCol={{ span: 6, prefixCls: 'right-item' }}
                         >
-                            <Input type="date" />
+                            <DatePicker format={'DD/MM/YYYY'} />
                         </Form.Item>
                         <Form.Item
                             label='Ghi chú'
