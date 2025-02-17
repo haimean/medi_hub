@@ -20,7 +20,7 @@ namespace MediHub.Web.ApplicationCore.Service
         /// </summary>
         /// <param name="files">List of files to upload.</param>
         /// <returns>Service response with uploaded file keys.</returns>
-        public async Task<ServiceResponse> UploadDocs(Dictionary<string, IFormFile> files)
+        public async Task<ServiceResponse> UploadDocs(List<IFormFile> files)
         {
             var response = new ServiceResponse();
 
@@ -29,12 +29,12 @@ namespace MediHub.Web.ApplicationCore.Service
                 return BadRequest(message: "No files uploaded.");
             }
 
-            var uploadedFiles = new Dictionary<string, IFormFile>();
+            var uploadedFiles = new List<string>();
 
             foreach (var file in files)
             {
                 var key = Guid.NewGuid().ToString(); // Tạo key giống như S3
-                var filePath = Path.Combine("Uploads", $"{file.Key}{key}{Path.GetExtension(file.Value.FileName)}");
+                var filePath = Path.Combine("Uploads", $"{key}{Path.GetExtension(file.FileName)}");
 
                 // {{ edit_1 }}: Check if the directory exists, if not, create it
                 var directoryPath = Path.GetDirectoryName(filePath);
@@ -45,13 +45,42 @@ namespace MediHub.Web.ApplicationCore.Service
 
                 using (var stream = new FileStream(filePath, FileMode.Create))
                 {
-                    await file.Value.CopyToAsync(stream);
+                    await file.CopyToAsync(stream);
                 }
 
-                uploadedFiles.Add(file.Key, file.Value); // Lưu key để trả về
+                uploadedFiles.Add(filePath); // Lưu key để trả về
             }
 
             return Ok(uploadedFiles);
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="files"></param>
+        /// <returns></returns>
+        public async Task<ServiceResponse> UploadDoc(string key, IFormFile file)
+        {
+            var response = new ServiceResponse();
+
+            var uuid = Guid.NewGuid().ToString(); // Tạo key giống như S3
+            string finnalKey = $"{key}-{uuid}-{file.FileName}";
+            var filePath = Path.Combine("Uploads", finnalKey);
+
+            // {{ edit_1 }}: Check if the directory exists, if not, create it
+            var directoryPath = Path.GetDirectoryName(filePath);
+            if (!Directory.Exists(directoryPath))
+            {
+                Directory.CreateDirectory(directoryPath);
+            }
+
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+
+            return Ok(finnalKey);
         }
 
         /// <summary>

@@ -10,7 +10,7 @@ import { setIsEditDevice } from '../../../stores/commonStore'; // Import setDepa
 import { useDispatch, useSelector } from 'react-redux';
 import dayjs from 'dayjs';
 
-const DevicesDetail = () => {
+const DevicesDetail = () => { 
     let navigate = useNavigate();
     const { id } = useParams(); // Lấy ID từ URL
     const [form] = Form.useForm(); // Khởi tạo form
@@ -33,7 +33,12 @@ const DevicesDetail = () => {
             } else if (status === 'error') {
                 message.error(`${info.file.name} file upload failed.`);
             }
-            setFileListContract(info.fileList); // Update the file list
+            
+            setFileListContract(prevFileList => [
+                ...prevFileList,
+                ...info.fileList
+            ]);
+
         },
         beforeUpload(file: any) {
             // Prevent automatic upload
@@ -142,7 +147,11 @@ const DevicesDetail = () => {
 
     return (
         <div className="medi-devices-detail">
-            <DevicesDetailTopbar form={form} onFinish={onFinish} />
+            <DevicesDetailTopbar 
+                form={form} 
+                onFinish={onFinish} 
+                fileListContract={fileListContract}
+            />
             <div className='devices-detail__content'>
                 <Form
                     form={form} // Gán form vào component

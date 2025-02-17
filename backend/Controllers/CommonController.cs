@@ -20,7 +20,7 @@ namespace MediHub.Web.Controllers
         /// <param name="departments"></param>
         /// <returns></returns>
         [HttpPost("upload-docs")]
-        public async Task<IActionResult> Upload(Dictionary<string, IFormFile> files)
+        public async Task<IActionResult> Uploads([FromForm] List<IFormFile> files)
         {
             if (files == null || files.Count == 0)
             {
@@ -28,7 +28,18 @@ namespace MediHub.Web.Controllers
             }
 
             var uploadedFiles = await _commonService.UploadDocs(files);
+            return StatusCode((int)uploadedFiles.StatusCode, uploadedFiles);
+        }
 
+        /// <summary>
+        /// Create new departments
+        /// </summary>
+        /// <param name="departments"></param>
+        /// <returns></returns>
+        [HttpPost("upload-doc")]
+        public async Task<IActionResult> Upload(string key, IFormFile file)
+        {
+            var uploadedFiles = await _commonService.UploadDoc(key, file);
             return StatusCode((int)uploadedFiles.StatusCode, uploadedFiles);
         }
 

@@ -20,7 +20,7 @@ export async function apiLogin(userName: string, passWord: string) {
    return await axiosClient.post(`${process.env.REACT_APP_API_URL}/login`, {
       username: userName,
       password: passWord
-    });
+   });
 }
 
 /**
@@ -84,7 +84,17 @@ export async function deleteDevices(params: any) {
 //#region API Common
 
 export async function uploadDocs(params: any) {
-   return await axiosClient.post(`${process.env.REACT_APP_API_URL}/v1/common/upload-docs`, params);
+   return await axiosClient.post(`${process.env.REACT_APP_API_URL}/v1/common/upload-docs`, params,
+      {
+         headers: { 'Content-Type': 'multipart/form-data' }
+      });
+}
+
+export async function uploadDoc(key: string, params: any) {
+   return await axiosClient.post(`${process.env.REACT_APP_API_URL}/v1/common/upload-doc?key=${key}`, params,
+      {
+         headers: { 'Content-Type': 'multipart/form-data' }
+      });
 }
 
 

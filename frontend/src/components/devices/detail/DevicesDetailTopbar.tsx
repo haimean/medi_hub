@@ -2,15 +2,18 @@ import React from 'react';
 import { Button, message } from 'antd';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FormInstance } from 'antd/es/form';
-import { createDevices, updatedDevices } from '../../../api/appApi'; // Import hàm createDevices và updateDevices
+import { createDevices, updatedDevices, uploadDoc, uploadDocs } from '../../../api/appApi'; // Import hàm createDevices và updateDevices
 import { useSelector } from 'react-redux';
+import { error } from 'console';
+import axiosClient from '../../../api/axiosClient';
 
 interface DevicesDetailTopbarProps {
     form: FormInstance; // Định nghĩa kiểu cho form
     onFinish: (values: any) => void; // Định nghĩa kiểu cho hàm onFinish
+    fileListContract: any;
 }
 
-const DevicesDetailTopbar: React.FC<DevicesDetailTopbarProps> = ({ form, onFinish }) => {
+const DevicesDetailTopbar: React.FC<DevicesDetailTopbarProps> = ({ form, onFinish, fileListContract }) => {
     let navigate = useNavigate();
     const department = useSelector((state: any) => state.department); // Lấy department từ store
     const isEditDevice: boolean = useSelector((state: any) => state.isEditDevice); // Lấy trạng thái isEditDevice từ store
@@ -69,10 +72,38 @@ const DevicesDetailTopbar: React.FC<DevicesDetailTopbarProps> = ({ form, onFinis
     /**
      * 
      */
+    const uploadFiles = async () => {
+        if (fileListContract?.length > 0) {
+            let uploadContract: any = [];
+
+            fileListContract.forEach(async (file: any) => {
+
+                // Kiểm tra xem originFileObj có tồn tại và có thuộc tính 'file' không
+
+                if (file.originFileObj) {
+                    const formData = new FormData();
+                    formData.append('File', file.originFileObj);
+
+                    await uploadDoc(`${department?.id}-device-contract`, formData).then((respon) => {
+                        uploadContract?.push(respon?.data);
+                    }).catch((error) => {
+                        console.log(`Upload file false`, file.originFileObj);
+                    })
+                }
+            });
+        }
+    };
+
+    /**
+     * 
+     */
     const handleSave = async () => {
         try {
             const values = await form.validateFields(); // Kiểm tra tính hợp lệ của form
             let adjustedValues: any = createAdjustedValues(values); // Tạo adjustedValues
+
+            // lưu danh sách file contract trước
+            await uploadFiles();
 
             if (isEditDevice) {
                 // Nếu đang ở chế độ sửa, gọi API updateDevices
