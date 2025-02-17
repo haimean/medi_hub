@@ -151,6 +151,7 @@ const DevicesDetail = () => {
                 form={form} 
                 onFinish={onFinish} 
                 fileListContract={fileListContract}
+                fileList={fileList}
             />
             <div className='devices-detail__content'>
                 <Form

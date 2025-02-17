@@ -11,9 +11,10 @@ interface DevicesDetailTopbarProps {
     form: FormInstance; // Định nghĩa kiểu cho form
     onFinish: (values: any) => void; // Định nghĩa kiểu cho hàm onFinish
     fileListContract: any;
+    fileList: any
 }
 
-const DevicesDetailTopbar: React.FC<DevicesDetailTopbarProps> = ({ form, onFinish, fileListContract }) => {
+const DevicesDetailTopbar: React.FC<DevicesDetailTopbarProps> = ({ form, onFinish, fileListContract, fileList }) => {
     let navigate = useNavigate();
     const department = useSelector((state: any) => state.department); // Lấy department từ store
     const isEditDevice: boolean = useSelector((state: any) => state.isEditDevice); // Lấy trạng thái isEditDevice từ store
@@ -29,10 +30,11 @@ const DevicesDetailTopbar: React.FC<DevicesDetailTopbarProps> = ({ form, onFinis
      * @returns 
      * CreatedBy: PQ Huy (19.01.2025)
      */
-    const createAdjustedValues = (values: any) => {
+    const createAdjustedValues = (values: any, upload: any) => {
+        
         return {
             name: values.deviceName,
-            deviceAvatar: values?.deviceAvatar ? [values.deviceAvatar[0].name] : [], // Chỉ lấy tên file
+            deviceAvatar: upload?.deviceAvatar ?  upload?.deviceAvatar : [], // Chỉ lấy tên file
             deviceCode: values?.deviceCode,
             deviceName: values?.deviceName,
             manufacturerCountry: values?.manufacturerCountry,
@@ -40,7 +42,7 @@ const DevicesDetailTopbar: React.FC<DevicesDetailTopbarProps> = ({ form, onFinis
             manufacturingYear: Number(values?.manufacturingYear), // Chuyển đổi sang số
             serialNumber: values?.serialNumber,
             functionName: values?.functionName,
-            installationContract: values?.installationContract?.fileList?.map((file: any) => file?.name), // Chỉ lấy tên file
+            installationContract: upload?.installationContract ? upload?.installationContract : [],
             contractDuration: values?.contractDuration,
             machineStatus: values?.machineStatus,
             importSource: values?.importSource || "", // Nếu không có giá trị, có thể để trống
@@ -73,12 +75,13 @@ const DevicesDetailTopbar: React.FC<DevicesDetailTopbarProps> = ({ form, onFinis
      * 
      */
     const uploadFiles = async () => {
+        let uploadContract: any = [];
+        let uploadAvatar: any = [];
+
         if (fileListContract?.length > 0) {
-            let uploadContract: any = [];
 
-            fileListContract.forEach(async (file: any) => {
-
-                // Kiểm tra xem originFileObj có tồn tại và có thuộc tính 'file' không
+            for (let index = 0; index < fileListContract.length; index++) {
+                const file = fileListContract[index];
 
                 if (file.originFileObj) {
                     const formData = new FormData();
@@ -86,11 +89,31 @@ const DevicesDetailTopbar: React.FC<DevicesDetailTopbarProps> = ({ form, onFinis
 
                     await uploadDoc(`${department?.id}-device-contract`, formData).then((respon) => {
                         uploadContract?.push(respon?.data);
-                    }).catch((error) => {
-                        console.log(`Upload file false`, file.originFileObj);
                     })
                 }
-            });
+                
+            }
+        }
+
+        if (fileList?.length > 0) {
+            for (let index = 0; index < fileList.length; index++) {
+                const file = fileList[index];
+
+                if (file.originFileObj) {
+                    const formData = new FormData();
+                    formData.append('File', file.originFileObj);
+
+                    await uploadDoc(`${department?.id}-device-contract`, formData).then((respon) => {
+                        uploadAvatar?.push(respon?.data);
+                    })
+                }
+                
+            }
+        }
+
+        return {
+            'installationContract': uploadContract,
+            'deviceAvatar': uploadAvatar
         }
     };
 
@@ -100,10 +123,11 @@ const DevicesDetailTopbar: React.FC<DevicesDetailTopbarProps> = ({ form, onFinis
     const handleSave = async () => {
         try {
             const values = await form.validateFields(); // Kiểm tra tính hợp lệ của form
-            let adjustedValues: any = createAdjustedValues(values); // Tạo adjustedValues
-
+            
             // lưu danh sách file contract trước
-            await uploadFiles();
+            let upload = await uploadFiles();
+
+            let adjustedValues: any = createAdjustedValues(values, upload); // Tạo adjustedValues
 
             if (isEditDevice) {
                 // Nếu đang ở chế độ sửa, gọi API updateDevices
@@ -138,7 +162,11 @@ const DevicesDetailTopbar: React.FC<DevicesDetailTopbarProps> = ({ form, onFinis
     const handleAdd = async () => {
         try {
             const values = await form.validateFields(); // Kiểm tra tính hợp lệ của form
-            const adjustedValues = createAdjustedValues(values); // Tạo adjustedValues
+
+            // lưu danh sách file contract trước
+            let upload = await uploadFiles();
+
+            const adjustedValues = createAdjustedValues(values, upload); // Tạo adjustedValues
 
             if (isEditDevice) {
                 // Nếu đang ở chế độ sửa, gọi API updateDevices
