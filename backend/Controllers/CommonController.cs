@@ -1,5 +1,6 @@
 ﻿using MediHub.Web.ApplicationCore.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace MediHub.Web.Controllers
 {
@@ -58,6 +59,18 @@ namespace MediHub.Web.Controllers
 
             var uploadedFiles = await _commonService.GetDocs(files);
             return StatusCode((int)uploadedFiles.StatusCode, uploadedFiles);
+        }
+
+        /// <summary>
+        /// Create new departments
+        /// </summary>
+        /// <param name="departments"></param>
+        /// <returns></returns>
+        [HttpPost("get-doc")]
+        public async Task<IActionResult> GetDoc(string file)
+        {
+            var uploadedFiles = await _commonService.GetDoc(file);
+            return StatusCode((int)uploadedFiles.StatusCode, JsonConvert.SerializeObject(uploadedFiles));
         }
     }
 }

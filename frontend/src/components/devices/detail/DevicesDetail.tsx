@@ -4,13 +4,13 @@ import { useNavigate, useParams } from 'react-router-dom';
 import DevicesDetailTopbar from './DevicesDetailTopbar';
 import { FileImageOutlined, UploadOutlined } from '@ant-design/icons';
 import ActivityHistory from './activityHistory/ActivityHistory';
-import { getDeviceById, getdocs } from '../../../api/appApi';
+import { getDeviceById, getdoc, getdocs } from '../../../api/appApi';
 import { useQuery } from '@tanstack/react-query';
 import { setIsEditDevice } from '../../../stores/commonStore'; // Import setDepartments
 import { useDispatch, useSelector } from 'react-redux';
 import dayjs from 'dayjs';
 
-const DevicesDetail = () => { 
+const DevicesDetail = () => {
     let navigate = useNavigate();
     const { id } = useParams(); // Lấy ID từ URL
     const [form] = Form.useForm(); // Khởi tạo form
@@ -33,7 +33,7 @@ const DevicesDetail = () => {
             } else if (status === 'error') {
                 message.error(`${info.file.name} file upload failed.`);
             }
-            
+
             setFileListContract(prevFileList => [
                 ...prevFileList,
                 ...info.fileList
@@ -57,16 +57,20 @@ const DevicesDetail = () => {
         if (deviceData) {
             // kiểm tra xem có avatar ko thì lấy file ảnh về
             if (deviceData?.data?.deviceAvatar && deviceData?.data?.deviceAvatar?.length > 0) {
+                setFileList([]); // Cập nhật fileList với đối tượng hình ảnh
+
                 // Call API to fetch documents
-                getdocs(deviceData.data.deviceAvatar)
-                    .then(async response => {
-                        const byteArrayList = response.data; // Giả sử API trả về danh sách byte[]
-                        const fileUrls = byteArrayList.map((byteArray: any, index: any) => {
-                            const blob = new Blob([new Uint8Array(byteArray)], { type: 'application/octet-stream' });
-                            return URL.createObjectURL(blob);
-                        });
-                        
-                        setFileList(fileUrls);
+                getdoc(deviceData.data.deviceAvatar[0])
+                    .then((response: any) => {
+                        const imageObject = {
+                            uid: '-1', // Hoặc một giá trị duy nhất khác
+                            name: response?.Data, // Tên tệp
+                            status: 'done', // Trạng thái
+                            url: `data:image/jpeg;base64,${response?.FileDatas}`, // Đường dẫn hình ảnh
+                        };
+
+                        // Cập nhật danh sách tệp
+                        setFileList([imageObject]); // Cập nhật fileList với đối tượng hình ảnh
                     })
                     .catch(error => {
                         console.error('Error fetching documents:', error);
@@ -76,19 +80,27 @@ const DevicesDetail = () => {
 
             if (deviceData?.data?.installationContract && deviceData?.data?.installationContract.length > 0) {
                 // Call API to fetch documents
-                getdocs(deviceData.data.installationContract)
-                    .then(response => {
-                        const byteArrayList = response.data; // Giả sử API trả về danh sách byte[]
-                        const fileUrls = byteArrayList.map((byteArray: any, index: any) => {
-                            const blob = new Blob([new Uint8Array(byteArray)], { type: 'application/octet-stream' });
-                            return URL.createObjectURL(blob);
+                setFileListContract([]);
+                for (let index = 0; index < deviceData.data.installationContract.length; index++) {
+                    const path = deviceData.data.installationContract[index];
+
+                    getdoc(path)
+                        .then((response: any) => {
+                            const extension = getFileType(response?.Data);
+
+                            const fileObject = {
+                                uid: path, // Sử dụng đường dẫn làm uid
+                                name: response?.Data || 'file', // Tên tệp từ phản hồi hoặc mặc định
+                                status: 'done', // Trạng thái
+                                url: `data:${extension};base64,${response?.FileDatas}`, // Đường dẫn tệp
+                            };
+                            setFileListContract(prev => [...prev, fileObject]);
+                        })
+                        .catch(error => {
+                            console.error('Error fetching documents:', error);
+                            message.error('Failed to fetch documents.');
                         });
-                        setFileListContract(fileUrls);
-                    })
-                    .catch(error => {
-                        console.error('Error fetching documents:', error);
-                        message.error('Failed to fetch documents.');
-                    });
+                }
             }
 
             // Ánh xạ dữ liệu từ deviceData vào form
@@ -133,6 +145,7 @@ const DevicesDetail = () => {
         }
     }, [deviceData, form]);
 
+
     /**
      * 
      * @param values 
@@ -156,22 +169,63 @@ const DevicesDetail = () => {
         setFileList(info.fileList.slice(-1)); // Chỉ giữ lại file cuối cùng
     };
 
+    const getFileType = (fileName: any) => {
+        const extension = fileName?.split('.').pop().toLowerCase();
+        switch (extension) {
+            case 'pdf':
+                return 'application/pdf';
+            case 'jpg':
+            case 'jpeg':
+                return 'image/jpeg';
+            case 'png':
+                return 'image/png';
+            case 'gif':
+                return 'image/gif';
+            // Thêm các loại tệp khác nếu cần
+            default:
+                return 'application/octet-stream'; // Loại mặc định
+        }
+    }
+
     /**
-     * 
-     * @param file 
-     */
+ * 
+ * @param file 
+ */
     const handlePreview = async (file: any) => {
         // Check if the file has a URL or create a data URL for local files
         const fileUrl = file.url || (file.originFileObj && URL.createObjectURL(file.originFileObj));
-        
-        if (fileUrl) {
-            // Open the file in a new tab
-            window.open(fileUrl, '_blank');
-        } else {
-            message.error('Unable to preview the file.');
+
+        // Kiểm tra loại tệp
+        const fileExtension = file.name.split('.').pop().toLowerCase();
+        const downloadableFileTypes = ['pdf', 'xls', 'xlsx', 'doc', 'docx'];
+
+        // Nếu tệp là PDF, Excel hoặc Word, tạo liên kết tải về
+        if (downloadableFileTypes.includes(fileExtension)) {
+            // Nếu file là base64, tạo Blob và liên kết tải về
+            if (file.url.startsWith('data:')) {
+                const link = document.createElement('a');
+                link.href = file.url; // Sử dụng URL base64
+                link.download = file.name; // Đặt tên tệp khi tải về
+                document.body.appendChild(link);
+                link.click(); // Mô phỏng click để tải về
+                document.body.removeChild(link); // Xóa liên kết sau khi tải về
+            } else {
+                window.open(fileUrl, '_blank'); // Mở tệp nếu không phải base64
+            }
+            return; // Kết thúc hàm sau khi mở tệp
+        }
+
+        switch (true) {
+            case file?.url.startsWith('data:image/'):
+                // Nếu file là base64 hình ảnh, sử dụng nó để xem trước
+                setPreviewImage(file.url); // Cập nhật hình ảnh để xem trước
+                setPreviewOpen(true); // Mở cửa sổ xem trước
+                break;
+            default:
+                window.open(fileUrl, '_blank');
+                break;
         }
     };
-
     // Function to validate image file type
     const beforeUploadImage = (file: any) => {
         const isImage = file.type.startsWith('image/');
@@ -183,9 +237,9 @@ const DevicesDetail = () => {
 
     return (
         <div className="medi-devices-detail">
-            <DevicesDetailTopbar 
-                form={form} 
-                onFinish={onFinish} 
+            <DevicesDetailTopbar
+                form={form}
+                onFinish={onFinish}
                 fileListContract={fileListContract}
                 fileList={fileList}
             />

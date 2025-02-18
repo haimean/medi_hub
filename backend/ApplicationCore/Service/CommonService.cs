@@ -65,8 +65,8 @@ namespace MediHub.Web.ApplicationCore.Service
             var response = new ServiceResponse();
 
             var uuid = Guid.NewGuid().ToString(); // Tạo key giống như S3
-            string finnalKey = $"{key}-{uuid}-{file.FileName}";
-            var filePath = Path.Combine("Uploads", finnalKey);
+            // string finnalKey = $"{key}-{uuid}-{file.FileName}";
+            var filePath = Path.Combine("Uploads", file.FileName);
 
             // {{ edit_1 }}: Check if the directory exists, if not, create it
             var directoryPath = Path.GetDirectoryName(filePath);
@@ -80,7 +80,7 @@ namespace MediHub.Web.ApplicationCore.Service
                 await file.CopyToAsync(stream);
             }
 
-            return Ok(finnalKey);
+            return Ok(file.FileName);
         }
 
         /// <summary>
@@ -114,6 +114,34 @@ namespace MediHub.Web.ApplicationCore.Service
             }
 
             return Ok(documents);
+        }
+
+        /// <summary>
+        /// Retrieves documents from the server based on provided keys.
+        /// </summary>
+        /// <param name="keys">List of keys for the documents to retrieve.</param>
+        /// <returns>Service response with document byte arrays.</returns>
+        public async Task<ServiceResponse> GetDoc(string key)
+        {
+            if (string.IsNullOrEmpty(key))
+            {
+                return BadRequest(message: "No keys provided.");
+            }
+
+            var filePath = Path.Combine("Uploads", key); // Đường dẫn đến tệp
+
+            if (System.IO.File.Exists(filePath))
+            {
+                var fileBytes = await System.IO.File.ReadAllBytesAsync(filePath);
+                var fileName = Path.GetFileName(filePath);
+
+                // Đọc file và trả về
+                return OkFile(fileBytes, "application/octet-stream", fileName);
+            }
+            else
+            {
+                return BadRequest(message: $"Document with key {key} not found.");
+            }
         }
     }
 }

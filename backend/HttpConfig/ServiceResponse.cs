@@ -10,6 +10,7 @@ namespace MediHub.Web.HttpConfig
         public string Code { get; set; }
         public string Message { get; set; }
         public string AdditionalInfo { get; set; }
+
         [JsonIgnore]
         public byte[] FileDatas { get; set; }
 

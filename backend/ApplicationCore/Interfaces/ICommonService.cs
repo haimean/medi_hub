@@ -24,5 +24,12 @@ namespace MediHub.Web.ApplicationCore.Interfaces
         /// <param name="files"></param>
         /// <returns></returns>
         Task<ServiceResponse> GetDocs(List<string> keys);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="files"></param>
+        /// <returns></returns>
+        Task<ServiceResponse> GetDoc(string keys);
     }
 }

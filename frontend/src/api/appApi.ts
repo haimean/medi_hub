@@ -101,4 +101,8 @@ export async function uploadDoc(key: string, params: any) {
 export async function getdocs(params: any) {
    return await axiosClient.post(`${process.env.REACT_APP_API_URL}/v1/common/get-docs`, params);
 }
+
+export async function getdoc(params: any) {
+   return await axiosClient.post(`${process.env.REACT_APP_API_URL}/v1/common/get-doc?file=${params}`);
+}
 //#endregion
