@@ -100,7 +100,7 @@ namespace MediHub.Web.ApplicationCore.Service
 
             foreach (var key in keys)
             {
-                var filePath = Path.Combine("LocalServicePath", key); // Đường dẫn đến tệp
+                var filePath = Path.Combine("Uploads", key); // Đường dẫn đến tệp
 
                 if (System.IO.File.Exists(filePath))
                 {

@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import DevicesDetailTopbar from './DevicesDetailTopbar';
 import { FileImageOutlined, UploadOutlined } from '@ant-design/icons';
 import ActivityHistory from './activityHistory/ActivityHistory';
-import { getDeviceById } from '../../../api/appApi';
+import { getDeviceById, getdocs } from '../../../api/appApi';
 import { useQuery } from '@tanstack/react-query';
 import { setIsEditDevice } from '../../../stores/commonStore'; // Import setDepartments
 import { useDispatch, useSelector } from 'react-redux';
@@ -55,6 +55,42 @@ const DevicesDetail = () => {
 
     useEffect(() => {
         if (deviceData) {
+            // kiểm tra xem có avatar ko thì lấy file ảnh về
+            if (deviceData?.data?.deviceAvatar && deviceData?.data?.deviceAvatar?.length > 0) {
+                // Call API to fetch documents
+                getdocs(deviceData.data.deviceAvatar)
+                    .then(async response => {
+                        const byteArrayList = response.data; // Giả sử API trả về danh sách byte[]
+                        const fileUrls = byteArrayList.map((byteArray: any, index: any) => {
+                            const blob = new Blob([new Uint8Array(byteArray)], { type: 'application/octet-stream' });
+                            return URL.createObjectURL(blob);
+                        });
+                        
+                        setFileList(fileUrls);
+                    })
+                    .catch(error => {
+                        console.error('Error fetching documents:', error);
+                        message.error('Failed to fetch documents.');
+                    });
+            }
+
+            if (deviceData?.data?.installationContract && deviceData?.data?.installationContract.length > 0) {
+                // Call API to fetch documents
+                getdocs(deviceData.data.installationContract)
+                    .then(response => {
+                        const byteArrayList = response.data; // Giả sử API trả về danh sách byte[]
+                        const fileUrls = byteArrayList.map((byteArray: any, index: any) => {
+                            const blob = new Blob([new Uint8Array(byteArray)], { type: 'application/octet-stream' });
+                            return URL.createObjectURL(blob);
+                        });
+                        setFileListContract(fileUrls);
+                    })
+                    .catch(error => {
+                        console.error('Error fetching documents:', error);
+                        message.error('Failed to fetch documents.');
+                    });
+            }
+
             // Ánh xạ dữ liệu từ deviceData vào form
             form.setFieldsValue({
                 deviceName: deviceData?.data?.deviceName,
