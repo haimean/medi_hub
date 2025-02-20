@@ -123,7 +123,7 @@ namespace MediHub.Web.Models
     /// </summary>
     public class MaintenanceRecord
     {
-        public DateTime MaintenanceDate { get; set; } // Ngày bảo dưỡng
+        public string MaintenanceDate { get; set; } // Ngày bảo dưỡng
         public List<string> FileLinks { get; set; } // Danh sách đường link dẫn đến các tệp đính kèm
     }
     #endregion

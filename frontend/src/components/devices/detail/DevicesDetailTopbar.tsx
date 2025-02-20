@@ -4,8 +4,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { FormInstance } from 'antd/es/form';
 import { createDevices, updatedDevices, uploadDoc, uploadDocs } from '../../../api/appApi'; // Import hàm createDevices và updateDevices
 import { useSelector } from 'react-redux';
-import { error } from 'console';
-import axiosClient from '../../../api/axiosClient';
 
 interface DevicesDetailTopbarProps {
     form: FormInstance; // Định nghĩa kiểu cho form
@@ -34,7 +32,7 @@ const DevicesDetailTopbar: React.FC<DevicesDetailTopbarProps> = ({ form, onFinis
         
         return {
             name: values.deviceName,
-            deviceAvatar: upload?.deviceAvatar ?  upload?.deviceAvatar : [], // Chỉ lấy tên file
+            deviceAvatar: upload?.deviceAvatar?.length > 0 ?  upload?.deviceAvatar : (values?.deviceAvatar ? values?.deviceAvatar : []), // Chỉ lấy tên file
             deviceCode: values?.deviceCode,
             deviceName: values?.deviceName,
             manufacturerCountry: values?.manufacturerCountry,
@@ -42,7 +40,7 @@ const DevicesDetailTopbar: React.FC<DevicesDetailTopbarProps> = ({ form, onFinis
             manufacturingYear: Number(values?.manufacturingYear), // Chuyển đổi sang số
             serialNumber: values?.serialNumber,
             functionName: values?.functionName,
-            installationContract: upload?.installationContract ? upload?.installationContract : [],
+            installationContract: values?.installationContract ? values?.installationContract : [],
             contractDuration: values?.contractDuration,
             machineStatus: values?.machineStatus,
             importSource: values?.importSource || "", // Nếu không có giá trị, có thể để trống
@@ -62,9 +60,9 @@ const DevicesDetailTopbar: React.FC<DevicesDetailTopbarProps> = ({ form, onFinis
             },
             deviceUsageInstructions: values.deviceUsageInstructions,
             deviceTroubleshootingInstructions: values.deviceTroubleshootingInstructions,
-            maintenanceLog: [], // Cần thêm thông tin nếu có
-            maintenanceReport: [], // Cần thêm thông tin nếu có
-            internalMaintenanceCheck: [], // Cần thêm thông tin nếu có
+            maintenanceLog: values?.maintenanceLog, // Cần thêm thông tin nếu có
+            maintenanceReport: values?.maintenanceReport, // Cần thêm thông tin nếu có
+            internalMaintenanceCheck: values?.internalMaintenanceCheck, // Cần thêm thông tin nếu có
             maintenanceSchedule: values.maintenanceSchedule,
             notes: values.notes,
             departmentIds: [department?.id], // ID của phòng ban có thể được lấy từ một nguồn khác
@@ -107,7 +105,6 @@ const DevicesDetailTopbar: React.FC<DevicesDetailTopbarProps> = ({ form, onFinis
                         uploadAvatar?.push(respon?.data);
                     })
                 }
-                
             }
         }
 
@@ -123,7 +120,6 @@ const DevicesDetailTopbar: React.FC<DevicesDetailTopbarProps> = ({ form, onFinis
     const handleSave = async () => {
         try {
             const values = await form.validateFields(); // Kiểm tra tính hợp lệ của form
-            
             // lưu danh sách file contract trước
             let upload = await uploadFiles();
 

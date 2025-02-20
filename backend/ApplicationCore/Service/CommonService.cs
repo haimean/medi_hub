@@ -33,8 +33,8 @@ namespace MediHub.Web.ApplicationCore.Service
 
             foreach (var file in files)
             {
-                var key = Guid.NewGuid().ToString(); // Tạo key giống như S3
-                var filePath = Path.Combine("Uploads", $"{key}{Path.GetExtension(file.FileName)}");
+                // var key = Guid.NewGuid().ToString(); // Tạo key giống như S3
+                var filePath = Path.Combine("Uploads", $"{file.FileName}");
 
                 // {{ edit_1 }}: Check if the directory exists, if not, create it
                 var directoryPath = Path.GetDirectoryName(filePath);
@@ -90,7 +90,6 @@ namespace MediHub.Web.ApplicationCore.Service
         /// <returns>Service response with document byte arrays.</returns>
         public async Task<ServiceResponse> GetDocs(List<string> keys)
         {
-            var response = new ServiceResponse();
             var documents = new List<byte[]>();
 
             if (keys == null || keys.Count == 0)

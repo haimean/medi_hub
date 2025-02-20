@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CalendarOutlined, DeleteOutlined, PlusOutlined } from '@ant-design/icons'; // Thêm PlusOutlined
 import { Modal, Button, DatePicker, List, Upload, Image, message } from 'antd';
 import dayjs from 'dayjs';
 import { v4 as uuidv4 } from 'uuid';
+import { getdoc, uploadDoc } from '../../../../api/appApi';
+import { getFileType } from '../../../../function/commons';
 
 /**
  * CreatedBy: PQ Huy (25.12.2024)
  */
-const ActivityHistory = ({ label, value, key }: any) => {
+const ActivityHistory = (props: any) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [isImageModalVisible, setIsImageModalVisible] = useState(false);
     const [isViewListImg, setIsViewListImg] = useState(false);
@@ -177,9 +179,9 @@ const ActivityHistory = ({ label, value, key }: any) => {
         // Nếu đã tồn tại, cập nhật hình ảnh cho hoạt động đó
         if (existingActivityIndex !== -1) {
             const updatedActivities = [...activities];
-            
+
             // case 1: trường hợp thêm mới thì check xem tồn tại chưa rồi add mới vào như sau:
-            if(!isViewListImg) {
+            if (!isViewListImg) {
                 updatedActivities[existingActivityIndex].images = [
                     ...updatedActivities[existingActivityIndex].images,
                     ...fileList
@@ -198,20 +200,82 @@ const ActivityHistory = ({ label, value, key }: any) => {
             }];
         }
 
-        
+
         // thực hiện lọc
         setActivities(result);
         filterActivities(selectedDateRange, result);
+
+
+        // thực hiện lưu vào server
+        const formData = new FormData();
+        if (result?.length > 0) {
+            let setFile = [];
+
+            for (let index = 0; index < result.length; index++) {
+                const rs = result[index];
+
+                setFile.push({
+                    maintenanceDate: rs?.monthYear,
+                    fileLinks: rs?.images?.map((x: any) => x.name)
+                });
+
+                for (let index = 0; index < rs?.images?.length; index++) {
+                    const file = rs?.images[index];
+                    formData.append('File', file.originFileObj);
+                    await uploadDoc(`${file?.name}`, formData).then((respon) => {
+                    }).then(() => {
+                    }).catch((error) => {
+                        message.error(`Lưu ảnh thất bại !!!`);
+                        console.error(`Lưu ảnh thất bại !!!`, error);
+                    })
+                }
+            }
+
+            props?.form.setFieldValue(props?.keyForm, setFile);
+        }
 
         setIsImageModalVisible(false);
         setIsViewListImg(false);
     };
 
+    useEffect(() => {
+        if (props?.valueForm?.length > 0) {
+            const fetchActivities = async () => {
+                const fetchedActivities = await Promise.all(props.valueForm.map(async (activity: any) => {
+                    const images = await Promise.all(activity.fileLinks.map(async (link: string) => {
+                        const response: any = await getdoc(link);
+                        const extension = getFileType(response?.Data);
+                        return {
+                            uid: link, // Sử dụng đường dẫn làm uid
+                            name: response?.Data || 'file', // Tên tệp từ phản hồi hoặc mặc định
+                            status: 'done', // Trạng thái
+                            url: `data:${extension};base64,${response?.FileDatas}`, // Đường dẫn tệp
+                        };
+                    }));
+
+                    return {
+                        id: uuidv4(), // Tạo ID mới cho hoạt động
+                        monthYear: activity.maintenanceDate,
+                        images: images,
+                    };
+                }));
+
+                setActivities(fetchedActivities);
+                setFilteredActivities(fetchedActivities); // Cập nhật filteredActivities
+            };
+
+            fetchActivities().catch(error => {
+                console.error('Error fetching activities:', error);
+                message.error('Failed to fetch activities.');
+            });
+        }
+    }, [props?.valueForm]);
+
     return (
         <div className='activity-history'>
             <CalendarOutlined className='history__calendar-icon' onClick={showModal} />
             <Modal
-                title={label}
+                title={props?.label}
                 visible={isModalVisible}
                 onOk={handleOk}
                 onCancel={handleCancel}
@@ -290,7 +354,7 @@ const ActivityHistory = ({ label, value, key }: any) => {
                     accept="image/*"
                     beforeUpload={beforeUploadImage}
                 >
-                    <div>+ Upload</div>
+                    <div>+ Tải lên</div>
                 </Upload>
                 {previewImage && (
                     <Image

@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Button, Form, Input, Upload, Image, Row, Col, UploadProps, message, DatePicker, Modal } from 'antd';
 import { useNavigate, useParams } from 'react-router-dom';
 import DevicesDetailTopbar from './DevicesDetailTopbar';
-import { FileImageOutlined, UploadOutlined } from '@ant-design/icons';
+import { DeleteOutlined, FileImageOutlined, UploadOutlined } from '@ant-design/icons';
 import ActivityHistory from './activityHistory/ActivityHistory';
 import { getDeviceById, getdoc, getdocs } from '../../../api/appApi';
 import { useQuery } from '@tanstack/react-query';
 import { setIsEditDevice } from '../../../stores/commonStore'; // Import setDepartments
 import { useDispatch, useSelector } from 'react-redux';
 import dayjs from 'dayjs';
+import { getFileType } from '../../../function/commons';
 
 const DevicesDetail = () => {
     let navigate = useNavigate();
@@ -22,6 +23,7 @@ const DevicesDetail = () => {
     const isEditDevice: boolean = useSelector((state: any) => state.isEditDevice); // Lấy trạng thái isEditDevice từ store
     const dispatch = useDispatch(); // Khởi tạo dispatch
     const { Dragger } = Upload;
+    let hasFetchedDataRef = false;
 
     const propsInstallationContract = {
         name: 'file',
@@ -34,27 +36,39 @@ const DevicesDetail = () => {
                 message.error(`${info.file.name} file upload failed.`);
             }
 
-            setFileListContract(prevFileList => [
-                ...prevFileList,
-                ...info.fileList
-            ]);
+            // Cập nhật danh sách file
+            setFileListContract(prevFileList => {
+                const updatedFileList = [...prevFileList, ...info.fileList];
+
+                // Cập nhật giá trị của trường installationContract trong form
+                form.setFieldValue('installationContract', updatedFileList.map(item => item.name));
+
+                return updatedFileList;
+            });
 
         },
         beforeUpload(file: any) {
             // Prevent automatic upload
             return false;
         },
+        onRemove: (file: any) => {
+            setFileListContract(prevFileList => prevFileList.filter(item => item.uid !== file.uid));
+        },
     };
 
     const { data: deviceData, isLoading, isError } = useQuery({
-        queryKey: [`device-detail-${id}`, id],
+        queryKey: [`device-detail-${id}`],
         queryFn: () => getDeviceById(id ? id : ''),
         refetchOnWindowFocus: false,
         enabled: !!id, // Only run the query if the id exists
+        staleTime: 60 * 10000, // Cache for 10 minute
     });
 
     useEffect(() => {
-        if (deviceData) {
+        if (!isLoading && deviceData && !hasFetchedDataRef) {
+            dispatch(setIsEditDevice(true));
+            hasFetchedDataRef = true; // Đánh dấu là đã thực hiện
+
             // kiểm tra xem có avatar ko thì lấy file ảnh về
             if (deviceData?.data?.deviceAvatar && deviceData?.data?.deviceAvatar?.length > 0) {
                 setFileList([]); // Cập nhật fileList với đối tượng hình ảnh
@@ -81,30 +95,34 @@ const DevicesDetail = () => {
             if (deviceData?.data?.installationContract && deviceData?.data?.installationContract.length > 0) {
                 // Call API to fetch documents
                 setFileListContract([]);
-                for (let index = 0; index < deviceData.data.installationContract.length; index++) {
-                    const path = deviceData.data.installationContract[index];
 
-                    getdoc(path)
-                        .then((response: any) => {
-                            const extension = getFileType(response?.Data);
+                setTimeout(() => {
+                    for (let index = 0; index < deviceData.data.installationContract.length; index++) {
+                        const path = deviceData.data.installationContract[index];
 
-                            const fileObject = {
-                                uid: path, // Sử dụng đường dẫn làm uid
-                                name: response?.Data || 'file', // Tên tệp từ phản hồi hoặc mặc định
-                                status: 'done', // Trạng thái
-                                url: `data:${extension};base64,${response?.FileDatas}`, // Đường dẫn tệp
-                            };
-                            setFileListContract(prev => [...prev, fileObject]);
-                        })
-                        .catch(error => {
-                            console.error('Error fetching documents:', error);
-                            message.error('Failed to fetch documents.');
-                        });
-                }
+                        getdoc(path)
+                            .then((response: any) => {
+                                const extension = getFileType(response?.Data);
+
+                                const fileObject = {
+                                    uid: path, // Sử dụng đường dẫn làm uid
+                                    name: response?.Data || 'file', // Tên tệp từ phản hồi hoặc mặc định
+                                    status: 'done', // Trạng thái
+                                    url: `data:${extension};base64,${response?.FileDatas}`, // Đường dẫn tệp
+                                };
+                                setFileListContract(prev => [...prev, fileObject]);
+                            })
+                            .catch(error => {
+                                console.error('Error fetching documents:', error);
+                                message.error('Failed to fetch documents.');
+                            });
+                    }
+                }, 150);
             }
 
             // Ánh xạ dữ liệu từ deviceData vào form
             form.setFieldsValue({
+                deviceAvatar: deviceData?.data?.deviceAvatar,
                 deviceName: deviceData?.data?.deviceName,
                 deviceCode: deviceData?.data?.deviceCode,
                 manufacturerCountry: deviceData?.data?.manufacturerCountry,
@@ -138,13 +156,23 @@ const DevicesDetail = () => {
             if (deviceData?.data?.deviceAvatar) {
                 setImageUrl(deviceData?.data?.deviceAvatar);
             }
-
-            dispatch(setIsEditDevice(true));
         } else {
-            dispatch(setIsEditDevice(false));
+            if (!(id && deviceData?.data)) {
+                dispatch(setIsEditDevice(false));
+            }
         }
-    }, [deviceData, form]);
+    }, [deviceData]);
 
+    const onRemoveContract = (file: any) => {
+        setFileListContract(prevFileList => {
+            const updatedFileList = prevFileList.filter(item => item.uid !== file.uid);
+            
+            // Cập nhật giá trị của trường installationContract trong form
+            form.setFieldValue('installationContract', updatedFileList.map(item => item.name)); // Hoặc item.uid nếu bạn muốn lưu uid
+    
+            return updatedFileList;
+        });
+    }
 
     /**
      * 
@@ -167,30 +195,13 @@ const DevicesDetail = () => {
             };
         }
         setFileList(info.fileList.slice(-1)); // Chỉ giữ lại file cuối cùng
+        form.setFieldValue('deviceAvatar', info.fileList?.length > 0 ? info.fileList.slice(-1)?.name : null);
     };
 
-    const getFileType = (fileName: any) => {
-        const extension = fileName?.split('.').pop().toLowerCase();
-        switch (extension) {
-            case 'pdf':
-                return 'application/pdf';
-            case 'jpg':
-            case 'jpeg':
-                return 'image/jpeg';
-            case 'png':
-                return 'image/png';
-            case 'gif':
-                return 'image/gif';
-            // Thêm các loại tệp khác nếu cần
-            default:
-                return 'application/octet-stream'; // Loại mặc định
-        }
-    }
-
     /**
- * 
- * @param file 
- */
+     * 
+     * @param file 
+     */
     const handlePreview = async (file: any) => {
         // Check if the file has a URL or create a data URL for local files
         const fileUrl = file.url || (file.originFileObj && URL.createObjectURL(file.originFileObj));
@@ -226,6 +237,7 @@ const DevicesDetail = () => {
                 break;
         }
     };
+
     // Function to validate image file type
     const beforeUploadImage = (file: any) => {
         const isImage = file.type.startsWith('image/');
@@ -328,14 +340,21 @@ const DevicesDetail = () => {
                             </Dragger>
                             {fileListContract.length > 0 && (
                                 <div style={{ marginTop: 16 }}>
-                                    {fileListContract.map((file) => (
-                                        <div key={file.uid}>
+                                    {fileListContract.map((file, index) => (
+                                        <div key={`${file.uid}-${index}`}>
                                             <a
                                                 onClick={() => handlePreview(file)}
                                                 style={{ cursor: 'pointer', color: '#1890ff' }}
                                             >
                                                 {file.name}
                                             </a>
+                                            <Button 
+                                                type="link" 
+                                                danger 
+                                                onClick={() => onRemoveContract(file)} // Gọi hàm xóa khi nhấn nút
+                                            >
+                                                <DeleteOutlined style={{color: 'red'}}/>
+                                            </Button>
                                         </div>
                                     ))}
                                 </div>
@@ -462,8 +481,9 @@ const DevicesDetail = () => {
                         >
                             <ActivityHistory
                                 label='Nhật ký bảo dưỡng'
-                                key='maintenanceLog'
-                                value={form?.getFieldValue('maintenanceLog')}
+                                keyForm='maintenanceLog'
+                                valueForm={form?.getFieldValue('maintenanceLog')}
+                                form={form}
                             />
                         </Form.Item>
                         <Form.Item
@@ -473,8 +493,9 @@ const DevicesDetail = () => {
                         >
                             <ActivityHistory
                                 label='Biên bản bảo trì'
-                                key='maintenanceReport'
-                                value={form?.getFieldValue('maintenanceReport')}
+                                keyForm='maintenanceReport'
+                                valueForm={form?.getFieldValue('maintenanceReport')}
+                                form={form}
                             />
                         </Form.Item>
                         <Form.Item
@@ -484,8 +505,9 @@ const DevicesDetail = () => {
                         >
                             <ActivityHistory
                                 label='Nội kiểm tra bảo trì'
-                                key='internalMaintenanceCheck'
-                                value={form?.getFieldValue('internalMaintenanceCheck')}
+                                keyForm='internalMaintenanceCheck'
+                                valueForm={form?.getFieldValue('internalMaintenanceCheck')}
+                                form={form}
                             />
                         </Form.Item>
                         <Form.Item
