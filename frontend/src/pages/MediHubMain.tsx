@@ -90,12 +90,9 @@ const MediHubMain = () => {
                         </div>
                     </div>
                 </div>
-                {
-                    !['dashboard'].includes(window.location.pathname.split('/')[1]) &&
-                    <div className="medi-topbar-between">
-                        MEDICAL EQUIPMENT LAB
-                    </div>
-                }
+                <div className="medi-topbar-between">
+                    MEDICAL EQUIPMENT LAB
+                </div>
                 <div className="medi-topbar__right">
                     <div className="medi-icon topbar__right--setting"></div>
                     <div className="topbar__right--notification"></div>

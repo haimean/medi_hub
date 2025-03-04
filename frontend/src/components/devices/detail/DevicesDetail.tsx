@@ -1,15 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Button, Form, Input, Upload, Image, Row, Col, UploadProps, message, DatePicker, Modal } from 'antd';
+import { Button, Form, Input, Upload, Image, Row, Col, UploadProps, message, DatePicker, Modal, Select, Divider, Space, InputRef } from 'antd';
 import { useNavigate, useParams } from 'react-router-dom';
 import DevicesDetailTopbar from './DevicesDetailTopbar';
-import { DeleteOutlined, FileImageOutlined, UploadOutlined } from '@ant-design/icons';
+import { DeleteOutlined, FileImageOutlined, PlusOutlined, UploadOutlined } from '@ant-design/icons';
 import ActivityHistory from './activityHistory/ActivityHistory';
-import { getDeviceById, getdoc, getdocs } from '../../../api/appApi';
+import { getDeviceById, getdoc, getdocs, getManufacturerBranch } from '../../../api/appApi';
 import { useQuery } from '@tanstack/react-query';
 import { setIsEditDevice } from '../../../stores/commonStore'; // Import setDepartments
 import { useDispatch, useSelector } from 'react-redux';
 import dayjs from 'dayjs';
 import { getFileType } from '../../../function/commons';
+import { v4 as uuidv4 } from 'uuid';
 
 const DevicesDetail = () => {
     let navigate = useNavigate();
@@ -24,6 +25,12 @@ const DevicesDetail = () => {
     const dispatch = useDispatch(); // Khởi tạo dispatch
     const { Dragger } = Upload;
     let hasFetchedDataRef = false;
+
+    const [nameFunc, setNameFunc] = useState('');
+    const [lstFunc, setLstFunc] = useState<any>([]);
+    
+    const [nameManuFact, setNameManuFact] = useState('');
+    const [lstManufacters, setLstManufacters] = useState<any>([]);
 
     const propsInstallationContract = {
         name: 'file',
@@ -63,6 +70,20 @@ const DevicesDetail = () => {
         enabled: !!id, // Only run the query if the id exists
         staleTime: 60 * 10000, // Cache for 10 minute
     });
+
+    const { data: dataManufacturerBranch, isLoading: isLoadingManufacturerBranch, isError: isErrorManufacturerBranch } = useQuery({
+        queryKey: [`get-manufacturer-branch`],
+        queryFn: () => getManufacturerBranch(),
+        refetchOnWindowFocus: false,
+        staleTime: 60 * 10000, // Cache for 10 minute
+    });
+    
+    useEffect(() => {
+        if(!isLoadingManufacturerBranch && dataManufacturerBranch?.data) {
+            setLstManufacters(dataManufacturerBranch?.data?.manufacturer);
+            setLstFunc(dataManufacturerBranch?.data?.function);
+        }
+    }, [dataManufacturerBranch])
 
     useEffect(() => {
         if (!isLoading && deviceData && !hasFetchedDataRef) {
@@ -166,10 +187,10 @@ const DevicesDetail = () => {
     const onRemoveContract = (file: any) => {
         setFileListContract(prevFileList => {
             const updatedFileList = prevFileList.filter(item => item.uid !== file.uid);
-            
+
             // Cập nhật giá trị của trường installationContract trong form
             form.setFieldValue('installationContract', updatedFileList.map(item => item.name)); // Hoặc item.uid nếu bạn muốn lưu uid
-    
+
             return updatedFileList;
         });
     }
@@ -227,7 +248,7 @@ const DevicesDetail = () => {
         }
 
         switch (true) {
-            case file?.url.startsWith('data:image/'):
+            case file?.url?.startsWith('data:image/') || file?.hasOwnProperty('originFileObj'):
                 // Nếu file là base64 hình ảnh, sử dụng nó để xem trước
                 setPreviewImage(file.url); // Cập nhật hình ảnh để xem trước
                 setPreviewOpen(true); // Mở cửa sổ xem trước
@@ -245,6 +266,35 @@ const DevicesDetail = () => {
             message.error('Bạn chỉ có thể tải lên ảnh!');
         }
         return false; // Allow only image files
+    };
+
+    const inputRef = useRef<InputRef>(null);
+
+    /**
+     * 
+     * @param event 
+     * @param setFunc 
+     */
+    const onNameChange = (event: React.ChangeEvent<HTMLInputElement>, setFunc: any) => {
+        setFunc(event.target.value);
+    };
+
+    /**
+     * 
+     * @param e 
+     * @param setFunc 
+     * @param valueFunc 
+     * @param setName 
+     * @param name 
+     */
+    const addItem = (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>, setFunc: any, valueFunc: any, setName: any, name: any) => {
+        e.preventDefault();
+        const newUuid = uuidv4(); // Tạo UUID mới
+        setFunc([...valueFunc, name || `New item ${newUuid}`]);
+        setName('');
+        setTimeout(() => {
+            inputRef.current?.focus();
+        }, 0);
     };
 
     return (
@@ -299,7 +349,28 @@ const DevicesDetail = () => {
                             wrapperCol={{ span: 12 }}
                             rules={[{ required: true, message: 'Vui lòng nhập tên hãng' }]}
                         >
-                            <Input />
+                            <Select
+                                placeholder="Nhập tên hãng"
+                                dropdownRender={(menu) => (
+                                    <>
+                                        {menu}
+                                        <Divider style={{ margin: '8px 0' }} />
+                                        <Space style={{ padding: '0 8px 4px' }}>
+                                            <Input
+                                                placeholder="Nhập tên hãng"
+                                                ref={inputRef}
+                                                value={nameManuFact}
+                                                onChange={(e) => onNameChange(e, setNameManuFact)}
+                                                onKeyDown={(e) => e.stopPropagation()}
+                                            />
+                                            <Button type="text" icon={<PlusOutlined />} onClick={(e: any) => addItem(e, setLstManufacters, lstManufacters, setNameManuFact, nameManuFact)}>
+                                                Thêm mới
+                                            </Button>
+                                        </Space>
+                                    </>
+                                )}
+                                options={lstManufacters?.map((item: any) => ({ label: item, value: item }))}
+                            />
                         </Form.Item>
                         <Form.Item
                             label='Năm sản xuất'
@@ -325,7 +396,28 @@ const DevicesDetail = () => {
                             wrapperCol={{ span: 12 }}
                             rules={[{ required: true, message: 'Vui lòng nhập tên chức năng' }]}
                         >
-                            <Input />
+                            <Select
+                                placeholder="Nhập tên chức năng"
+                                dropdownRender={(menu) => (
+                                    <>
+                                        {menu}
+                                        <Divider style={{ margin: '8px 0' }} />
+                                        <Space style={{ padding: '0 8px 4px' }}>
+                                            <Input
+                                                placeholder="Nhập tên chức năng"
+                                                ref={inputRef}
+                                                value={nameFunc}
+                                                onChange={(e) => onNameChange(e, setNameFunc)}
+                                                onKeyDown={(e) => e.stopPropagation()}
+                                            />
+                                            <Button type="text" icon={<PlusOutlined />} onClick={(e: any) => addItem(e, setLstFunc, lstFunc, setNameFunc, nameFunc)}>
+                                                Thêm mới
+                                            </Button>
+                                        </Space>
+                                    </>
+                                )}
+                                options={lstFunc.map((item: any) => ({ label: item, value: item }))}
+                            />
                         </Form.Item>
                         {/* Hợp đồng lắp đặt */}
                         <Form.Item
@@ -348,12 +440,12 @@ const DevicesDetail = () => {
                                             >
                                                 {file.name}
                                             </a>
-                                            <Button 
-                                                type="link" 
-                                                danger 
+                                            <Button
+                                                type="link"
+                                                danger
                                                 onClick={() => onRemoveContract(file)} // Gọi hàm xóa khi nhấn nút
                                             >
-                                                <DeleteOutlined style={{color: 'red'}}/>
+                                                <DeleteOutlined style={{ color: 'red' }} />
                                             </Button>
                                         </div>
                                     ))}

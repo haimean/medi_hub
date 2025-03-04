@@ -61,7 +61,6 @@ builder.Services.RegisterAppService();
 builder.Services.AddSignalR();
 
 builder.Services.AddSingleton<MediHubDapperContext>();
-builder.Services.AddSingleton<MediHubDapperContext>();
 
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddHttpContextAccessor();

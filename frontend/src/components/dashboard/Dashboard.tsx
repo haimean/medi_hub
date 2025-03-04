@@ -52,9 +52,10 @@ const Dashboard = () => {
         <div className="medi-dashboard">
             <div className='dashboard-row-1'>
                 <img className='row-1--device-1' src={Device1} alt="device-1" />
-                <div className='row-1--app-title'>
+                {/* <div className='row-1--app-title'>
                     MEDICAL EQUIPMENT LAB
-                </div>
+                </div> */}
+                <img className='row-1--device-2' src={Device2} alt="device-1" />
                 <img className='row-1--device-2' src={Device2} alt="device-1" />
             </div>
             <div className='dashboard-row-2'>

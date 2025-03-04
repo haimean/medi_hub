@@ -84,5 +84,16 @@ namespace MediHub.Web.Controllers
             var response = await _devicesService.Delete(ids);
             return StatusCode((int)response.StatusCode, response);
         }
+
+        /// <summary>
+        /// Get all manufacture and branch
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("manufacturer-branch")]
+        public async Task<IActionResult> GetManufacturerBranch()
+        {
+            var response = await _devicesService.GetManufacturerBranch();
+            return StatusCode((int)response.StatusCode, response);
+        }
     }
 }

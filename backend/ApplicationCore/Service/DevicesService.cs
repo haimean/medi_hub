@@ -1,6 +1,8 @@
-﻿using MediHub.Web.ApplicationCore.Auth.CurrentUser;
+﻿using Dapper;
+using MediHub.Web.ApplicationCore.Auth.CurrentUser;
 using MediHub.Web.ApplicationCore.Interfaces;
 using MediHub.Web.Data.Repository;
+using MediHub.Web.DatabaseContext.DapperDbContext;
 using MediHub.Web.HttpConfig;
 using MediHub.Web.Models;
 
@@ -10,13 +12,16 @@ namespace MediHub.Web.ApplicationCore.Service
     {
         private readonly IRepository _repository;
         private readonly ICurrentUser _currentUser;
+        private readonly MediHubDapperContext _mediHubContext;
 
-        public DevicesService(IRepository repository, ICurrentUser currentUser)
+        public DevicesService(IRepository repository, ICurrentUser currentUser, MediHubDapperContext mediHubContext)
         {
             _repository = repository;
             _currentUser = currentUser;
+            _mediHubContext = mediHubContext;
         }
 
+        #region Common
         /// <summary>
         /// Create
         /// </summary>
@@ -170,5 +175,47 @@ namespace MediHub.Web.ApplicationCore.Service
                 return BadRequest(ce.Message);
             }
         }
+        #endregion
+
+        #region Analytics
+        /// <summary>
+        /// Create
+        /// </summary>
+        /// <param name="devices"></param>
+        /// <returns></returns>
+        /// CreatedBy: PQ Huy (28.11.2024)
+        public async Task<ServiceResponse> GetManufacturerBranch()
+        {
+            string query = "SELECT DISTINCT MANUFACTURER_NAME AS NAME FROM DEVICES WHERE MANUFACTURER_NAME IS NOT NULL AND IS_DELETED IS NOT TRUE; SELECT DISTINCT FUNCTION_NAME AS NAME FROM DEVICES WHERE FUNCTION_NAME IS NOT NULL AND IS_DELETED IS NOT TRUE;";
+            var result = new Dictionary<string, List<string>>()
+            {
+                {"manufacturer", new List<string>() },
+                {"function", new List<string>() },
+            };
+
+            try
+            {
+                using (var connect = _mediHubContext.CreateConnection())
+                {
+                    connect.Open();
+
+                    using (var reQuery = await connect.QueryMultipleAsync(query))
+                    {
+                        result["manufacturer"] = (await reQuery.ReadAsync<string>()).ToList();
+                        result["function"] = (await reQuery.ReadAsync<string>()).ToList();
+                    }
+
+                    connect.Close();
+                    connect.Dispose();
+                }
+            }
+            catch (Exception ce)
+            {
+                return BadRequest(ce.Message);
+            }
+
+            return Ok(result);
+        }
+        #endregion
     }
 }

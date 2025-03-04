@@ -44,5 +44,11 @@ namespace MediHub.Web.ApplicationCore.Interfaces
         /// <param name="ids"></param>
         /// <returns></returns>
         Task<ServiceResponse> Delete(List<Guid> ids);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        Task<ServiceResponse> GetManufacturerBranch();
     }
 }

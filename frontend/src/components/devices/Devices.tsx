@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import DevicesTopBar from './DevicesTopBar';
 import { Tooltip, Popconfirm, message } from 'antd'; // Import Popconfirm
 import { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons';
@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 const Devices = () => {
     const [refreshDevice, setRefreshDevice] = useState(0); // Sử dụng số để trigger refetch
     const navigate = useNavigate();
+    const gridRef = useRef<any>(null);
 
     // Use useQuery to fetch devices
     const { isError, isLoading, data } = useQuery({
@@ -210,9 +211,12 @@ const Devices = () => {
 
     return (
         <div className="medi-devices">
-            <DevicesTopBar />
+            <DevicesTopBar
+                gridRef={gridRef}
+            />
             <div className='devices__content ag-theme-alpine'>
                 <AgGridReact
+                    ref={gridRef}
                     animateRows={true}
                     rowData={data?.data}
                     columnDefs={columnDefs}

@@ -105,4 +105,8 @@ export async function getdocs(params: any) {
 export async function getdoc(params: any) {
    return await axiosClient.post(`${process.env.REACT_APP_API_URL}/v1/common/get-doc?file=${params}`);
 }
+
+export async function getManufacturerBranch() {
+   return await axiosClient.get(`${process.env.REACT_APP_API_URL}/v1/devices/manufacturer-branch`);
+}
 //#endregion

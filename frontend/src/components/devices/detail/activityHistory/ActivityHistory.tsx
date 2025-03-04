@@ -13,6 +13,7 @@ const ActivityHistory = (props: any) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [isImageModalVisible, setIsImageModalVisible] = useState(false);
     const [isViewListImg, setIsViewListImg] = useState(false);
+    const [monthBd, setMonthBd] = useState(dayjs());
     const [selectedDateRange, setSelectedDateRange] = useState<any>(null);
     const [activities, setActivities] = useState<any>([]);
     const [currentImages, setCurrentImages] = useState<string[]>([]);
@@ -93,7 +94,10 @@ const ActivityHistory = (props: any) => {
      * @param images - danh sách hình ảnh
      * CreatedBy: PQ Huy (25.12.2024)
      */
-    const showImageModalEdit = (images: string[]) => {
+    const showImageModalEdit = (month: any, images: string[]) => {
+        const monthDate = dayjs(`01-${month}`, 'DD-MM-YYYY'); // Đảm bảo định dạng đúng
+        setMonthBd(monthDate); // Thiết lập giá trị tháng        
+        setMonthYear(month);
         setIsViewListImg(true);
         setCurrentImages(images);
         setFileList(images); // Chuyển đổi hình ảnh thành định dạng fileList
@@ -205,7 +209,6 @@ const ActivityHistory = (props: any) => {
         setActivities(result);
         filterActivities(selectedDateRange, result);
 
-
         // thực hiện lưu vào server
         const formData = new FormData();
         if (result?.length > 0) {
@@ -221,13 +224,15 @@ const ActivityHistory = (props: any) => {
 
                 for (let index = 0; index < rs?.images?.length; index++) {
                     const file = rs?.images[index];
-                    formData.append('File', file.originFileObj);
-                    await uploadDoc(`${file?.name}`, formData).then((respon) => {
-                    }).then(() => {
-                    }).catch((error) => {
-                        message.error(`Lưu ảnh thất bại !!!`);
-                        console.error(`Lưu ảnh thất bại !!!`, error);
-                    })
+
+                    if(file?.originFileObj) {
+                        formData.append('File', file.originFileObj);
+                        await uploadDoc(`${file?.name}`, formData).then((respon) => {}).then(() => {
+                        }).catch((error) => {
+                            message.error(`Lưu ảnh thất bại !!!`);
+                            console.error(`Lưu ảnh thất bại !!!`, error);
+                        })
+                    }
                 }
             }
 
@@ -303,7 +308,7 @@ const ActivityHistory = (props: any) => {
                         <List.Item
                             actions={[
                                 <span
-                                    onClick={() => showImageModalEdit(item?.images)}
+                                    onClick={() => showImageModalEdit(item?.monthYear, item?.images)}
                                     style={{ color: '#0073E6', cursor: 'pointer', marginRight: '8px' }}
                                 >
                                     Xem ảnh ({item?.images?.length})
@@ -342,6 +347,7 @@ const ActivityHistory = (props: any) => {
                     <DatePicker
                         picker="month"
                         placeholder='Chọn tháng/năm'
+                        defaultValue={monthBd}
                         onChange={(date) => setMonthYear(dayjs(date).format('MM-YYYY'))} // Set month/year
                         disabled={isViewListImg}
                     />
