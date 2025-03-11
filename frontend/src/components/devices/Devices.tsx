@@ -6,6 +6,7 @@ import { AgGridReact } from 'ag-grid-react';
 import { useQuery } from '@tanstack/react-query';
 import { deleteDevices, getDevices } from '../../api/appApi';
 import { useNavigate } from 'react-router-dom';
+import MaintenanceStatus from '../common/MaintenanceStatus';
 
 const Devices = () => {
     const [refreshDevice, setRefreshDevice] = useState(0); // Sử dụng số để trigger refetch
@@ -123,7 +124,10 @@ const Devices = () => {
                 minWidth: 150,
                 pinned: "right",
                 flex: 1,
-                filter: 'agSetColumnFilter'
+                filter: 'agSetColumnFilter',
+                cellRenderer: (params: any) => {
+                    return <MaintenanceStatus maintenanceDate={params?.data?.maintenanceSchedule} />;
+                }
             },
             {
                 headerName: 'Hành động',

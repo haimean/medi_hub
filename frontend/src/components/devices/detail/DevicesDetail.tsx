@@ -428,7 +428,7 @@ const DevicesDetail = () => {
                         >
                             <Dragger {...propsInstallationContract} onPreview={handlePreview}>
                                 <UploadOutlined style={{ fontSize: '24px' }} />
-                                <p className="ant-upload-text">Tải lên</p>
+                                <p className="ant-upload-text">Tải lên hợp đồng</p>
                             </Dragger>
                             {fileListContract.length > 0 && (
                                 <div style={{ marginTop: 16 }}>
