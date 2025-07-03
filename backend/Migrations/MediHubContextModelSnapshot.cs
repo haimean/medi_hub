@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using MediHub.Web.DatabaseContext.AppDbcontext;
-using MediHub.Web.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
@@ -24,48 +23,6 @@ namespace MediHub.Web.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("MediHub.Web.Models.DepartmentEntity", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("id");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("text")
-                        .HasColumnName("created_by");
-
-                    b.Property<DateTime?>("CreatedDate")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("created_at");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("text")
-                        .HasColumnName("description");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("boolean")
-                        .HasColumnName("is_deleted");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)")
-                        .HasColumnName("name");
-
-                    b.Property<string>("UpdatedBy")
-                        .HasColumnType("text")
-                        .HasColumnName("updated_by");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("updated_at");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("departments");
-                });
-
             modelBuilder.Entity("MediHub.Web.Models.DeviceEntity", b =>
                 {
                     b.Property<Guid>("Id")
@@ -73,9 +30,17 @@ namespace MediHub.Web.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("id");
 
-                    b.Property<DateTime?>("ContractDuration")
+                    b.Property<string>("AppraisalFile")
+                        .HasColumnType("text")
+                        .HasColumnName("appraisal_file");
+
+                    b.Property<DateTime?>("CalibrationDate")
                         .HasColumnType("timestamp with time zone")
-                        .HasColumnName("contract_duration");
+                        .HasColumnName("calibration_date");
+
+                    b.Property<DateTime?>("CalibrationNextDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("calibration_next_date");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("text")
@@ -84,10 +49,6 @@ namespace MediHub.Web.Migrations
                     b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at");
-
-                    b.Property<List<Guid>>("DepartmentIds")
-                        .HasColumnType("uuid[]")
-                        .HasColumnName("department_ids");
 
                     b.Property<List<string>>("DeviceAvatar")
                         .HasColumnType("text[]")
@@ -101,17 +62,20 @@ namespace MediHub.Web.Migrations
                         .HasColumnType("text")
                         .HasColumnName("device_name");
 
-                    b.Property<string>("DeviceTroubleshootingInstructions")
-                        .HasColumnType("text")
-                        .HasColumnName("device_troubleshooting_instructions");
-
                     b.Property<string>("DeviceUsageInstructions")
                         .HasColumnType("text")
                         .HasColumnName("device_usage_instructions");
 
-                    b.Property<ManagerEngineerInfo>("EngineerInfo")
-                        .HasColumnType("jsonb")
+                    b.Property<string>("EngineerInfo")
+                        .HasColumnType("text")
                         .HasColumnName("engineer_info");
+
+                    b.Property<string>("EngineerPhoneNumber")
+                        .HasColumnType("text")
+                        .HasColumnName("engineer_phonenumber");
+
+                    b.Property<DateTime?>("ExpirationDate")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("FunctionName")
                         .HasColumnType("text")
@@ -121,13 +85,9 @@ namespace MediHub.Web.Migrations
                         .HasColumnType("text")
                         .HasColumnName("import_source");
 
-                    b.Property<List<string>>("InstallationContract")
-                        .HasColumnType("text[]")
+                    b.Property<string>("InstallationContract")
+                        .HasColumnType("text")
                         .HasColumnName("installation_contract");
-
-                    b.Property<List<MaintenanceRecord>>("InternalMaintenanceCheck")
-                        .HasColumnType("jsonb")
-                        .HasColumnName("internal_maintenance_check");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean")
@@ -137,32 +97,36 @@ namespace MediHub.Web.Migrations
                         .HasColumnType("text")
                         .HasColumnName("lab_usage");
 
-                    b.Property<string>("MachineStatus")
-                        .HasColumnType("text")
+                    b.Property<int>("MachineStatus")
+                        .HasColumnType("integer")
                         .HasColumnName("machine_status");
 
-                    b.Property<List<MaintenanceRecord>>("MaintenanceLog")
-                        .HasColumnType("jsonb")
-                        .HasColumnName("maintenance_log");
-
-                    b.Property<List<MaintenanceRecord>>("MaintenanceReport")
-                        .HasColumnType("jsonb")
-                        .HasColumnName("maintenance_report");
-
-                    b.Property<DateTime?>("MaintenanceSchedule")
+                    b.Property<DateTime?>("MaintenanceDate")
                         .HasColumnType("timestamp with time zone")
+                        .HasColumnName("maintenance_date");
+
+                    b.Property<DateTime?>("MaintenanceNextDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("maintenance_next_date");
+
+                    b.Property<int>("MaintenanceSchedule")
+                        .HasColumnType("integer")
                         .HasColumnName("maintenance_schedule");
 
-                    b.Property<ManagerEngineerInfo>("ManagerInfo")
-                        .HasColumnType("jsonb")
+                    b.Property<string>("ManagerInfo")
+                        .HasColumnType("text")
                         .HasColumnName("manager_info");
+
+                    b.Property<string>("ManagerPhoneNumber")
+                        .HasColumnType("text")
+                        .HasColumnName("manager_phonenumber");
 
                     b.Property<string>("ManufacturerCountry")
                         .HasColumnType("text")
                         .HasColumnName("manufacturer_country");
 
-                    b.Property<string>("ManufacturerName")
-                        .HasColumnType("text")
+                    b.Property<int>("ManufacturerName")
+                        .HasColumnType("integer")
                         .HasColumnName("manufacturer_name");
 
                     b.Property<int>("ManufacturingYear")
@@ -177,9 +141,21 @@ namespace MediHub.Web.Migrations
                         .HasColumnType("text")
                         .HasColumnName("notes");
 
+                    b.Property<DateTime?>("ReplaceDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("replace_date");
+
+                    b.Property<DateTime?>("ReplaceNextDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("replace_next_date");
+
                     b.Property<string>("SerialNumber")
                         .HasColumnType("text")
                         .HasColumnName("serial_number");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("integer")
+                        .HasColumnName("device_status");
 
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("text")
@@ -198,7 +174,7 @@ namespace MediHub.Web.Migrations
                     b.ToTable("devices");
                 });
 
-            modelBuilder.Entity("MediHub.Web.Models.UserEntity", b =>
+            modelBuilder.Entity("MediHub.Web.Models.MaintenanceRecordEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -213,9 +189,61 @@ namespace MediHub.Web.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at");
 
-                    b.Property<List<Guid>>("DepartmentIds")
-                        .HasColumnType("uuid[]")
-                        .HasColumnName("department_ids");
+                    b.Property<Guid>("DeviceID")
+                        .HasColumnType("uuid")
+                        .HasColumnName("device_id");
+
+                    b.Property<string>("FileLinks")
+                        .HasColumnType("text")
+                        .HasColumnName("file_links");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_deleted");
+
+                    b.Property<DateTime>("MaintaindDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("maintaind_date");
+
+                    b.Property<string>("MaintenanceDate")
+                        .HasColumnType("text")
+                        .HasColumnName("maintenance_date");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.Property<int>("TypeOfMaintenance")
+                        .HasColumnType("integer")
+                        .HasColumnName("type_of_maintenance");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("text")
+                        .HasColumnName("updated_by");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MaintenanceRecordEntity");
+                });
+
+            modelBuilder.Entity("MediHub.Web.Models.UserEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("text")
+                        .HasColumnName("created_by");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
 
                     b.Property<string>("Email")
                         .HasColumnType("text")
@@ -256,10 +284,6 @@ namespace MediHub.Web.Migrations
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("text")
                         .HasColumnName("phone_number");
-
-                    b.Property<string>("ProfilePicture")
-                        .HasColumnType("text")
-                        .HasColumnName("profile_picture");
 
                     b.Property<List<string>>("Role")
                         .HasColumnType("text[]")

@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="global.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Uploads\BD876100.xlsx" />
     <None Remove="Uploads\Form detail report-1.xlsx" />
     <None Remove="Uploads\ggggg.xlsx" />
@@ -42,6 +46,7 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
     <PackageReference Include="Npgsql" Version="7.0.0" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.0" />
+    <PackageReference Include="SqlTools" Version="1.6.2" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
@@ -49,6 +54,10 @@
     <Folder Include="Migrations\" />
     <Folder Include="Infastructure\" />
     <Folder Include="Uploads\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="global.json" />
   </ItemGroup>
 
 </Project>

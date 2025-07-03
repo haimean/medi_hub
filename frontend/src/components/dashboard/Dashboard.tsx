@@ -8,110 +8,98 @@ import { setSelectedBrand, setSelectedDeviceType } from '../../stores/commonStor
 const Dashboard = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch(); // Khởi tạo dispatch
-    
-    // Tên nhánh
-    const [lstBranch, setLstBranch] = useState([
-        {
-            value: 'roche',
-            label: 'Roche',
-            avatar: 'roche-svg'
-        },
-        {
-            value: 'beckmanCoulter',
-            label: 'Beckman Coulter',
-            avatar: 'beckman-svg'
-        },
-        {
-            value: 'abbottDiagnostics',
-            label: 'Abbott Diagnostics',
-            avatar: 'abbott-svg'
-        }
-    ]);
 
     // Tên loại thiết bị
     const [kindDevices, setKindDevices] = useState([
         {
-            value: 'tumat',
+            value: 1,
+            label: 'Roche',
+            // avatar: 'roche-svg'
+        },
+        {
+            value: 2,
+            label: 'Beckman',
+            // avatar: 'beckman-svg'
+        },
+        {
+            value: 3,
+            label: 'Abbott',
+            // avatar: 'abbott-svg'
+        },
+        {
+            value: 4,
             label: 'Tủ Mát'
         },
         {
-            value: 'tuam',
+            value: 5,
             label: 'Tủ Âm'
         },
         {
-            value: 'locro',
+            value: 6,
             label: 'Lọc RO'
+        }
+    ]);
+
+    const [statusDevices, setStatusDevices] = useState([
+        {
+            value: 'periodicMaintenancev',
+            label: 'Bảo Dưỡng Định Kỳ'
         },
         {
-            value: 'khac',
-            label: 'Khác'
+            value: 'regularCalibration',
+            label: 'Hiệu Chuẩn Định Kỳ'
+        },
+        {
+            value: 'periodicReplacement',
+            label: 'Thay Thế Định Kỳ'
+        },
+        {
+            value: 'usingDevices',
+            label: 'Thiết Bị Đang Sử Dụng'
+        },
+        {
+            value: 'notUsingDevices',
+            label: 'Thiết Bị Không Sử Dụng'
+        },
+        {
+            value: 7,
+            label: 'Thiết bị khác'
         }
     ]);
 
     return (
         <div className="medi-dashboard">
-            <div className='dashboard-row-1'>
-                <img className='row-1--device-1' src={Device1} alt="device-1" />
-                {/* <div className='row-1--app-title'>
-                    MEDICAL EQUIPMENT LAB
-                </div> */}
-                <img className='row-1--device-2' src={Device2} alt="device-1" />
-                <img className='row-1--device-2' src={Device2} alt="device-1" />
-            </div>
-            <div className='dashboard-row-2'>
-                <div className='row-2--group status-due-soon'>
-                    <div className='group-1--title'>Bảo Dưỡng Định Kỳ</div>
-                    <div className='group-1--info'>
-                        <div className='info__number'>45</div>
-                        <div className='info__status-name'>Sắp đến hạn</div>
-                    </div>
+            <div className="dashboard-columns">
+                <div className="dashboard-column status-devices">
+                    <h3 className="dashboard-title">Trạng Thái Thiết Bị</h3>
+                    {statusDevices.map((status, idx) => (
+                        <div
+                            key={status.value}
+                            className="dashboard-card status-card"
+                            onClick={() => {
+                                // Bạn có thể thêm logic khi click vào status nếu cần
+                            }}
+                        >
+                            {status.label}
+                        </div>
+                    ))}
                 </div>
-                <div className='row-2--group status-overdue'>
-                    <div className='group-1--title'>Thay thế Định Kỳ</div>
-                    <div className='group-1--info'>
-                        <div className='info__number'>45</div>
-                        <div className='info__status-name'>Sắp đến hạn</div>
-                    </div>
+
+                <div className="dashboard-column kind-devices">
+                    <h3 className="dashboard-title">Loại Thiết Bị</h3>
+                    {kindDevices.map((kind, idx) => (
+                        <div
+                            key={kind.value}
+                            className="dashboard-card kind-card"
+                            onClick={() => {
+                                dispatch(setSelectedDeviceType(kind.value));
+                                navigate('/devices');
+                            }}
+                        >
+                            {kind.label}
+                        </div>
+                    ))}
                 </div>
-                <div className='row-2--group status-notyet-due'>
-                    <div className='group-1--title'>Bảo Dưỡng Định Kỳ</div>
-                    <div className='group-1--info'>
-                        <div className='info__number'>45</div>
-                        <div className='info__status-name'>Sắp đến hạn</div>
-                    </div>
-                </div>
-            </div>
-            <div className='dashboard-row-3'>
-                {
-                    lstBranch?.map((branch: any, index: any) => {
-                        return (
-                            <div key={`dashboard-branch-${index}`} className={`row-3--branch`}
-                                style={{ flex: `0 0 ${99 / lstBranch?.length}%` }} // Dynamic width
-                                onClick={() => {
-                                    dispatch(setSelectedBrand(branch?.value)); // Lưu id branch chọn
-                                    navigate('/devices')
-                                }}
-                            >
-                                <div className={`branch-img ${branch?.avatar}`}></div>
-                            </div>
-                        )
-                    })
-                }
-            </div>
-            <div className='dashboard-row-4'>
-                {
-                    kindDevices?.map((kind: any, index: any) => {
-                        return (
-                            <div key={`dashboard-kind-${index}`} className={`row-3--kind`}
-                                style={{ flex: `0 0 ${100 / kindDevices?.length}%` }} // Dynamic width
-                                onClick={() => {
-                                    dispatch(setSelectedDeviceType(kind?.value)); // Lưu id branch chọn
-                                    navigate('/devices')
-                                }}
-                            >{kind?.label}</div>
-                        )
-                    })
-                }
             </div>
         </div>
     );

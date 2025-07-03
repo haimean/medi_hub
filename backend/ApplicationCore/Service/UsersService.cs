@@ -22,7 +22,7 @@ namespace MediHub.Web.ApplicationCore.Service
         /// </summary>
         /// <param name="users"></param>
         /// <returns></returns>
-        /// CreatedBy: PQ Huy (28.11.2024)
+        /// CreatedBy: HieuNM
         public async Task<ServiceResponse> Create(List<UserEntity> users)
         {
             try
@@ -53,7 +53,7 @@ namespace MediHub.Web.ApplicationCore.Service
         /// Get all users
         /// </summary>
         /// <returns></returns>
-        /// CreatedBy: PQ Huy (28.11.2024)
+        /// CreatedBy: HieuNM
         public async Task<ServiceResponse> Get()
         {
             var result = new List<UserEntity>();
@@ -77,7 +77,7 @@ namespace MediHub.Web.ApplicationCore.Service
         /// </summary>
         /// <param name="ids"></param>
         /// <returns></returns>
-        /// CreatedBy: PQ Huy (28.11.2024)
+        /// CreatedBy: HieuNM
         public async Task<ServiceResponse> Get(List<Guid> ids)
         {
             var result = new List<UserEntity>();
@@ -101,7 +101,7 @@ namespace MediHub.Web.ApplicationCore.Service
         /// </summary>
         /// <param name="users"></param>
         /// <returns></returns>
-        /// CreatedBy: PQ Huy (28.11.2024)
+        /// CreatedBy: HieuNM
         public async Task<ServiceResponse> Update(List<UserEntity> users)
         {
             try
@@ -131,7 +131,7 @@ namespace MediHub.Web.ApplicationCore.Service
         /// </summary>
         /// <param name="ids"></param>
         /// <returns></returns>
-        /// CreatedBy: PQ Huy (28.11.2024)
+        /// CreatedBy: HieuNM
         public async Task<ServiceResponse> Delete(List<Guid> ids)
         {
             try

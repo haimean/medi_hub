@@ -3,6 +3,7 @@ using MediHub.Web.ApplicationCore.Interfaces;
 using MediHub.Web.Aws;
 using MediHub.Web.Data.Repository;
 using MediHub.Web.DatabaseContext.AppDbcontext;
+using MediHub.Web.Models;
 
 namespace MediHub.Web.ApplicationCore.Service
 {
@@ -16,9 +17,8 @@ namespace MediHub.Web.ApplicationCore.Service
 
             #region Services
             services.AddScoped<IAwsService, AwsService>();
-
             services.AddScoped<ICurrentUser, CurrentUserService>();
-            services.AddScoped<IDepartmentsService, DepartmentsService>();
+            services.AddScoped<IMaintenanceRecordService, MaintenanceRecordService>();
             services.AddScoped<IDevicesService, DevicesService>();
             services.AddScoped<IUsersService, UsersService>();
             services.AddScoped<ICommonService, CommonService>();

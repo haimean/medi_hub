@@ -1,4 +1,5 @@
 ﻿using MediHub.Web.ApplicationCore.Interfaces;
+using MediHub.Web.Dtos.Common;
 using MediHub.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,9 +22,9 @@ namespace MediHub.Web.Controllers
         /// <param name="devices"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] List<DeviceEntity> devices)
+        public async Task<IActionResult> Create([FromBody] InsertDeviceRequest devicesRequest)
         {
-            var response = await _devicesService.Create(devices);
+            var response = await _devicesService.Create(devicesRequest.DeviceEntity, devicesRequest.MaintenanceRecordEntity);
             return StatusCode((int)response.StatusCode, response);
         }
 
@@ -94,6 +95,13 @@ namespace MediHub.Web.Controllers
         {
             var response = await _devicesService.GetManufacturerBranch();
             return StatusCode((int)response.StatusCode, response);
+        }
+
+        [HttpGet("manufactureName")]
+        public async Task<IActionResult> GetDeviceByManufacturerName(int manufactureName)
+        {
+            var response = await _devicesService.GetDeviceByManufacturerName(manufactureName);
+            return StatusCode((int) response.StatusCode, response);
         }
     }
 }

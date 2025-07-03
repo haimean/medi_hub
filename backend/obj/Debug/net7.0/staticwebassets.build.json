@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "STj+6txPfbyol1L7YKha7FaTHdCs9miqOatEaqfqnbg=",
+  "Source": "MediHub.Web",
+  "BasePath": "_content/MediHub.Web",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

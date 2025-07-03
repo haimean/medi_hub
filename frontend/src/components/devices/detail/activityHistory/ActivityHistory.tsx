@@ -357,7 +357,7 @@ const ActivityHistory = (props: any) => {
                     fileList={fileList}
                     onPreview={handlePreview}
                     onChange={handleChange}
-                    accept="image/*"
+                    accept="application/pdf"
                     beforeUpload={beforeUploadImage}
                 >
                     <div>+ Tải lên</div>

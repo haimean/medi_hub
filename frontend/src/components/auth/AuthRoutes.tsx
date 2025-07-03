@@ -52,9 +52,6 @@ const AuthRoutes = () => {
             if (!['dashboard', 'devices'].includes(window.location.pathname.split('/')[1])) {
                 navigate('/dashboard');
             }
-            if(!data?.data?.user?.departmentIds || data?.data?.user?.departmentIds?.length <= 0) {
-                message.warning("Bạn chưa được phân quyền vào phòng ban nào. Vui lòng liên hệ quản trị viên !")
-            }
         }
     }, [isLoading, isError, data, dispatch, navigate]);
 

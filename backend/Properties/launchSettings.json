@@ -6,7 +6,7 @@
       "launchUrl": "medihub/swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "MediHubConnectionString": "Server=wh-idd-test-dev.c9lyw52w9grj.ap-southeast-1.rds.amazonaws.com;Port=5432;Database=qaqc;UserId=do_invoice;Password=wohhup2021"
+        "MediHubConnectionString": "Server=localhost;Port=5432;Database=postgres;User Id=postgres;Password=220900"
       },
       "dotnetRunMessages": true,
       "applicationUrl": "http://localhost:8010"
@@ -17,7 +17,7 @@
       "launchUrl": "medihub/swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "MediHubConnectionString": "Server=wh-idd-test-dev.c9lyw52w9grj.ap-southeast-1.rds.amazonaws.com;Port=5432;Database=qaqc;UserId=do_invoice;Password=wohhup2021"
+        "MediHubConnectionString": "Server=localhost;Port=5432;Database=postgres;User Id=postgres;Password=220900"
       },
       "dotnetRunMessages": true,
       "applicationUrl": "https://localhost:7201;http://localhost:8010"
@@ -28,7 +28,7 @@
       "launchUrl": "medihub/swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "MediHubConnectionString": "Server=wh-idd-test-dev.c9lyw52w9grj.ap-southeast-1.rds.amazonaws.com;Port=5432;Database=qaqc;UserId=do_invoice;Password=wohhup2021"
+        "MediHubConnectionString": "Server=localhost;Port=5432;Database=postgres;User Id=postgres;Password=220900"
       },
       "dotnetRunMessages": true,
       "applicationUrl": "http://localhost:8010"

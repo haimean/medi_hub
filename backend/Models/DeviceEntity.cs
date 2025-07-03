@@ -20,7 +20,7 @@ namespace MediHub.Web.Models
         public string ManufacturerCountry { get; set; } // Nước sản xuất
 
         [Column("manufacturer_name")]
-        public string ManufacturerName { get; set; } // Tên hãng
+        public int ManufacturerName { get; set; } // Tên hãng
 
         [Column("manufacturing_year")]
         public int ManufacturingYear { get; set; } // Năm sản xuất
@@ -28,25 +28,17 @@ namespace MediHub.Web.Models
         [Column("serial_number")]
         public string SerialNumber { get; set; } // Số seri
 
+        [Column("machine_status")]
+        public int MachineStatus { get; set; } // Tình trạng máy
+
+        [Column("import_source")]
+        public string ImportSource { get; set; } // Nguồn nhập
+
         [Column("function_name")]
         public string FunctionName { get; set; } // Tên chức năng
 
         [Column("installation_contract")]
-        public List<string> InstallationContract { get; set; } // Hợp đồng lắp đặt
-
-        [Column("contract_duration")]
-        public DateTime? ContractDuration
-        {
-            get => _contractDuration;
-            set => _contractDuration = value?.ToUniversalTime();
-        }
-        private DateTime? _contractDuration; // Thời hạn hợp đồng
-
-        [Column("machine_status")]
-        public string MachineStatus { get; set; } // Tình trạng máy
-
-        [Column("import_source")]
-        public string ImportSource { get; set; } // Nguồn nhập
+        public string InstallationContract { get; set; } // Hợp đồng - pháp lý
 
         [Column("usage_date")]
         public DateTime UsageDate
@@ -56,75 +48,91 @@ namespace MediHub.Web.Models
         }
         private DateTime _usageDate; // Ngày sử dụng
 
+        public DateTime? ExpirationDate
+        {
+            get => _expirationDate;
+            set => _expirationDate = value?.ToUniversalTime();
+        }
+        private DateTime? _expirationDate; // Ngày hết hạn sử dụng
+
         [Column("lab_usage")]
         public string LabUsage { get; set; } // Lab sử dụng
 
-        [Column("manager_info", TypeName = "jsonb")]
-        public ManagerEngineerInfo? ManagerInfo { get; set; } // Thông tin người quản lý và kỹ sư (dưới dạng JSON)
+        [Column("manager_info")]
+        public string ManagerInfo { get; set; } // Thông tin người quản lý
 
-        [Column("engineer_info", TypeName = "jsonb")]
-        public ManagerEngineerInfo? EngineerInfo { get; set; } // Thông tin người quản lý và kỹ sư (dưới dạng JSON)
+        [Column("manager_phonenumber")]
+        public string ManagerPhoneNumber { get; set; } // Sđt người quản lý
+
+        [Column("engineer_info")]
+        public string EngineerInfo { get; set; } // Thông tin kỹ sư 
+
+        [Column("engineer_phonenumber")]
+        public string EngineerPhoneNumber { get; set; } // Sđt kỹ sư
 
         [Column("device_usage_instructions")]
         public string DeviceUsageInstructions { get; set; } // HDSD Thiết bị
 
-        [Column("device_troubleshooting_instructions")]
-        public string DeviceTroubleshootingInstructions { get; set; } // HD sử lý sự cố thiết bị
+        [Column("appraisal_file")]
+        public string AppraisalFile { get; set; } // hồ sơ thẩm định
+
+        [Column("device_status")]
+        public int DeviceStatus { get; set; } // tình trạng Sử dụng
         #endregion
 
         #region Lịch sử hoạt động - tình trạng
-        [Column("maintenance_log", TypeName = "jsonb")]
-        public List<MaintenanceRecord>? MaintenanceLog { get; set; } // Nhật ký bảo dưỡng (danh sách ngày bảo dưỡng và các tệp pdf, ảnh)
+        [Column("maintenance_date")]
+        public DateTime? MaintenanceDate
+        {
+            get => _maintenanceDate;
+            set => _maintenanceDate = value?.ToUniversalTime();
+        }
+        private DateTime? _maintenanceDate; // Ngày bảo dưỡng 
 
-        [Column("maintenance_report", TypeName = "jsonb")]
-        public List<MaintenanceRecord>? MaintenanceReport { get; set; } // Biên bản bảo trì
-
-        [Column("internal_maintenance_check", TypeName = "jsonb")]
-        public List<MaintenanceRecord>? InternalMaintenanceCheck { get; set; } // Nội kiểm tra bảo trì
+        [Column("maintenance_next_date")]
+        public DateTime? MaintenanceNextDate
+        {
+            get => _maintenanceNextDate;
+            set => _maintenanceNextDate = value?.ToUniversalTime();
+        }
+        private DateTime? _maintenanceNextDate; // Ngày bảo dưỡng kế tiếp
 
         [Column("maintenance_schedule")]
-        public DateTime? MaintenanceSchedule
-        {
-            get => _maintenanceSchedule;
-            set => _maintenanceSchedule = value?.ToUniversalTime();
-        }
-        private DateTime? _maintenanceSchedule; // Lịch bảo dưỡng (tương tự nhật ký bảo dưỡng)
+        public int MaintenanceSchedule { get; set; } // lịch bảo dưỡng định kì
 
+        [Column("calibration_date")]
+        public DateTime? CalibrationDate
+        {
+            get => _calibrationDate;
+            set => _calibrationDate = value?.ToUniversalTime();
+        }
+        private DateTime? _calibrationDate; // Ngày hiệu chuẩn 
+
+        [Column("calibration_next_date")]
+        public DateTime? CalibrationNextDate
+        {
+            get => _calibrationNextDate;
+            set => _calibrationNextDate = value?.ToUniversalTime();
+        }
+        private DateTime? _calibrationNextDate; // Ngày hiệu chuẩn kế tiếp
+
+        [Column("replace_date")]
+        public DateTime? ReplaceDate
+        {
+            get => _replaceDate;
+            set => _replaceDate = value?.ToUniversalTime();
+        }
+        private DateTime? _replaceDate; // Ngày thay thế thiết bị
+        [Column("replace_next_date")]
+        public DateTime? ReplaceNextDate
+        {
+            get => _replaceNextDate;
+            set => _replaceNextDate = value?.ToUniversalTime();
+        }
+        private DateTime? _replaceNextDate; // Ngày thay thế thiết bị kế tiếp
         #endregion
 
         [Column("notes")]
         public string Notes { get; set; } // Ghi chú
-
-        [Column("is_deleted")]
-        public bool IsDeleted { get; set; } // Trạng thái xóa
-
-        #region Phân quyền phòng ban
-
-        [Column("department_ids")]
-        public List<Guid> DepartmentIds { get; set; } // Danh sách ID phòng ban mà người dùng có quyền truy cập
-
-        #endregion
     }
-
-    #region Thông tin chi tiết kỹ sư, lịch sử hoạt động
-    /// <summary>
-    /// Manager, engineer
-    /// </summary>
-    public class ManagerEngineerInfo
-    {
-        public string FullName { get; set; } // Họ tên
-        public DateTime DateOfBirth { get; set; } // Ngày tháng năm sinh
-        public string PhoneNumber { get; set; } // Số điện thoại
-        public string Address { get; set; } // Địa chỉ
-    }
-
-    /// <summary>
-    /// Maintenance record with date and file links
-    /// </summary>
-    public class MaintenanceRecord
-    {
-        public string MaintenanceDate { get; set; } // Ngày bảo dưỡng
-        public List<string> FileLinks { get; set; } // Danh sách đường link dẫn đến các tệp đính kèm
-    }
-    #endregion
 }

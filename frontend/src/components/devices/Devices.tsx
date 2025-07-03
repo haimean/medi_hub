@@ -4,19 +4,22 @@ import { Tooltip, Popconfirm, message } from 'antd'; // Import Popconfirm
 import { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons';
 import { AgGridReact } from 'ag-grid-react';
 import { useQuery } from '@tanstack/react-query';
-import { deleteDevices, getDevices } from '../../api/appApi';
+import { deleteDevices, getDeviceByManufacturerName } from '../../api/appApi';
 import { useNavigate } from 'react-router-dom';
 import MaintenanceStatus from '../common/MaintenanceStatus';
+import { useSelector } from 'react-redux';
+import { getManufacturerName } from '../../function/commons';
 
 const Devices = () => {
     const [refreshDevice, setRefreshDevice] = useState(0); // Sử dụng số để trigger refetch
     const navigate = useNavigate();
     const gridRef = useRef<any>(null);
+    const isEditDevice: number = useSelector((state: any) => state.selectedDeviceType);
 
     // Use useQuery to fetch devices
     const { isError, isLoading, data } = useQuery({
         queryKey: [`all-devices`, refreshDevice],
-        queryFn: () => getDevices(),
+        queryFn: () => getDeviceByManufacturerName(isEditDevice),
         refetchOnWindowFocus: false
     });
 
@@ -30,41 +33,34 @@ const Devices = () => {
                 headerName: 'S/N',
                 field: 'S/N',
                 tooltipField: 'S/N',
-                resizable: true,
                 maxWidth: 100,
                 minWidth: 50,
                 suppressMenu: true,
                 floatingFilterComponentParams: { suppressFilterButton: true },
                 valueGetter: "node.rowIndex + 1",
-                pinned: "left"
             },
             {
                 headerName: 'MTB',
                 field: 'deviceCode',
                 tooltipField: 'MTB',
-                resizable: true,
                 minWidth: 120,
                 maxWidth: 120,
                 flex: 1,
                 filter: 'agSetColumnFilter',
-                pinned: "left"
             },
             {
                 headerName: 'Tên thiết bị',
                 field: 'deviceName',
                 tooltipField: 'Tên thiết bị',
-                resizable: true,
                 minWidth: 120,
                 flex: 1,
                 filter: 'agSetColumnFilter',
-                pinned: "left"
             },
             {
                 headerName: 'Nước sản xuất',
                 field: 'manufacturerCountry',
                 tooltipField: 'Nước sản xuất',
                 minWidth: 150,
-                resizable: false,
                 flex: 1,
                 filter: 'agSetColumnFilter'
             },
@@ -73,9 +69,11 @@ const Devices = () => {
                 field: 'manufacturerName',
                 tooltipField: 'Tên hãng',
                 minWidth: 150,
-                resizable: false,
                 flex: 1,
-                filter: 'agSetColumnFilter'
+                filter: 'agSetColumnFilter',
+                cellRenderer: (params: any) => {
+                    return <div>{getManufacturerName(params?.data?.manufacturerName)}</div>
+                }
             },
             {
                 headerName: 'Chức năng',
@@ -96,37 +94,25 @@ const Devices = () => {
             },
             {
                 headerName: 'Người quản lý',
-                field: 'managerInfo.FullName',
+                field: 'managerInfo',
                 tooltipField: 'Người quản lý',
                 minWidth: 200,
                 flex: 1,
                 filter: 'agSetColumnFilter',
                 cellRenderer: (params: any) => {
-                    return <div>{params?.data?.managerInfo?.fullName}</div>
-                }
-            },
-            {
-                headerName: 'Kỹ sư',
-                field: 'engineerInfo.FullName',
-                tooltipField: 'Kỹ sư',
-                minWidth: 150,
-                flex: 1,
-                filter: 'agSetColumnFilter',
-                cellRenderer: (params: any) => {
-                    return <div>{params?.data?.engineerInfo?.fullName}</div>
+                    return <div>{params?.data?.managerInfo}</div>
                 }
             },
             {
                 headerName: 'Trạng thái',
-                field: 'status',
+                field: 'deviceStatus',
                 tooltipField: 'Trạng thái',
                 maxWidth: 150,
                 minWidth: 150,
-                pinned: "right",
                 flex: 1,
                 filter: 'agSetColumnFilter',
                 cellRenderer: (params: any) => {
-                    return <MaintenanceStatus maintenanceDate={params?.data?.maintenanceSchedule} />;
+                    return <MaintenanceStatus maintenanceDate={params?.data?.deviceStatus} />;
                 }
             },
             {
@@ -135,7 +121,6 @@ const Devices = () => {
                 resizable: false,
                 minWidth: 120,
                 width: 120,
-                pinned: "right",
                 sortable: false,
                 suppressMenu: true,
                 cellRenderer: (record: any) => {

@@ -20,3 +20,15 @@ export const getFileType = (fileName: any) => {
             return 'application/octet-stream'; // Loại mặc định
     }
 }
+
+export const getManufacturerName = (type: number) => {
+    const types: { [key: number]: string } = {
+        1: 'Roche',
+        2: 'Beckman',
+        3: 'Abbott',
+        4: 'Tủ Mát',
+        5: 'Tủ Âm',
+        6: 'Lọc RO'
+    };
+    return types[type] || '';
+}

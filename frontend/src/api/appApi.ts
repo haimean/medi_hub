@@ -69,6 +69,10 @@ export async function getDeviceById(id: string) {
    return await axiosClient.get(`${process.env.REACT_APP_API_URL}/v1/devices/id?id=${id}`);
 }
 
+export async function getDeviceByManufacturerName(type: number) {
+   return await axiosClient.get(`${process.env.REACT_APP_API_URL}/v1/devices/manufactureName?manufactureName=${type}`);
+}
+
 export async function updatedDevices(params: any) {
    return await axiosClient.put(`${process.env.REACT_APP_API_URL}/v1/devices`, params);
 }

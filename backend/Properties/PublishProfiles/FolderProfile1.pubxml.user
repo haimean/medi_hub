@@ -4,7 +4,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 -->
 <Project>
   <PropertyGroup>
-    <_PublishTargetUrl>C:\Users\dell\Documents\IddApp_QaQc\be\bin\Release\net7.0\publish\</_PublishTargetUrl>
+    <_PublishTargetUrl>bin\Release\net7.0\publish\</_PublishTargetUrl>
     <History>True|2023-04-18T09:33:05.5643865Z;</History>
     <LastFailureDetails />
   </PropertyGroup>

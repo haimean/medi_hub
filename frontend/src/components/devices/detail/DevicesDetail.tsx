@@ -28,13 +28,76 @@ const DevicesDetail = () => {
 
     const [nameFunc, setNameFunc] = useState('');
     const [lstFunc, setLstFunc] = useState<any>([]);
-    
+
     const [nameManuFact, setNameManuFact] = useState('');
-    const [lstManufacters, setLstManufacters] = useState<any>([]);
+    const [lstManufacters, setLstManufacters] = useState([
+        {
+            value: 1,
+            label: 'Roche',
+            // avatar: 'roche-svg'
+        },
+        {
+            value: 2,
+            label: 'Beckman',
+            // avatar: 'beckman-svg'
+        },
+        {
+            value: 3,
+            label: 'Abbott',
+            // avatar: 'abbott-svg'
+        },
+        {
+            value: 4,
+            label: 'Tủ Mát'
+        },
+        {
+            value: 5,
+            label: 'Tủ Âm'
+        },
+        {
+            value: 6,
+            label: 'Lọc RO'
+        },
+        {
+            value: 7,
+            label: 'Hãng khác'
+        }
+    ]);
+
+    const [deviceStatus, setDeviceStatus] = useState([
+        {
+            value: 0,
+            label: 'Đang sử dụng'
+        },
+        {
+            value: 1,
+            label: 'Đang sửa chữa'
+        },
+        {
+            value: 2,
+            label: 'Chờ thẩm định'
+        },
+        {
+            value: 3,
+            label: 'Không sử dụng'
+        }
+    ]);
+
+    const [machineStatus, setMachineStatus] = useState([
+        {
+            value: 0,
+            label: 'Mới'
+        },
+        {
+            value:1,
+            label: 'Cũ'
+        }
+    ]);
 
     const propsInstallationContract = {
         name: 'file',
-        multiple: true,
+        multiple: false,
+        maxCount: 1,
         onChange(info: any) {
             const { status } = info.file;
             if (status === 'done') {
@@ -45,7 +108,7 @@ const DevicesDetail = () => {
 
             // Cập nhật danh sách file
             setFileListContract(prevFileList => {
-                const updatedFileList = [...prevFileList, ...info.fileList];
+                const updatedFileList = [...info.fileList];
 
                 // Cập nhật giá trị của trường installationContract trong form
                 form.setFieldValue('installationContract', updatedFileList.map(item => item.name));
@@ -77,10 +140,9 @@ const DevicesDetail = () => {
         refetchOnWindowFocus: false,
         staleTime: 60 * 10000, // Cache for 10 minute
     });
-    
+
     useEffect(() => {
-        if(!isLoadingManufacturerBranch && dataManufacturerBranch?.data) {
-            setLstManufacters(dataManufacturerBranch?.data?.manufacturer);
+        if (!isLoadingManufacturerBranch && dataManufacturerBranch?.data) {
             setLstFunc(dataManufacturerBranch?.data?.function);
         }
     }, [dataManufacturerBranch])
@@ -91,27 +153,27 @@ const DevicesDetail = () => {
             hasFetchedDataRef = true; // Đánh dấu là đã thực hiện
 
             // kiểm tra xem có avatar ko thì lấy file ảnh về
-            if (deviceData?.data?.deviceAvatar && deviceData?.data?.deviceAvatar?.length > 0) {
-                setFileList([]); // Cập nhật fileList với đối tượng hình ảnh
+            // if (deviceData?.data?.deviceAvatar && deviceData?.data?.deviceAvatar?.length > 0) {
+            //     setFileList([]); // Cập nhật fileList với đối tượng hình ảnh
 
-                // Call API to fetch documents
-                getdoc(deviceData.data.deviceAvatar[0])
-                    .then((response: any) => {
-                        const imageObject = {
-                            uid: '-1', // Hoặc một giá trị duy nhất khác
-                            name: response?.Data, // Tên tệp
-                            status: 'done', // Trạng thái
-                            url: `data:image/jpeg;base64,${response?.FileDatas}`, // Đường dẫn hình ảnh
-                        };
+            //     // Call API to fetch documents
+            //     getdoc(deviceData.data.deviceAvatar[0])
+            //         .then((response: any) => {
+            //             const imageObject = {
+            //                 uid: '-1', // Hoặc một giá trị duy nhất khác
+            //                 name: response?.Data, // Tên tệp
+            //                 status: 'done', // Trạng thái
+            //                 url: `data:image/jpeg;base64,${response?.FileDatas}`, // Đường dẫn hình ảnh
+            //             };
 
-                        // Cập nhật danh sách tệp
-                        setFileList([imageObject]); // Cập nhật fileList với đối tượng hình ảnh
-                    })
-                    .catch(error => {
-                        console.error('Error fetching documents:', error);
-                        message.error('Failed to fetch documents.');
-                    });
-            }
+            //             // Cập nhật danh sách tệp
+            //             setFileList([imageObject]); // Cập nhật fileList với đối tượng hình ảnh
+            //         })
+            //         .catch(error => {
+            //             console.error('Error fetching documents:', error);
+            //             message.error('Failed to fetch documents.');
+            //         });
+            // }
 
             if (deviceData?.data?.installationContract && deviceData?.data?.installationContract.length > 0) {
                 // Call API to fetch documents
@@ -134,8 +196,8 @@ const DevicesDetail = () => {
                                 setFileListContract(prev => [...prev, fileObject]);
                             })
                             .catch(error => {
-                                console.error('Error fetching documents:', error);
-                                message.error('Failed to fetch documents.');
+                                // console.error('Error fetching documents:', error);
+                                // message.error('Failed to fetch documents.');
                             });
                     }
                 }, 150);
@@ -152,21 +214,25 @@ const DevicesDetail = () => {
                 serialNumber: deviceData?.data?.serialNumber,
                 functionName: deviceData?.data?.functionName,
                 installationContract: deviceData?.data?.installationContract,
-                contractDuration: deviceData?.data?.contractDuration ? dayjs(deviceData?.data?.contractDuration) : null,
+                expirationDate: deviceData?.data?.expirationDate ? dayjs(deviceData?.data?.expirationDate) : null,
                 machineStatus: deviceData?.data?.machineStatus,
+                deviceStatus : deviceData?.data?.deviceStatus,
                 importSource: deviceData?.data?.importSource,
                 usageDate: deviceData?.data?.usageDate ? dayjs(deviceData?.data?.usageDate) : null,
                 labUsage: deviceData?.data?.labUsage,
-                managerInfo: {
-                    fullName: deviceData?.data?.managerInfo?.fullName,
-                    phoneNumber: deviceData?.data?.managerInfo?.phoneNumber,
-                },
-                engineerInfo: {
-                    fullName: deviceData?.data?.engineerInfo?.fullName,
-                    phoneNumber: deviceData?.data?.engineerInfo?.phoneNumber,
-                },
+                managerInfo: deviceData?.data?.managerInfo,
+                status: deviceData?.data?.status,
+                managerPhonenumber: deviceData?.data?.managerPhoneNumber,
+                engineerInfo: deviceData?.data?.engineerInfo,
+                engineerPhonenumber: deviceData?.data?.engineerPhoneNumber,
                 deviceUsageInstructions: deviceData?.data?.deviceUsageInstructions,
                 deviceTroubleshootingInstructions: deviceData?.data?.deviceTroubleshootingInstructions,
+                maintenanceDate: deviceData?.data?.maintenanceDate ? dayjs(deviceData?.data?.maintenanceDate) : null,
+                maintenanceNextDate: deviceData?.data?.maintenanceNextDate ? dayjs(deviceData?.data?.maintenanceNextDate) : null,
+                calibrationDate: deviceData?.data?.calibrationDate ? dayjs(deviceData?.data?.calibrationDate) : null,
+                calibrationNextDate: deviceData?.data?.calibrationNextDate ? dayjs(deviceData?.data?.calibrationNextDate) : null,
+                replaceDate: deviceData?.data?.replaceDate ? dayjs(deviceData?.data?.replaceDate) : null,
+                replaceNextDate: deviceData?.data?.replaceNextDate ? dayjs(deviceData?.data?.replaceNextDate) : null,
                 maintenanceLog: deviceData?.data?.maintenanceLog,
                 maintenanceReport: deviceData?.data?.maintenanceReport,
                 internalMaintenanceCheck: deviceData?.data?.internalMaintenanceCheck,
@@ -227,24 +293,21 @@ const DevicesDetail = () => {
         // Check if the file has a URL or create a data URL for local files
         const fileUrl = file.url || (file.originFileObj && URL.createObjectURL(file.originFileObj));
 
-        // Kiểm tra loại tệp
         const fileExtension = file.name.split('.').pop().toLowerCase();
-        const downloadableFileTypes = ['pdf', 'xls', 'xlsx', 'doc', 'docx'];
+        const downloadableFileTypes = ['pdf', 'xls', 'xlsx', 'doc', 'docx', 'jpg','png'];
 
-        // Nếu tệp là PDF, Excel hoặc Word, tạo liên kết tải về
         if (downloadableFileTypes.includes(fileExtension)) {
-            // Nếu file là base64, tạo Blob và liên kết tải về
-            if (file.url.startsWith('data:')) {
+            if (file.url && file.url.startsWith('data:')) {
                 const link = document.createElement('a');
-                link.href = file.url; // Sử dụng URL base64
-                link.download = file.name; // Đặt tên tệp khi tải về
+                link.href = file.url;
+                link.download = file.name;
                 document.body.appendChild(link);
-                link.click(); // Mô phỏng click để tải về
-                document.body.removeChild(link); // Xóa liên kết sau khi tải về
+                link.click();
+                document.body.removeChild(link);
             } else {
-                window.open(fileUrl, '_blank'); // Mở tệp nếu không phải base64
+                window.open(fileUrl, '_blank');
             }
-            return; // Kết thúc hàm sau khi mở tệp
+            return;
         }
 
         switch (true) {
@@ -355,21 +418,9 @@ const DevicesDetail = () => {
                                     <>
                                         {menu}
                                         <Divider style={{ margin: '8px 0' }} />
-                                        <Space style={{ padding: '0 8px 4px' }}>
-                                            <Input
-                                                placeholder="Nhập tên hãng"
-                                                ref={inputRef}
-                                                value={nameManuFact}
-                                                onChange={(e) => onNameChange(e, setNameManuFact)}
-                                                onKeyDown={(e) => e.stopPropagation()}
-                                            />
-                                            <Button type="text" icon={<PlusOutlined />} onClick={(e: any) => addItem(e, setLstManufacters, lstManufacters, setNameManuFact, nameManuFact)}>
-                                                Thêm mới
-                                            </Button>
-                                        </Space>
                                     </>
                                 )}
-                                options={lstManufacters?.map((item: any) => ({ label: item, value: item }))}
+                                options={lstManufacters?.map((item: any) => ({ label: item.label, value: item.value }))}
                             />
                         </Form.Item>
                         <Form.Item
@@ -384,6 +435,31 @@ const DevicesDetail = () => {
                         <Form.Item
                             label='Số seri'
                             name='serialNumber'
+                            labelCol={{ span: 6, prefixCls: 'left-item' }}
+                            wrapperCol={{ span: 12 }}
+                        >
+                            <Input />
+                        </Form.Item>
+                        <Form.Item
+                            label='Tình trạng máy'
+                            name='machineStatus'
+                            labelCol={{ span: 6, prefixCls: 'left-item' }}
+                            wrapperCol={{ span: 12 }}
+                        >
+                            <Select
+                                placeholder="Nhập tình trạng máy"
+                                dropdownRender={(menu) => (
+                                    <>
+                                        {menu}
+                                        <Divider style={{ margin: '8px 0' }} />
+                                    </>
+                                )}
+                                options={machineStatus.map((item: any) => ({ label: item.label, value: item.value }))}
+                            />
+                        </Form.Item>
+                        <Form.Item
+                            label='Nguồn nhập'
+                            name='importSource'
                             labelCol={{ span: 6, prefixCls: 'left-item' }}
                             wrapperCol={{ span: 12 }}
                         >
@@ -421,61 +497,15 @@ const DevicesDetail = () => {
                         </Form.Item>
                         {/* Hợp đồng lắp đặt */}
                         <Form.Item
-                            label='Hợp đồng lắp đặt'
+                            label='Hợp đồng - Pháp lý'
                             name='installationContract'
                             labelCol={{ span: 6, prefixCls: 'left-item' }}
                             wrapperCol={{ span: 12 }}
                         >
-                            <Dragger {...propsInstallationContract} onPreview={handlePreview}>
+                            {/* vì đây nhớ không nhầm là pdf nên đang chỉ accept mỗi pdf nhá : k phải thì xóa đi, phải thì các chỗ khác làm tương tự accept='xxxx' */}
+                            <Dragger {...propsInstallationContract} onPreview={handlePreview} accept='application/pdf'>
                                 <UploadOutlined style={{ fontSize: '24px' }} />
-                                <p className="ant-upload-text">Tải lên hợp đồng</p>
                             </Dragger>
-                            {fileListContract.length > 0 && (
-                                <div style={{ marginTop: 16 }}>
-                                    {fileListContract.map((file, index) => (
-                                        <div key={`${file.uid}-${index}`}>
-                                            <a
-                                                onClick={() => handlePreview(file)}
-                                                style={{ cursor: 'pointer', color: '#1890ff' }}
-                                            >
-                                                {file.name}
-                                            </a>
-                                            <Button
-                                                type="link"
-                                                danger
-                                                onClick={() => onRemoveContract(file)} // Gọi hàm xóa khi nhấn nút
-                                            >
-                                                <DeleteOutlined style={{ color: 'red' }} />
-                                            </Button>
-                                        </div>
-                                    ))}
-                                </div>
-                            )}
-                        </Form.Item>
-                        {/* Thời hạn hợp đồng */}
-                        <Form.Item
-                            label='Thời hạn hợp đồng'
-                            name='contractDuration'
-                            labelCol={{ span: 6, prefixCls: 'left-item' }}
-                            wrapperCol={{ span: 12 }}
-                        >
-                            <DatePicker format={'DD/MM/YYYY'} />
-                        </Form.Item>
-                        <Form.Item
-                            label='Tình trạng máy'
-                            name='machineStatus'
-                            labelCol={{ span: 6, prefixCls: 'left-item' }}
-                            wrapperCol={{ span: 12 }}
-                        >
-                            <Input />
-                        </Form.Item>
-                        <Form.Item
-                            label='Nguồn nhập'
-                            name='importSource'
-                            labelCol={{ span: 6, prefixCls: 'left-item' }}
-                            wrapperCol={{ span: 12 }}
-                        >
-                            <Input />
                         </Form.Item>
                         <Form.Item
                             label='Ngày sử dụng'
@@ -483,6 +513,15 @@ const DevicesDetail = () => {
                             labelCol={{ span: 6, prefixCls: 'left-item' }}
                             wrapperCol={{ span: 12 }}
                             rules={[{ required: true, message: 'Vui lòng nhập ngày sử dụng' }]}
+                        >
+                            <DatePicker format={'DD/MM/YYYY'} />
+                        </Form.Item>
+                        {/* Thời hạn hợp đồng */}
+                        <Form.Item
+                            label='Ngày hết hạn sử dụng'
+                            name='expirationDate'
+                            labelCol={{ span: 6, prefixCls: 'left-item' }}
+                            wrapperCol={{ span: 12 }}
                         >
                             <DatePicker format={'DD/MM/YYYY'} />
                         </Form.Item>
@@ -499,7 +538,7 @@ const DevicesDetail = () => {
                             <Col span={12}>
                                 <Form.Item
                                     label='Người quản lý'
-                                    name={['managerInfo', 'fullName']}
+                                    name='managerInfo'
                                     labelCol={{ span: 12, prefixCls: 'left-item' }}
                                     wrapperCol={{ span: 15 }}
                                 >
@@ -508,7 +547,7 @@ const DevicesDetail = () => {
                             </Col>
                             <Col span={12}>
                                 <Form.Item
-                                    name={['managerInfo', 'phoneNumber']}
+                                    name='managerPhonenumber'
                                     wrapperCol={{ span: 15 }}
                                 >
                                     <Input placeholder='Số điện thoại' />
@@ -520,7 +559,7 @@ const DevicesDetail = () => {
                             <Col span={12}>
                                 <Form.Item
                                     label='Kỹ sư'
-                                    name={['engineerInfo', 'fullName']}
+                                    name='engineerInfo'
                                     labelCol={{ span: 12, prefixCls: 'left-item' }}
                                     wrapperCol={{ span: 15 }}
                                 >
@@ -529,19 +568,28 @@ const DevicesDetail = () => {
                             </Col>
                             <Col span={12}>
                                 <Form.Item
-                                    name={['engineerInfo', 'phoneNumber']}
+                                    name='engineerPhonenumber'
                                     wrapperCol={{ span: 15 }}
                                 >
                                     <Input placeholder='Số điện thoại' />
                                 </Form.Item>
                             </Col>
                         </Row>
+                        <Form.Item
+                            label='Ghi chú'
+                            name='notes'
+                            labelCol={{ span: 6, prefixCls: 'left-item' }}
+                            wrapperCol={{ span: 12 }}
+                        >
+                            <Input.TextArea />
+                        </Form.Item>
                     </div>
                     <div className='detail__content--right'>
-                        <div className='text-xl font-bold' style={{ paddingBottom: '8px' }}>Ảnh đại diện</div>
                         <Form.Item
-                            label=''
+                            label='Ảnh đại diện'
                             name='deviceAvatar'
+                            labelCol={{ span: 12, prefixCls: 'right-item' }}
+                            wrapperCol={{ span: 12 }}
                         >
                             <Upload
                                 listType="picture-card"
@@ -549,6 +597,7 @@ const DevicesDetail = () => {
                                 onPreview={handlePreview}
                                 onChange={handleUploadChange}
                                 className='right-avatar'
+                                accept='image/*'
                                 beforeUpload={beforeUploadImage} // Validate image file type
                             >
                                 {fileList.length >= 1 ? null : <FileImageOutlined style={{ fontSize: '2rem' }} />}
@@ -566,71 +615,120 @@ const DevicesDetail = () => {
                             )}
                         </Form.Item>
                         <div className='text-xl font-bold' style={{ paddingBottom: '8px' }}>Lịch sử - Tình trạng hoạt động</div>
+                        {/* Hồ sơ thẩm định */}
                         <Form.Item
-                            label='Nhật ký bảo dưỡng'
+                            // Trường hợp muốn click vào label mà không thực hiện action gì thì viết như dưới nhé
+                            label={<span onClick={e => e.preventDefault()}>Hồ sơ thẩm định</span>}
+                            name='installationContract'
+                            labelCol={{ span: 8, prefixCls: 'right-item' }}
+                            wrapperCol={{ span: 12 }}
+                        >
+                            <Dragger {...propsInstallationContract} onPreview={handlePreview}>
+                                <UploadOutlined style={{ fontSize: '24px' }} />
+                            </Dragger>
+                        </Form.Item>
+                        <Form.Item
+                            label='Tình trạng hoạt động'
+                            name='deviceStatus'
+                            labelCol={{ span: 8, prefixCls: 'right-item' }}
+                        >
+                            <Select
+                                placeholder="Nhập tình trạng máy"
+                                dropdownRender={(menu) => (
+                                    <>
+                                        {menu}
+                                        <Divider style={{ margin: '8px 0' }} />
+                                    </>
+                                )}
+                                options={deviceStatus.map((item: any) => ({ label: item.label, value: item.value }))}
+                            />
+                        </Form.Item>
+                        <Form.Item
+                            label='Bảo trì, bảo dưỡng, sửa chữa'
                             name='maintenanceLog'
-                            labelCol={{ span: 6, prefixCls: 'right-item' }}
+                            labelCol={{ span: 8, prefixCls: 'right-item' }}
                         >
                             <ActivityHistory
-                                label='Nhật ký bảo dưỡng'
+                                label='Bảo trì, bảo dưỡng, sửa chữa'
                                 keyForm='maintenanceLog'
                                 valueForm={form?.getFieldValue('maintenanceLog')}
                                 form={form}
                             />
                         </Form.Item>
                         <Form.Item
-                            label='Biên bản bảo trì'
+                            label='Nội kiểm sau bảo dưỡng'
                             name='maintenanceReport'
-                            labelCol={{ span: 6, prefixCls: 'right-item' }}
+                            labelCol={{ span: 8, prefixCls: 'right-item' }}
                         >
                             <ActivityHistory
-                                label='Biên bản bảo trì'
+                                label='Nội kiểm sau bảo dưỡng'
                                 keyForm='maintenanceReport'
                                 valueForm={form?.getFieldValue('maintenanceReport')}
                                 form={form}
                             />
                         </Form.Item>
                         <Form.Item
-                            label='Nội kiểm tra bảo trì'
+                            label='Nhật kí sử dụng hàng ngày'
                             name='internalMaintenanceCheck'
-                            labelCol={{ span: 6, prefixCls: 'right-item' }}
+                            labelCol={{ span: 8, prefixCls: 'right-item' }}
                         >
                             <ActivityHistory
-                                label='Nội kiểm tra bảo trì'
+                                label='Nhật kí sử dụng hàng ngày'
                                 keyForm='internalMaintenanceCheck'
                                 valueForm={form?.getFieldValue('internalMaintenanceCheck')}
                                 form={form}
                             />
                         </Form.Item>
                         <Form.Item
-                            label='Lịch bảo dưỡng'
-                            name='maintenanceSchedule'
-                            labelCol={{ span: 6, prefixCls: 'right-item' }}
+                            label='Ngày bảo trì, bảo dưỡng'
+                            name='maintenanceDate'
+                            labelCol={{ span: 8, prefixCls: 'right-item' }}
+                        >
+                            <DatePicker format={'DD/MM/YYYY'} />
+                        </Form.Item>
+                        
+                        <Form.Item
+                            label='Ngày bảo trì, bảo dưỡng kế tiếp'
+                            name='maintenanceNextDate'
+                            labelCol={{ span: 8, prefixCls: 'right-item' }}
                         >
                             <DatePicker format={'DD/MM/YYYY'} />
                         </Form.Item>
                         <Form.Item
-                            label='Ghi chú'
-                            name='notes'
-                            labelCol={{ span: 6, prefixCls: 'right-item' }}
+                            label='Ngày hiệu chuẩn'
+                            name='calibrationDate'
+                            labelCol={{ span: 8, prefixCls: 'right-item' }}
                         >
-                            <Input.TextArea />
+                            <DatePicker format={'DD/MM/YYYY'} />
+                        </Form.Item>
+                        <Form.Item
+                            label='Ngày hiệu chuẩn kế tiếp'
+                            name='calibrationNextDate'
+                            labelCol={{ span: 8, prefixCls: 'right-item' }}
+                        >
+                            <DatePicker format={'DD/MM/YYYY'} />
+                        </Form.Item>
+                        <Form.Item
+                            label='Ngày thay thế'
+                            name='replaceDate'
+                            labelCol={{ span: 8, prefixCls: 'right-item' }}
+                        >
+                            <DatePicker format={'DD/MM/YYYY'} />
+                        </Form.Item>
+                        <Form.Item
+                            label='Ngày thay thế kế tiếp'
+                            name='replaceNextDate'
+                            labelCol={{ span: 8, prefixCls: 'right-item' }}
+                        >
+                            <DatePicker format={'DD/MM/YYYY'} />
                         </Form.Item>
                         {/* HDSD Thiết bị */}
                         <Form.Item
                             label='HDSD Thiết bị'
                             name='deviceUsageInstructions'
-                            labelCol={{ span: 6, prefixCls: 'right-item' }}
+                            labelCol={{ span: 8, prefixCls: 'right-item' }}
                         >
                             <Input.TextArea placeholder="Hướng dẫn sử dụng thiết bị" />
-                        </Form.Item>
-                        {/* HD sử lý sự cố thiết bị */}
-                        <Form.Item
-                            label='HD sử lý sự cố thiết bị'
-                            name='deviceTroubleshootingInstructions'
-                            labelCol={{ span: 6, prefixCls: 'right-item' }}
-                        >
-                            <Input.TextArea placeholder="Hướng dẫn xử lý sự cố thiết bị" />
                         </Form.Item>
                     </div>
                 </Form>

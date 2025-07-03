@@ -10,7 +10,7 @@ namespace MediHub.Web.ApplicationCore.Interfaces
         /// </summary>
         /// <param name="devices"></param>
         /// <returns></returns>
-        Task<ServiceResponse> Create(List<DeviceEntity> devices);
+        Task<ServiceResponse> Create(List<DeviceEntity> devices, List<MaintenanceRecordEntity> maintenanceRecords);
 
         /// <summary>
         /// Get all
@@ -50,5 +50,12 @@ namespace MediHub.Web.ApplicationCore.Interfaces
         /// </summary>
         /// <returns></returns>
         Task<ServiceResponse> GetManufacturerBranch();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="mamufaceturer"></param>
+        /// <returns></returns>
+        Task<ServiceResponse> GetDeviceByManufacturerName(int mamufaceturer);
     }
 }

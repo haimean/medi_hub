@@ -3,7 +3,7 @@ import React from 'react';
 import dayjs from 'dayjs';
 
 interface MaintenanceStatusProps {
-    maintenanceDate: string; // Expecting a date string in ISO format
+    maintenanceDate: number; // Expecting a date string in ISO format
 }
 
 const MaintenanceStatus: React.FC<MaintenanceStatusProps> = ({ maintenanceDate }) => {
@@ -14,18 +14,21 @@ const MaintenanceStatus: React.FC<MaintenanceStatusProps> = ({ maintenanceDate }
     let statusMessage = '';
     let statusColor = '';
 
-    if (daysUntilMaintenance < 0) {
+    if (maintenanceDate == 0) {
         // Overdue
-        statusMessage = 'Đã đến hạn';
+        statusMessage = 'Đang sử dụng';
         statusColor = 'red'; // Red color for overdue
-    } else if (daysUntilMaintenance <= 15) {
+    } else if (maintenanceDate == 1) {
         // Due soon
-        statusMessage = 'Sắp đến hạn';
+        statusMessage = 'Đang sửa chữa';
         statusColor = 'orange'; // Orange color for due soon
-    } else {
+    } else if (maintenanceDate == 2){
         // Not due yet
-        statusMessage = 'Chưa đến hạn';
-        statusColor = 'green'; // Green color for not due yet
+        statusMessage = 'Chờ thẩm định';
+        statusColor = 'green'; 
+    }else if (maintenanceDate == 3) {
+        statusMessage = 'Không sử dụng';
+        statusColor = 'green'; 
     }
 
     return (

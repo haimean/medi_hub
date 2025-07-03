@@ -22,9 +22,6 @@ namespace MediHub.Web.Models
         [Column("full_name")]
         public string FullName { get; set; } // Họ tên đầy đủ
 
-        [Column("profile_picture")]
-        public string ProfilePicture { get; set; } // Ảnh đại diện
-
         [Column("role")]
         public List<string> Role { get; set; } // Vai trò người dùng (Admin, User, Manager, v.v.)
         #endregion
@@ -44,13 +41,6 @@ namespace MediHub.Web.Models
 
         [Column("is_token_valid")]
         public bool IsTokenValid { get; set; } // Trạng thái hợp lệ của token
-        #endregion
-
-        #region Phân quyền phòng ban
-
-        [Column("department_ids")]
-        public List<Guid> DepartmentIds { get; set; } // Danh sách ID phòng ban mà người dùng có quyền truy cập
-
         #endregion
 
         #region Metadata

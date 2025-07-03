@@ -118,7 +118,7 @@ export const setSelectedBrand = (brand: string | null) => ({
 });
 
 // Định nghĩa action để cập nhật selectedDeviceType
-export const setSelectedDeviceType = (deviceType: string | null) => ({
+export const setSelectedDeviceType = (deviceType: number | null) => ({
     type: SET_SELECTED_DEVICE_TYPE,
     payload: deviceType,
 });

@@ -29,10 +29,10 @@ const DevicesDetailTopbar: React.FC<DevicesDetailTopbarProps> = ({ form, onFinis
      * CreatedBy: PQ Huy (19.01.2025)
      */
     const createAdjustedValues = (values: any, upload: any) => {
-        
+
         return {
             name: values.deviceName,
-            deviceAvatar: upload?.deviceAvatar?.length > 0 ?  upload?.deviceAvatar : (values?.deviceAvatar ? values?.deviceAvatar : []), // Chỉ lấy tên file
+            deviceAvatar: upload?.deviceAvatar?.length > 0 ? upload?.deviceAvatar : (values?.deviceAvatar ? values?.deviceAvatar : []), // Chỉ lấy tên file
             deviceCode: values?.deviceCode,
             deviceName: values?.deviceName,
             manufacturerCountry: values?.manufacturerCountry,
@@ -46,18 +46,10 @@ const DevicesDetailTopbar: React.FC<DevicesDetailTopbarProps> = ({ form, onFinis
             importSource: values?.importSource || "", // Nếu không có giá trị, có thể để trống
             usageDate: values?.usageDate,
             labUsage: values?.labUsage,
-            managerInfo: {
-                fullName: values?.managerInfo?.fullName,
-                dateOfBirth: new Date().toISOString(), // Thay thế bằng giá trị thực tế nếu có
-                phoneNumber: values.managerInfo.phoneNumber,
-                address: values.managerInfo.address || "", // Nếu không có giá trị, có thể để trống
-            },
-            engineerInfo: {
-                fullName: values.engineerInfo.fullName,
-                dateOfBirth: new Date().toISOString(), // Thay thế bằng giá trị thực tế nếu có
-                phoneNumber: values.engineerInfo.phoneNumber,
-                address: values.engineerInfo.address || "", // Nếu không có giá trị, có thể để trống
-            },
+            managerInfo: values?.managerInfo,
+            managerPhoneNumber: values?.managerPhoneNumber,
+            engineerInfo: values?.engineerInfo,
+            engineerPhoneNumber: values?.engineerPhoneNumber,
             deviceUsageInstructions: values.deviceUsageInstructions,
             deviceTroubleshootingInstructions: values.deviceTroubleshootingInstructions,
             maintenanceLog: values?.maintenanceLog, // Cần thêm thông tin nếu có
@@ -66,6 +58,52 @@ const DevicesDetailTopbar: React.FC<DevicesDetailTopbarProps> = ({ form, onFinis
             maintenanceSchedule: values.maintenanceSchedule,
             notes: values.notes,
             departmentIds: [department?.id], // ID của phòng ban có thể được lấy từ một nguồn khác
+        };
+    };
+
+    const createAdjustedValuesForCreate = (values: any, upload: any) => {
+
+        return {
+            DeviceEntity: [
+                {
+                    deviceAvatar: upload?.deviceAvatar?.length > 0 ? upload?.deviceAvatar : (values?.deviceAvatar ? values?.deviceAvatar : []), // List<string>
+                    deviceCode: values?.deviceCode, // string
+                    deviceName: values?.deviceName, // string
+                    manufacturerCountry: values?.manufacturerCountry, // string
+                    manufacturerName: Number(values?.manufacturerName || 0), // int
+                    manufacturingYear: Number(values?.manufacturingYear || 0), // int
+                    serialNumber: values?.serialNumber, // string
+                    machineStatus: values?.machineStatus, // string
+                    importSource: values?.importSource || "", // string
+                    functionName: values?.functionName, // string
+                    installationContract: values?.installationContract ? values?.installationContract : '', // string (adjust if needed)
+                    usageDate: values?.usageDate, // DateTime
+                    expirationDate: values?.expirationDate, // DateTime?
+                    labUsage: values?.labUsage, // string
+                    managerInfo: values?.managerInfo, // string
+                    managerPhoneNumber: values?.managerPhoneNumber, // string
+                    engineerInfo: values?.engineerInfo, // string
+                    engineerPhoneNumber: values?.engineerPhoneNumber, // string
+                    deviceUsageInstructions: values?.deviceUsageInstructions, // string
+                    appraisalFile: values?.appraisalFile, // string
+                    status: values?.status, // int
+                    maintenanceDate: values?.maintenanceDate, // DateTime?
+                    maintenanceNextDate: values?.maintenanceNextDate, // DateTime?
+                    maintenanceSchedule: Number(values?.maintenanceSchedule || 0), // int
+                    calibrationDate: values?.calibrationDate, // DateTime?
+                    calibrationNextDate: values?.calibrationNextDate, // DateTime?
+                    replaceDate: values?.replaceDate, // DateTime?
+                    replaceNextDate: values?.replaceNextDate, // DateTime?
+                    notes: values?.notes, // string
+                }
+            ],
+            MaintenanceRecordEntity: (values?.maintenanceLog || []).map((record: any) => ({
+                MaintaindDate: record.maintaindDate, // DateTime
+                MaintenanceDate: record.maintenanceDate, // string
+                FileLinks: record.fileLinks, // string
+                DeviceID: record.deviceId, // Guid
+                TypeOfMaintenance: record.typeOfMaintenance // int
+            }))
         };
     };
 
@@ -89,7 +127,7 @@ const DevicesDetailTopbar: React.FC<DevicesDetailTopbarProps> = ({ form, onFinis
                         uploadContract?.push(respon?.data);
                     })
                 }
-                
+
             }
         }
 
@@ -137,8 +175,9 @@ const DevicesDetailTopbar: React.FC<DevicesDetailTopbarProps> = ({ form, onFinis
                     }
                 });
             } else {
+                adjustedValues = createAdjustedValuesForCreate(values, upload); // Tạo adjustedValues cho create
                 // Nếu không, gọi API createDevices để thêm mới
-                await createDevices([adjustedValues]).then((res: any) => {
+                await createDevices(adjustedValues).then((res: any) => {
                     if (res?.succeeded) {
                         message.success('Lưu thành công');
                         onFinish(values); // Gọi hàm onFinish
@@ -162,11 +201,11 @@ const DevicesDetailTopbar: React.FC<DevicesDetailTopbarProps> = ({ form, onFinis
             // lưu danh sách file contract trước
             let upload = await uploadFiles();
 
-            const adjustedValues = createAdjustedValues(values, upload); // Tạo adjustedValues
+            let adjustedValues : any = createAdjustedValues(values, upload); // Tạo adjustedValues
 
             if (isEditDevice) {
                 // Nếu đang ở chế độ sửa, gọi API updateDevices
-                await updatedDevices([adjustedValues]).then((res: any) => {
+                await updatedDevices(adjustedValues).then((res: any) => {
                     if (res?.succeeded) {
                         message.success('Cập nhật thành công');
                         onFinish(values); // Gọi hàm onFinish
@@ -176,6 +215,7 @@ const DevicesDetailTopbar: React.FC<DevicesDetailTopbarProps> = ({ form, onFinis
                     }
                 });
             } else {
+                adjustedValues = createAdjustedValuesForCreate(values, upload); // Tạo adjustedValues cho create
                 // Nếu không, gọi API createDevices để thêm mới
                 await createDevices([adjustedValues]).then((res: any) => {
                     if (res?.succeeded) {

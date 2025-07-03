@@ -2,6 +2,7 @@
 using MediHub.Web.ApplicationCore.Auth.CurrentUser;
 using MediHub.Web.ApplicationCore.Interfaces;
 using MediHub.Web.Data.Repository;
+using MediHub.Web.DatabaseContext.AppDbcontext;
 using MediHub.Web.DatabaseContext.DapperDbContext;
 using MediHub.Web.HttpConfig;
 using MediHub.Web.Models;
@@ -13,12 +14,14 @@ namespace MediHub.Web.ApplicationCore.Service
         private readonly IRepository _repository;
         private readonly ICurrentUser _currentUser;
         private readonly MediHubDapperContext _mediHubContext;
+        private readonly MediHubContext _hubContext;
 
-        public DevicesService(IRepository repository, ICurrentUser currentUser, MediHubDapperContext mediHubContext)
+        public DevicesService(IRepository repository, ICurrentUser currentUser, MediHubDapperContext mediHubContext, MediHubContext hubContext)
         {
             _repository = repository;
             _currentUser = currentUser;
             _mediHubContext = mediHubContext;
+            _hubContext = hubContext;
         }
 
         #region Common
@@ -27,8 +30,8 @@ namespace MediHub.Web.ApplicationCore.Service
         /// </summary>
         /// <param name="devices"></param>
         /// <returns></returns>
-        /// CreatedBy: PQ Huy (28.11.2024)
-        public async Task<ServiceResponse> Create(List<DeviceEntity> devices)
+        /// CreatedBy: HieuNM
+        public async Task<ServiceResponse> Create(List<DeviceEntity> devices, List<MaintenanceRecordEntity> maintenanceRecords)
         {
             try
             {
@@ -39,6 +42,15 @@ namespace MediHub.Web.ApplicationCore.Service
                     device.UpdatedBy = _currentUser.GetEmail();
 
                     await _repository.AddAsync(device);
+                    foreach (var maintenance in maintenanceRecords)
+                    {
+                        if (maintenance.DeviceID.Equals(device.Id))
+                        {
+                            device.IsDeleted = false;
+                            maintenance.CreatedBy = _currentUser.GetEmail();
+                            maintenance.UpdatedBy = _currentUser.GetEmail();
+                        }
+                    }
                 }
 
                 await _repository.SaveChangeAsync();
@@ -55,7 +67,7 @@ namespace MediHub.Web.ApplicationCore.Service
         /// 
         /// </summary>
         /// <returns></returns>
-        /// CreatedBy: PQ Huy (28.11.2024)
+        /// CreatedBy: HieuNM
         public async Task<ServiceResponse> Get()
         {
             var reuslt = new List<DeviceEntity>();
@@ -76,7 +88,7 @@ namespace MediHub.Web.ApplicationCore.Service
         /// 
         /// </summary>
         /// <returns></returns>
-        /// CreatedBy: PQ Huy (28.11.2024)
+        /// CreatedBy: HieuNM
         public async Task<ServiceResponse> Get(Guid id)
         {
             var reuslt = new DeviceEntity();
@@ -98,7 +110,7 @@ namespace MediHub.Web.ApplicationCore.Service
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        /// CreatedBy: PQ Huy (28.11.2024)
+        /// CreatedBy: HieuNM
         public async Task<ServiceResponse> Get(List<Guid> ids)
         {
             var result = new List<DeviceEntity>();
@@ -122,7 +134,7 @@ namespace MediHub.Web.ApplicationCore.Service
         /// </summary>
         /// <param name="devices"></param>
         /// <returns></returns>
-        /// CreatedBy: PQ Huy (28.11.2024)
+        /// CreatedBy: HieuNM
         public async Task<ServiceResponse> Update(List<DeviceEntity> devices)
         {
             var reuslt = new List<DeviceEntity>();
@@ -148,7 +160,7 @@ namespace MediHub.Web.ApplicationCore.Service
         /// </summary>
         /// <param name="ids"></param>
         /// <returns></returns>
-        /// CreatedBy: PQ Huy (28.11.2024)
+        /// CreatedBy: HieuNM
         public async Task<ServiceResponse> Delete(List<Guid> ids)
         {
             try
@@ -215,6 +227,21 @@ namespace MediHub.Web.ApplicationCore.Service
             }
 
             return Ok(result);
+        }
+
+        public async Task<ServiceResponse> GetDeviceByManufacturerName(int manufacturerName)
+        {
+            var devicesEntities = new List<DeviceEntity>();
+
+            try
+            {
+                devicesEntities = _hubContext.DeviceEntity.Where(record => record.ManufacturerName == manufacturerName).ToList();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            return Ok(devicesEntities);
         }
         #endregion
     }

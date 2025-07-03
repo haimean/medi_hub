@@ -55,13 +55,13 @@ namespace MediHub.Web.Data.Repository
             where TEntity : class, IEntity<TKey>
             where TKey : IEquatable<TKey>
         {
-            if (entity is ISoftDelete deleteEntity)
+/*            if (entity is ISoftDelete deleteEntity)
             {
                 deleteEntity.IsDeleted = true;
                 DbContext.Update(entity);
 
                 return Task.CompletedTask;
-            }
+            }*/
 
             DbContext.Remove(entity);
 

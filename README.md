@@ -35,3 +35,4 @@ MediHub is an integrated ecosystem designed to serve healthcare organizations, p
 ```bash  
 git clone https://github.com/<your-username>/medihub.git  
 cd medihub  
+# medi_hub

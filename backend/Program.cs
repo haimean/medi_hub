@@ -54,7 +54,7 @@ builder.Services.AddSwaggerGen(option =>
 
 Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
 
-var conn = !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("MediHubConnectionString")) ? Environment.GetEnvironmentVariable("MediHubConnectionString") : "Server=wh-idd-test-dev.c9lyw52w9grj.ap-southeast-1.rds.amazonaws.com;Port=5432;Database=qaqc;UserId=do_invoice;Password=wohhup2021";
+var conn = !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("MediHubConnectionString")) ? Environment.GetEnvironmentVariable("MediHubConnectionString") : "Server=localhost;Port=5432;Database=postgres;User Id=postgres;Password=220900";
 builder.Services.AddDbContext<MediHubContext>(opt => opt.UseNpgsql(conn));
 
 builder.Services.RegisterAppService();
