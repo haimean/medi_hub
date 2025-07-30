@@ -467,8 +467,10 @@ const DevicesDetail = () => {
       <DevicesDetailTopbar
         form={form}
         onFinish={onFinish}
-        fileListContract={fileListContract}
-        fileList={fileList}
+        appraisalFile={null}
+        deviceAvatarFile={null}
+        deviceUsageInstructionsFile={null}
+        installationContractFile={null}
       />
       <div className="devices-detail__content">
         <Form

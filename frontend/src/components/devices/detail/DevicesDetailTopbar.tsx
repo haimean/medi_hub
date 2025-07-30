@@ -13,15 +13,19 @@ import { useSelector } from "react-redux";
 interface DevicesDetailTopbarProps {
   form: FormInstance; // Định nghĩa kiểu cho form
   onFinish: (values: any) => void; // Định nghĩa kiểu cho hàm onFinish
-  fileListContract: any;
-  fileList: any;
+  deviceAvatarFile: any;
+  deviceUsageInstructionsFile: any;
+  appraisalFile: any;
+  installationContractFile: any;
 }
 
 const DevicesDetailTopbar: React.FC<DevicesDetailTopbarProps> = ({
   form,
   onFinish,
-  fileListContract,
-  fileList,
+  deviceAvatarFile,
+  deviceUsageInstructionsFile,
+  appraisalFile,
+  installationContractFile,
 }) => {
   let navigate = useNavigate();
   const department = useSelector((state: any) => state.department); // Lấy department từ store
@@ -91,53 +95,56 @@ const DevicesDetailTopbar: React.FC<DevicesDetailTopbarProps> = ({
   const uploadFiles = async (values: any) => {
     console.log("🚀 ~ uploadFiles ~ values:", values);
     let deviceAvatar = "";
+    let deviceUsageInstructions = "";
+    let appraisalFileName = "";
     let installationContract = "";
-    let appraisalFile = "";
     // Ảnh đại diện deviceAvatar
-    if (values.deviceAvatar?.length > 0) {
-      const file = values.deviceAvatar[0];
-      if (file.originFileObj) {
-        await uploadDoc({
-          file: file.originFileObj,
-          urlTemp: "deviceAvatar",
-        }).then((respon) => {
-          console.log("🚀 ~ uploadFiles ~ respon:", respon);
-          deviceAvatar = respon?.data;
-        });
-      }
-    }
-    if (values.installationContract?.length > 0) {
-      const file = values.installationContract[0];
-      if (file.originFileObj) {
-        await uploadDoc({
-          file: file.originFileObj,
-          urlTemp: "installationContract",
-        }).then((respon) => {
-          console.log("🚀 ~ uploadFiles ~ respon:", respon);
-          installationContract = respon?.data;
-        });
-      }
-    }
-    if (values.appraisalFile?.length > 0) {
-      const file = values.appraisalFile[0];
-      if (file.originFileObj) {
-        await uploadDoc({
-          file: file.originFileObj,
-          urlTemp: "appraisalFile",
-        }).then((respon) => {
-          console.log("🚀 ~ uploadFiles ~ respon:", respon);
-          appraisalFile = respon?.data;
-        });
-      }
+    if (deviceAvatarFile.originFileObj) {
+      await uploadDoc({
+        file: deviceAvatarFile.originFileObj,
+        urlTemp: "deviceAvatar",
+      }).then((respon) => {
+        console.log("🚀 ~ uploadFiles ~ respon:", respon);
+        deviceAvatar = respon?.data;
+      });
     }
 
-    //     Hồ sơ thẩm định  installationContract
+    // Hướng dẫn sử dụng  deviceUsageInstructions
+    if (deviceUsageInstructionsFile.originFileObj) {
+      await uploadDoc({
+        file: deviceUsageInstructionsFile.originFileObj,
+        urlTemp: "deviceUsageInstructions",
+      }).then((respon) => {
+        console.log("🚀 ~ uploadFiles ~ respon:", respon);
+        deviceUsageInstructions = respon?.data;
+      });
+    }
+    // Hồ sơ thẩm định  appraisalFile
+    if (appraisalFile.originFileObj) {
+      await uploadDoc({
+        file: appraisalFile.originFileObj,
+        urlTemp: "appraisalFile",
+      }).then((respon) => {
+        console.log("🚀 ~ uploadFiles ~ respon:", respon);
+        appraisalFileName = respon?.data;
+      });
+    }
     // Hợp đồng - Pháp lý installationContract
+    if (installationContractFile.originFileObj) {
+      await uploadDoc({
+        file: installationContractFile.originFileObj,
+        urlTemp: "installationContract",
+      }).then((respon) => {
+        console.log("🚀 ~ uploadFiles ~ respon:", respon);
+        installationContract = respon?.data;
+      });
+    }
 
     return {
       deviceAvatar,
       installationContract,
-      appraisalFile,
+      appraisalFile: appraisalFileName,
+      deviceUsageInstructions,
     };
   };
 
