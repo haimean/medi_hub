@@ -80,7 +80,7 @@ namespace MediHub.Web.ApplicationCore.Service
                 await file.CopyToAsync(stream);
             }
 
-            return Ok(file.FileName);
+            return Ok(filePath);
         }
 
         /// <summary>

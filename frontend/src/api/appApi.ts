@@ -114,6 +114,11 @@ export async function deleteDevices(params: any) {
 //#endregion
 
 //#region API Common
+interface UploadParams {
+  key?: string;
+  urlTemp: string;
+  file: File;
+}
 
 export async function uploadDocs(params: any) {
   return await axiosClient.post(
@@ -125,10 +130,14 @@ export async function uploadDocs(params: any) {
   );
 }
 
-export async function uploadDoc(key: string, params: any) {
+export async function uploadDoc({ key, urlTemp, file }: UploadParams) {
+  const formData = new FormData();
+  // Thêm các trường dữ liệu đơn giản vào FormData
+  // Thêm file vào FormData. Tên trường 'file' phải khớp với tên biến ở backend.
+  formData.append("file", file);
   return await axiosClient.post(
-    `${process.env.REACT_APP_API_URL}/v1/common/upload-doc?key=${key}`,
-    params,
+    `${process.env.REACT_APP_API_URL}/v1/common/upload-doc?key=${key}&urlTemp=${urlTemp}`,
+    formData,
     {
       headers: { "Content-Type": "multipart/form-data" },
     }
