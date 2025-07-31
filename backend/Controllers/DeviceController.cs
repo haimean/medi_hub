@@ -1,4 +1,5 @@
-﻿using MediHub.Web.ApplicationCore.Interfaces;
+﻿using Azure;
+using MediHub.Web.ApplicationCore.Interfaces;
 using MediHub.Web.Dtos.Common;
 using MediHub.Web.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -22,9 +23,9 @@ namespace MediHub.Web.Controllers
         /// <param name="devices"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] InsertDeviceRequest devicesRequest)
+        public async Task<IActionResult> Create([FromBody] UpdateDeviceRequest devicesRequest)
         {
-            var response = await _devicesService.Create(devicesRequest.DeviceEntity, devicesRequest.MaintenanceRecordEntity);
+            var response = await _devicesService.Create(devicesRequest);
             return StatusCode((int)response.StatusCode, response);
         }
 
@@ -68,9 +69,9 @@ namespace MediHub.Web.Controllers
         /// <param name="devices"></param>
         /// <returns></returns>
         [HttpPut]
-        public async Task<IActionResult> Update([FromBody] List<DeviceEntity> devices)
+        public async Task<IActionResult> Update([FromBody] UpdateDeviceRequest devicesRequest)
         {
-            var response = await _devicesService.Update(devices);
+            var response = await _devicesService.Update(devicesRequest);
             return StatusCode((int)response.StatusCode, response);
         }
 
@@ -102,6 +103,20 @@ namespace MediHub.Web.Controllers
         {
             var response = await _devicesService.GetDeviceByManufacturerName(manufactureName);
             return StatusCode((int) response.StatusCode, response);
+        }
+
+        [HttpGet("calibrationNextDate")]
+        public async Task<IActionResult> GetDeviceByCalibrationNextDate()
+        {
+            var response = await _devicesService.GetDeviceByCalibrationNextDate();
+            return StatusCode(response.StatusCode, response);
+        }
+
+        [HttpGet("maintenanceNextDate")]
+        public async Task<IActionResult> GetDeviceByMaintenanceNextDate()
+        {
+            var response = await _devicesService.GetDeviceByMaintenanceNextDate();
+            return StatusCode(response.StatusCode, response);
         }
     }
 }

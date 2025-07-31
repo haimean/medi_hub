@@ -91,6 +91,9 @@
               "schema": {
                 "type": "object",
                 "properties": {
+                  "urlTemp": {
+                    "type": "string"
+                  },
                   "files": {
                     "type": "array",
                     "items": {
@@ -101,6 +104,9 @@
                 }
               },
               "encoding": {
+                "urlTemp": {
+                  "style": "form"
+                },
                 "files": {
                   "style": "form"
                 }
@@ -123,6 +129,14 @@
         "parameters": [
           {
             "name": "key",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "urlTemp",
             "in": "query",
             "style": "form",
             "schema": {
@@ -228,17 +242,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/InsertDeviceRequest"
+                "$ref": "#/components/schemas/UpdateDeviceRequest"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/InsertDeviceRequest"
+                "$ref": "#/components/schemas/UpdateDeviceRequest"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/InsertDeviceRequest"
+                "$ref": "#/components/schemas/UpdateDeviceRequest"
               }
             }
           }
@@ -267,26 +281,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/DeviceEntity"
-                }
+                "$ref": "#/components/schemas/UpdateDeviceRequest"
               }
             },
             "text/json": {
               "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/DeviceEntity"
-                }
+                "$ref": "#/components/schemas/UpdateDeviceRequest"
               }
             },
             "application/*+json": {
               "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/DeviceEntity"
-                }
+                "$ref": "#/components/schemas/UpdateDeviceRequest"
               }
             }
           }
@@ -423,6 +428,30 @@
         }
       }
     },
+    "/v1/devices/calibrationNextDate": {
+      "get": {
+        "tags": [
+          "Devices"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/v1/devices/maintenanceNextDate": {
+      "get": {
+        "tags": [
+          "Devices"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/medihub/healthcheck2": {
       "get": {
         "tags": [
@@ -434,7 +463,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/StringString<>f__AnonymousType5"
+                  "$ref": "#/components/schemas/StringString<>f__AnonymousType6"
                 }
               }
             }
@@ -761,26 +790,6 @@
         },
         "additionalProperties": false
       },
-      "InsertDeviceRequest": {
-        "type": "object",
-        "properties": {
-          "deviceEntity": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DeviceEntity"
-            },
-            "nullable": true
-          },
-          "maintenanceRecordEntity": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/MaintenanceRecordEntity"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
       "LoginRequest": {
         "type": "object",
         "properties": {
@@ -829,7 +838,8 @@
           },
           "maintaindDate": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "nullable": true
           },
           "maintenanceDate": {
             "type": "string",
@@ -850,7 +860,7 @@
         },
         "additionalProperties": false
       },
-      "StringString<>f__AnonymousType5": {
+      "StringString<>f__AnonymousType6": {
         "type": "object",
         "properties": {
           "env": {
@@ -859,6 +869,22 @@
           },
           "mediHubConnectionString": {
             "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateDeviceRequest": {
+        "type": "object",
+        "properties": {
+          "deviceEntity": {
+            "$ref": "#/components/schemas/DeviceEntity"
+          },
+          "maintenanceRecordEntity": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MaintenanceRecordEntity"
+            },
             "nullable": true
           }
         },

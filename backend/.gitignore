@@ -1,0 +1,75 @@
+# Ignores for Visual Studio, .NET, and C# projects.
+# This file is based on the official gitignore template for Visual Studio.
+# https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
+
+## Ignore folders and files created by Visual Studio
+.vs/
+[Dd]ebug/
+[Rr]elease/
+[Bb]in/
+[Oo]bj/
+*.log
+*.pdb
+*.suo
+*.user
+*.userprefs
+*.vssscc
+*.vspscc
+*.vsproj
+*.sln.docstates
+*.vshost.*
+*.VC.db
+*.VC.VC.sdf
+*.VC.sdf
+*.opensdf
+*.intellisense.cache
+*.ipdb
+*.tlog
+
+## Ignore NuGet packages
+[Pp]ackages/
+# project.json/project.lock.json are obsolete, but you may have them in older projects
+project.lock.json
+project.fragment.lock.json
+# Nuget packages and restore files for newer .NET projects
+*.nupkg
+*.snupkg
+*.nuspec
+# The .NET SDK's NuGet cache is stored in the user's profile directory. You can ignore it.
+.nuget/
+
+## Ignore generated files
+Generated_Code/
+CodeCoverage.config
+*.codecoverage
+*.testsettings
+TestResults/
+*.trx
+*.sksk
+*.dll.mdb
+*.exe.mdb
+*.cache
+*.zip
+*.rar
+*.7z
+# Visual Studio Code specific ignore
+.vscode/
+
+## Ignore Rider/ReSharper
+*.ReSharper/
+*.ReSharper.user
+_ReSharper.*/
+
+## Ignore a few more common build/tools folders
+node_modules/
+bower_components/
+
+# Local settings and data
+*.local
+[Tt]emp/
+[Tt]emporary/
+[Dd]ata/
+_Local/
+
+# Dotnet tool manifest
+.config/dotnet-tools.json

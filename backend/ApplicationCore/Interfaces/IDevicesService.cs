@@ -1,4 +1,5 @@
-﻿using MediHub.Web.HttpConfig;
+﻿using MediHub.Web.Dtos.Common;
+using MediHub.Web.HttpConfig;
 using MediHub.Web.Models;
 
 namespace MediHub.Web.ApplicationCore.Interfaces
@@ -10,7 +11,7 @@ namespace MediHub.Web.ApplicationCore.Interfaces
         /// </summary>
         /// <param name="devices"></param>
         /// <returns></returns>
-        Task<ServiceResponse> Create(List<DeviceEntity> devices, List<MaintenanceRecordEntity> maintenanceRecords);
+        Task<ServiceResponse> Create(UpdateDeviceRequest deviceRequest);
 
         /// <summary>
         /// Get all
@@ -36,7 +37,7 @@ namespace MediHub.Web.ApplicationCore.Interfaces
         /// </summary>
         /// <param name="devices"></param>
         /// <returns></returns>
-        Task<ServiceResponse> Update(List<DeviceEntity> devices);
+        Task<ServiceResponse> Update(UpdateDeviceRequest devicesRequest);
 
         /// <summary>
         /// Delete
@@ -57,5 +58,9 @@ namespace MediHub.Web.ApplicationCore.Interfaces
         /// <param name="mamufaceturer"></param>
         /// <returns></returns>
         Task<ServiceResponse> GetDeviceByManufacturerName(int mamufaceturer);
+
+        Task<ServiceResponse> GetDeviceByCalibrationNextDate();
+
+        Task<ServiceResponse> GetDeviceByMaintenanceNextDate();
     }
 }

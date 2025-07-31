@@ -76,9 +76,9 @@ C:\Users\maaur\OneDrive\Máy tính\Project\MediHub\backend\obj\Debug\net7.0\stat
 C:\Users\maaur\OneDrive\Máy tính\Project\MediHub\backend\obj\Debug\net7.0\staticwebassets.build.json
 C:\Users\maaur\OneDrive\Máy tính\Project\MediHub\backend\obj\Debug\net7.0\staticwebassets.development.json
 C:\Users\maaur\OneDrive\Máy tính\Project\MediHub\backend\obj\Debug\net7.0\scopedcss\bundle\MediHub.Web.styles.css
+C:\Users\maaur\OneDrive\Máy tính\Project\MediHub\backend\obj\Debug\net7.0\MediHub..21EDAECE.Up2Date
 C:\Users\maaur\OneDrive\Máy tính\Project\MediHub\backend\obj\Debug\net7.0\MediHub.Web.dll
 C:\Users\maaur\OneDrive\Máy tính\Project\MediHub\backend\obj\Debug\net7.0\refint\MediHub.Web.dll
 C:\Users\maaur\OneDrive\Máy tính\Project\MediHub\backend\obj\Debug\net7.0\MediHub.Web.pdb
 C:\Users\maaur\OneDrive\Máy tính\Project\MediHub\backend\obj\Debug\net7.0\MediHub.Web.genruntimeconfig.cache
 C:\Users\maaur\OneDrive\Máy tính\Project\MediHub\backend\obj\Debug\net7.0\ref\MediHub.Web.dll
-C:\Users\maaur\OneDrive\Máy tính\Project\MediHub\backend\obj\Debug\net7.0\MediHub..21EDAECE.Up2Date

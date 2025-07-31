@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using MediHub.Web.DatabaseContext.AppDbcontext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -12,9 +13,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MediHub.Web.Migrations
 {
     [DbContext(typeof(MediHubContext))]
-    partial class MediHubContextModelSnapshot : ModelSnapshot
+    [Migration("20250729173012_[updateDateTimeToNull]")]
+    partial class updateDateTimeToNull
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -196,6 +199,10 @@ namespace MediHub.Web.Migrations
                     b.Property<string>("FileLinks")
                         .HasColumnType("text")
                         .HasColumnName("file_links");
+
+                    b.Property<string>("FileName")
+                        .HasColumnType("text")
+                        .HasColumnName("file_name");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean")

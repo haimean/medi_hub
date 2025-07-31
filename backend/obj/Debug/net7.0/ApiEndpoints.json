@@ -57,7 +57,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "\u003C\u003Ef__AnonymousType5\u00602[[System.String, System.Private.CoreLib, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "\u003C\u003Ef__AnonymousType6\u00602[[System.String, System.Private.CoreLib, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "application/json"
         ],
@@ -111,6 +111,11 @@
         "IsRequired": false
       },
       {
+        "Name": "urlTemp",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
         "Name": "file",
         "Type": "Microsoft.AspNetCore.Http.IFormFile",
         "IsRequired": false
@@ -126,6 +131,11 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [
+      {
+        "Name": "urlTemp",
+        "Type": "System.String",
+        "IsRequired": false
+      },
       {
         "Name": "files",
         "Type": "System.Collections.Generic.List\u00601[[Microsoft.AspNetCore.Http.IFormFile, Microsoft.AspNetCore.Http.Features, Version=7.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60]]",
@@ -144,7 +154,7 @@
     "Parameters": [
       {
         "Name": "devicesRequest",
-        "Type": "MediHub.Web.Dtos.Common.InsertDeviceRequest",
+        "Type": "MediHub.Web.Dtos.Common.UpdateDeviceRequest",
         "IsRequired": true
       }
     ],
@@ -169,8 +179,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "devices",
-        "Type": "System.Collections.Generic.List\u00601[[MediHub.Web.Models.DeviceEntity, MediHub.Web, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Name": "devicesRequest",
+        "Type": "MediHub.Web.Dtos.Common.UpdateDeviceRequest",
         "IsRequired": true
       }
     ],
@@ -190,6 +200,16 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MediHub.Web.Controllers.DevicesController",
+    "Method": "GetDeviceByCalibrationNextDate",
+    "RelativePath": "v1/devices/calibrationNextDate",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {
@@ -222,6 +242,16 @@
         "IsRequired": false
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MediHub.Web.Controllers.DevicesController",
+    "Method": "GetDeviceByMaintenanceNextDate",
+    "RelativePath": "v1/devices/maintenanceNextDate",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {

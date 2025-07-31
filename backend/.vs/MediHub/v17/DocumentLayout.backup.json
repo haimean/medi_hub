@@ -3,12 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\models\\deviceentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|solutionrelative:models\\deviceentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\controllers\\commoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|solutionrelative:controllers\\commoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\applicationcore\\service\\commonservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|solutionrelative:applicationcore\\service\\commonservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\applicationcore\\interfaces\\icommonservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|solutionrelative:applicationcore\\interfaces\\icommonservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\applicationcore\\service\\devicesservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|solutionrelative:applicationcore\\service\\devicesservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\models\\maintenancerecordentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|solutionrelative:models\\maintenancerecordentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\controllers\\devicecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -19,52 +31,88 @@
       "RelativeMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|solutionrelative:dtos\\insertdevicerequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\applicationcore\\service\\devicesservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|solutionrelative:applicationcore\\service\\devicesservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\applicationcore\\interfaces\\idevicesservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|solutionrelative:applicationcore\\interfaces\\idevicesservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|solutionrelative:dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\models\\deviceentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|solutionrelative:models\\deviceentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\httpconfig\\serviceresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|solutionrelative:httpconfig\\serviceresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\models\\common\\ibaseentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|solutionrelative:models\\common\\ibaseentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\applicationcore\\service\\usersservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|solutionrelative:applicationcore\\service\\usersservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\data\\repository\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|solutionrelative:data\\repository\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\data\\repository\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|solutionrelative:data\\repository\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\models\\common\\ientity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|solutionrelative:models\\common\\ientity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\applicationcore\\interfaces\\idevicesservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|solutionrelative:applicationcore\\interfaces\\idevicesservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\models\\common\\entity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|solutionrelative:models\\common\\entity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\applicationcore\\service\\maintenancerecordservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|solutionrelative:applicationcore\\service\\maintenancerecordservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\models\\common\\isoftdelete.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|solutionrelative:models\\common\\isoftdelete.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\controllers\\commoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|solutionrelative:controllers\\commoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|solutionrelative:controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\applicationcore\\interfaces\\iauthservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|solutionrelative:applicationcore\\interfaces\\iauthservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\applicationcore\\service\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|solutionrelative:applicationcore\\service\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\models\\userentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|solutionrelative:models\\userentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\applicationcore\\service\\maintenancerecordservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|solutionrelative:applicationcore\\service\\maintenancerecordservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\applicationcore\\interfaces\\iauthservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|solutionrelative:applicationcore\\interfaces\\iauthservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\aws\\awsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|solutionrelative:aws\\awsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\httpconfig\\httpstatuscodefilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|solutionrelative:httpconfig\\httpstatuscodefilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\httpconfig\\httpendpoint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|solutionrelative:httpconfig\\httpendpoint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\databasecontext\\appdbcontext\\medihubcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|solutionrelative:databasecontext\\appdbcontext\\medihubcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|solutionrelative:controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\aws\\dtos\\uploadfilerequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|solutionrelative:aws\\dtos\\uploadfilerequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\httpconfig\\serviceresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|solutionrelative:httpconfig\\serviceresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|solutionrelative:dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\models\\userentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|solutionrelative:models\\userentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -81,14 +129,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\dtos\\common\\searchdorequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|solutionrelative:dtos\\common\\searchdorequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\applicationcore\\service\\usersservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|solutionrelative:applicationcore\\service\\usersservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\databasecontext\\appdbcontext\\medihubcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|solutionrelative:databasecontext\\appdbcontext\\medihubcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\databasecontext\\dapperdbcontext\\medihubdappercontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -123,32 +163,8 @@
       "RelativeMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|solutionrelative:properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\models\\common\\ibaseentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|solutionrelative:models\\common\\ibaseentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\profiles\\mappingprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|solutionrelative:profiles\\mappingprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\models\\common\\baseentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|solutionrelative:models\\common\\baseentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\models\\common\\ientity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|solutionrelative:models\\common\\ientity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\models\\common\\entity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|solutionrelative:models\\common\\entity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\models\\common\\idatetime.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|solutionrelative:models\\common\\idatetime.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\aws\\awsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|solutionrelative:aws\\awsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\aws\\iawsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -163,16 +179,8 @@
       "RelativeMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|solutionrelative:aws\\dtos\\gets3jsondatarequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\applicationcore\\service\\commonservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|solutionrelative:applicationcore\\service\\commonservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\applicationcore\\auth\\currentuser\\currentuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|solutionrelative:applicationcore\\auth\\currentuser\\currentuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\aws\\dtos\\uploadfilerequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|solutionrelative:aws\\dtos\\uploadfilerequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6D93F399-B8DE-4612-9D22-11968F8DD08C}|MediHub.Web.csproj|c:\\users\\maaur\\onedrive\\m\u00E1y t\u00EDnh\\project\\medihub\\backend\\aws\\dtos\\awsoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -186,180 +194,299 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
+              "Title": "DeviceController.cs",
+              "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Controllers\\DeviceController.cs",
+              "RelativeDocumentMoniker": "Controllers\\DeviceController.cs",
+              "ToolTip": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Controllers\\DeviceController.cs",
+              "RelativeToolTip": "Controllers\\DeviceController.cs",
+              "ViewState": "AgIAADYAAAAAAAAAAAAgwEkAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-05T16:29:34.246Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "DevicesService.cs",
               "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\ApplicationCore\\Service\\DevicesService.cs",
               "RelativeDocumentMoniker": "ApplicationCore\\Service\\DevicesService.cs",
               "ToolTip": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\ApplicationCore\\Service\\DevicesService.cs",
               "RelativeToolTip": "ApplicationCore\\Service\\DevicesService.cs",
-              "ViewState": "AgIAAE4AAAAAAAAAAAAuwF0AAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAAL4AAAAAAAAAAAAcwNcAAAA/AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-07T13:45:53.059Z"
+              "WhenOpened": "2025-06-07T13:45:53.059Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Repository.cs",
-              "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Data\\Repository\\Repository.cs",
-              "RelativeDocumentMoniker": "Data\\Repository\\Repository.cs",
-              "ToolTip": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Data\\Repository\\Repository.cs",
-              "RelativeToolTip": "Data\\Repository\\Repository.cs",
-              "ViewState": "AgIAALAAAAAAAAAAAAAqwLwAAABDAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "ICommonService.cs",
+              "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\ApplicationCore\\Interfaces\\ICommonService.cs",
+              "RelativeDocumentMoniker": "ApplicationCore\\Interfaces\\ICommonService.cs",
+              "ToolTip": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\ApplicationCore\\Interfaces\\ICommonService.cs",
+              "RelativeToolTip": "ApplicationCore\\Interfaces\\ICommonService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwBIAAABEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-12T02:33:15.94Z"
+              "WhenOpened": "2025-07-29T17:58:58.227Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ServiceResponse.cs",
-              "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\HttpConfig\\ServiceResponse.cs",
-              "RelativeDocumentMoniker": "HttpConfig\\ServiceResponse.cs",
-              "ToolTip": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\HttpConfig\\ServiceResponse.cs",
-              "RelativeToolTip": "HttpConfig\\ServiceResponse.cs",
-              "ViewState": "AgIAAB0AAAAAAAAAAAA0wAsAAAAnAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "CommonService.cs",
+              "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\ApplicationCore\\Service\\CommonService.cs",
+              "RelativeDocumentMoniker": "ApplicationCore\\Service\\CommonService.cs",
+              "ToolTip": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\ApplicationCore\\Service\\CommonService.cs",
+              "RelativeToolTip": "ApplicationCore\\Service\\CommonService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwA4AAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-05T16:24:11.504Z"
+              "WhenOpened": "2025-07-28T03:27:09.953Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "MaintenanceRecordEntity.cs",
+              "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Models\\MaintenanceRecordEntity.cs",
+              "RelativeDocumentMoniker": "Models\\MaintenanceRecordEntity.cs",
+              "ToolTip": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Models\\MaintenanceRecordEntity.cs",
+              "RelativeToolTip": "Models\\MaintenanceRecordEntity.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAuwBIAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-25T08:10:49.07Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "CommonController.cs",
+              "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Controllers\\CommonController.cs",
+              "RelativeDocumentMoniker": "Controllers\\CommonController.cs",
+              "ToolTip": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Controllers\\CommonController.cs",
+              "RelativeToolTip": "Controllers\\CommonController.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAQwB0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-16T17:57:08.49Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "InsertDeviceRequest.cs",
+              "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Dtos\\InsertDeviceRequest.cs",
+              "RelativeDocumentMoniker": "Dtos\\InsertDeviceRequest.cs",
+              "ToolTip": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Dtos\\InsertDeviceRequest.cs",
+              "RelativeToolTip": "Dtos\\InsertDeviceRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-30T02:18:01.33Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "IDevicesService.cs",
+              "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\ApplicationCore\\Interfaces\\IDevicesService.cs",
+              "RelativeDocumentMoniker": "ApplicationCore\\Interfaces\\IDevicesService.cs",
+              "ToolTip": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\ApplicationCore\\Interfaces\\IDevicesService.cs",
+              "RelativeToolTip": "ApplicationCore\\Interfaces\\IDevicesService.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAACYAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-28T07:41:30.372Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "DeviceEntity.cs",
               "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Models\\DeviceEntity.cs",
               "RelativeDocumentMoniker": "Models\\DeviceEntity.cs",
               "ToolTip": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Models\\DeviceEntity.cs",
               "RelativeToolTip": "Models\\DeviceEntity.cs",
-              "ViewState": "AgIAAD0AAAAAAAAAAADwv1EAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAC8AAAAAAAAAAAAlwEYAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-16T17:27:20.842Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 9,
+              "Title": "IBaseEntity.cs",
+              "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Models\\Common\\IBaseEntity.cs",
+              "RelativeDocumentMoniker": "Models\\Common\\IBaseEntity.cs",
+              "ToolTip": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Models\\Common\\IBaseEntity.cs",
+              "RelativeToolTip": "Models\\Common\\IBaseEntity.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAUAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-11T15:29:17.181Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAALAAAAAAAAAAAAAAAL8AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAADgAAAAAAAAAAAAtwHMAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-05T16:25:36.503Z"
+              "WhenOpened": "2025-06-05T16:25:36.503Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Dockerfile",
-              "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Dockerfile",
-              "RelativeDocumentMoniker": "Dockerfile",
-              "ToolTip": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Dockerfile",
-              "RelativeToolTip": "Dockerfile",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-06-08T07:11:19.394Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "DeviceController.cs",
-              "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Controllers\\DeviceController.cs",
-              "RelativeDocumentMoniker": "Controllers\\DeviceController.cs",
-              "ToolTip": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Controllers\\DeviceController.cs",
-              "RelativeToolTip": "Controllers\\DeviceController.cs",
-              "ViewState": "AgIAABwAAAAAAAAAAAAiwCQAAAAJAAAAAAAAAA==",
+              "DocumentIndex": 11,
+              "Title": "UsersService.cs",
+              "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\ApplicationCore\\Service\\UsersService.cs",
+              "RelativeDocumentMoniker": "ApplicationCore\\Service\\UsersService.cs",
+              "ToolTip": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\ApplicationCore\\Service\\UsersService.cs",
+              "RelativeToolTip": "ApplicationCore\\Service\\UsersService.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAADoAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-05T16:29:34.246Z"
+              "WhenOpened": "2025-06-11T17:42:54.934Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "InsertDeviceRequest.cs",
-              "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Dtos\\InsertDeviceRequest.cs",
-              "RelativeDocumentMoniker": "Dtos\\InsertDeviceRequest.cs",
-              "ToolTip": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Dtos\\InsertDeviceRequest.cs",
-              "RelativeToolTip": "Dtos\\InsertDeviceRequest.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAcAAAArAAAAAAAAAA==",
+              "DocumentIndex": 13,
+              "Title": "IEntity.cs",
+              "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Models\\Common\\IEntity.cs",
+              "RelativeDocumentMoniker": "Models\\Common\\IEntity.cs",
+              "ToolTip": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Models\\Common\\IEntity.cs",
+              "RelativeToolTip": "Models\\Common\\IEntity.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAQAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-16T13:29:27.986Z"
+              "WhenOpened": "2025-07-28T07:52:45.439Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "IRepository.cs",
-              "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Data\\Repository\\IRepository.cs",
-              "RelativeDocumentMoniker": "Data\\Repository\\IRepository.cs",
-              "ToolTip": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Data\\Repository\\IRepository.cs",
-              "RelativeToolTip": "Data\\Repository\\IRepository.cs",
-              "ViewState": "AgIAACkAAAAAAAAAAAAUwDMAAAAWAAAAAAAAAA==",
+              "DocumentIndex": 12,
+              "Title": "Repository.cs",
+              "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Data\\Repository\\Repository.cs",
+              "RelativeDocumentMoniker": "Data\\Repository\\Repository.cs",
+              "ToolTip": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Data\\Repository\\Repository.cs",
+              "RelativeToolTip": "Data\\Repository\\Repository.cs",
+              "ViewState": "AgIAADAAAAAAAAAAAAAMwCUAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-11T17:36:41.357Z"
+              "WhenOpened": "2025-07-28T07:54:34.872Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "IDevicesService.cs",
-              "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\ApplicationCore\\Interfaces\\IDevicesService.cs",
-              "RelativeDocumentMoniker": "ApplicationCore\\Interfaces\\IDevicesService.cs",
-              "ToolTip": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\ApplicationCore\\Interfaces\\IDevicesService.cs",
-              "RelativeToolTip": "ApplicationCore\\Interfaces\\IDevicesService.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAAQwBgAAAAeAAAAAAAAAA==",
+              "DocumentIndex": 15,
+              "Title": "ISoftDelete.cs",
+              "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Models\\Common\\ISoftDelete.cs",
+              "RelativeDocumentMoniker": "Models\\Common\\ISoftDelete.cs",
+              "ToolTip": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Models\\Common\\ISoftDelete.cs",
+              "RelativeToolTip": "Models\\Common\\ISoftDelete.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-12T08:47:03.718Z"
+              "WhenOpened": "2025-07-28T07:52:58.7Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 14,
+              "Title": "Entity.cs",
+              "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Models\\Common\\Entity.cs",
+              "RelativeDocumentMoniker": "Models\\Common\\Entity.cs",
+              "ToolTip": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Models\\Common\\Entity.cs",
+              "RelativeToolTip": "Models\\Common\\Entity.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-25T07:46:13.275Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
               "Title": "MaintenanceRecordService.cs",
               "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\ApplicationCore\\Service\\MaintenanceRecordService.cs",
               "RelativeDocumentMoniker": "ApplicationCore\\Service\\MaintenanceRecordService.cs",
               "ToolTip": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\ApplicationCore\\Service\\MaintenanceRecordService.cs",
               "RelativeToolTip": "ApplicationCore\\Service\\MaintenanceRecordService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAJgAAAAAAAAAAAAswLIAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-11T17:33:55.124Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "IAuthService.cs",
-              "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\ApplicationCore\\Interfaces\\IAuthService.cs",
-              "RelativeDocumentMoniker": "ApplicationCore\\Interfaces\\IAuthService.cs",
-              "ToolTip": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\ApplicationCore\\Interfaces\\IAuthService.cs",
-              "RelativeToolTip": "ApplicationCore\\Interfaces\\IAuthService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAZAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-06T02:30:00.203Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 17,
               "Title": "AuthService.cs",
               "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\ApplicationCore\\Service\\AuthService.cs",
               "RelativeDocumentMoniker": "ApplicationCore\\Service\\AuthService.cs",
               "ToolTip": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\ApplicationCore\\Service\\AuthService.cs",
               "RelativeToolTip": "ApplicationCore\\Service\\AuthService.cs",
-              "ViewState": "AgIAABEAAAAAAAAAAAAAwI8AAAANAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-05T16:32:12.79Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "CommonController.cs",
-              "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Controllers\\CommonController.cs",
-              "RelativeDocumentMoniker": "Controllers\\CommonController.cs",
-              "ToolTip": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Controllers\\CommonController.cs",
-              "RelativeToolTip": "Controllers\\CommonController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 16,
+              "Title": "IAuthService.cs",
+              "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\ApplicationCore\\Interfaces\\IAuthService.cs",
+              "RelativeDocumentMoniker": "ApplicationCore\\Interfaces\\IAuthService.cs",
+              "ToolTip": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\ApplicationCore\\Interfaces\\IAuthService.cs",
+              "RelativeToolTip": "ApplicationCore\\Interfaces\\IAuthService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-16T17:57:08.49Z"
+              "WhenOpened": "2025-06-06T02:30:00.203Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 19,
+              "Title": "AwsService.cs",
+              "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Aws\\AwsService.cs",
+              "RelativeDocumentMoniker": "Aws\\AwsService.cs",
+              "ToolTip": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Aws\\AwsService.cs",
+              "RelativeToolTip": "Aws\\AwsService.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAASwE4AAABLAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-28T04:05:23.997Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "HttpStatusCodeFilter.cs",
+              "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\HttpConfig\\HttpStatusCodeFilter.cs",
+              "RelativeDocumentMoniker": "HttpConfig\\HttpStatusCodeFilter.cs",
+              "ToolTip": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\HttpConfig\\HttpStatusCodeFilter.cs",
+              "RelativeToolTip": "HttpConfig\\HttpStatusCodeFilter.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-28T04:30:18.445Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "HttpEndpoint.cs",
+              "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\HttpConfig\\HttpEndpoint.cs",
+              "RelativeDocumentMoniker": "HttpConfig\\HttpEndpoint.cs",
+              "ToolTip": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\HttpConfig\\HttpEndpoint.cs",
+              "RelativeToolTip": "HttpConfig\\HttpEndpoint.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-28T04:30:16.14Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "MediHubContext.cs",
+              "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\DatabaseContext\\AppDbcontext\\MediHubContext.cs",
+              "RelativeDocumentMoniker": "DatabaseContext\\AppDbcontext\\MediHubContext.cs",
+              "ToolTip": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\DatabaseContext\\AppDbcontext\\MediHubContext.cs",
+              "RelativeToolTip": "DatabaseContext\\AppDbcontext\\MediHubContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-06T08:01:57.816Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
               "Title": "UsersController.cs",
               "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Controllers\\UsersController.cs",
               "RelativeDocumentMoniker": "Controllers\\UsersController.cs",
@@ -371,7 +498,43 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 24,
+              "Title": "UploadFileRequest.cs",
+              "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Aws\\Dtos\\UploadFileRequest.cs",
+              "RelativeDocumentMoniker": "Aws\\Dtos\\UploadFileRequest.cs",
+              "ToolTip": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Aws\\Dtos\\UploadFileRequest.cs",
+              "RelativeToolTip": "Aws\\Dtos\\UploadFileRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-05T16:23:38.134Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "ServiceResponse.cs",
+              "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\HttpConfig\\ServiceResponse.cs",
+              "RelativeDocumentMoniker": "HttpConfig\\ServiceResponse.cs",
+              "ToolTip": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\HttpConfig\\ServiceResponse.cs",
+              "RelativeToolTip": "HttpConfig\\ServiceResponse.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAIA3wBQAAAB/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-05T16:24:11.504Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "Dockerfile",
+              "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Dockerfile",
+              "RelativeDocumentMoniker": "Dockerfile",
+              "ToolTip": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Dockerfile",
+              "RelativeToolTip": "Dockerfile",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-06-08T07:11:19.394Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
               "Title": "AuthController.cs",
               "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Controllers\\AuthController.cs",
               "RelativeDocumentMoniker": "Controllers\\AuthController.cs",
@@ -383,7 +546,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 27,
               "Title": "UserEntity.cs",
               "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Models\\UserEntity.cs",
               "RelativeDocumentMoniker": "Models\\UserEntity.cs",
@@ -395,31 +558,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "UsersService.cs",
-              "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\ApplicationCore\\Service\\UsersService.cs",
-              "RelativeDocumentMoniker": "ApplicationCore\\Service\\UsersService.cs",
-              "ToolTip": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\ApplicationCore\\Service\\UsersService.cs",
-              "RelativeToolTip": "ApplicationCore\\Service\\UsersService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAIUAAAAdAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-11T17:42:54.934Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "MediHubContext.cs",
-              "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\DatabaseContext\\AppDbcontext\\MediHubContext.cs",
-              "RelativeDocumentMoniker": "DatabaseContext\\AppDbcontext\\MediHubContext.cs",
-              "ToolTip": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\DatabaseContext\\AppDbcontext\\MediHubContext.cs",
-              "RelativeToolTip": "DatabaseContext\\AppDbcontext\\MediHubContext.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-06T08:01:57.816Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 31,
               "Title": "SearchDoRequest.cs",
               "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Dtos\\Common\\SearchDoRequest.cs",
               "RelativeDocumentMoniker": "Dtos\\Common\\SearchDoRequest.cs",
@@ -431,7 +570,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 29,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Dtos\\Common\\User.cs",
               "RelativeDocumentMoniker": "Dtos\\Common\\User.cs",
@@ -443,7 +582,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 30,
               "Title": "SearchRequest.cs",
               "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Dtos\\Common\\SearchRequest.cs",
               "RelativeDocumentMoniker": "Dtos\\Common\\SearchRequest.cs",
@@ -455,7 +594,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 32,
               "Title": "MediHubDapperContext.cs",
               "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\DatabaseContext\\DapperDbContext\\MediHubDapperContext.cs",
               "RelativeDocumentMoniker": "DatabaseContext\\DapperDbContext\\MediHubDapperContext.cs",
@@ -467,7 +606,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 33,
               "Title": "IMaintenanceRecordService.cs",
               "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\ApplicationCore\\Interfaces\\IMaintenanceRecordService.cs",
               "RelativeDocumentMoniker": "ApplicationCore\\Interfaces\\IMaintenanceRecordService.cs",
@@ -479,7 +618,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 34,
               "Title": "RegisterService.cs",
               "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\ApplicationCore\\Service\\RegisterService.cs",
               "RelativeDocumentMoniker": "ApplicationCore\\Service\\RegisterService.cs",
@@ -491,7 +630,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 35,
               "Title": "IUsersService.cs",
               "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\ApplicationCore\\Interfaces\\IUsersService.cs",
               "RelativeDocumentMoniker": "ApplicationCore\\Interfaces\\IUsersService.cs",
@@ -503,7 +642,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 36,
               "Title": "appsettings.Production.json",
               "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\appsettings.Production.json",
               "RelativeDocumentMoniker": "appsettings.Production.json",
@@ -515,7 +654,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 37,
               "Title": "appsettings.Development.json",
               "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\appsettings.Development.json",
               "RelativeDocumentMoniker": "appsettings.Development.json",
@@ -527,7 +666,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 39,
               "Title": "launchSettings.json",
               "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "Properties\\launchSettings.json",
@@ -539,7 +678,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 38,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\appsettings.json",
               "RelativeDocumentMoniker": "appsettings.json",
@@ -551,67 +690,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
-              "Title": "IBaseEntity.cs",
-              "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Models\\Common\\IBaseEntity.cs",
-              "RelativeDocumentMoniker": "Models\\Common\\IBaseEntity.cs",
-              "ToolTip": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Models\\Common\\IBaseEntity.cs",
-              "RelativeToolTip": "Models\\Common\\IBaseEntity.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAUAAAAaAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-11T15:29:17.181Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 31,
-              "Title": "MappingProfile.cs",
-              "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Profiles\\MappingProfile.cs",
-              "RelativeDocumentMoniker": "Profiles\\MappingProfile.cs",
-              "ToolTip": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Profiles\\MappingProfile.cs",
-              "RelativeToolTip": "Profiles\\MappingProfile.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-11T16:18:54.148Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 32,
-              "Title": "BaseEntity.cs",
-              "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Models\\Common\\BaseEntity.cs",
-              "RelativeDocumentMoniker": "Models\\Common\\BaseEntity.cs",
-              "ToolTip": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Models\\Common\\BaseEntity.cs",
-              "RelativeToolTip": "Models\\Common\\BaseEntity.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-11T15:30:11.146Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 33,
-              "Title": "IEntity.cs",
-              "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Models\\Common\\IEntity.cs",
-              "RelativeDocumentMoniker": "Models\\Common\\IEntity.cs",
-              "ToolTip": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Models\\Common\\IEntity.cs",
-              "RelativeToolTip": "Models\\Common\\IEntity.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-11T15:30:00.545Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 34,
-              "Title": "Entity.cs",
-              "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Models\\Common\\Entity.cs",
-              "RelativeDocumentMoniker": "Models\\Common\\Entity.cs",
-              "ToolTip": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Models\\Common\\Entity.cs",
-              "RelativeToolTip": "Models\\Common\\Entity.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-11T15:30:29.727Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 40,
               "Title": "IDateTime.cs",
               "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Models\\Common\\IDateTime.cs",
               "RelativeDocumentMoniker": "Models\\Common\\IDateTime.cs",
@@ -623,19 +702,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
-              "Title": "AwsService.cs",
-              "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Aws\\AwsService.cs",
-              "RelativeDocumentMoniker": "Aws\\AwsService.cs",
-              "ToolTip": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Aws\\AwsService.cs",
-              "RelativeToolTip": "Aws\\AwsService.cs",
-              "ViewState": "AgIAAHwAAAAAAAAAAAAkwJUAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-05T16:23:39.375Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 42,
               "Title": "GetS3SignedUrlRequest.cs",
               "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Aws\\Dtos\\GetS3SignedUrlRequest.cs",
               "RelativeDocumentMoniker": "Aws\\Dtos\\GetS3SignedUrlRequest.cs",
@@ -647,7 +714,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 41,
               "Title": "IAwsService.cs",
               "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Aws\\IAwsService.cs",
               "RelativeDocumentMoniker": "Aws\\IAwsService.cs",
@@ -659,7 +726,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 43,
               "Title": "GetS3JsonDataRequest.cs",
               "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Aws\\Dtos\\GetS3JsonDataRequest.cs",
               "RelativeDocumentMoniker": "Aws\\Dtos\\GetS3JsonDataRequest.cs",
@@ -671,19 +738,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
-              "Title": "CommonService.cs",
-              "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\ApplicationCore\\Service\\CommonService.cs",
-              "RelativeDocumentMoniker": "ApplicationCore\\Service\\CommonService.cs",
-              "ToolTip": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\ApplicationCore\\Service\\CommonService.cs",
-              "RelativeToolTip": "ApplicationCore\\Service\\CommonService.cs",
-              "ViewState": "AgIAAE0AAAAAAAAAAAAgwDQAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-07T14:18:57.558Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 44,
               "Title": "CurrentUserService.cs",
               "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\ApplicationCore\\Auth\\CurrentUser\\CurrentUserService.cs",
               "RelativeDocumentMoniker": "ApplicationCore\\Auth\\CurrentUser\\CurrentUserService.cs",
@@ -695,19 +750,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
-              "Title": "UploadFileRequest.cs",
-              "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Aws\\Dtos\\UploadFileRequest.cs",
-              "RelativeDocumentMoniker": "Aws\\Dtos\\UploadFileRequest.cs",
-              "ToolTip": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Aws\\Dtos\\UploadFileRequest.cs",
-              "RelativeToolTip": "Aws\\Dtos\\UploadFileRequest.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-05T16:23:38.134Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 45,
               "Title": "AwsOptions.cs",
               "DocumentMoniker": "C:\\Users\\maaur\\OneDrive\\M\u00E1y t\u00EDnh\\Project\\MediHub\\backend\\Aws\\Dtos\\AwsOptions.cs",
               "RelativeDocumentMoniker": "Aws\\Dtos\\AwsOptions.cs",

@@ -4,8 +4,12 @@ using MediHub.Web.ApplicationCore.Interfaces;
 using MediHub.Web.Data.Repository;
 using MediHub.Web.DatabaseContext.AppDbcontext;
 using MediHub.Web.DatabaseContext.DapperDbContext;
+using MediHub.Web.Dtos.Common;
 using MediHub.Web.HttpConfig;
 using MediHub.Web.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using SharpCompress.Common;
 
 namespace MediHub.Web.ApplicationCore.Service
 {
@@ -31,26 +35,33 @@ namespace MediHub.Web.ApplicationCore.Service
         /// <param name="devices"></param>
         /// <returns></returns>
         /// CreatedBy: HieuNM
-        public async Task<ServiceResponse> Create(List<DeviceEntity> devices, List<MaintenanceRecordEntity> maintenanceRecords)
+        public async Task<ServiceResponse> Create(UpdateDeviceRequest deviceRequest)
         {
             try
             {
-                foreach (var device in devices)
+                await _repository.AddAsync(deviceRequest.DeviceEntity);
+                foreach (var maintenance in deviceRequest.MaintenanceRecordEntity)
                 {
-                    device.IsDeleted = false;
-                    device.CreatedBy = _currentUser.GetEmail();
-                    device.UpdatedBy = _currentUser.GetEmail();
+                    maintenance.DeviceID = deviceRequest.DeviceEntity.Id;
+                    maintenance.CreatedBy = _currentUser.GetEmail();
+                    maintenance.UpdatedBy = _currentUser.GetEmail();
+                    await _repository.AddAsync(maintenance);
 
-                    await _repository.AddAsync(device);
-                    foreach (var maintenance in maintenanceRecords)
+                    var uploadedFiles = new List<string>();
+                    var filePath = string.Empty;
+                    if (maintenance.MaintenanceDate != null)
                     {
-                        if (maintenance.DeviceID.Equals(device.Id))
-                        {
-                            device.IsDeleted = false;
-                            maintenance.CreatedBy = _currentUser.GetEmail();
-                            maintenance.UpdatedBy = _currentUser.GetEmail();
-                        }
+                        filePath = Path.Combine("Uploads", maintenance.MaintaindDate.Value.Year.ToString()
+                        , $"{maintenance.Name}" + Guid.NewGuid());
                     }
+                    else
+                    {
+                        filePath = Path.Combine("Uploads", $"{maintenance.Name}" + Guid.NewGuid());
+                    }
+
+                    maintenance.FileLinks = filePath;
+                    await _repository.AddAsync(maintenance);
+
                 }
 
                 await _repository.SaveChangeAsync();
@@ -60,7 +71,7 @@ namespace MediHub.Web.ApplicationCore.Service
                 return BadRequest(ce.Message);
             }
 
-            return Ok(devices);
+            return Ok(deviceRequest);
         }
 
         /// <summary>
@@ -70,18 +81,32 @@ namespace MediHub.Web.ApplicationCore.Service
         /// CreatedBy: HieuNM
         public async Task<ServiceResponse> Get()
         {
-            var reuslt = new List<DeviceEntity>();
+            var result = new List<SelectDeviceRequest>();
 
             try
             {
-                reuslt = (await _repository.FindAllAsync<DeviceEntity>()).Where(c => c.IsDeleted != true).ToList();
+                result = await _repository.GetQueryable<DeviceEntity>()
+                    .Where(device => !device.IsDeleted)
+                    .GroupJoin(
+                        _repository.GetQueryable<MaintenanceRecordEntity>(),
+                        device => device.Id,
+                        maintenance => maintenance.DeviceID,
+                        (device, maintenances) => new { device, maintenances }
+                    )
+                    .Select(x => new SelectDeviceRequest
+                    {
+                        DeviceEntity = x.device,
+                        MaintenanceRecordEntity = x.maintenances,
+                    }
+                    )
+                    .ToListAsync();
             }
             catch (Exception ce)
             {
                 return BadRequest(ce.Message);
             }
 
-            return Ok(reuslt);
+            return Ok(result);
         }
 
         /// <summary>
@@ -91,18 +116,32 @@ namespace MediHub.Web.ApplicationCore.Service
         /// CreatedBy: HieuNM
         public async Task<ServiceResponse> Get(Guid id)
         {
-            var reuslt = new DeviceEntity();
+            var result = new SelectDeviceRequest();
 
             try
             {
-                reuslt = (await _repository.FindAsync<DeviceEntity>(id));
+                result = await _repository.GetQueryable<DeviceEntity>()
+                    .Where(c => !c.IsDeleted && (id == c.Id))
+                    .GroupJoin(
+                        _repository.GetQueryable<MaintenanceRecordEntity>(),
+                        device => device.Id,
+                        maintenance => maintenance.DeviceID,
+                        (device, maintenances) => new { device, maintenances }
+                    )
+                    .Select(x => new SelectDeviceRequest
+                    {
+                        DeviceEntity = x.device,
+                        MaintenanceRecordEntity = x.maintenances,
+                    }
+                    )
+                    .FirstOrDefaultAsync();
             }
             catch (Exception ce)
             {
                 return BadRequest(ce.Message);
             }
 
-            return Ok(reuslt);
+            return Ok(result);
         }
 
         /// <summary>
@@ -113,13 +152,25 @@ namespace MediHub.Web.ApplicationCore.Service
         /// CreatedBy: HieuNM
         public async Task<ServiceResponse> Get(List<Guid> ids)
         {
-            var result = new List<DeviceEntity>();
+            var result = new List<SelectDeviceRequest>();
 
             try
             {
-                result = (await _repository.FindAllAsync<DeviceEntity>())
-                        .Where(c => !c.IsDeleted && ids.Contains(c.Id))
-                        .ToList();
+                result = await _repository.GetQueryable<DeviceEntity>()
+                    .Where(c => !c.IsDeleted && ids.Contains(c.Id))
+                    .GroupJoin(
+                        _repository.GetQueryable<MaintenanceRecordEntity>(),
+                        device => device.Id,
+                        maintenance => maintenance.DeviceID,
+                        (device, maintenances) => new { device, maintenances }
+                    )
+                    .Select(x => new SelectDeviceRequest
+                    {
+                        DeviceEntity = x.device,
+                        MaintenanceRecordEntity = x.maintenances,
+                    }
+                    )
+                    .ToListAsync();
             }
             catch (Exception ce)
             {
@@ -135,24 +186,46 @@ namespace MediHub.Web.ApplicationCore.Service
         /// <param name="devices"></param>
         /// <returns></returns>
         /// CreatedBy: HieuNM
-        public async Task<ServiceResponse> Update(List<DeviceEntity> devices)
+        public async Task<ServiceResponse> Update(UpdateDeviceRequest devicesRequest)
         {
-            var reuslt = new List<DeviceEntity>();
-
             try
             {
-                foreach (var device in devices)
+                await _repository.UpdateAsync(devicesRequest.DeviceEntity);
+
+                IEnumerable<MaintenanceRecordEntity> data = await _repository
+                    .FindAllAsync<MaintenanceRecordEntity>(record => record.DeviceID == devicesRequest.DeviceEntity.Id);
+
+                var inputIds = new HashSet<Guid>();
+
+                foreach (var item in devicesRequest.MaintenanceRecordEntity)
                 {
-                    await _repository.UpdateAsync(device);
+                    if (item.Id != Guid.Empty) { inputIds.Add(item.Id); }
+                    else
+                    {
+                        var uploadedFiles = new List<string>();
+                        await _repository.AddAsync(item);
+                    }
+                }
+
+                foreach (MaintenanceRecordEntity maintenance in data)
+                {
+                    if (!inputIds.Contains(maintenance.Id))
+                    {
+                        if (File.Exists(maintenance.FileLinks))
+                        {
+                            File.Delete(maintenance.FileLinks);
+                        }
+                        await _repository.DeleteAsync(maintenance);
+                    }
                 }
             }
             catch (Exception ce)
             {
-                return Ok(devices, message: ce.Message);
+                return Ok(devicesRequest, message: ce.Message);
             }
 
             await _repository.SaveChangeAsync();
-            return Ok(devices);
+            return Ok(devicesRequest);
         }
 
         /// <summary>
@@ -175,6 +248,16 @@ namespace MediHub.Web.ApplicationCore.Service
                     {
                         await _repository.DeleteAsync<DeviceEntity>(id);
                         result.Add(id);
+
+                        var findMaintainCode = await _repository.FindAllAsync<MaintenanceRecordEntity>(record => record.DeviceID == id);
+                        foreach (var item in findMaintainCode)
+                        {
+                            if (File.Exists(item.FileLinks))
+                            {
+                                File.Delete(item.FileLinks);
+                            }
+                            await _repository.DeleteAsync<MaintenanceRecordEntity>(item.Id);
+                        }
                     }
                 }
 
@@ -235,10 +318,43 @@ namespace MediHub.Web.ApplicationCore.Service
 
             try
             {
-                devicesEntities = _hubContext.DeviceEntity.Where(record => record.ManufacturerName == manufacturerName).ToList();
+                devicesEntities = await _hubContext.DeviceEntity.Where(record => record.ManufacturerName == manufacturerName).ToListAsync();
             }
             catch (Exception ex)
             {
+                return BadRequest(ex.Message);
+            }
+            return Ok(devicesEntities);
+        }
+
+        public async Task<ServiceResponse> GetDeviceByCalibrationNextDate()
+        {
+            var devicesEntities = new List<DeviceEntity>();
+            try
+            {
+                devicesEntities = await _hubContext.DeviceEntity
+                    .Where(record => (record.CalibrationNextDate != null && (record.CalibrationNextDate.Value - DateTime.Now).TotalDays < 15))
+                    .ToListAsync();
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
+            return Ok(devicesEntities);
+        }
+        public async Task<ServiceResponse> GetDeviceByMaintenanceNextDate()
+        {
+            var devicesEntities = new List<DeviceEntity>();
+            try
+            {
+                devicesEntities = await _hubContext.DeviceEntity
+                    .Where(record => (record.MaintenanceNextDate != null && (record.MaintenanceNextDate.Value - DateTime.Now).TotalDays < 15))
+                    .ToListAsync();
+            }
+            catch (Exception ex)
+            {
+
                 return BadRequest(ex.Message);
             }
             return Ok(devicesEntities);

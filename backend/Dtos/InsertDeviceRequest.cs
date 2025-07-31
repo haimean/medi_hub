@@ -2,10 +2,15 @@
 
 namespace MediHub.Web.Dtos.Common
 {
-    public class InsertDeviceRequest
+    public class SelectDeviceRequest
     {
-        public List<DeviceEntity> DeviceEntity { get; set; }
-        public List<MaintenanceRecordEntity> MaintenanceRecordEntity { get; set; }
+        public DeviceEntity DeviceEntity { get; set; }
+        public IEnumerable<MaintenanceRecordEntity> MaintenanceRecordEntity { get; set; }
+    }
 
+    public class UpdateDeviceRequest
+    {
+        public DeviceEntity DeviceEntity { get; set; }
+        public List<MaintenanceRecordEntity> MaintenanceRecordEntity { get; set; }
     }
 }

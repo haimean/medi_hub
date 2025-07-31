@@ -3,6 +3,7 @@ using MediHub.Web.ApplicationCore.Interfaces;
 using MediHub.Web.Data.Repository;
 using MediHub.Web.HttpConfig;
 using MediHub.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MediHub.Web.ApplicationCore.Service
 {
@@ -23,6 +24,7 @@ namespace MediHub.Web.ApplicationCore.Service
         /// <param name="users"></param>
         /// <returns></returns>
         /// CreatedBy: HieuNM
+        [Authorize(Roles = "Admin")]
         public async Task<ServiceResponse> Create(List<UserEntity> users)
         {
             try
@@ -54,6 +56,7 @@ namespace MediHub.Web.ApplicationCore.Service
         /// </summary>
         /// <returns></returns>
         /// CreatedBy: HieuNM
+        [Authorize(Roles = "Admin")]
         public async Task<ServiceResponse> Get()
         {
             var result = new List<UserEntity>();
@@ -78,6 +81,7 @@ namespace MediHub.Web.ApplicationCore.Service
         /// <param name="ids"></param>
         /// <returns></returns>
         /// CreatedBy: HieuNM
+        [Authorize(Roles = "Admin")]
         public async Task<ServiceResponse> Get(List<Guid> ids)
         {
             var result = new List<UserEntity>();
@@ -102,6 +106,7 @@ namespace MediHub.Web.ApplicationCore.Service
         /// <param name="users"></param>
         /// <returns></returns>
         /// CreatedBy: HieuNM
+        [Authorize(Roles = "Admin")]
         public async Task<ServiceResponse> Update(List<UserEntity> users)
         {
             try
@@ -132,6 +137,7 @@ namespace MediHub.Web.ApplicationCore.Service
         /// <param name="ids"></param>
         /// <returns></returns>
         /// CreatedBy: HieuNM
+        [Authorize(Roles = "Admin")]
         public async Task<ServiceResponse> Delete(List<Guid> ids)
         {
             try

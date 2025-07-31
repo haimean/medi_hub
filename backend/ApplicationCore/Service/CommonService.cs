@@ -20,7 +20,7 @@ namespace MediHub.Web.ApplicationCore.Service
         /// </summary>
         /// <param name="files">List of files to upload.</param>
         /// <returns>Service response with uploaded file keys.</returns>
-        public async Task<ServiceResponse> UploadDocs(List<IFormFile> files)
+        public async Task<ServiceResponse> UploadDocs(string urlTemp, List<IFormFile> files)
         {
             var response = new ServiceResponse();
 
@@ -34,7 +34,7 @@ namespace MediHub.Web.ApplicationCore.Service
             foreach (var file in files)
             {
                 // var key = Guid.NewGuid().ToString(); // Tạo key giống như S3
-                var filePath = Path.Combine("Uploads", $"{file.FileName}");
+                var filePath = Path.Combine("Uploads", urlTemp, $"{file.FileName}");
 
                 // {{ edit_1 }}: Check if the directory exists, if not, create it
                 var directoryPath = Path.GetDirectoryName(filePath);
@@ -60,13 +60,13 @@ namespace MediHub.Web.ApplicationCore.Service
         /// </summary>
         /// <param name="files"></param>
         /// <returns></returns>
-        public async Task<ServiceResponse> UploadDoc(string key, IFormFile file)
+        public async Task<ServiceResponse> UploadDoc(string key, string urlTemp, IFormFile file)
         {
             var response = new ServiceResponse();
 
             var uuid = Guid.NewGuid().ToString(); // Tạo key giống như S3
             // string finnalKey = $"{key}-{uuid}-{file.FileName}";
-            var filePath = Path.Combine("Uploads", file.FileName);
+            var filePath = Path.Combine("Uploads", urlTemp, file.FileName);
 
             // {{ edit_1 }}: Check if the directory exists, if not, create it
             var directoryPath = Path.GetDirectoryName(filePath);
@@ -99,7 +99,7 @@ namespace MediHub.Web.ApplicationCore.Service
 
             foreach (var key in keys)
             {
-                var filePath = Path.Combine("Uploads", key); // Đường dẫn đến tệp
+                var filePath = Path.Combine(key); // Đường dẫn đến tệp
 
                 if (System.IO.File.Exists(filePath))
                 {
@@ -127,7 +127,7 @@ namespace MediHub.Web.ApplicationCore.Service
                 return BadRequest(message: "No keys provided.");
             }
 
-            var filePath = Path.Combine("Uploads", key); // Đường dẫn đến tệp
+            var filePath = Path.Combine(key); // Đường dẫn đến tệp
 
             if (System.IO.File.Exists(filePath))
             {
