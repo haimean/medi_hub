@@ -162,6 +162,78 @@ const DevicesDetail = () => {
     },
   };
 
+  const propsAppraisalFile = {
+    name: "file",
+    multiple: false,
+    maxCount: 1,
+    onChange(info: any) {
+      const { status } = info.file;
+      if (status === "done") {
+        message.success(`${info.file.name} file uploaded successfully`);
+      } else if (status === "error") {
+        message.error(`${info.file.name} file upload failed.`);
+      }
+
+      // Cập nhật danh sách file
+      setFileListContract((prevFileList) => {
+        const updatedFileList = [...info.fileList];
+
+        // Cập nhật giá trị của trường appraisalFile trong form
+        form.setFieldValue(
+          "appraisalFile",
+          updatedFileList.map((item) => item.name)
+        );
+
+        return updatedFileList;
+      });
+    },
+    beforeUpload(file: any) {
+      // Prevent automatic upload
+      return false;
+    },
+    onRemove: (file: any) => {
+      setFileListContract((prevFileList) =>
+        prevFileList.filter((item) => item.uid !== file.uid)
+      );
+    },
+  };
+
+  const propsDeviceUsageInstructions = {
+    name: "file",
+    multiple: false,
+    maxCount: 1,
+    onChange(info: any) {
+      const { status } = info.file;
+      if (status === "done") {
+        message.success(`${info.file.name} file uploaded successfully`);
+      } else if (status === "error") {
+        message.error(`${info.file.name} file upload failed.`);
+      }
+
+      // Cập nhật danh sách file
+      setFileListContract((prevFileList) => {
+        const updatedFileList = [...info.fileList];
+
+        // Cập nhật giá trị của trường appraisalFile trong form
+        form.setFieldValue(
+          "deviceUsageInstructions",
+          updatedFileList.map((item) => item.name)
+        );
+
+        return updatedFileList;
+      });
+    },
+    beforeUpload(file: any) {
+      // Prevent automatic upload
+      return false;
+    },
+    onRemove: (file: any) => {
+      setFileListContract((prevFileList) =>
+        prevFileList.filter((item) => item.uid !== file.uid)
+      );
+    },
+  };
+
   const {
     data: deviceData,
     isLoading,
@@ -782,11 +854,11 @@ const DevicesDetail = () => {
               label={
                 <span onClick={(e) => e.preventDefault()}>Hồ sơ thẩm định</span>
               }
-              name="installationContract"
+              name="propsAppraisalFile"
               labelCol={{ span: 8, prefixCls: "right-item" }}
               wrapperCol={{ span: 12 }}
             >
-              <Dragger {...propsInstallationContract} onPreview={handlePreview}>
+              <Dragger {...propsAppraisalFile} onPreview={handlePreview}>
                 <UploadOutlined style={{ fontSize: "24px" }} />
               </Dragger>
             </Form.Item>
@@ -890,11 +962,20 @@ const DevicesDetail = () => {
             </Form.Item>
             {/* HDSD Thiết bị */}
             <Form.Item
-              label="HDSD Thiết bị"
+              label={
+                <span onClick={(e) => e.preventDefault()}>
+                  Hướng dẫn sử dụng
+                </span>
+              }
               name="deviceUsageInstructions"
               labelCol={{ span: 8, prefixCls: "right-item" }}
             >
-              <Input.TextArea placeholder="Hướng dẫn sử dụng thiết bị" />
+              <Dragger
+                {...propsDeviceUsageInstructions}
+                onPreview={handlePreview}
+              >
+                <UploadOutlined style={{ fontSize: "24px" }} />
+              </Dragger>
             </Form.Item>
           </div>
         </Form>
